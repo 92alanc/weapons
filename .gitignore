@@ -2,6 +2,12 @@
 .gradle/
 build/
 captures/
+app/ww1/
+app/ww2/
+app/korea/
+app/vietnam/
 *.iml
 *.jks
+*.aab
+*.apk
 local.properties
