@@ -16,6 +16,10 @@ sealed class WeaponType {
 
     }
 
+    object Shotgun : WeaponType()
+
+    object Carbine : WeaponType()
+
     data class MachineGun(val category: Category) : WeaponType() {
 
         enum class Category {
