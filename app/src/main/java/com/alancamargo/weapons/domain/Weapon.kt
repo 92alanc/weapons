@@ -12,6 +12,6 @@ data class Weapon(
     val calibre: String,
     val capacity: Int,
     val rateOfFire: Int,
-    val approximateRange: Int,
+    val accuracy: Int,
     val photos: List<String>
 )
