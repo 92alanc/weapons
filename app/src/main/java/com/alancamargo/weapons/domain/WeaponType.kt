@@ -1,12 +1,12 @@
 package com.alancamargo.weapons.domain
 
-sealed class WeaponType {
+sealed class WeaponType(val id: Long) {
 
-    object Melee : WeaponType()
+    class Melee(id: Long) : WeaponType(id)
 
-    object Pistol : WeaponType()
+    class Pistol(id: Long) : WeaponType(id)
 
-    data class Rifle(val category: Category) : WeaponType() {
+    class Rifle(id: Long, val category: Category) : WeaponType(id) {
 
         enum class Category {
             BOLT_ACTION,
@@ -16,11 +16,11 @@ sealed class WeaponType {
 
     }
 
-    object Shotgun : WeaponType()
+    class Shotgun(id: Long) : WeaponType(id)
 
-    object Carbine : WeaponType()
+    class Carbine(id: Long) : WeaponType(id)
 
-    data class MachineGun(val category: Category) : WeaponType() {
+    class MachineGun(id: Long, val category: Category) : WeaponType(id) {
 
         enum class Category {
             LIGHT,
@@ -30,18 +30,9 @@ sealed class WeaponType {
 
     }
 
-    object SubMachineGun : WeaponType()
+    class SubMachineGun(id: Long) : WeaponType(id)
 
-    data class Grenade(val category: Category) : WeaponType() {
-
-        enum class Category {
-            ANTI_PERSONNEL,
-            ANTI_TANK
-        }
-
-    }
-
-    data class Mine(val category: Category) : WeaponType() {
+    class Grenade(id: Long, val category: Category) : WeaponType(id) {
 
         enum class Category {
             ANTI_PERSONNEL,
@@ -50,10 +41,19 @@ sealed class WeaponType {
 
     }
 
-    object GrenadeLauncher : WeaponType()
+    class Mine(id: Long, val category: Category) : WeaponType(id) {
 
-    object RocketLauncher : WeaponType()
+        enum class Category {
+            ANTI_PERSONNEL,
+            ANTI_TANK
+        }
 
-    object BoobyTrap : WeaponType()
+    }
+
+    class GrenadeLauncher(id: Long) : WeaponType(id)
+
+    class RocketLauncher(id: Long) : WeaponType(id)
+
+    class BoobyTrap(id: Long) : WeaponType(id)
 
 }

@@ -24,8 +24,8 @@ class TypeConversionsKtTest {
     // region Country
     @Test
     fun country_fromDomainToDb() {
-        val domain = Country(name = COUNTRY_NAME, flag = COUNTRY_FLAG)
-        val expected = DbCountry(name = COUNTRY_NAME, flag = COUNTRY_FLAG)
+        val domain = Country(ID, COUNTRY_NAME, COUNTRY_FLAG)
+        val expected = DbCountry(ID, COUNTRY_NAME, COUNTRY_FLAG)
 
         val actual = domain.fromDomainToDb()
 
@@ -34,8 +34,8 @@ class TypeConversionsKtTest {
 
     @Test
     fun country_fromDbToDomain() {
-        val db = DbCountry(name = COUNTRY_NAME, flag = COUNTRY_FLAG)
-        val expected = Country(name = COUNTRY_NAME, flag = COUNTRY_FLAG)
+        val db = DbCountry(ID, COUNTRY_NAME, COUNTRY_FLAG)
+        val expected = Country(ID, COUNTRY_NAME, COUNTRY_FLAG)
 
         val actual = db.fromDbToDomain()
 
@@ -46,8 +46,8 @@ class TypeConversionsKtTest {
     // region WeaponType
     @Test
     fun melee_fromDomainToDb() {
-        val domain = WeaponType.Melee
-        val expected = DbWeaponType(name = NAME_MELEE, category = null)
+        val domain = WeaponType.Melee(ID)
+        val expected = DbWeaponType(ID, NAME_MELEE, category = null)
 
         val actual = domain.fromDomainToDb()
 
@@ -56,18 +56,21 @@ class TypeConversionsKtTest {
 
     @Test
     fun melee_fromDbToDomain() {
-        val db = DbWeaponType(name = NAME_MELEE, category = null)
-        val expected = WeaponType.Melee
+        val db = DbWeaponType(ID, NAME_MELEE, category = null)
+        val expected = WeaponType.Melee(ID)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Melee::class.java)
+        }
     }
 
     @Test
     fun pistol_fromDomainToDb() {
-        val domain = WeaponType.Pistol
-        val expected = DbWeaponType(name = NAME_PISTOL, category = null)
+        val domain = WeaponType.Pistol(ID)
+        val expected = DbWeaponType(ID, NAME_PISTOL, category = null)
 
         val actual = domain.fromDomainToDb()
 
@@ -76,20 +79,24 @@ class TypeConversionsKtTest {
 
     @Test
     fun pistol_fromDbToDomain() {
-        val db = DbWeaponType(name = NAME_PISTOL, category = null)
-        val expected = WeaponType.Pistol
+        val db = DbWeaponType(ID, NAME_PISTOL, category = null)
+        val expected = WeaponType.Pistol(ID)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Pistol::class.java)
+        }
     }
 
     @Test
     fun boltActionRifle_fromDomainToDb() {
-        val domain = WeaponType.Rifle(WeaponType.Rifle.Category.BOLT_ACTION)
+        val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.BOLT_ACTION)
         val expected = DbWeaponType(
-            name = NAME_RIFLE,
-            category = WeaponType.Rifle.Category.BOLT_ACTION.name
+            ID,
+            NAME_RIFLE,
+            WeaponType.Rifle.Category.BOLT_ACTION.name
         )
 
         val actual = domain.fromDomainToDb()
@@ -100,22 +107,29 @@ class TypeConversionsKtTest {
     @Test
     fun boltActionRifle_fromDbToDomain() {
         val db = DbWeaponType(
-            name = NAME_RIFLE,
-            category = WeaponType.Rifle.Category.BOLT_ACTION.name
+            ID,
+            NAME_RIFLE,
+            WeaponType.Rifle.Category.BOLT_ACTION.name
         )
-        val expected = WeaponType.Rifle(WeaponType.Rifle.Category.BOLT_ACTION)
+        val expected = WeaponType.Rifle(ID, WeaponType.Rifle.Category.BOLT_ACTION)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Rifle::class.java)
+            require(this is WeaponType.Rifle)
+            assertThat(category).isEqualTo(WeaponType.Rifle.Category.BOLT_ACTION)
+        }
     }
 
     @Test
     fun semiAutomaticRifle_fromDomainToDb() {
-        val domain = WeaponType.Rifle(WeaponType.Rifle.Category.SEMI_AUTOMATIC)
+        val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.SEMI_AUTOMATIC)
         val expected = DbWeaponType(
-            name = NAME_RIFLE,
-            category = WeaponType.Rifle.Category.SEMI_AUTOMATIC.name
+            ID,
+            NAME_RIFLE,
+            WeaponType.Rifle.Category.SEMI_AUTOMATIC.name
         )
 
         val actual = domain.fromDomainToDb()
@@ -126,22 +140,29 @@ class TypeConversionsKtTest {
     @Test
     fun semiAutomaticRifle_fromDbToDomain() {
         val db = DbWeaponType(
-            name = NAME_RIFLE,
-            category = WeaponType.Rifle.Category.SEMI_AUTOMATIC.name
+            ID,
+            NAME_RIFLE,
+            WeaponType.Rifle.Category.SEMI_AUTOMATIC.name
         )
-        val expected = WeaponType.Rifle(WeaponType.Rifle.Category.SEMI_AUTOMATIC)
+        val expected = WeaponType.Rifle(ID, WeaponType.Rifle.Category.SEMI_AUTOMATIC)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Rifle::class.java)
+            require(this is WeaponType.Rifle)
+            assertThat(category).isEqualTo(WeaponType.Rifle.Category.SEMI_AUTOMATIC)
+        }
     }
 
     @Test
     fun automaticRifle_fromDomainToDb() {
-        val domain = WeaponType.Rifle(WeaponType.Rifle.Category.AUTOMATIC)
+        val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.AUTOMATIC)
         val expected = DbWeaponType(
-            name = NAME_RIFLE,
-            category = WeaponType.Rifle.Category.AUTOMATIC.name
+            ID,
+            NAME_RIFLE,
+            WeaponType.Rifle.Category.AUTOMATIC.name
         )
 
         val actual = domain.fromDomainToDb()
@@ -152,20 +173,27 @@ class TypeConversionsKtTest {
     @Test
     fun automaticRifle_fromDbToDomain() {
         val db = DbWeaponType(
-            name = NAME_RIFLE,
-            category = WeaponType.Rifle.Category.AUTOMATIC.name
+            ID,
+            NAME_RIFLE,
+            WeaponType.Rifle.Category.AUTOMATIC.name
         )
-        val expected = WeaponType.Rifle(WeaponType.Rifle.Category.AUTOMATIC)
+        val expected = WeaponType.Rifle(ID, WeaponType.Rifle.Category.AUTOMATIC)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Rifle::class.java)
+            require(this is WeaponType.Rifle)
+            assertThat(category).isEqualTo(WeaponType.Rifle.Category.AUTOMATIC)
+        }
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun invalidRifle_shouldThrowException() {
         val db = DbWeaponType(
-            name = NAME_RIFLE,
+            ID,
+            NAME_RIFLE,
             category = "invalid"
         )
 
@@ -174,8 +202,8 @@ class TypeConversionsKtTest {
 
     @Test
     fun shotgun_fromDomainToDb() {
-        val domain = WeaponType.Shotgun
-        val expected = DbWeaponType(name = NAME_SHOTGUN, category = null)
+        val domain = WeaponType.Shotgun(ID)
+        val expected = DbWeaponType(ID, NAME_SHOTGUN, category = null)
 
         val actual = domain.fromDomainToDb()
 
@@ -184,18 +212,21 @@ class TypeConversionsKtTest {
 
     @Test
     fun shotgun_fromDbToDomain() {
-        val db = DbWeaponType(name = NAME_SHOTGUN, category = null)
-        val expected = WeaponType.Shotgun
+        val db = DbWeaponType(ID, NAME_SHOTGUN, category = null)
+        val expected = WeaponType.Shotgun(ID)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Shotgun::class.java)
+        }
     }
 
     @Test
     fun carbine_fromDomainToDb() {
-        val domain = WeaponType.Carbine
-        val expected = DbWeaponType(name = NAME_CARBINE, category = null)
+        val domain = WeaponType.Carbine(ID)
+        val expected = DbWeaponType(ID, NAME_CARBINE, category = null)
 
         val actual = domain.fromDomainToDb()
 
@@ -204,20 +235,24 @@ class TypeConversionsKtTest {
 
     @Test
     fun carbine_fromDbToDomain() {
-        val db = DbWeaponType(name = NAME_CARBINE, category = null)
-        val expected = WeaponType.Carbine
+        val db = DbWeaponType(ID, NAME_CARBINE, category = null)
+        val expected = WeaponType.Carbine(ID)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Carbine::class.java)
+        }
     }
 
     @Test
     fun lightMachineGun_fromDomainToDb() {
-        val domain = WeaponType.MachineGun(WeaponType.MachineGun.Category.LIGHT)
+        val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.LIGHT)
         val expected = DbWeaponType(
-            name = NAME_MACHINE_GUN,
-            category = WeaponType.MachineGun.Category.LIGHT.name
+            ID,
+            NAME_MACHINE_GUN,
+            WeaponType.MachineGun.Category.LIGHT.name
         )
 
         val actual = domain.fromDomainToDb()
@@ -228,22 +263,29 @@ class TypeConversionsKtTest {
     @Test
     fun lightMachineGun_fromDbToDomain() {
         val db = DbWeaponType(
-            name = NAME_MACHINE_GUN,
-            category = WeaponType.MachineGun.Category.LIGHT.name
+            ID,
+            NAME_MACHINE_GUN,
+            WeaponType.MachineGun.Category.LIGHT.name
         )
-        val expected = WeaponType.MachineGun(WeaponType.MachineGun.Category.LIGHT)
+        val expected = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.LIGHT)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.MachineGun::class.java)
+            require(this is WeaponType.MachineGun)
+            assertThat(category).isEqualTo(WeaponType.MachineGun.Category.LIGHT)
+        }
     }
 
     @Test
     fun generalPurposeMachineGun_fromDomainToDb() {
-        val domain = WeaponType.MachineGun(WeaponType.MachineGun.Category.GENERAL_PURPOSE)
+        val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.GENERAL_PURPOSE)
         val expected = DbWeaponType(
-            name = NAME_MACHINE_GUN,
-            category = WeaponType.MachineGun.Category.GENERAL_PURPOSE.name
+            ID,
+            NAME_MACHINE_GUN,
+            WeaponType.MachineGun.Category.GENERAL_PURPOSE.name
         )
 
         val actual = domain.fromDomainToDb()
@@ -254,22 +296,29 @@ class TypeConversionsKtTest {
     @Test
     fun generalPurposeMachineGun_fromDbToDomain() {
         val db = DbWeaponType(
-            name = NAME_MACHINE_GUN,
-            category = WeaponType.MachineGun.Category.GENERAL_PURPOSE.name
+            ID,
+            NAME_MACHINE_GUN,
+            WeaponType.MachineGun.Category.GENERAL_PURPOSE.name
         )
-        val expected = WeaponType.MachineGun(WeaponType.MachineGun.Category.GENERAL_PURPOSE)
+        val expected = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.GENERAL_PURPOSE)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.MachineGun::class.java)
+            require(this is WeaponType.MachineGun)
+            assertThat(category).isEqualTo(WeaponType.MachineGun.Category.GENERAL_PURPOSE)
+        }
     }
 
     @Test
     fun heavyMachineGun_fromDomainToDb() {
-        val domain = WeaponType.MachineGun(WeaponType.MachineGun.Category.HEAVY)
+        val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.HEAVY)
         val expected = DbWeaponType(
-            name = NAME_MACHINE_GUN,
-            category = WeaponType.MachineGun.Category.HEAVY.name
+            ID,
+            NAME_MACHINE_GUN,
+            WeaponType.MachineGun.Category.HEAVY.name
         )
 
         val actual = domain.fromDomainToDb()
@@ -280,20 +329,27 @@ class TypeConversionsKtTest {
     @Test
     fun heavyMachineGun_fromDbToDomain() {
         val db = DbWeaponType(
-            name = NAME_MACHINE_GUN,
-            category = WeaponType.MachineGun.Category.HEAVY.name
+            ID,
+            NAME_MACHINE_GUN,
+            WeaponType.MachineGun.Category.HEAVY.name
         )
-        val expected = WeaponType.MachineGun(WeaponType.MachineGun.Category.HEAVY)
+        val expected = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.HEAVY)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.MachineGun::class.java)
+            require(this is WeaponType.MachineGun)
+            assertThat(category).isEqualTo(WeaponType.MachineGun.Category.HEAVY)
+        }
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun invalidMachineGun_shouldThrowException() {
         val db = DbWeaponType(
-            name = NAME_MACHINE_GUN,
+            ID,
+            NAME_MACHINE_GUN,
             category = "invalid"
         )
 
@@ -302,8 +358,8 @@ class TypeConversionsKtTest {
 
     @Test
     fun subMachineGun_fromDomainToDb() {
-        val domain = WeaponType.SubMachineGun
-        val expected = DbWeaponType(name = NAME_SUB_MACHINE_GUN, category = null)
+        val domain = WeaponType.SubMachineGun(ID)
+        val expected = DbWeaponType(ID, NAME_SUB_MACHINE_GUN, category = null)
 
         val actual = domain.fromDomainToDb()
 
@@ -312,20 +368,24 @@ class TypeConversionsKtTest {
 
     @Test
     fun subMachineGun_fromDbToDomain() {
-        val db = DbWeaponType(name = NAME_SUB_MACHINE_GUN, category = null)
-        val expected = WeaponType.SubMachineGun
+        val db = DbWeaponType(ID, NAME_SUB_MACHINE_GUN, category = null)
+        val expected = WeaponType.SubMachineGun(ID)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.SubMachineGun::class.java)
+        }
     }
 
     @Test
     fun antiPersonnelGrenade_fromDomainToDb() {
-        val domain = WeaponType.Grenade(WeaponType.Grenade.Category.ANTI_PERSONNEL)
+        val domain = WeaponType.Grenade(ID, WeaponType.Grenade.Category.ANTI_PERSONNEL)
         val expected = DbWeaponType(
-            name = NAME_GRENADE,
-            category = WeaponType.Grenade.Category.ANTI_PERSONNEL.name
+            ID,
+            NAME_GRENADE,
+            WeaponType.Grenade.Category.ANTI_PERSONNEL.name
         )
 
         val actual = domain.fromDomainToDb()
@@ -336,22 +396,29 @@ class TypeConversionsKtTest {
     @Test
     fun antiPersonnelGrenade_fromDbToDomain() {
         val db = DbWeaponType(
-            name = NAME_GRENADE,
-            category = WeaponType.Grenade.Category.ANTI_PERSONNEL.name
+            ID,
+            NAME_GRENADE,
+            WeaponType.Grenade.Category.ANTI_PERSONNEL.name
         )
-        val expected = WeaponType.Grenade(WeaponType.Grenade.Category.ANTI_PERSONNEL)
+        val expected = WeaponType.Grenade(ID, WeaponType.Grenade.Category.ANTI_PERSONNEL)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Grenade::class.java)
+            require(this is WeaponType.Grenade)
+            assertThat(category).isEqualTo(WeaponType.Grenade.Category.ANTI_PERSONNEL)
+        }
     }
 
     @Test
     fun antiTankGrenade_fromDomainToDb() {
-        val domain = WeaponType.Grenade(WeaponType.Grenade.Category.ANTI_TANK)
+        val domain = WeaponType.Grenade(ID, WeaponType.Grenade.Category.ANTI_TANK)
         val expected = DbWeaponType(
-            name = NAME_GRENADE,
-            category = WeaponType.Grenade.Category.ANTI_TANK.name
+            ID,
+            NAME_GRENADE,
+            WeaponType.Grenade.Category.ANTI_TANK.name
         )
 
         val actual = domain.fromDomainToDb()
@@ -362,20 +429,27 @@ class TypeConversionsKtTest {
     @Test
     fun antiTankGrenade_fromDbToDomain() {
         val db = DbWeaponType(
-            name = NAME_GRENADE,
-            category = WeaponType.Grenade.Category.ANTI_TANK.name
+            ID,
+            NAME_GRENADE,
+            WeaponType.Grenade.Category.ANTI_TANK.name
         )
-        val expected = WeaponType.Grenade(WeaponType.Grenade.Category.ANTI_TANK)
+        val expected = WeaponType.Grenade(ID, WeaponType.Grenade.Category.ANTI_TANK)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Grenade::class.java)
+            require(this is WeaponType.Grenade)
+            assertThat(category).isEqualTo(WeaponType.Grenade.Category.ANTI_TANK)
+        }
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun invalidGrenade_shouldThrowException() {
         val db = DbWeaponType(
-            name = NAME_GRENADE,
+            ID,
+            NAME_GRENADE,
             category = "invalid"
         )
 
@@ -384,10 +458,11 @@ class TypeConversionsKtTest {
 
     @Test
     fun antiPersonnelMine_fromDomainToDb() {
-        val domain = WeaponType.Mine(WeaponType.Mine.Category.ANTI_PERSONNEL)
+        val domain = WeaponType.Mine(ID, WeaponType.Mine.Category.ANTI_PERSONNEL)
         val expected = DbWeaponType(
-            name = NAME_MINE,
-            category = WeaponType.Mine.Category.ANTI_PERSONNEL.name
+            ID,
+            NAME_MINE,
+            WeaponType.Mine.Category.ANTI_PERSONNEL.name
         )
 
         val actual = domain.fromDomainToDb()
@@ -398,22 +473,29 @@ class TypeConversionsKtTest {
     @Test
     fun antiPersonnelMine_fromDbToDomain() {
         val db = DbWeaponType(
-            name = NAME_MINE,
-            category = WeaponType.Mine.Category.ANTI_PERSONNEL.name
+            ID,
+            NAME_MINE,
+            WeaponType.Mine.Category.ANTI_PERSONNEL.name
         )
-        val expected = WeaponType.Mine(WeaponType.Mine.Category.ANTI_PERSONNEL)
+        val expected = WeaponType.Mine(ID, WeaponType.Mine.Category.ANTI_PERSONNEL)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Mine::class.java)
+            require(this is WeaponType.Mine)
+            assertThat(category).isEqualTo(WeaponType.Mine.Category.ANTI_PERSONNEL)
+        }
     }
 
     @Test
     fun antiTankMine_fromDomainToDb() {
-        val domain = WeaponType.Mine(WeaponType.Mine.Category.ANTI_TANK)
+        val domain = WeaponType.Mine(ID, WeaponType.Mine.Category.ANTI_TANK)
         val expected = DbWeaponType(
-            name = NAME_MINE,
-            category = WeaponType.Mine.Category.ANTI_TANK.name
+            ID,
+            NAME_MINE,
+            WeaponType.Mine.Category.ANTI_TANK.name
         )
 
         val actual = domain.fromDomainToDb()
@@ -424,20 +506,27 @@ class TypeConversionsKtTest {
     @Test
     fun antiTankMine_fromDbToDomain() {
         val db = DbWeaponType(
-            name = NAME_MINE,
-            category = WeaponType.Mine.Category.ANTI_TANK.name
+            ID,
+            NAME_MINE,
+            WeaponType.Mine.Category.ANTI_TANK.name
         )
-        val expected = WeaponType.Mine(WeaponType.Mine.Category.ANTI_TANK)
+        val expected = WeaponType.Mine(ID, WeaponType.Mine.Category.ANTI_TANK)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Mine::class.java)
+            require(this is WeaponType.Mine)
+            assertThat(category).isEqualTo(WeaponType.Mine.Category.ANTI_TANK)
+        }
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun invalidMine_shouldThrowException() {
         val db = DbWeaponType(
-            name = NAME_MINE,
+            ID,
+            NAME_MINE,
             category = "invalid"
         )
 
@@ -446,8 +535,8 @@ class TypeConversionsKtTest {
 
     @Test
     fun grenadeLauncher_fromDomainToDb() {
-        val domain = WeaponType.GrenadeLauncher
-        val expected = DbWeaponType(name = NAME_GRENADE_LAUNCHER, category = null)
+        val domain = WeaponType.GrenadeLauncher(ID)
+        val expected = DbWeaponType(ID, NAME_GRENADE_LAUNCHER, category = null)
 
         val actual = domain.fromDomainToDb()
 
@@ -456,18 +545,21 @@ class TypeConversionsKtTest {
 
     @Test
     fun grenadeLauncher_fromDbToDomain() {
-        val db = DbWeaponType(name = NAME_GRENADE_LAUNCHER, category = null)
-        val expected = WeaponType.GrenadeLauncher
+        val db = DbWeaponType(ID, NAME_GRENADE_LAUNCHER, category = null)
+        val expected = WeaponType.GrenadeLauncher(ID)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.GrenadeLauncher::class.java)
+        }
     }
 
     @Test
     fun rocketLauncher_fromDomainToDb() {
-        val domain = WeaponType.RocketLauncher
-        val expected = DbWeaponType(name = NAME_ROCKET_LAUNCHER, category = null)
+        val domain = WeaponType.RocketLauncher(ID)
+        val expected = DbWeaponType(ID, NAME_ROCKET_LAUNCHER, category = null)
 
         val actual = domain.fromDomainToDb()
 
@@ -476,18 +568,21 @@ class TypeConversionsKtTest {
 
     @Test
     fun rocketLauncher_fromDbToDomain() {
-        val db = DbWeaponType(name = NAME_ROCKET_LAUNCHER, category = null)
-        val expected = WeaponType.RocketLauncher
+        val db = DbWeaponType(ID, NAME_ROCKET_LAUNCHER, category = null)
+        val expected = WeaponType.RocketLauncher(ID)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.RocketLauncher::class.java)
+        }
     }
 
     @Test
     fun boobyTrap_fromDomainToDb() {
-        val domain = WeaponType.BoobyTrap
-        val expected = DbWeaponType(name = NAME_BOOBY_TRAP, category = null)
+        val domain = WeaponType.BoobyTrap(ID)
+        val expected = DbWeaponType(ID, NAME_BOOBY_TRAP, category = null)
 
         val actual = domain.fromDomainToDb()
 
@@ -496,23 +591,27 @@ class TypeConversionsKtTest {
 
     @Test
     fun boobyTrap_fromDbToDomain() {
-        val db = DbWeaponType(name = NAME_BOOBY_TRAP, category = null)
-        val expected = WeaponType.BoobyTrap
+        val db = DbWeaponType(ID, NAME_BOOBY_TRAP, category = null)
+        val expected = WeaponType.BoobyTrap(ID)
 
         val actual = db.fromDbToDomain()
 
-        assertThat(actual).isEqualTo(expected)
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.BoobyTrap::class.java)
+        }
     }
 
     @Test(expected = IllegalArgumentException::class)
     fun invalidWeaponType_shouldThrowException() {
-        val db = DbWeaponType(name = "invalid", category = null)
+        val db = DbWeaponType(ID, name = "invalid", category = null)
 
         db.fromDbToDomain()
     }
     // endregion
 
     private companion object {
+        const val ID = 12345L
         const val COUNTRY_NAME = "United Kingdom"
         const val COUNTRY_FLAG = 123
     }
