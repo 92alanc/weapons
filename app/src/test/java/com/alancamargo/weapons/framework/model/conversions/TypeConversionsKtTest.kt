@@ -1,8 +1,10 @@
 package com.alancamargo.weapons.framework.model.conversions
 
+import com.alancamargo.weapons.domain.Calibre
 import com.alancamargo.weapons.domain.Country
 import com.alancamargo.weapons.domain.Weapon
 import com.alancamargo.weapons.domain.WeaponType
+import com.alancamargo.weapons.framework.model.entities.DbCalibre
 import com.alancamargo.weapons.framework.model.entities.DbCountry
 import com.alancamargo.weapons.framework.model.entities.DbWeapon
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType
@@ -23,6 +25,28 @@ import com.google.gson.Gson
 import org.junit.Test
 
 class TypeConversionsKtTest {
+
+    // region Calibre
+    @Test
+    fun calibre_fromDomainToDb() {
+        val domain = Calibre(CALIBRE_ID, CALIBRE)
+        val expected = DbCalibre(CALIBRE_ID, CALIBRE)
+
+        val actual = domain.fromDomainToDb()
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun calibre_fromDbToDomain() {
+        val db = DbCalibre(CALIBRE_ID, CALIBRE)
+        val expected = Calibre(CALIBRE_ID, CALIBRE)
+
+        val actual = db.fromDbToDomain()
+
+        assertThat(actual).isEqualTo(expected)
+    }
+    // endregion
 
     // region Country
     @Test
@@ -67,7 +91,7 @@ class TypeConversionsKtTest {
             TYPE_ID,
             LENGTH,
             WEIGHT,
-            CALIBRE,
+            CALIBRE_ID,
             CAPACITY,
             RATE_OF_FIRE,
             ACCURACY,
@@ -83,7 +107,7 @@ class TypeConversionsKtTest {
             TYPE_ID,
             LENGTH,
             WEIGHT,
-            CALIBRE,
+            CALIBRE_ID,
             CAPACITY,
             RATE_OF_FIRE,
             ACCURACY,
@@ -106,7 +130,7 @@ class TypeConversionsKtTest {
             TYPE_ID,
             LENGTH,
             WEIGHT,
-            CALIBRE,
+            CALIBRE_ID,
             CAPACITY,
             RATE_OF_FIRE,
             ACCURACY,
@@ -122,7 +146,7 @@ class TypeConversionsKtTest {
             TYPE_ID,
             LENGTH,
             WEIGHT,
-            CALIBRE,
+            CALIBRE_ID,
             CAPACITY,
             RATE_OF_FIRE,
             ACCURACY,
@@ -139,7 +163,7 @@ class TypeConversionsKtTest {
             assertThat(countryId).isEqualTo(expected.countryId)
             assertThat(length).isEqualTo(expected.length)
             assertThat(weight).isEqualTo(expected.weight)
-            assertThat(calibre).isEqualTo(expected.calibre)
+            assertThat(calibreId).isEqualTo(expected.calibreId)
             assertThat(capacity).isEqualTo(expected.capacity)
             assertThat(rateOfFire).isEqualTo(expected.rateOfFire)
             assertThat(accuracy).isEqualTo(expected.accuracy)
@@ -815,6 +839,7 @@ class TypeConversionsKtTest {
         const val TYPE_ID = 456L
         const val LENGTH = 1.0f
         const val WEIGHT = 2.5f
+        const val CALIBRE_ID = 789L
         const val CALIBRE = ".303 British"
         const val CAPACITY = 10
         const val RATE_OF_FIRE = 20

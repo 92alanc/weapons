@@ -3,7 +3,7 @@ package com.alancamargo.weapons.framework.model.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "WeaponType")
+@Entity(tableName = "WEAPON_TYPE")
 data class DbWeaponType(
     @PrimaryKey val id: Long,
     val name: String,

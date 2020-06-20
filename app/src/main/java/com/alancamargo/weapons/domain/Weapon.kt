@@ -9,7 +9,7 @@ data class Weapon(
     val typeId: Long,
     val length: Float,
     val weight: Float,
-    val calibre: String,
+    val calibreId: Long,
     val capacity: Int,
     val rateOfFire: Int,
     val accuracy: Int,

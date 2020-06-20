@@ -3,11 +3,10 @@ package com.alancamargo.weapons.framework.model.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "COUNTRY")
-data class DbCountry(
+@Entity(tableName = "CALIBRE")
+data class DbCalibre(
     @PrimaryKey val id: Long,
-    val name: String,
-    val flag: Int
+    val calibre: String
 ) {
 
     companion object {

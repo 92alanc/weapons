@@ -1,13 +1,15 @@
 package com.alancamargo.weapons.framework.model.entities
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.alancamargo.weapons.framework.model.entities.DbWeapon.Companion.COLUMN_CALIBRE_ID
 import com.alancamargo.weapons.framework.model.entities.DbWeapon.Companion.COLUMN_COUNTRY_ID
 import com.alancamargo.weapons.framework.model.entities.DbWeapon.Companion.COLUMN_TYPE_ID
 
 @Entity(
-    tableName = "Weapon",
+    tableName = "WEAPON",
     foreignKeys = [
         ForeignKey(
             entity = DbCountry::class,
@@ -18,6 +20,11 @@ import com.alancamargo.weapons.framework.model.entities.DbWeapon.Companion.COLUM
             entity = DbWeaponType::class,
             parentColumns = [DbWeaponType.COLUMN_ID],
             childColumns = [COLUMN_TYPE_ID]
+        ),
+        ForeignKey(
+            entity = DbCalibre::class,
+            parentColumns = [DbCalibre.COLUMN_ID],
+            childColumns = [COLUMN_CALIBRE_ID]
         )
     ]
 )
@@ -26,11 +33,11 @@ data class DbWeapon(
     val name: String,
     val year: Int,
     val manufacturer: String,
-    val countryId: Long,
-    val typeId: Long,
+    @ColumnInfo(name = COLUMN_COUNTRY_ID) val countryId: Long,
+    @ColumnInfo(name = COLUMN_TYPE_ID) val typeId: Long,
     val length: Float,
     val weight: Float,
-    val calibre: String,
+    @ColumnInfo(name = COLUMN_CALIBRE_ID) val calibreId: Long,
     val capacity: Int,
     val rateOfFire: Int,
     val accuracy: Int,
@@ -38,8 +45,9 @@ data class DbWeapon(
 ) {
 
     companion object {
-        const val COLUMN_COUNTRY_ID = "countryId"
-        const val COLUMN_TYPE_ID = "typeId"
+        const val COLUMN_COUNTRY_ID = "COUNTRY_ID"
+        const val COLUMN_TYPE_ID = "TYPE_ID"
+        const val COLUMN_CALIBRE_ID = "CALIBRE_ID"
     }
 
 }
