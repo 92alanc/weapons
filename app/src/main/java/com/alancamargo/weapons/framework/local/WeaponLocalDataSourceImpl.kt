@@ -6,6 +6,7 @@ import com.alancamargo.weapons.framework.db.CalibreDao
 import com.alancamargo.weapons.framework.db.CountryDao
 import com.alancamargo.weapons.framework.db.WeaponDao
 import com.alancamargo.weapons.framework.db.WeaponTypeDao
+import com.alancamargo.weapons.framework.model.conversions.fromDbToDomain
 
 class WeaponLocalDataSourceImpl(
     private val weaponDao: WeaponDao,
@@ -15,7 +16,15 @@ class WeaponLocalDataSourceImpl(
 ) : WeaponLocalDataSource {
 
     override suspend fun getWeapons(): List<Weapon> {
-        return emptyList()
+        val dbWeapons = weaponDao.select()
+        val countryIds = dbWeapons.map { it.countryId }
+        val typeIds = dbWeapons.map { it.typeId }
+        val calibreIds = dbWeapons.map { it.calibreId }
+
+        val countries = countryIds.map { countryDao.select(it).fromDbToDomain() }
+        val types = typeIds.map { weaponTypeDao.select(it).fromDbToDomain() }
+
+        return emptyList() // TODO
     }
 
 }
