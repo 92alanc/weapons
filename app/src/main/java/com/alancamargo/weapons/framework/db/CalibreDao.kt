@@ -10,4 +10,7 @@ interface CalibreDao {
     @Query("SELECT * FROM CALIBRE")
     suspend fun select(): List<DbCalibre>
 
+    @Query("SELECT * FROM CALIBRE WHERE ID = :id")
+    suspend fun select(id: Long): DbCalibre
+
 }

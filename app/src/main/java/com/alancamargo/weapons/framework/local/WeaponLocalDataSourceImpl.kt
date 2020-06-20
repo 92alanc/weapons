@@ -17,14 +17,13 @@ class WeaponLocalDataSourceImpl(
 
     override suspend fun getWeapons(): List<Weapon> {
         val dbWeapons = weaponDao.select()
-        val countryIds = dbWeapons.map { it.countryId }
-        val typeIds = dbWeapons.map { it.typeId }
-        val calibreIds = dbWeapons.map { it.calibreId }
 
-        val countries = countryIds.map { countryDao.select(it).fromDbToDomain() }
-        val types = typeIds.map { weaponTypeDao.select(it).fromDbToDomain() }
-
-        return emptyList() // TODO
+        return dbWeapons.map {
+            val country = countryDao.select(it.countryId)
+            val type = weaponTypeDao.select(it.typeId)
+            val calibre = calibreDao.select(it.calibreId)
+            it.fromDbToDomain(country, type, calibre)
+        }
     }
 
 }

@@ -41,7 +41,7 @@ data class DbWeapon(
     val capacity: Int,
     val rateOfFire: Int,
     val accuracy: Int,
-    val photos: String
+    val photosJson: String
 ) {
 
     companion object {

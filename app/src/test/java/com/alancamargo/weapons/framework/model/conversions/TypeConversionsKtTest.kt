@@ -2,9 +2,11 @@ package com.alancamargo.weapons.framework.model.conversions
 
 import com.alancamargo.weapons.domain.Calibre
 import com.alancamargo.weapons.domain.Country
+import com.alancamargo.weapons.domain.Weapon
 import com.alancamargo.weapons.domain.WeaponType
 import com.alancamargo.weapons.framework.model.entities.DbCalibre
 import com.alancamargo.weapons.framework.model.entities.DbCountry
+import com.alancamargo.weapons.framework.model.entities.DbWeapon
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_CARBINE
@@ -22,6 +24,65 @@ import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
 class TypeConversionsKtTest {
+
+    // region Weapon
+    @Test
+    fun weapon_fromDbToDomain() {
+        val dbCountry = DbCountry(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG)
+        val dbType = DbWeaponType(TYPE_ID, NAME_BOOBY_TRAP, category = null)
+        val dbCalibre = DbCalibre(CALIBRE_ID, CALIBRE)
+
+        val dbWeapon = DbWeapon(
+            ID,
+            WEAPON_NAME,
+            YEAR,
+            MANUFACTURER,
+            COUNTRY_ID,
+            TYPE_ID,
+            LENGTH,
+            WEIGHT,
+            CALIBRE_ID,
+            CAPACITY,
+            RATE_OF_FIRE,
+            ACCURACY,
+            PHOTOS_JSON
+        )
+
+        val expected = Weapon(
+            ID,
+            WEAPON_NAME,
+            YEAR,
+            MANUFACTURER,
+            Country(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG),
+            WeaponType.BoobyTrap(TYPE_ID),
+            LENGTH,
+            WEIGHT,
+            Calibre(CALIBRE_ID, CALIBRE),
+            CAPACITY,
+            RATE_OF_FIRE,
+            ACCURACY,
+            listOf(PHOTO)
+        )
+
+        val actual = dbWeapon.fromDbToDomain(dbCountry, dbType, dbCalibre)
+
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(name).isEqualTo(expected.name)
+            assertThat(year).isEqualTo(expected.year)
+            assertThat(manufacturer).isEqualTo(expected.manufacturer)
+            assertThat(country.id).isEqualTo(expected.country.id)
+            assertThat(type.id).isEqualTo(expected.type.id)
+            assertThat(length).isEqualTo(expected.length)
+            assertThat(weight).isEqualTo(expected.weight)
+            assertThat(calibre.id).isEqualTo(expected.calibre.id)
+            assertThat(capacity).isEqualTo(expected.capacity)
+            assertThat(rateOfFire).isEqualTo(expected.rateOfFire)
+            assertThat(accuracy).isEqualTo(expected.accuracy)
+            assertThat(photos).isEqualTo(expected.photos)
+        }
+    }
+    // endregion
 
     // region Calibre
     @Test
@@ -735,6 +796,18 @@ class TypeConversionsKtTest {
         const val COUNTRY_FLAG = 1234
         const val CALIBRE_ID = 789L
         const val CALIBRE = ".303 British"
+        const val WEAPON_NAME = "Short Magazine Lee-Enfield No.1 Mk.3"
+        const val YEAR = 1907
+        const val MANUFACTURER = "Lee-Enfield"
+        const val COUNTRY_ID = 222L
+        const val TYPE_ID = 333L
+        const val LENGTH = 1.02f
+        const val WEIGHT = 2.5f
+        const val CAPACITY = 10
+        const val RATE_OF_FIRE = 20
+        const val ACCURACY = 300
+        const val PHOTO = "photo1"
+        const val PHOTOS_JSON = "[\"$PHOTO\"]"
     }
 
 }
