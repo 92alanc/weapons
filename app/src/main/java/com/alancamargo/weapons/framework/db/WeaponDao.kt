@@ -8,13 +8,16 @@ import com.alancamargo.weapons.framework.model.entities.DbWeapon
 interface WeaponDao {
 
     @Query("SELECT * FROM WEAPON")
-    suspend fun select(): List<DbWeapon>
+    suspend fun selectAll(): List<DbWeapon>
+
+    @Query("SELECT * FROM WEAPON WHERE ID = :id")
+    suspend fun selectById(id: Long): DbWeapon
 
     @Query("SELECT * FROM WEAPON WHERE NAME = :name")
-    suspend fun select(name: String): List<DbWeapon>
+    suspend fun selectByName(name: String): List<DbWeapon>
 
     @Query("SELECT * FROM WEAPON WHERE YEAR = :year")
-    suspend fun select(year: Int): List<DbWeapon>
+    suspend fun selectByYear(year: Int): List<DbWeapon>
 
     @Query("SELECT * FROM WEAPON WHERE COUNTRY_ID = :countryId")
     suspend fun selectByCountry(countryId: Long): List<DbWeapon>

@@ -8,9 +8,9 @@ import com.alancamargo.weapons.framework.model.entities.DbCountry
 interface CountryDao {
 
     @Query("SELECT * FROM COUNTRY")
-    suspend fun select(): List<DbCountry>
+    suspend fun selectAll(): List<DbCountry>
 
     @Query("SELECT * FROM COUNTRY WHERE ID = :id")
-    suspend fun select(id: Long): DbCountry
+    suspend fun selectById(id: Long): DbCountry
 
 }
