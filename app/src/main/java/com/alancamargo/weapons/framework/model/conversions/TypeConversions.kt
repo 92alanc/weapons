@@ -2,11 +2,9 @@ package com.alancamargo.weapons.framework.model.conversions
 
 import com.alancamargo.weapons.domain.Calibre
 import com.alancamargo.weapons.domain.Country
-import com.alancamargo.weapons.domain.Weapon
 import com.alancamargo.weapons.domain.WeaponType
 import com.alancamargo.weapons.framework.model.entities.DbCalibre
 import com.alancamargo.weapons.framework.model.entities.DbCountry
-import com.alancamargo.weapons.framework.model.entities.DbWeapon
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_CARBINE
@@ -20,8 +18,6 @@ import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.N
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_ROCKET_LAUNCHER
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_SHOTGUN
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_SUB_MACHINE_GUN
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 fun Calibre.fromDomainToDb() = DbCalibre(id, calibre)
 
@@ -30,47 +26,6 @@ fun DbCalibre.fromDbToDomain() = Calibre(id, calibre)
 fun Country.fromDomainToDb() = DbCountry(id, name, flag)
 
 fun DbCountry.fromDbToDomain() = Country(id, name, flag)
-
-fun Weapon.fromDomainToDb(): DbWeapon {
-    val gson = Gson()
-
-    return DbWeapon(
-        id,
-        name,
-        year,
-        manufacturer,
-        countryId,
-        typeId,
-        length,
-        weight,
-        calibreId,
-        capacity,
-        rateOfFire,
-        accuracy,
-        gson.toJson(photos)
-    )
-}
-
-fun DbWeapon.fromDbToDomain(): Weapon {
-    val gson = Gson()
-    val stringListType = object : TypeToken<List<String>>() {}.type
-
-    return Weapon(
-        id,
-        name,
-        year,
-        manufacturer,
-        countryId,
-        typeId,
-        length,
-        weight,
-        calibreId,
-        capacity,
-        rateOfFire,
-        accuracy,
-        gson.fromJson(photos, stringListType)
-    )
-}
 
 fun WeaponType.fromDomainToDb() = when (this) {
     is WeaponType.BoobyTrap -> DbWeaponType(id, NAME_BOOBY_TRAP, category = null)

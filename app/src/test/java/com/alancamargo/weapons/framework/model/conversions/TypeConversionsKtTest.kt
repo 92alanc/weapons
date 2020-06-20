@@ -2,11 +2,9 @@ package com.alancamargo.weapons.framework.model.conversions
 
 import com.alancamargo.weapons.domain.Calibre
 import com.alancamargo.weapons.domain.Country
-import com.alancamargo.weapons.domain.Weapon
 import com.alancamargo.weapons.domain.WeaponType
 import com.alancamargo.weapons.framework.model.entities.DbCalibre
 import com.alancamargo.weapons.framework.model.entities.DbCountry
-import com.alancamargo.weapons.framework.model.entities.DbWeapon
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_CARBINE
@@ -21,7 +19,6 @@ import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.N
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_SHOTGUN
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_SUB_MACHINE_GUN
 import com.google.common.truth.Truth.assertThat
-import com.google.gson.Gson
 import org.junit.Test
 
 class TypeConversionsKtTest {
@@ -76,100 +73,6 @@ class TypeConversionsKtTest {
         val actual = db.fromDbToDomain()
 
         assertThat(actual).isEqualTo(expected)
-    }
-    // endregion
-
-    // region Weapon
-    @Test
-    fun weapon_fromDomainToDb() {
-        val domain = Weapon(
-            ID,
-            NAME,
-            YEAR,
-            MANUFACTURER,
-            COUNTRY_ID,
-            TYPE_ID,
-            LENGTH,
-            WEIGHT,
-            CALIBRE_ID,
-            CAPACITY,
-            RATE_OF_FIRE,
-            ACCURACY,
-            photos
-        )
-
-        val expected = DbWeapon(
-            ID,
-            NAME,
-            YEAR,
-            MANUFACTURER,
-            COUNTRY_ID,
-            TYPE_ID,
-            LENGTH,
-            WEIGHT,
-            CALIBRE_ID,
-            CAPACITY,
-            RATE_OF_FIRE,
-            ACCURACY,
-            photosJson
-        )
-
-        val actual = domain.fromDomainToDb()
-
-        assertThat(actual).isEqualTo(expected)
-    }
-
-    @Test
-    fun weapon_fromDbToDomain() {
-        val db = DbWeapon(
-            ID,
-            NAME,
-            YEAR,
-            MANUFACTURER,
-            COUNTRY_ID,
-            TYPE_ID,
-            LENGTH,
-            WEIGHT,
-            CALIBRE_ID,
-            CAPACITY,
-            RATE_OF_FIRE,
-            ACCURACY,
-            photosJson
-        )
-
-        val expected = Weapon(
-            ID,
-            NAME,
-            YEAR,
-            MANUFACTURER,
-            COUNTRY_ID,
-            TYPE_ID,
-            LENGTH,
-            WEIGHT,
-            CALIBRE_ID,
-            CAPACITY,
-            RATE_OF_FIRE,
-            ACCURACY,
-            photos
-        )
-
-        val actual = db.fromDbToDomain()
-
-        with(actual) {
-            assertThat(id).isEqualTo(expected.id)
-            assertThat(name).isEqualTo(expected.name)
-            assertThat(year).isEqualTo(expected.year)
-            assertThat(manufacturer).isEqualTo(expected.manufacturer)
-            assertThat(countryId).isEqualTo(expected.countryId)
-            assertThat(length).isEqualTo(expected.length)
-            assertThat(weight).isEqualTo(expected.weight)
-            assertThat(calibreId).isEqualTo(expected.calibreId)
-            assertThat(capacity).isEqualTo(expected.capacity)
-            assertThat(rateOfFire).isEqualTo(expected.rateOfFire)
-            assertThat(accuracy).isEqualTo(expected.accuracy)
-            assertThat(photos).isEqualTo(expected.photos)
-            assertThat(typeId).isEqualTo(expected.typeId)
-        }
     }
     // endregion
 
@@ -827,27 +730,11 @@ class TypeConversionsKtTest {
     // endregion
 
     private companion object {
-        val gson = Gson()
-
         const val ID = 12345L
         const val COUNTRY_NAME = "United Kingdom"
         const val COUNTRY_FLAG = 1234
-        const val NAME = "Short Magazine Lee-Enfield No.1 Mk. 3"
-        const val YEAR = 1907
-        const val MANUFACTURER = "Lee-Enfield"
-        const val COUNTRY_ID = 123L
-        const val TYPE_ID = 456L
-        const val LENGTH = 1.0f
-        const val WEIGHT = 2.5f
         const val CALIBRE_ID = 789L
         const val CALIBRE = ".303 British"
-        const val CAPACITY = 10
-        const val RATE_OF_FIRE = 20
-        const val ACCURACY = 300
-        const val PHOTO = "photo"
-
-        val photos = listOf(PHOTO)
-        val photosJson: String = gson.toJson(photos)
     }
 
 }
