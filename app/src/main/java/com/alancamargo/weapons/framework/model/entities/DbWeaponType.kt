@@ -1,16 +1,18 @@
-package com.alancamargo.weapons.framework.model
+package com.alancamargo.weapons.framework.model.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "WeaponType")
 data class DbWeaponType(
-    @PrimaryKey(autoGenerate = true) var id: Long = -1,
+    @PrimaryKey val id: Long,
     val name: String,
     val category: String?
 ) {
 
     companion object {
+        const val COLUMN_ID = "id"
+
         const val NAME_MELEE = "Melee"
         const val NAME_PISTOL = "Pistol"
         const val NAME_RIFLE = "Rifle"
