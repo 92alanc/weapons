@@ -7,6 +7,8 @@ import com.alancamargo.weapons.framework.db.CountryDao
 import com.alancamargo.weapons.framework.db.WeaponDao
 import com.alancamargo.weapons.framework.db.WeaponTypeDao
 import com.alancamargo.weapons.framework.model.conversions.fromDbToDomain
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class WeaponLocalDataSourceImpl(
     private val weaponDao: WeaponDao,
@@ -15,10 +17,10 @@ class WeaponLocalDataSourceImpl(
     private val calibreDao: CalibreDao
 ) : WeaponLocalDataSource {
 
-    override suspend fun getWeapons(): List<Weapon> {
+    override suspend fun getWeapons(): List<Weapon> = withContext(Dispatchers.IO) {
         val dbWeapons = weaponDao.select()
 
-        return dbWeapons.map {
+        dbWeapons.map {
             val country = countryDao.select(it.countryId)
             val type = weaponTypeDao.select(it.typeId)
             val calibre = calibreDao.select(it.calibreId)
