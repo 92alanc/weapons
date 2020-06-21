@@ -34,7 +34,7 @@ fun DbWeapon.fromDbToDomain(
 
     val gson = Gson()
     val jsonType = object : TypeToken<List<String>>() {}.type
-    val photos = gson.fromJson<List<String>>(photosJson, jsonType)
+    val photos = gson.fromJson<List<String>>(photosJson, jsonType) ?: emptyList()
 
     return Weapon(
         id,

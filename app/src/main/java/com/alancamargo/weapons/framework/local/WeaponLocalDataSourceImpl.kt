@@ -44,7 +44,7 @@ class WeaponLocalDataSourceImpl(
             val country = countryDao.selectById(countryId)
 
             dbWeapons.map {
-                val type = weaponTypeDao.select(it.typeId)
+                val type = weaponTypeDao.selectById(it.typeId)
                 val calibre = calibreDao.selectById(it.calibreId)
                 it.fromDbToDomain(country, type, calibre)
             }
@@ -54,7 +54,7 @@ class WeaponLocalDataSourceImpl(
     override suspend fun getWeaponsByType(typeId: Long): List<Weapon> {
         return withContext(Dispatchers.IO) {
             val dbWeapons = weaponDao.selectByType(typeId)
-            val type = weaponTypeDao.select(typeId)
+            val type = weaponTypeDao.selectById(typeId)
 
             dbWeapons.map {
                 val country = countryDao.selectById(it.countryId)
@@ -71,7 +71,7 @@ class WeaponLocalDataSourceImpl(
 
             dbWeapons.map {
                 val country = countryDao.selectById(it.countryId)
-                val type = weaponTypeDao.select(it.typeId)
+                val type = weaponTypeDao.selectById(it.typeId)
                 it.fromDbToDomain(country, type, calibre)
             }
         }
@@ -85,7 +85,7 @@ class WeaponLocalDataSourceImpl(
 
     private suspend fun DbWeapon.fromDbToDomain(): Weapon {
         val country = countryDao.selectById(countryId)
-        val type = weaponTypeDao.select(typeId)
+        val type = weaponTypeDao.selectById(typeId)
         val calibre = calibreDao.selectById(calibreId)
         return fromDbToDomain(country, type, calibre)
     }
