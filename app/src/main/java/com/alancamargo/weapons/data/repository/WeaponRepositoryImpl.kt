@@ -7,7 +7,7 @@ import com.alancamargo.weapons.domain.Weapon
 
 class WeaponRepositoryImpl(
     private val localDataSource: WeaponLocalDataSource,
-    private val ioHelper: IoHelper = IoHelper()
+    private val ioHelper: IoHelper
 ) : WeaponRepository {
 
     override suspend fun getWeapons(): Result<List<Weapon>> = ioHelper.safeIoCall {

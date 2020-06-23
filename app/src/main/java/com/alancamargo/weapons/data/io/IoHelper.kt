@@ -1,16 +1,16 @@
 package com.alancamargo.weapons.data.io
 
-import android.util.Log
+import com.alancamargo.weapons.data.crash.CrashReportHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class IoHelper {
+class IoHelper(private val crashReportHelper: CrashReportHelper) {
 
     suspend fun <T> safeIoCall(call: suspend () -> T): Result<T> = withContext(Dispatchers.IO) {
         try {
             Result.Success(call.invoke())
         } catch (t: Throwable) {
-            Log.d("TAG", t.message, t) // TODO: replace with Crashlytics
+            crashReportHelper.log(t)
             Result.Error
         }
     }
