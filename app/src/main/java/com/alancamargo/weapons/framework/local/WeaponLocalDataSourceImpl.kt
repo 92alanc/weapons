@@ -8,8 +8,6 @@ import com.alancamargo.weapons.framework.db.WeaponDao
 import com.alancamargo.weapons.framework.db.WeaponTypeDao
 import com.alancamargo.weapons.framework.model.conversions.fromDbToDomain
 import com.alancamargo.weapons.framework.model.entities.DbWeapon
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class WeaponLocalDataSourceImpl(
     private val weaponDao: WeaponDao,
@@ -18,62 +16,48 @@ class WeaponLocalDataSourceImpl(
     private val calibreDao: CalibreDao
 ) : WeaponLocalDataSource {
 
-    override suspend fun getWeapons(): List<Weapon> = withContext(Dispatchers.IO) {
-        weaponDao.selectAll().fromDbToDomain()
-    }
+    override suspend fun getWeapons(): List<Weapon> = weaponDao.selectAll().fromDbToDomain()
 
-    override suspend fun getWeaponById(id: Long): Weapon = withContext(Dispatchers.IO) {
-        weaponDao.selectById(id).fromDbToDomain()
-    }
+    override suspend fun getWeaponById(id: Long): Weapon = weaponDao.selectById(id).fromDbToDomain()
 
     override suspend fun getWeaponsByName(name: String): List<Weapon> {
-        return withContext(Dispatchers.IO) {
-            weaponDao.selectByName(name).fromDbToDomain()
-        }
+        return weaponDao.selectByName(name).fromDbToDomain()
     }
 
     override suspend fun getWeaponsByYear(year: Int): List<Weapon> {
-        return withContext(Dispatchers.IO) {
-            weaponDao.selectByYear(year).fromDbToDomain()
-        }
+        return weaponDao.selectByYear(year).fromDbToDomain()
     }
 
     override suspend fun getWeaponsByCountry(countryId: Long): List<Weapon> {
-        return withContext(Dispatchers.IO) {
-            val dbWeapons = weaponDao.selectByCountry(countryId)
-            val country = countryDao.selectById(countryId)
+        val dbWeapons = weaponDao.selectByCountry(countryId)
+        val country = countryDao.selectById(countryId)
 
-            dbWeapons.map {
-                val type = weaponTypeDao.selectById(it.typeId)
-                val calibre = calibreDao.selectById(it.calibreId)
-                it.fromDbToDomain(country, type, calibre)
-            }
+        return dbWeapons.map {
+            val type = weaponTypeDao.selectById(it.typeId)
+            val calibre = calibreDao.selectById(it.calibreId)
+            it.fromDbToDomain(country, type, calibre)
         }
     }
 
     override suspend fun getWeaponsByType(typeId: Long): List<Weapon> {
-        return withContext(Dispatchers.IO) {
-            val dbWeapons = weaponDao.selectByType(typeId)
-            val type = weaponTypeDao.selectById(typeId)
+        val dbWeapons = weaponDao.selectByType(typeId)
+        val type = weaponTypeDao.selectById(typeId)
 
-            dbWeapons.map {
-                val country = countryDao.selectById(it.countryId)
-                val calibre = calibreDao.selectById(it.calibreId)
-                it.fromDbToDomain(country, type, calibre)
-            }
+        return dbWeapons.map {
+            val country = countryDao.selectById(it.countryId)
+            val calibre = calibreDao.selectById(it.calibreId)
+            it.fromDbToDomain(country, type, calibre)
         }
     }
 
     override suspend fun getWeaponsByCalibre(calibreId: Long): List<Weapon> {
-        return withContext(Dispatchers.IO) {
-            val dbWeapons = weaponDao.selectByCalibre(calibreId)
-            val calibre = calibreDao.selectById(calibreId)
+        val dbWeapons = weaponDao.selectByCalibre(calibreId)
+        val calibre = calibreDao.selectById(calibreId)
 
-            dbWeapons.map {
-                val country = countryDao.selectById(it.countryId)
-                val type = weaponTypeDao.selectById(it.typeId)
-                it.fromDbToDomain(country, type, calibre)
-            }
+        return dbWeapons.map {
+            val country = countryDao.selectById(it.countryId)
+            val type = weaponTypeDao.selectById(it.typeId)
+            it.fromDbToDomain(country, type, calibre)
         }
     }
 

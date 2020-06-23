@@ -1,32 +1,49 @@
 package com.alancamargo.weapons.data.repository
 
+import com.alancamargo.weapons.data.io.IoHelper
+import com.alancamargo.weapons.data.io.Result
 import com.alancamargo.weapons.data.local.WeaponLocalDataSource
 import com.alancamargo.weapons.domain.Weapon
 
-class WeaponRepositoryImpl(private val localDataSource: WeaponLocalDataSource) : WeaponRepository {
+class WeaponRepositoryImpl(
+    private val localDataSource: WeaponLocalDataSource,
+    private val ioHelper: IoHelper = IoHelper()
+) : WeaponRepository {
 
-    override suspend fun getWeapons(): List<Weapon> = localDataSource.getWeapons()
-
-    override suspend fun getWeaponById(id: Long): Weapon = localDataSource.getWeaponById(id)
-
-    override suspend fun getWeaponsByName(name: String): List<Weapon> {
-        return localDataSource.getWeaponsByName(name)
+    override suspend fun getWeapons(): Result<List<Weapon>> = ioHelper.safeIoCall {
+        localDataSource.getWeapons()
     }
 
-    override suspend fun getWeaponsByYear(year: Int): List<Weapon> {
-        return localDataSource.getWeaponsByYear(year)
+    override suspend fun getWeaponById(id: Long): Result<Weapon> = ioHelper.safeIoCall {
+        localDataSource.getWeaponById(id)
     }
 
-    override suspend fun getWeaponsByCountry(countryId: Long): List<Weapon> {
-        return localDataSource.getWeaponsByCountry(countryId)
+    override suspend fun getWeaponsByName(name: String): Result<List<Weapon>> {
+        return ioHelper.safeIoCall {
+            localDataSource.getWeaponsByName(name)
+        }
     }
 
-    override suspend fun getWeaponsByType(typeId: Long): List<Weapon> {
-        return localDataSource.getWeaponsByType(typeId)
+    override suspend fun getWeaponsByYear(year: Int): Result<List<Weapon>> = ioHelper.safeIoCall {
+        localDataSource.getWeaponsByYear(year)
     }
 
-    override suspend fun getWeaponsByCalibre(calibreId: Long): List<Weapon> {
-        return localDataSource.getWeaponsByCalibre(calibreId)
+    override suspend fun getWeaponsByCountry(countryId: Long): Result<List<Weapon>> {
+        return ioHelper.safeIoCall {
+            localDataSource.getWeaponsByCountry(countryId)
+        }
+    }
+
+    override suspend fun getWeaponsByType(typeId: Long): Result<List<Weapon>> {
+        return ioHelper.safeIoCall {
+            localDataSource.getWeaponsByType(typeId)
+        }
+    }
+
+    override suspend fun getWeaponsByCalibre(calibreId: Long): Result<List<Weapon>> {
+        return ioHelper.safeIoCall {
+            localDataSource.getWeaponsByCalibre(calibreId)
+        }
     }
 
 }

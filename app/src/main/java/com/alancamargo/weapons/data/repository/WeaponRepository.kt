@@ -1,21 +1,22 @@
 package com.alancamargo.weapons.data.repository
 
+import com.alancamargo.weapons.data.io.Result
 import com.alancamargo.weapons.domain.Weapon
 
 interface WeaponRepository {
 
-    suspend fun getWeapons(): List<Weapon>
+    suspend fun getWeapons(): Result<List<Weapon>>
 
-    suspend fun getWeaponById(id: Long): Weapon
+    suspend fun getWeaponById(id: Long): Result<Weapon>
 
-    suspend fun getWeaponsByName(name: String): List<Weapon>
+    suspend fun getWeaponsByName(name: String): Result<List<Weapon>>
 
-    suspend fun getWeaponsByYear(year: Int): List<Weapon>
+    suspend fun getWeaponsByYear(year: Int): Result<List<Weapon>>
 
-    suspend fun getWeaponsByCountry(countryId: Long): List<Weapon>
+    suspend fun getWeaponsByCountry(countryId: Long): Result<List<Weapon>>
 
-    suspend fun getWeaponsByType(typeId: Long): List<Weapon>
+    suspend fun getWeaponsByType(typeId: Long): Result<List<Weapon>>
 
-    suspend fun getWeaponsByCalibre(calibreId: Long): List<Weapon>
+    suspend fun getWeaponsByCalibre(calibreId: Long): Result<List<Weapon>>
 
 }
