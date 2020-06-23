@@ -18,4 +18,6 @@ interface WeaponLocalDataSource {
 
     suspend fun getWeaponsByCalibre(calibreId: Long): List<Weapon>
 
+    suspend fun getWeaponsByManufacturer(manufacturerId: Long): List<Weapon>
+
 }

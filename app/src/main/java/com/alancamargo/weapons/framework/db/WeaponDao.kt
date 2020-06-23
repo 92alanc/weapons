@@ -28,4 +28,7 @@ interface WeaponDao {
     @Query("SELECT * FROM WEAPON WHERE CALIBRE_ID = :calibreId")
     suspend fun selectByCalibre(calibreId: Long): List<DbWeapon>
 
+    @Query("SELECT * FROM WEAPON WHERE MANUFACTURER_ID = :manufacturerId")
+    suspend fun selectByManufacturer(manufacturerId: Long): List<DbWeapon>
+
 }

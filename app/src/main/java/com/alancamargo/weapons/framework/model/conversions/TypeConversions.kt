@@ -1,13 +1,7 @@
 package com.alancamargo.weapons.framework.model.conversions
 
-import com.alancamargo.weapons.domain.Calibre
-import com.alancamargo.weapons.domain.Country
-import com.alancamargo.weapons.domain.Weapon
-import com.alancamargo.weapons.domain.WeaponType
-import com.alancamargo.weapons.framework.model.entities.DbCalibre
-import com.alancamargo.weapons.framework.model.entities.DbCountry
-import com.alancamargo.weapons.framework.model.entities.DbWeapon
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType
+import com.alancamargo.weapons.domain.*
+import com.alancamargo.weapons.framework.model.entities.*
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_CARBINE
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_GRENADE
@@ -24,10 +18,12 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 fun DbWeapon.fromDbToDomain(
+    dbManufacturer: DbManufacturer,
     dbCountry: DbCountry,
     dbType: DbWeaponType,
     dbCalibre: DbCalibre
 ): Weapon {
+    val manufacturer = dbManufacturer.fromDbToDomain()
     val country = dbCountry.fromDbToDomain()
     val type = dbType.fromDbToDomain()
     val calibre = dbCalibre.fromDbToDomain()
@@ -60,6 +56,10 @@ fun DbCalibre.fromDbToDomain() = Calibre(id, calibre)
 fun Country.fromDomainToDb() = DbCountry(id, name, flag)
 
 fun DbCountry.fromDbToDomain() = Country(id, name, flag)
+
+fun Manufacturer.fromDomainToDb() = DbManufacturer(id, name)
+
+fun DbManufacturer.fromDbToDomain() = Manufacturer(id, name)
 
 fun WeaponType.fromDomainToDb() = when (this) {
     is WeaponType.BoobyTrap -> DbWeaponType(id, NAME_BOOBY_TRAP, category = null)

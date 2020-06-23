@@ -4,7 +4,7 @@ data class Weapon(
     val id: Long,
     val name: String,
     val year: Int,
-    val manufacturer: String,
+    val manufacturer: Manufacturer,
     val country: Country,
     val type: WeaponType,
     val length: Float,

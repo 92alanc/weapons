@@ -15,7 +15,7 @@ fun getModules() = listOf(data, framework)
 
 private val data = module {
     factory<WeaponRepository> { WeaponRepositoryImpl(get(), get()) }
-    factory<WeaponLocalDataSource> { WeaponLocalDataSourceImpl(get(), get(), get(), get()) }
+    factory<WeaponLocalDataSource> { WeaponLocalDataSourceImpl(get(), get(), get(), get(), get()) }
     factory { IoHelper(get()) }
     factory<CrashReportHelper> { CrashReportHelperImpl() }
 }
@@ -25,4 +25,5 @@ private val framework = module {
     factory { DatabaseProvider.getInstance(androidContext()).provideWeaponTypeDao() }
     factory { DatabaseProvider.getInstance(androidContext()).provideCountryDao() }
     factory { DatabaseProvider.getInstance(androidContext()).provideCalibreDao() }
+    factory { DatabaseProvider.getInstance(androidContext()).provideManufacturerDao() }
 }

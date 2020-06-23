@@ -1,9 +1,6 @@
 package com.alancamargo.weapons.framework.local
 
-import com.alancamargo.weapons.framework.db.CalibreDao
-import com.alancamargo.weapons.framework.db.CountryDao
-import com.alancamargo.weapons.framework.db.WeaponDao
-import com.alancamargo.weapons.framework.db.WeaponTypeDao
+import com.alancamargo.weapons.framework.db.*
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
@@ -21,6 +18,7 @@ class WeaponLocalDataSourceImplTest {
     @MockK lateinit var mockWeaponTypeDao: WeaponTypeDao
     @MockK lateinit var mockCountryDao: CountryDao
     @MockK lateinit var mockCalibreDao: CalibreDao
+    @MockK lateinit var mockManufacturerDao: ManufacturerDao
 
     private lateinit var localDataSource: WeaponLocalDataSourceImpl
 
@@ -31,7 +29,8 @@ class WeaponLocalDataSourceImplTest {
             mockWeaponDao,
             mockWeaponTypeDao,
             mockCountryDao,
-            mockCalibreDao
+            mockCalibreDao,
+            mockManufacturerDao
         )
     }
 
@@ -161,11 +160,30 @@ class WeaponLocalDataSourceImplTest {
         }
     }
 
+    @Test
+    fun shouldGetWeaponsByManufacturer() = runBlocking {
+        mockSuccessfulOutput()
+
+        val weapons = localDataSource.getWeaponsByManufacturer(14L)
+
+        assertThat(weapons.size).isEqualTo(1)
+    }
+
+    @Test(expected = IOException::class)
+    fun getWeaponsByManufacturer_databaseThrowsException_shouldThrow() {
+        coEvery { mockWeaponDao.selectByManufacturer(any()) } throws IOException()
+
+        runBlocking {
+            localDataSource.getWeaponsByManufacturer(55L)
+        }
+    }
+
     private fun mockSuccessfulOutput() {
         mockWeaponDaoOutput()
         mockWeaponTypeDaoOutput()
         mockCountryDaoOutput()
         mockCalibreDaoOutput()
+        mockManufacturerDaoOutput()
     }
 
     private fun mockWeaponDaoOutput() {
@@ -178,6 +196,7 @@ class WeaponLocalDataSourceImplTest {
         coEvery { mockWeaponDao.selectByCountry(any()) } returns listOf(mockk(relaxed = true))
         coEvery { mockWeaponDao.selectByType(any()) } returns listOf(mockk(relaxed = true))
         coEvery { mockWeaponDao.selectByCalibre(any()) } returns listOf(mockk(relaxed = true))
+        coEvery { mockWeaponDao.selectByManufacturer(any()) } returns listOf(mockk(relaxed = true))
     }
 
     private fun mockWeaponTypeDaoOutput() {
@@ -192,6 +211,10 @@ class WeaponLocalDataSourceImplTest {
 
     private fun mockCalibreDaoOutput() {
         coEvery { mockCalibreDao.selectById(any()) } returns mockk(relaxed = true)
+    }
+
+    private fun mockManufacturerDaoOutput() {
+        coEvery { mockManufacturerDao.selectById(any()) } returns mockk(relaxed = true)
     }
 
     private companion object {

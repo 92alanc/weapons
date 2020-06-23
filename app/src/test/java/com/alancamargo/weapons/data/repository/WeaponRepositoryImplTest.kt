@@ -240,4 +240,36 @@ class WeaponRepositoryImplTest {
         assertThat(result).isInstanceOf(Result.Error::class.java)
     }
 
+    @Test
+    fun shouldGetWeaponsByManufacturer() = runBlocking {
+        coEvery {
+            mockLocalDataSource.getWeaponsByManufacturer(any())
+        } returns listOf(mockk(), mockk())
+
+        val result = repository.getWeaponsByManufacturer(555L)
+
+        assertThat(result).isInstanceOf(Result.Success::class.java)
+        require(result is Result.Success)
+        assertThat(result.body.size).isEqualTo(2)
+    }
+
+    @Test
+    fun getWeaponsByManufacturer_localDataSourceThrowsException_shouldLogToCrashReport() = runBlocking {
+        val exception = IOException()
+        coEvery { mockLocalDataSource.getWeaponsByManufacturer(any()) } throws exception
+
+        repository.getWeaponsByManufacturer(555L)
+
+        verify { mockCrashReportHelper.log(exception) }
+    }
+
+    @Test
+    fun getWeaponsByManufacturer_localDataSourceThrowsException_shouldReturnError() = runBlocking {
+        coEvery { mockLocalDataSource.getWeaponsByManufacturer(any()) } throws IOException()
+
+        val result = repository.getWeaponsByManufacturer(555L)
+
+        assertThat(result).isInstanceOf(Result.Error::class.java)
+    }
+
 }

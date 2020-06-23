@@ -4,17 +4,17 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.alancamargo.weapons.framework.db.CalibreDao
-import com.alancamargo.weapons.framework.db.CountryDao
-import com.alancamargo.weapons.framework.db.WeaponDao
-import com.alancamargo.weapons.framework.db.WeaponTypeDao
-import com.alancamargo.weapons.framework.model.entities.DbCalibre
-import com.alancamargo.weapons.framework.model.entities.DbCountry
-import com.alancamargo.weapons.framework.model.entities.DbWeapon
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType
+import com.alancamargo.weapons.framework.db.*
+import com.alancamargo.weapons.framework.model.entities.*
 
 @Database(
-    entities = [DbWeapon::class, DbWeaponType::class, DbCalibre::class, DbCountry::class],
+    entities = [
+        DbWeapon::class,
+        DbWeaponType::class,
+        DbCalibre::class,
+        DbCountry::class,
+        DbManufacturer::class
+    ],
     version = 1,
     exportSchema = false
 )
@@ -27,6 +27,8 @@ abstract class DatabaseProvider : RoomDatabase() {
     abstract fun provideCalibreDao(): CalibreDao
 
     abstract fun provideCountryDao(): CountryDao
+
+    abstract fun provideManufacturerDao(): ManufacturerDao
 
     companion object {
 
@@ -43,7 +45,7 @@ abstract class DatabaseProvider : RoomDatabase() {
                     DatabaseProvider::class.java,
                     DB_NAME
                 ).fallbackToDestructiveMigration()
-                    //.createFromAsset("database.db") TODO
+                    .createFromAsset("database.db")
                     .build()
             }
 

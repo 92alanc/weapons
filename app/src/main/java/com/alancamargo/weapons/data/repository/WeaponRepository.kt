@@ -19,4 +19,6 @@ interface WeaponRepository {
 
     suspend fun getWeaponsByCalibre(calibreId: Long): Result<List<Weapon>>
 
+    suspend fun getWeaponsByManufacturer(manufacturerId: Long): Result<List<Weapon>>
+
 }

@@ -1,13 +1,7 @@
 package com.alancamargo.weapons.framework.model.conversions
 
-import com.alancamargo.weapons.domain.Calibre
-import com.alancamargo.weapons.domain.Country
-import com.alancamargo.weapons.domain.Weapon
-import com.alancamargo.weapons.domain.WeaponType
-import com.alancamargo.weapons.framework.model.entities.DbCalibre
-import com.alancamargo.weapons.framework.model.entities.DbCountry
-import com.alancamargo.weapons.framework.model.entities.DbWeapon
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType
+import com.alancamargo.weapons.domain.*
+import com.alancamargo.weapons.framework.model.entities.*
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_CARBINE
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_GRENADE
@@ -28,6 +22,7 @@ class TypeConversionsKtTest {
     // region Weapon
     @Test
     fun weapon_fromDbToDomain() {
+        val dbManufacturer = DbManufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
         val dbCountry = DbCountry(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG)
         val dbType = DbWeaponType(TYPE_ID, NAME_BOOBY_TRAP, category = null)
         val dbCalibre = DbCalibre(CALIBRE_ID, CALIBRE)
@@ -36,7 +31,7 @@ class TypeConversionsKtTest {
             ID,
             WEAPON_NAME,
             YEAR,
-            MANUFACTURER,
+            MANUFACTURER_ID,
             COUNTRY_ID,
             TYPE_ID,
             LENGTH,
@@ -52,7 +47,7 @@ class TypeConversionsKtTest {
             ID,
             WEAPON_NAME,
             YEAR,
-            MANUFACTURER,
+            Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME),
             Country(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG),
             WeaponType.BoobyTrap(TYPE_ID),
             LENGTH,
@@ -64,13 +59,13 @@ class TypeConversionsKtTest {
             listOf(PHOTO)
         )
 
-        val actual = dbWeapon.fromDbToDomain(dbCountry, dbType, dbCalibre)
+        val actual = dbWeapon.fromDbToDomain(dbManufacturer, dbCountry, dbType, dbCalibre)
 
         with(actual) {
             assertThat(id).isEqualTo(expected.id)
             assertThat(name).isEqualTo(expected.name)
             assertThat(year).isEqualTo(expected.year)
-            assertThat(manufacturer).isEqualTo(expected.manufacturer)
+            assertThat(manufacturer.id).isEqualTo(expected.manufacturer.id)
             assertThat(country.id).isEqualTo(expected.country.id)
             assertThat(type.id).isEqualTo(expected.type.id)
             assertThat(length).isEqualTo(expected.length)
@@ -130,6 +125,28 @@ class TypeConversionsKtTest {
             COUNTRY_FLAG
         )
         val expected = Country(ID, COUNTRY_NAME, COUNTRY_FLAG)
+
+        val actual = db.fromDbToDomain()
+
+        assertThat(actual).isEqualTo(expected)
+    }
+    // endregion
+
+    // region Manufacturer
+    @Test
+    fun manufacturer_fromDomainToDb() {
+        val domain = Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
+        val expected = DbManufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
+
+        val actual = domain.fromDomainToDb()
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun manufacturer_fromDbToDomain() {
+        val db = DbManufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
+        val expected = Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
 
         val actual = db.fromDbToDomain()
 
@@ -798,7 +815,8 @@ class TypeConversionsKtTest {
         const val CALIBRE = ".303 British"
         const val WEAPON_NAME = "Short Magazine Lee-Enfield No.1 Mk.3"
         const val YEAR = 1907
-        const val MANUFACTURER = "Lee-Enfield"
+        const val MANUFACTURER_ID = 999L
+        const val MANUFACTURER_NAME = "Lee-Enfield"
         const val COUNTRY_ID = 222L
         const val TYPE_ID = 333L
         const val LENGTH = 1.02f

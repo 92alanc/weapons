@@ -46,4 +46,10 @@ class WeaponRepositoryImpl(
         }
     }
 
+    override suspend fun getWeaponsByManufacturer(manufacturerId: Long): Result<List<Weapon>> {
+        return ioHelper.safeIoCall {
+            localDataSource.getWeaponsByManufacturer(manufacturerId)
+        }
+    }
+
 }
