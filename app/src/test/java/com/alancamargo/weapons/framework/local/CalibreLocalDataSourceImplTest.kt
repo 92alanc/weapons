@@ -30,9 +30,9 @@ class CalibreLocalDataSourceImplTest {
             mockCalibreDao.selectAll()
         } returns listOf(mockk(relaxed = true), mockk(relaxed = true))
 
-        val weaponTypes = localDataSource.getCalibres()
+        val calibres = localDataSource.getCalibres()
 
-        assertThat(weaponTypes.size).isEqualTo(2)
+        assertThat(calibres.size).isEqualTo(2)
     }
 
     @Test(expected = IOException::class)
