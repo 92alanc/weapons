@@ -1,3 +1,27 @@
 <resources>
+    <!-- region Weapon types -->
+    <string name="type_melee">Melee</string>
+    <string name="type_pistol">Pistol</string>
+    <string name="type_rifle">Rifle</string>
+    <string name="type_shotgun">Shotgun</string>
+    <string name="type_carbine">Carbine</string>
+    <string name="type_machine_gun">Machine-gun</string>
+    <string name="type_sub_machine_gun">Sub machine-gun</string>
+    <string name="type_grenade">Grenade</string>
+    <string name="type_mine">Mine</string>
+    <string name="type_grenade_launcher">Grenade launcher</string>
+    <string name="type_rocket_launcher">Rocket launcher</string>
+    <string name="type_booby_trap">Booby trap</string>
+    <!-- endregion -->
 
+    <!-- region Weapon type categories -->
+    <string name="category_bolt_action">Bolt action</string>
+    <string name="category_semi_automatic">Semi-automatic</string>
+    <string name="category_automatic">Automatic</string>
+    <string name="category_light">Light</string>
+    <string name="category_general_purpose">General purpose</string>
+    <string name="category_heavy">Heavy</string>
+    <string name="category_anti_personnel">Anti personnel</string>
+    <string name="category_anti_tank">Anti tank</string>
+    <!-- endregion -->
 </resources>
