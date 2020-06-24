@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.ui.activities
+package com.alancamargo.weapons.ui.fragments
 
 import android.os.Bundle
 import android.view.View
