@@ -1,9 +1,9 @@
-package com.alancamargo.weapons.data.repository.country
+package com.alancamargo.weapons.data.repository.type
 
 import com.alancamargo.weapons.data.crash.CrashReportHelper
 import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.io.Result
-import com.alancamargo.weapons.data.local.CountryLocalDataSource
+import com.alancamargo.weapons.data.local.WeaponTypeLocalDataSource
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -15,26 +15,26 @@ import org.junit.Before
 import org.junit.Test
 import java.io.IOException
 
-class CountryRepositoryImplTest {
+class WeaponTypeRepositoryImplTest {
 
-    @MockK lateinit var mockLocalDataSource: CountryLocalDataSource
+    @MockK lateinit var mockLocalDataSource: WeaponTypeLocalDataSource
     @MockK lateinit var mockCrashReportHelper: CrashReportHelper
 
-    private lateinit var repository: CountryRepositoryImpl
+    private lateinit var repository: WeaponTypeRepositoryImpl
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this, relaxed = true)
         val ioHelper = IoHelper(mockCrashReportHelper)
 
-        repository = CountryRepositoryImpl(mockLocalDataSource, ioHelper)
+        repository = WeaponTypeRepositoryImpl(mockLocalDataSource, ioHelper)
     }
 
     @Test
-    fun shouldGetCountries() = runBlocking {
-        coEvery { mockLocalDataSource.getCountries() } returns listOf(mockk(), mockk(), mockk())
+    fun shouldGetWeaponTypes() = runBlocking {
+        coEvery { mockLocalDataSource.getWeaponTypes() } returns listOf(mockk(), mockk(), mockk())
 
-        val result = repository.getCountries()
+        val result = repository.getWeaponTypes()
 
         assertThat(result).isInstanceOf(Result.Success::class.java)
         require(result is Result.Success)
@@ -44,18 +44,18 @@ class CountryRepositoryImplTest {
     @Test
     fun getCountries_localDataSourceThrowsException_shouldLogToCrashReport() = runBlocking {
         val exception = IOException()
-        coEvery { mockLocalDataSource.getCountries() } throws exception
+        coEvery { mockLocalDataSource.getWeaponTypes() } throws exception
 
-        repository.getCountries()
+        repository.getWeaponTypes()
 
         verify { mockCrashReportHelper.log(exception) }
     }
 
     @Test
     fun getCountries_localDataSourceThrowsException_shouldReturnError() = runBlocking {
-        coEvery { mockLocalDataSource.getCountries() } throws IOException()
+        coEvery { mockLocalDataSource.getWeaponTypes() } throws IOException()
 
-        val result = repository.getCountries()
+        val result = repository.getWeaponTypes()
 
         assertThat(result).isInstanceOf(Result.Error::class.java)
     }
