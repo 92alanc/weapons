@@ -16,10 +16,12 @@ import com.alancamargo.weapons.data.repository.weapon.WeaponRepositoryImpl
 import com.alancamargo.weapons.framework.crash.CrashReportHelperImpl
 import com.alancamargo.weapons.framework.db.provider.DatabaseProvider
 import com.alancamargo.weapons.framework.local.*
+import com.alancamargo.weapons.ui.viewmodel.WeaponListViewModel
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-fun getModules() = listOf(data, framework)
+fun getModules() = listOf(data, framework, ui)
 
 private val data = module {
     factory<WeaponRepository> { WeaponRepositoryImpl(get(), get()) }
@@ -44,4 +46,8 @@ private val framework = module {
     factory { DatabaseProvider.getInstance(androidContext()).provideCountryDao() }
     factory { DatabaseProvider.getInstance(androidContext()).provideCalibreDao() }
     factory { DatabaseProvider.getInstance(androidContext()).provideManufacturerDao() }
+}
+
+private val ui = module {
+    viewModel { WeaponListViewModel(get()) }
 }
