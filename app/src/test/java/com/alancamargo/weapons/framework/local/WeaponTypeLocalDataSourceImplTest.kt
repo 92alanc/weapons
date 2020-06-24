@@ -27,8 +27,8 @@ class WeaponTypeLocalDataSourceImplTest {
     @Test
     fun shouldGetWeaponTypes() = runBlocking {
         val data = listOf(
-            DbWeaponType(1L, DbWeaponType.NAME_PISTOL, category = null),
-            DbWeaponType(2L, DbWeaponType.NAME_CARBINE, category = null)
+            DbWeaponType(1L, DbWeaponType.NAME_PISTOL, categoryId = null),
+            DbWeaponType(2L, DbWeaponType.NAME_CARBINE, categoryId = null)
         )
         coEvery {
             mockWeaponTypeDao.selectAll()
@@ -52,7 +52,7 @@ class WeaponTypeLocalDataSourceImplTest {
     fun shouldGetWeaponTypeById() = runBlocking {
         coEvery {
             mockWeaponTypeDao.selectById(any())
-        } returns DbWeaponType(1L, DbWeaponType.NAME_PISTOL, category = null)
+        } returns DbWeaponType(1L, DbWeaponType.NAME_PISTOL, categoryId = null)
 
         val weaponType = localDataSource.getWeaponTypeById(1L)
 

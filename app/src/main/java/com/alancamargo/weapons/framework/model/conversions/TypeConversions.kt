@@ -44,34 +44,34 @@ fun DbWeapon.fromDbToDomain(
     )
 }
 
-fun Calibre.fromDomainToDb() = DbCalibre(id, calibre)
+fun Calibre.fromDomainToDb() = DbCalibre(id, nameId)
 
-fun DbCalibre.fromDbToDomain() = Calibre(id, calibre)
+fun DbCalibre.fromDbToDomain() = Calibre(id, nameId)
 
-fun Country.fromDomainToDb() = DbCountry(id, name, flag)
+fun Country.fromDomainToDb() = DbCountry(id, nameId, flagId)
 
-fun DbCountry.fromDbToDomain() = Country(id, name, flag)
+fun DbCountry.fromDbToDomain() = Country(id, nameId, flagId)
 
 fun Manufacturer.fromDomainToDb() = DbManufacturer(id, name)
 
 fun DbManufacturer.fromDbToDomain() = Manufacturer(id, name)
 
 fun WeaponType.fromDomainToDb() = when (this) {
-    is WeaponType.BoobyTrap -> DbWeaponType(id, NAME_BOOBY_TRAP, category = null)
-    is WeaponType.Carbine -> DbWeaponType(id, NAME_CARBINE, category = null)
+    is WeaponType.BoobyTrap -> DbWeaponType(id, NAME_BOOBY_TRAP, categoryId = null)
+    is WeaponType.Carbine -> DbWeaponType(id, NAME_CARBINE, categoryId = null)
     is WeaponType.Grenade -> DbWeaponType(id, NAME_GRENADE, category.name)
-    is WeaponType.GrenadeLauncher -> DbWeaponType(id, NAME_GRENADE_LAUNCHER, category = null)
+    is WeaponType.GrenadeLauncher -> DbWeaponType(id, NAME_GRENADE_LAUNCHER, categoryId = null)
     is WeaponType.MachineGun -> DbWeaponType(id, NAME_MACHINE_GUN, category.name)
-    is WeaponType.Melee -> DbWeaponType(id, NAME_MELEE, category = null)
+    is WeaponType.Melee -> DbWeaponType(id, NAME_MELEE, categoryId = null)
     is WeaponType.Mine -> DbWeaponType(id, NAME_MINE, category.name)
-    is WeaponType.Pistol -> DbWeaponType(id, NAME_PISTOL, category = null)
+    is WeaponType.Pistol -> DbWeaponType(id, NAME_PISTOL, categoryId = null)
     is WeaponType.Rifle -> DbWeaponType(id, NAME_RIFLE, category.name)
-    is WeaponType.RocketLauncher -> DbWeaponType(id, NAME_ROCKET_LAUNCHER, category = null)
-    is WeaponType.Shotgun -> DbWeaponType(id, NAME_SHOTGUN, category = null)
-    is WeaponType.SubMachineGun -> DbWeaponType(id, NAME_SUB_MACHINE_GUN, category = null)
+    is WeaponType.RocketLauncher -> DbWeaponType(id, NAME_ROCKET_LAUNCHER, categoryId = null)
+    is WeaponType.Shotgun -> DbWeaponType(id, NAME_SHOTGUN, categoryId = null)
+    is WeaponType.SubMachineGun -> DbWeaponType(id, NAME_SUB_MACHINE_GUN, categoryId = null)
 }
 
-fun DbWeaponType.fromDbToDomain() = when (this.name) {
+fun DbWeaponType.fromDbToDomain() = when (this.nameId) {
     NAME_BOOBY_TRAP -> WeaponType.BoobyTrap(id)
     NAME_CARBINE -> WeaponType.Carbine(id)
     NAME_GRENADE -> convertGrenade()
@@ -87,7 +87,7 @@ fun DbWeaponType.fromDbToDomain() = when (this.name) {
     else -> throw IllegalArgumentException("Name must be a proper WeaponType name")
 }
 
-private fun DbWeaponType.convertGrenade() = when (this.category) {
+private fun DbWeaponType.convertGrenade() = when (this.categoryId) {
     WeaponType.Grenade.Category.ANTI_PERSONNEL.name -> {
         WeaponType.Grenade(id, WeaponType.Grenade.Category.ANTI_PERSONNEL)
     }
@@ -99,7 +99,7 @@ private fun DbWeaponType.convertGrenade() = when (this.category) {
     else -> throw IllegalArgumentException("Category must be a WeaponType.Grenade.Category")
 }
 
-private fun DbWeaponType.convertMachineGun() = when (this.category) {
+private fun DbWeaponType.convertMachineGun() = when (this.categoryId) {
     WeaponType.MachineGun.Category.GENERAL_PURPOSE.name -> {
         WeaponType.MachineGun(id, WeaponType.MachineGun.Category.GENERAL_PURPOSE)
     }
@@ -115,7 +115,7 @@ private fun DbWeaponType.convertMachineGun() = when (this.category) {
     else -> throw IllegalArgumentException("Category must be a WeaponType.MachineGun.Category")
 }
 
-private fun DbWeaponType.convertMine() = when (this.category) {
+private fun DbWeaponType.convertMine() = when (this.categoryId) {
     WeaponType.Mine.Category.ANTI_PERSONNEL.name -> {
         WeaponType.Mine(id, WeaponType.Mine.Category.ANTI_PERSONNEL)
     }
@@ -127,7 +127,7 @@ private fun DbWeaponType.convertMine() = when (this.category) {
     else -> throw IllegalArgumentException("Category must be a WeaponType.Mine.Category")
 }
 
-private fun DbWeaponType.convertRifle() = when (this.category) {
+private fun DbWeaponType.convertRifle() = when (this.categoryId) {
     WeaponType.Rifle.Category.AUTOMATIC.name -> {
         WeaponType.Rifle(id, WeaponType.Rifle.Category.AUTOMATIC)
     }
