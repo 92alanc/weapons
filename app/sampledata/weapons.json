@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "name": "Short Magazine Lee-Enfield No.1 Mk.3",
+      "flag": "@drawable/ic_uk",
+      "accessibility": "@string/country_uk"
+    },
+    {
+      "name": "Gewehr 98",
+      "flag": "@drawable/ic_germany",
+      "accessibility": "@string/country_germany"
+    },
+    {
+      "name": "Lebel",
+      "flag": "@drawable/ic_france",
+      "accessibility": "@string/country_france"
+    },
+    {
+      "name": "Mosin-Nagant 1891",
+      "flag": "@drawable/ic_russia",
+      "accessibility": "@string/country_russia"
+    },
+    {
+      "name": "Type 38 Arisaka",
+      "flag": "@drawable/ic_japan",
+      "accessibility": "@string/country_japan"
+    },
+    {
+      "name": "Mannlicher M1895",
+      "flag": "@drawable/ic_austria_hungary",
+      "accessibility": "@string/country_austria_hungary"
+    },
+    {
+      "name": "Carcano",
+      "flag": "@drawable/ic_italy",
+      "accessibility": "@string/country_italy"
+    },
+    {
+      "name": "Lewis Gun",
+      "flag": "@drawable/ic_uk",
+      "accessibility": "@string/country_uk"
+    },
+    {
+      "name": "Mills Bomb",
+      "flag": "@drawable/ic_uk",
+      "accessibility": "@string/country_uk"
+    },
+    {
+      "name": "Chauchat",
+      "flag": "@drawable/ic_france",
+      "accessibility": "@string/country_france"
+    }
+  ]
+}
