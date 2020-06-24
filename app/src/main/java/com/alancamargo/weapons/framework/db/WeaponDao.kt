@@ -10,9 +10,6 @@ interface WeaponDao {
     @Query("SELECT * FROM WEAPON")
     suspend fun selectAll(): List<DbWeapon>
 
-    @Query("SELECT * FROM WEAPON WHERE ID = :id")
-    suspend fun selectById(id: Long): DbWeapon
-
     @Query("SELECT * FROM WEAPON WHERE NAME = :name")
     suspend fun selectByName(name: String): List<DbWeapon>
 

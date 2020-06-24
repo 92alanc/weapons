@@ -14,10 +14,6 @@ class WeaponRepositoryImpl(
         localDataSource.getWeapons()
     }
 
-    override suspend fun getWeaponById(id: Long): Result<Weapon> = ioHelper.safeIoCall {
-        localDataSource.getWeaponById(id)
-    }
-
     override suspend fun getWeaponsByName(name: String): Result<List<Weapon>> {
         return ioHelper.safeIoCall {
             localDataSource.getWeaponsByName(name)

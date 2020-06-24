@@ -6,8 +6,6 @@ interface WeaponLocalDataSource {
 
     suspend fun getWeapons(): List<Weapon>
 
-    suspend fun getWeaponById(id: Long): Weapon
-
     suspend fun getWeaponsByName(name: String): List<Weapon>
 
     suspend fun getWeaponsByYear(year: Int): List<Weapon>

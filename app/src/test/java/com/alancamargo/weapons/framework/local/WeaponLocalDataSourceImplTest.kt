@@ -57,42 +57,6 @@ class WeaponLocalDataSourceImplTest {
     }
 
     @Test
-    fun shouldGetWeaponById() = runBlocking {
-        mockSuccessfulOutput()
-
-        val weapon = localDataSource.getWeaponById(123L)
-
-        assertThat(weapon).isNotNull()
-    }
-
-    @Test(expected = IOException::class)
-    fun getWeaponById_databaseThrowsException_shouldThrow() {
-        coEvery { mockWeaponDao.selectById(any()) } throws IOException()
-
-        runBlocking {
-            localDataSource.getWeaponById(111L)
-        }
-    }
-
-    @Test
-    fun shouldGetWeaponsByName() = runBlocking {
-        mockSuccessfulOutput()
-
-        val weapons = localDataSource.getWeaponsByName("M16A1")
-
-        assertThat(weapons.size).isEqualTo(1)
-    }
-
-    @Test(expected = IOException::class)
-    fun getWeaponsByName_databaseThrowsException_shouldThrow() {
-        coEvery { mockWeaponDao.selectByName(any()) } throws IOException()
-
-        runBlocking {
-            localDataSource.getWeaponsByName("MP40")
-        }
-    }
-
-    @Test
     fun shouldGetWeaponsByYear() = runBlocking {
         mockSuccessfulOutput()
 
@@ -194,7 +158,6 @@ class WeaponLocalDataSourceImplTest {
         coEvery {
             mockWeaponDao.selectAll()
         } returns listOf(mockk(relaxed = true), mockk(relaxed = true), mockk(relaxed = true))
-        coEvery { mockWeaponDao.selectById(any()) } returns mockk(relaxed = true)
         coEvery { mockWeaponDao.selectByName(any()) } returns listOf(mockk(relaxed = true))
         coEvery { mockWeaponDao.selectByYear(any()) } returns listOf(mockk(relaxed = true))
         coEvery { mockWeaponDao.selectByCountry(any()) } returns listOf(mockk(relaxed = true))

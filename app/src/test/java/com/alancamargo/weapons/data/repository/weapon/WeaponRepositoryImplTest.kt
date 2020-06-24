@@ -61,36 +61,6 @@ class WeaponRepositoryImplTest {
     }
 
     @Test
-    fun shouldGetWeaponById() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponById(any()) } returns mockk()
-
-        val result = repository.getWeaponById(111L)
-
-        assertThat(result).isInstanceOf(Result.Success::class.java)
-        require(result is Result.Success)
-        assertThat(result.body).isNotNull()
-    }
-
-    @Test
-    fun getWeaponById_localDataSourceThrowsException_shouldLogToCrashReport() = runBlocking {
-        val exception = IOException()
-        coEvery { mockLocalDataSource.getWeaponById(any()) } throws exception
-
-        repository.getWeaponById(111L)
-
-        verify { mockCrashReportHelper.log(exception) }
-    }
-
-    @Test
-    fun getWeaponById_localDataSourceThrowsException_shouldReturnError() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponById(any()) } throws IOException()
-
-        val result = repository.getWeaponById(111L)
-
-        assertThat(result).isInstanceOf(Result.Error::class.java)
-    }
-
-    @Test
     fun shouldGetWeaponsByName() = runBlocking {
         coEvery { mockLocalDataSource.getWeaponsByName(any()) } returns listOf(mockk(), mockk())
 

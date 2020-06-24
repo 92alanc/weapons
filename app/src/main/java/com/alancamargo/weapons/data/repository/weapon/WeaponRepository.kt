@@ -7,8 +7,6 @@ interface WeaponRepository {
 
     suspend fun getWeapons(): Result<List<Weapon>>
 
-    suspend fun getWeaponById(id: Long): Result<Weapon>
-
     suspend fun getWeaponsByName(name: String): Result<List<Weapon>>
 
     suspend fun getWeaponsByYear(year: Int): Result<List<Weapon>>
