@@ -11,4 +11,8 @@ class CountryLocalDataSourceImpl(private val countryDao: CountryDao) : CountryLo
         it.fromDbToDomain()
     }
 
+    override suspend fun getCountryById(id: Long): Country {
+        return countryDao.selectById(id).fromDbToDomain()
+    }
+
 }

@@ -44,4 +44,24 @@ class ManufacturerLocalDataSourceImplTest {
         }
     }
 
+    @Test
+    fun shouldGetManufacturerById() = runBlocking {
+        coEvery {
+            mockManufacturerDao.selectById(any())
+        } returns mockk(relaxed = true)
+
+        val manufacturer = localDataSource.getManufacturerById(1L)
+
+        assertThat(manufacturer).isNotNull()
+    }
+
+    @Test(expected = IOException::class)
+    fun getCalibreById_databaseThrowsException_shouldThrow() {
+        coEvery { mockManufacturerDao.selectById(any()) } throws IOException()
+
+        runBlocking {
+            localDataSource.getManufacturerById(1L)
+        }
+    }
+
 }

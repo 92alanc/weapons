@@ -44,4 +44,24 @@ class CountryLocalDataSourceImplTest {
         }
     }
 
+    @Test
+    fun shouldGetCountryById() = runBlocking {
+        coEvery {
+            mockCountryDao.selectById(any())
+        } returns mockk(relaxed = true)
+
+        val country = localDataSource.getCountryById(1L)
+
+        assertThat(country).isNotNull()
+    }
+
+    @Test(expected = IOException::class)
+    fun getCountryById_databaseThrowsException_shouldThrow() {
+        coEvery { mockCountryDao.selectById(any()) } throws IOException()
+
+        runBlocking {
+            localDataSource.getCountryById(1L)
+        }
+    }
+
 }

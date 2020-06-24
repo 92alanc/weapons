@@ -6,4 +6,6 @@ interface WeaponTypeLocalDataSource {
 
     suspend fun getWeaponTypes(): List<WeaponType>
 
+    suspend fun getWeaponTypeById(id: Long): WeaponType
+
 }

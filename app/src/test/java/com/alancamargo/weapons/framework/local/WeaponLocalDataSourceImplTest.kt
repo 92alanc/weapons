@@ -1,7 +1,11 @@
 package com.alancamargo.weapons.framework.local
 
-import com.alancamargo.weapons.framework.db.*
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType
+import com.alancamargo.weapons.data.local.CalibreLocalDataSource
+import com.alancamargo.weapons.data.local.CountryLocalDataSource
+import com.alancamargo.weapons.data.local.ManufacturerLocalDataSource
+import com.alancamargo.weapons.data.local.WeaponTypeLocalDataSource
+import com.alancamargo.weapons.domain.WeaponType
+import com.alancamargo.weapons.framework.db.WeaponDao
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -15,10 +19,10 @@ import java.io.IOException
 class WeaponLocalDataSourceImplTest {
 
     @MockK lateinit var mockWeaponDao: WeaponDao
-    @MockK lateinit var mockWeaponTypeDao: WeaponTypeDao
-    @MockK lateinit var mockCountryDao: CountryDao
-    @MockK lateinit var mockCalibreDao: CalibreDao
-    @MockK lateinit var mockManufacturerDao: ManufacturerDao
+    @MockK lateinit var mockWeaponTypeLocalDataSource: WeaponTypeLocalDataSource
+    @MockK lateinit var mockCountryLocalDataSource: CountryLocalDataSource
+    @MockK lateinit var mockCalibreLocalDataSource: CalibreLocalDataSource
+    @MockK lateinit var mockManufacturerLocalDataSource: ManufacturerLocalDataSource
 
     private lateinit var localDataSource: WeaponLocalDataSourceImpl
 
@@ -27,10 +31,10 @@ class WeaponLocalDataSourceImplTest {
         MockKAnnotations.init(this)
         localDataSource = WeaponLocalDataSourceImpl(
             mockWeaponDao,
-            mockWeaponTypeDao,
-            mockCountryDao,
-            mockCalibreDao,
-            mockManufacturerDao
+            mockWeaponTypeLocalDataSource,
+            mockCountryLocalDataSource,
+            mockCalibreLocalDataSource,
+            mockManufacturerLocalDataSource
         )
     }
 
@@ -201,20 +205,22 @@ class WeaponLocalDataSourceImplTest {
 
     private fun mockWeaponTypeDaoOutput() {
         coEvery {
-            mockWeaponTypeDao.selectById(any())
-        } returns DbWeaponType(TYPE_ID, DbWeaponType.NAME_BOOBY_TRAP, category = null)
+            mockWeaponTypeLocalDataSource.getWeaponTypeById(any())
+        } returns WeaponType.BoobyTrap(TYPE_ID)
     }
 
     private fun mockCountryDaoOutput() {
-        coEvery { mockCountryDao.selectById(any()) } returns mockk(relaxed = true)
+        coEvery { mockCountryLocalDataSource.getCountryById(any()) } returns mockk(relaxed = true)
     }
 
     private fun mockCalibreDaoOutput() {
-        coEvery { mockCalibreDao.selectById(any()) } returns mockk(relaxed = true)
+        coEvery { mockCalibreLocalDataSource.getCalibreById(any()) } returns mockk(relaxed = true)
     }
 
     private fun mockManufacturerDaoOutput() {
-        coEvery { mockManufacturerDao.selectById(any()) } returns mockk(relaxed = true)
+        coEvery {
+            mockManufacturerLocalDataSource.getManufacturerById(any())
+        } returns mockk(relaxed = true)
     }
 
     private companion object {

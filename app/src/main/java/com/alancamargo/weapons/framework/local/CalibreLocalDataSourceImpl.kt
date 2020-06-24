@@ -11,4 +11,8 @@ class CalibreLocalDataSourceImpl(private val calibreDao: CalibreDao) : CalibreLo
         it.fromDbToDomain()
     }
 
+    override suspend fun getCalibreById(id: Long): Calibre {
+        return calibreDao.selectById(id).fromDbToDomain()
+    }
+
 }

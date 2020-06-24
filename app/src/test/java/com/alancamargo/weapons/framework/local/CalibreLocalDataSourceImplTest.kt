@@ -44,4 +44,24 @@ class CalibreLocalDataSourceImplTest {
         }
     }
 
+    @Test
+    fun shouldGetCalibreById() = runBlocking {
+        coEvery {
+            mockCalibreDao.selectById(any())
+        } returns mockk(relaxed = true)
+
+        val calibre = localDataSource.getCalibreById(1L)
+
+        assertThat(calibre).isNotNull()
+    }
+
+    @Test(expected = IOException::class)
+    fun getCalibreById_databaseThrowsException_shouldThrow() {
+        coEvery { mockCalibreDao.selectById(any()) } throws IOException()
+
+        runBlocking {
+            localDataSource.getCalibreById(1L)
+        }
+    }
+
 }

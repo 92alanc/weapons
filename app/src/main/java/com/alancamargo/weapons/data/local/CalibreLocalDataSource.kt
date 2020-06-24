@@ -6,4 +6,6 @@ interface CalibreLocalDataSource {
 
     suspend fun getCalibres(): List<Calibre>
 
+    suspend fun getCalibreById(id: Long): Calibre
+
 }

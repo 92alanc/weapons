@@ -13,4 +13,8 @@ class WeaponTypeLocalDataSourceImpl(
         it.fromDbToDomain()
     }
 
+    override suspend fun getWeaponTypeById(id: Long): WeaponType {
+        return weaponTypeDao.selectById(id).fromDbToDomain()
+    }
+
 }

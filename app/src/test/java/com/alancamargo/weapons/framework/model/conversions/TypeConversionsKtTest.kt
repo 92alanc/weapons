@@ -22,10 +22,10 @@ class TypeConversionsKtTest {
     // region Weapon
     @Test
     fun weapon_fromDbToDomain() {
-        val dbManufacturer = DbManufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
-        val dbCountry = DbCountry(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG)
-        val dbType = DbWeaponType(TYPE_ID, NAME_BOOBY_TRAP, category = null)
-        val dbCalibre = DbCalibre(CALIBRE_ID, CALIBRE)
+        val manufacturer = Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
+        val country = Country(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG)
+        val type = WeaponType.BoobyTrap(TYPE_ID)
+        val calibre = Calibre(CALIBRE_ID, CALIBRE)
 
         val dbWeapon = DbWeapon(
             ID,
@@ -59,7 +59,7 @@ class TypeConversionsKtTest {
             listOf(PHOTO)
         )
 
-        val actual = dbWeapon.fromDbToDomain(dbManufacturer, dbCountry, dbType, dbCalibre)
+        val actual = dbWeapon.fromDbToDomain(manufacturer, country, type, calibre)
 
         with(actual) {
             assertThat(id).isEqualTo(expected.id)

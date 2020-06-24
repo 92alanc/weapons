@@ -48,4 +48,24 @@ class WeaponTypeLocalDataSourceImplTest {
         }
     }
 
+    @Test
+    fun shouldGetWeaponTypeById() = runBlocking {
+        coEvery {
+            mockWeaponTypeDao.selectById(any())
+        } returns DbWeaponType(1L, DbWeaponType.NAME_PISTOL, category = null)
+
+        val weaponType = localDataSource.getWeaponTypeById(1L)
+
+        assertThat(weaponType).isNotNull()
+    }
+
+    @Test(expected = IOException::class)
+    fun getWeaponTypeById_databaseThrowsException_shouldThrow() {
+        coEvery { mockWeaponTypeDao.selectById(any()) } throws IOException()
+
+        runBlocking {
+            localDataSource.getWeaponTypeById(1L)
+        }
+    }
+
 }

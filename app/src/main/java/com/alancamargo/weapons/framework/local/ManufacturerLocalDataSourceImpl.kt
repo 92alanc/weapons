@@ -13,4 +13,8 @@ class ManufacturerLocalDataSourceImpl(
         it.fromDbToDomain()
     }
 
+    override suspend fun getManufacturerById(id: Long): Manufacturer {
+        return manufacturerDao.selectById(id).fromDbToDomain()
+    }
+
 }
