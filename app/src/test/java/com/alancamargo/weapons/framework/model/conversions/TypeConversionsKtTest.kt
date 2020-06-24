@@ -2,6 +2,14 @@ package com.alancamargo.weapons.framework.model.conversions
 
 import com.alancamargo.weapons.domain.*
 import com.alancamargo.weapons.framework.model.entities.*
+import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_ANTI_PERSONNEL
+import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_ANTI_TANK
+import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_AUTOMATIC
+import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_BOLT_ACTION
+import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_GENERAL_PURPOSE
+import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_HEAVY
+import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_LIGHT
+import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_SEMI_AUTOMATIC
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_CARBINE
 import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_GRENADE
@@ -105,12 +113,11 @@ class TypeConversionsKtTest {
     @Test
     fun country_fromDomainToDb() {
         val domain = Country(ID, COUNTRY_NAME, COUNTRY_FLAG)
-        val expected =
-            DbCountry(
-                ID,
-                COUNTRY_NAME,
-                COUNTRY_FLAG
-            )
+        val expected = DbCountry(
+            ID,
+            COUNTRY_NAME,
+            COUNTRY_FLAG
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -158,12 +165,11 @@ class TypeConversionsKtTest {
     @Test
     fun melee_fromDomainToDb() {
         val domain = WeaponType.Melee(ID)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_MELEE,
-                categoryId = null
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_MELEE,
+            categoryId = null
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -190,12 +196,11 @@ class TypeConversionsKtTest {
     @Test
     fun pistol_fromDomainToDb() {
         val domain = WeaponType.Pistol(ID)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_PISTOL,
-                categoryId = null
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_PISTOL,
+            categoryId = null
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -222,12 +227,11 @@ class TypeConversionsKtTest {
     @Test
     fun boltActionRifle_fromDomainToDb() {
         val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.BOLT_ACTION)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_RIFLE,
-                WeaponType.Rifle.Category.BOLT_ACTION.name
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_RIFLE,
+            CATEGORY_BOLT_ACTION
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -239,7 +243,7 @@ class TypeConversionsKtTest {
         val db = DbWeaponType(
             ID,
             NAME_RIFLE,
-            WeaponType.Rifle.Category.BOLT_ACTION.name
+            CATEGORY_BOLT_ACTION
         )
         val expected = WeaponType.Rifle(ID, WeaponType.Rifle.Category.BOLT_ACTION)
 
@@ -256,12 +260,11 @@ class TypeConversionsKtTest {
     @Test
     fun semiAutomaticRifle_fromDomainToDb() {
         val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.SEMI_AUTOMATIC)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_RIFLE,
-                WeaponType.Rifle.Category.SEMI_AUTOMATIC.name
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_RIFLE,
+            CATEGORY_SEMI_AUTOMATIC
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -273,7 +276,7 @@ class TypeConversionsKtTest {
         val db = DbWeaponType(
             ID,
             NAME_RIFLE,
-            WeaponType.Rifle.Category.SEMI_AUTOMATIC.name
+            CATEGORY_SEMI_AUTOMATIC
         )
         val expected = WeaponType.Rifle(ID, WeaponType.Rifle.Category.SEMI_AUTOMATIC)
 
@@ -290,12 +293,11 @@ class TypeConversionsKtTest {
     @Test
     fun automaticRifle_fromDomainToDb() {
         val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.AUTOMATIC)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_RIFLE,
-                WeaponType.Rifle.Category.AUTOMATIC.name
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_RIFLE,
+            CATEGORY_AUTOMATIC
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -307,7 +309,7 @@ class TypeConversionsKtTest {
         val db = DbWeaponType(
             ID,
             NAME_RIFLE,
-            WeaponType.Rifle.Category.AUTOMATIC.name
+            CATEGORY_AUTOMATIC
         )
         val expected = WeaponType.Rifle(ID, WeaponType.Rifle.Category.AUTOMATIC)
 
@@ -335,12 +337,11 @@ class TypeConversionsKtTest {
     @Test
     fun shotgun_fromDomainToDb() {
         val domain = WeaponType.Shotgun(ID)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_SHOTGUN,
-                categoryId = null
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_SHOTGUN,
+            categoryId = null
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -367,12 +368,11 @@ class TypeConversionsKtTest {
     @Test
     fun carbine_fromDomainToDb() {
         val domain = WeaponType.Carbine(ID)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_CARBINE,
-                categoryId = null
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_CARBINE,
+            categoryId = null
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -399,12 +399,11 @@ class TypeConversionsKtTest {
     @Test
     fun lightMachineGun_fromDomainToDb() {
         val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.LIGHT)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_MACHINE_GUN,
-                WeaponType.MachineGun.Category.LIGHT.name
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_MACHINE_GUN,
+            CATEGORY_LIGHT
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -416,7 +415,7 @@ class TypeConversionsKtTest {
         val db = DbWeaponType(
             ID,
             NAME_MACHINE_GUN,
-            WeaponType.MachineGun.Category.LIGHT.name
+            CATEGORY_LIGHT
         )
         val expected = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.LIGHT)
 
@@ -433,12 +432,11 @@ class TypeConversionsKtTest {
     @Test
     fun generalPurposeMachineGun_fromDomainToDb() {
         val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.GENERAL_PURPOSE)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_MACHINE_GUN,
-                WeaponType.MachineGun.Category.GENERAL_PURPOSE.name
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_MACHINE_GUN,
+            CATEGORY_GENERAL_PURPOSE
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -450,7 +448,7 @@ class TypeConversionsKtTest {
         val db = DbWeaponType(
             ID,
             NAME_MACHINE_GUN,
-            WeaponType.MachineGun.Category.GENERAL_PURPOSE.name
+            CATEGORY_GENERAL_PURPOSE
         )
         val expected = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.GENERAL_PURPOSE)
 
@@ -467,12 +465,11 @@ class TypeConversionsKtTest {
     @Test
     fun heavyMachineGun_fromDomainToDb() {
         val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.HEAVY)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_MACHINE_GUN,
-                WeaponType.MachineGun.Category.HEAVY.name
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_MACHINE_GUN,
+            CATEGORY_HEAVY
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -484,7 +481,7 @@ class TypeConversionsKtTest {
         val db = DbWeaponType(
             ID,
             NAME_MACHINE_GUN,
-            WeaponType.MachineGun.Category.HEAVY.name
+            CATEGORY_HEAVY
         )
         val expected = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.HEAVY)
 
@@ -512,12 +509,11 @@ class TypeConversionsKtTest {
     @Test
     fun subMachineGun_fromDomainToDb() {
         val domain = WeaponType.SubMachineGun(ID)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_SUB_MACHINE_GUN,
-                categoryId = null
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_SUB_MACHINE_GUN,
+            categoryId = null
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -544,12 +540,11 @@ class TypeConversionsKtTest {
     @Test
     fun antiPersonnelGrenade_fromDomainToDb() {
         val domain = WeaponType.Grenade(ID, WeaponType.Grenade.Category.ANTI_PERSONNEL)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_GRENADE,
-                WeaponType.Grenade.Category.ANTI_PERSONNEL.name
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_GRENADE,
+            CATEGORY_ANTI_PERSONNEL
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -561,7 +556,7 @@ class TypeConversionsKtTest {
         val db = DbWeaponType(
             ID,
             NAME_GRENADE,
-            WeaponType.Grenade.Category.ANTI_PERSONNEL.name
+            CATEGORY_ANTI_PERSONNEL
         )
         val expected = WeaponType.Grenade(ID, WeaponType.Grenade.Category.ANTI_PERSONNEL)
 
@@ -578,12 +573,11 @@ class TypeConversionsKtTest {
     @Test
     fun antiTankGrenade_fromDomainToDb() {
         val domain = WeaponType.Grenade(ID, WeaponType.Grenade.Category.ANTI_TANK)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_GRENADE,
-                WeaponType.Grenade.Category.ANTI_TANK.name
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_GRENADE,
+            CATEGORY_ANTI_TANK
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -595,7 +589,7 @@ class TypeConversionsKtTest {
         val db = DbWeaponType(
             ID,
             NAME_GRENADE,
-            WeaponType.Grenade.Category.ANTI_TANK.name
+            CATEGORY_ANTI_TANK
         )
         val expected = WeaponType.Grenade(ID, WeaponType.Grenade.Category.ANTI_TANK)
 
@@ -623,12 +617,11 @@ class TypeConversionsKtTest {
     @Test
     fun antiPersonnelMine_fromDomainToDb() {
         val domain = WeaponType.Mine(ID, WeaponType.Mine.Category.ANTI_PERSONNEL)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_MINE,
-                WeaponType.Mine.Category.ANTI_PERSONNEL.name
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_MINE,
+            CATEGORY_ANTI_PERSONNEL
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -640,7 +633,7 @@ class TypeConversionsKtTest {
         val db = DbWeaponType(
             ID,
             NAME_MINE,
-            WeaponType.Mine.Category.ANTI_PERSONNEL.name
+            CATEGORY_ANTI_PERSONNEL
         )
         val expected = WeaponType.Mine(ID, WeaponType.Mine.Category.ANTI_PERSONNEL)
 
@@ -657,12 +650,11 @@ class TypeConversionsKtTest {
     @Test
     fun antiTankMine_fromDomainToDb() {
         val domain = WeaponType.Mine(ID, WeaponType.Mine.Category.ANTI_TANK)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_MINE,
-                WeaponType.Mine.Category.ANTI_TANK.name
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_MINE,
+            CATEGORY_ANTI_TANK
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -674,7 +666,7 @@ class TypeConversionsKtTest {
         val db = DbWeaponType(
             ID,
             NAME_MINE,
-            WeaponType.Mine.Category.ANTI_TANK.name
+            CATEGORY_ANTI_TANK
         )
         val expected = WeaponType.Mine(ID, WeaponType.Mine.Category.ANTI_TANK)
 
@@ -702,12 +694,11 @@ class TypeConversionsKtTest {
     @Test
     fun grenadeLauncher_fromDomainToDb() {
         val domain = WeaponType.GrenadeLauncher(ID)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_GRENADE_LAUNCHER,
-                categoryId = null
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_GRENADE_LAUNCHER,
+            categoryId = null
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -734,12 +725,11 @@ class TypeConversionsKtTest {
     @Test
     fun rocketLauncher_fromDomainToDb() {
         val domain = WeaponType.RocketLauncher(ID)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_ROCKET_LAUNCHER,
-                categoryId = null
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_ROCKET_LAUNCHER,
+            categoryId = null
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -766,12 +756,11 @@ class TypeConversionsKtTest {
     @Test
     fun boobyTrap_fromDomainToDb() {
         val domain = WeaponType.BoobyTrap(ID)
-        val expected =
-            DbWeaponType(
-                ID,
-                NAME_BOOBY_TRAP,
-                categoryId = null
-            )
+        val expected = DbWeaponType(
+            ID,
+            NAME_BOOBY_TRAP,
+            categoryId = null
+        )
 
         val actual = domain.fromDomainToDb()
 
