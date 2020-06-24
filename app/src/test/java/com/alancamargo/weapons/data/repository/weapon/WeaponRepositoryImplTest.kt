@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.data.repository
+package com.alancamargo.weapons.data.repository.weapon
 
 import com.alancamargo.weapons.data.crash.CrashReportHelper
 import com.alancamargo.weapons.data.io.IoHelper
