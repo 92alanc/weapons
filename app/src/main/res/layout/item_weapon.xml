@@ -21,8 +21,9 @@
             tools:src="@tools:sample/avatars"/>
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="0dp"
+            android:id="@+id/txtName"
             style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_default"
             android:layout_marginEnd="@dimen/margin_default"

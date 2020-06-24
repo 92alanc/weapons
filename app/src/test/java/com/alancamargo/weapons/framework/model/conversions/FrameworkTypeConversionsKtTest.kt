@@ -25,7 +25,7 @@ import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.N
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class TypeConversionsKtTest {
+class FrameworkTypeConversionsKtTest {
 
     // region Weapon
     @Test
@@ -113,11 +113,7 @@ class TypeConversionsKtTest {
     @Test
     fun country_fromDomainToDb() {
         val domain = Country(ID, COUNTRY_NAME, COUNTRY_FLAG)
-        val expected = DbCountry(
-            ID,
-            COUNTRY_NAME,
-            COUNTRY_FLAG
-        )
+        val expected = DbCountry(ID, COUNTRY_NAME, COUNTRY_FLAG)
 
         val actual = domain.fromDomainToDb()
 
@@ -126,11 +122,7 @@ class TypeConversionsKtTest {
 
     @Test
     fun country_fromDbToDomain() {
-        val db = DbCountry(
-            ID,
-            COUNTRY_NAME,
-            COUNTRY_FLAG
-        )
+        val db = DbCountry(ID, COUNTRY_NAME, COUNTRY_FLAG)
         val expected = Country(ID, COUNTRY_NAME, COUNTRY_FLAG)
 
         val actual = db.fromDbToDomain()
