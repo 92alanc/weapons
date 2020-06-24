@@ -24,4 +24,8 @@
     <string name="category_anti_personnel">Anti personnel</string>
     <string name="category_anti_tank">Anti tank</string>
     <!-- endregion -->
+
+    <!-- region App texts -->
+    <string name="error">Unfortunately an error occurred but don\'t worry, the developer has been notified and will fix it soon</string>
+    <!-- endregion -->
 </resources>
