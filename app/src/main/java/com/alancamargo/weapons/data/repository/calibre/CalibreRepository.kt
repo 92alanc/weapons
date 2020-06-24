@@ -1,7 +1,7 @@
 package com.alancamargo.weapons.data.repository.calibre
 
 import com.alancamargo.weapons.data.io.Result
-import com.alancamargo.weapons.domain.Calibre
+import com.alancamargo.weapons.domain.entities.Calibre
 
 interface CalibreRepository {
 

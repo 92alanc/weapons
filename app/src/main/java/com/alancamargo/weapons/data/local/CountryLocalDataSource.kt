@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.data.local
 
-import com.alancamargo.weapons.domain.Country
+import com.alancamargo.weapons.domain.entities.Country
 
 interface CountryLocalDataSource {
 

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.alancamargo.weapons.framework.db.*
-import com.alancamargo.weapons.framework.model.entities.*
+import com.alancamargo.weapons.framework.entities.*
 
 @Database(
     entities = [

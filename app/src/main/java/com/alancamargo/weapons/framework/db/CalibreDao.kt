@@ -2,7 +2,7 @@ package com.alancamargo.weapons.framework.db
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.alancamargo.weapons.framework.model.entities.DbCalibre
+import com.alancamargo.weapons.framework.entities.DbCalibre
 
 @Dao
 interface CalibreDao {

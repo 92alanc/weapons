@@ -1,10 +1,10 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.data.local.*
-import com.alancamargo.weapons.domain.Weapon
+import com.alancamargo.weapons.domain.entities.Weapon
 import com.alancamargo.weapons.framework.db.WeaponDao
-import com.alancamargo.weapons.framework.model.conversions.fromDbToDomain
-import com.alancamargo.weapons.framework.model.entities.DbWeapon
+import com.alancamargo.weapons.framework.entities.conversions.fromDbToDomain
+import com.alancamargo.weapons.framework.entities.DbWeapon
 
 class WeaponLocalDataSourceImpl(
     private val weaponDao: WeaponDao,

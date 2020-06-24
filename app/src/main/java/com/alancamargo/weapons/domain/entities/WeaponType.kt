@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.domain
+package com.alancamargo.weapons.domain.entities
 
 sealed class WeaponType(val id: Long) {
 

@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alancamargo.weapons.data.io.Result
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
-import com.alancamargo.weapons.domain.Weapon
+import com.alancamargo.weapons.domain.entities.Weapon
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.entities.conversions.fromDomainToUi
 import kotlinx.coroutines.launch

@@ -3,7 +3,7 @@ package com.alancamargo.weapons.data.repository.weapon
 import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.io.Result
 import com.alancamargo.weapons.data.local.WeaponLocalDataSource
-import com.alancamargo.weapons.domain.Weapon
+import com.alancamargo.weapons.domain.entities.Weapon
 
 class WeaponRepositoryImpl(
     private val localDataSource: WeaponLocalDataSource,

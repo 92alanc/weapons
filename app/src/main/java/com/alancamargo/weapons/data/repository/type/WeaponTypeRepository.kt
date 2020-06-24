@@ -1,7 +1,7 @@
 package com.alancamargo.weapons.data.repository.type
 
 import com.alancamargo.weapons.data.io.Result
-import com.alancamargo.weapons.domain.WeaponType
+import com.alancamargo.weapons.domain.entities.WeaponType
 
 interface WeaponTypeRepository {
 

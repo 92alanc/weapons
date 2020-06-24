@@ -1,27 +1,27 @@
-package com.alancamargo.weapons.framework.model.conversions
+package com.alancamargo.weapons.framework.entities.conversions
 
-import com.alancamargo.weapons.domain.*
-import com.alancamargo.weapons.framework.model.entities.*
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_ANTI_PERSONNEL
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_ANTI_TANK
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_AUTOMATIC
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_BOLT_ACTION
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_GENERAL_PURPOSE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_HEAVY
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_LIGHT
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_SEMI_AUTOMATIC
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_CARBINE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_GRENADE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_GRENADE_LAUNCHER
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_MACHINE_GUN
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_MELEE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_MINE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_PISTOL
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_RIFLE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_ROCKET_LAUNCHER
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_SHOTGUN
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_SUB_MACHINE_GUN
+import com.alancamargo.weapons.domain.entities.*
+import com.alancamargo.weapons.framework.entities.*
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_ANTI_PERSONNEL
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_ANTI_TANK
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_AUTOMATIC
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_BOLT_ACTION
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_GENERAL_PURPOSE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_HEAVY
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_LIGHT
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_SEMI_AUTOMATIC
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_CARBINE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_GRENADE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_GRENADE_LAUNCHER
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_MACHINE_GUN
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_MELEE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_MINE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_PISTOL
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_RIFLE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_ROCKET_LAUNCHER
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_SHOTGUN
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_SUB_MACHINE_GUN
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -52,31 +52,69 @@ fun DbWeapon.fromDbToDomain(
     )
 }
 
-fun Calibre.fromDomainToDb() = DbCalibre(id, nameId)
+fun Calibre.fromDomainToDb() =
+    DbCalibre(id, nameId)
 
-fun DbCalibre.fromDbToDomain() = Calibre(id, nameId)
+fun DbCalibre.fromDbToDomain() =
+    Calibre(id, nameId)
 
-fun Country.fromDomainToDb() = DbCountry(id, nameId, flagId)
+fun Country.fromDomainToDb() =
+    DbCountry(id, nameId, flagId)
 
-fun DbCountry.fromDbToDomain() = Country(id, nameId, flagId)
+fun DbCountry.fromDbToDomain() =
+    Country(id, nameId, flagId)
 
-fun Manufacturer.fromDomainToDb() = DbManufacturer(id, name)
+fun Manufacturer.fromDomainToDb() =
+    DbManufacturer(id, name)
 
-fun DbManufacturer.fromDbToDomain() = Manufacturer(id, name)
+fun DbManufacturer.fromDbToDomain() =
+    Manufacturer(id, name)
 
 fun WeaponType.fromDomainToDb() = when (this) {
-    is WeaponType.BoobyTrap -> DbWeaponType(id, NAME_BOOBY_TRAP, categoryId = null)
-    is WeaponType.Carbine -> DbWeaponType(id, NAME_CARBINE, categoryId = null)
+    is WeaponType.BoobyTrap -> DbWeaponType(
+        id,
+        NAME_BOOBY_TRAP,
+        categoryId = null
+    )
+    is WeaponType.Carbine -> DbWeaponType(
+        id,
+        NAME_CARBINE,
+        categoryId = null
+    )
     is WeaponType.Grenade -> convertGrenade()
-    is WeaponType.GrenadeLauncher -> DbWeaponType(id, NAME_GRENADE_LAUNCHER, categoryId = null)
+    is WeaponType.GrenadeLauncher -> DbWeaponType(
+        id,
+        NAME_GRENADE_LAUNCHER,
+        categoryId = null
+    )
     is WeaponType.MachineGun -> convertMachineGun()
-    is WeaponType.Melee -> DbWeaponType(id, NAME_MELEE, categoryId = null)
+    is WeaponType.Melee -> DbWeaponType(
+        id,
+        NAME_MELEE,
+        categoryId = null
+    )
     is WeaponType.Mine -> convertMine()
-    is WeaponType.Pistol -> DbWeaponType(id, NAME_PISTOL, categoryId = null)
+    is WeaponType.Pistol -> DbWeaponType(
+        id,
+        NAME_PISTOL,
+        categoryId = null
+    )
     is WeaponType.Rifle -> convertRifle()
-    is WeaponType.RocketLauncher -> DbWeaponType(id, NAME_ROCKET_LAUNCHER, categoryId = null)
-    is WeaponType.Shotgun -> DbWeaponType(id, NAME_SHOTGUN, categoryId = null)
-    is WeaponType.SubMachineGun -> DbWeaponType(id, NAME_SUB_MACHINE_GUN, categoryId = null)
+    is WeaponType.RocketLauncher -> DbWeaponType(
+        id,
+        NAME_ROCKET_LAUNCHER,
+        categoryId = null
+    )
+    is WeaponType.Shotgun -> DbWeaponType(
+        id,
+        NAME_SHOTGUN,
+        categoryId = null
+    )
+    is WeaponType.SubMachineGun -> DbWeaponType(
+        id,
+        NAME_SUB_MACHINE_GUN,
+        categoryId = null
+    )
 }
 
 fun DbWeaponType.fromDbToDomain() = when (this.nameId) {
@@ -101,7 +139,11 @@ private fun WeaponType.Grenade.convertGrenade(): DbWeaponType {
         WeaponType.Grenade.Category.ANTI_TANK -> CATEGORY_ANTI_TANK
     }
 
-    return DbWeaponType(id, NAME_GRENADE, category)
+    return DbWeaponType(
+        id,
+        NAME_GRENADE,
+        category
+    )
 }
 
 private fun DbWeaponType.convertGrenade() = when (this.categoryId) {
@@ -123,7 +165,11 @@ private fun WeaponType.MachineGun.convertMachineGun(): DbWeaponType {
         WeaponType.MachineGun.Category.LIGHT -> CATEGORY_LIGHT
     }
 
-    return DbWeaponType(id, NAME_MACHINE_GUN, category)
+    return DbWeaponType(
+        id,
+        NAME_MACHINE_GUN,
+        category
+    )
 }
 
 private fun DbWeaponType.convertMachineGun() = when (this.categoryId) {
@@ -148,7 +194,11 @@ private fun WeaponType.Mine.convertMine(): DbWeaponType {
         WeaponType.Mine.Category.ANTI_TANK -> CATEGORY_ANTI_TANK
     }
 
-    return DbWeaponType(id, NAME_MINE, category)
+    return DbWeaponType(
+        id,
+        NAME_MINE,
+        category
+    )
 }
 
 private fun DbWeaponType.convertMine() = when (this.categoryId) {
@@ -170,7 +220,11 @@ private fun WeaponType.Rifle.convertRifle(): DbWeaponType {
         WeaponType.Rifle.Category.AUTOMATIC -> CATEGORY_AUTOMATIC
     }
 
-    return DbWeaponType(id, NAME_RIFLE, category)
+    return DbWeaponType(
+        id,
+        NAME_RIFLE,
+        category
+    )
 }
 
 private fun DbWeaponType.convertRifle() = when (this.categoryId) {

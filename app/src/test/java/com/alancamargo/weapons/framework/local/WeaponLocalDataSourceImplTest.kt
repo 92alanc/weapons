@@ -4,7 +4,7 @@ import com.alancamargo.weapons.data.local.CalibreLocalDataSource
 import com.alancamargo.weapons.data.local.CountryLocalDataSource
 import com.alancamargo.weapons.data.local.ManufacturerLocalDataSource
 import com.alancamargo.weapons.data.local.WeaponTypeLocalDataSource
-import com.alancamargo.weapons.domain.WeaponType
+import com.alancamargo.weapons.domain.entities.WeaponType
 import com.alancamargo.weapons.framework.db.WeaponDao
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations

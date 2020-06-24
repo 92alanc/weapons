@@ -1,9 +1,9 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.data.local.CountryLocalDataSource
-import com.alancamargo.weapons.domain.Country
+import com.alancamargo.weapons.domain.entities.Country
 import com.alancamargo.weapons.framework.db.CountryDao
-import com.alancamargo.weapons.framework.model.conversions.fromDbToDomain
+import com.alancamargo.weapons.framework.entities.conversions.fromDbToDomain
 
 class CountryLocalDataSourceImpl(private val countryDao: CountryDao) : CountryLocalDataSource {
 

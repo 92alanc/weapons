@@ -1,13 +1,13 @@
-package com.alancamargo.weapons.framework.model.entities
+package com.alancamargo.weapons.framework.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.alancamargo.weapons.framework.model.entities.DbWeapon.Companion.COLUMN_CALIBRE_ID
-import com.alancamargo.weapons.framework.model.entities.DbWeapon.Companion.COLUMN_COUNTRY_ID
-import com.alancamargo.weapons.framework.model.entities.DbWeapon.Companion.COLUMN_MANUFACTURER_ID
-import com.alancamargo.weapons.framework.model.entities.DbWeapon.Companion.COLUMN_TYPE_ID
+import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_CALIBRE_ID
+import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_COUNTRY_ID
+import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_MANUFACTURER_ID
+import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_TYPE_ID
 
 @Entity(
     tableName = "WEAPON",

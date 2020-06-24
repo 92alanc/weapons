@@ -1,9 +1,9 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.data.local.ManufacturerLocalDataSource
-import com.alancamargo.weapons.domain.Manufacturer
+import com.alancamargo.weapons.domain.entities.Manufacturer
 import com.alancamargo.weapons.framework.db.ManufacturerDao
-import com.alancamargo.weapons.framework.model.conversions.fromDbToDomain
+import com.alancamargo.weapons.framework.entities.conversions.fromDbToDomain
 
 class ManufacturerLocalDataSourceImpl(
     private val manufacturerDao: ManufacturerDao

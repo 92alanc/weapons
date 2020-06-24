@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.data.local
 
-import com.alancamargo.weapons.domain.Calibre
+import com.alancamargo.weapons.domain.entities.Calibre
 
 interface CalibreLocalDataSource {
 

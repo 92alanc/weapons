@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.ui.entities.conversions
 
-import com.alancamargo.weapons.domain.*
+import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.ui.entities.*
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
@@ -13,8 +13,15 @@ class UiTypeConversionsKtTest {
             ID,
             WEAPON_NAME,
             YEAR,
-            Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME),
-            Country(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG),
+            Manufacturer(
+                MANUFACTURER_ID,
+                MANUFACTURER_NAME
+            ),
+            Country(
+                COUNTRY_ID,
+                COUNTRY_NAME,
+                COUNTRY_FLAG
+            ),
             WeaponType.BoobyTrap(TYPE_ID),
             LENGTH,
             WEIGHT,
@@ -62,7 +69,11 @@ class UiTypeConversionsKtTest {
 
     @Test
     fun country_fromDomainToUi() {
-        val domain = Country(ID, COUNTRY_NAME, COUNTRY_FLAG)
+        val domain = Country(
+            ID,
+            COUNTRY_NAME,
+            COUNTRY_FLAG
+        )
         val expected = UiCountry(ID, COUNTRY_NAME, COUNTRY_FLAG)
 
         val actual = domain.fromDomainToUi()
@@ -72,7 +83,8 @@ class UiTypeConversionsKtTest {
 
     @Test
     fun calibre_fromDomainToUi() {
-        val domain = Calibre(CALIBRE_ID, CALIBRE)
+        val domain =
+            Calibre(CALIBRE_ID, CALIBRE)
         val expected = UiCalibre(CALIBRE_ID, CALIBRE)
 
         val actual = domain.fromDomainToUi()
@@ -82,7 +94,10 @@ class UiTypeConversionsKtTest {
 
     @Test
     fun manufacturer_fromDomainToUi() {
-        val domain = Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
+        val domain = Manufacturer(
+            MANUFACTURER_ID,
+            MANUFACTURER_NAME
+        )
         val expected = UiManufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
 
         val actual = domain.fromDomainToUi()

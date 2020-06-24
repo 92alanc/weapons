@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.ui.entities.conversions
 
-import com.alancamargo.weapons.domain.*
+import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.ui.entities.*
 
 fun Weapon.fromDomainToUi() = UiWeapon(

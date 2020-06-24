@@ -3,7 +3,7 @@ package com.alancamargo.weapons.data.repository.manufacturer
 import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.io.Result
 import com.alancamargo.weapons.data.local.ManufacturerLocalDataSource
-import com.alancamargo.weapons.domain.Manufacturer
+import com.alancamargo.weapons.domain.entities.Manufacturer
 
 class ManufacturerRepositoryImpl(
     private val localDataSource: ManufacturerLocalDataSource,

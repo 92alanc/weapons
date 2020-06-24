@@ -1,7 +1,7 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.framework.db.WeaponTypeDao
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType
+import com.alancamargo.weapons.framework.entities.DbWeaponType
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -27,8 +27,16 @@ class WeaponTypeLocalDataSourceImplTest {
     @Test
     fun shouldGetWeaponTypes() = runBlocking {
         val data = listOf(
-            DbWeaponType(1L, DbWeaponType.NAME_PISTOL, categoryId = null),
-            DbWeaponType(2L, DbWeaponType.NAME_CARBINE, categoryId = null)
+            DbWeaponType(
+                1L,
+                DbWeaponType.NAME_PISTOL,
+                categoryId = null
+            ),
+            DbWeaponType(
+                2L,
+                DbWeaponType.NAME_CARBINE,
+                categoryId = null
+            )
         )
         coEvery {
             mockWeaponTypeDao.selectAll()
@@ -52,7 +60,11 @@ class WeaponTypeLocalDataSourceImplTest {
     fun shouldGetWeaponTypeById() = runBlocking {
         coEvery {
             mockWeaponTypeDao.selectById(any())
-        } returns DbWeaponType(1L, DbWeaponType.NAME_PISTOL, categoryId = null)
+        } returns DbWeaponType(
+            1L,
+            DbWeaponType.NAME_PISTOL,
+            categoryId = null
+        )
 
         val weaponType = localDataSource.getWeaponTypeById(1L)
 

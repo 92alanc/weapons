@@ -1,27 +1,27 @@
-package com.alancamargo.weapons.framework.model.conversions
+package com.alancamargo.weapons.framework.entities.conversions
 
-import com.alancamargo.weapons.domain.*
-import com.alancamargo.weapons.framework.model.entities.*
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_ANTI_PERSONNEL
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_ANTI_TANK
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_AUTOMATIC
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_BOLT_ACTION
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_GENERAL_PURPOSE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_HEAVY
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_LIGHT
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.CATEGORY_SEMI_AUTOMATIC
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_CARBINE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_GRENADE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_GRENADE_LAUNCHER
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_MACHINE_GUN
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_MELEE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_MINE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_PISTOL
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_RIFLE
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_ROCKET_LAUNCHER
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_SHOTGUN
-import com.alancamargo.weapons.framework.model.entities.DbWeaponType.Companion.NAME_SUB_MACHINE_GUN
+import com.alancamargo.weapons.domain.entities.*
+import com.alancamargo.weapons.framework.entities.*
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_ANTI_PERSONNEL
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_ANTI_TANK
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_AUTOMATIC
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_BOLT_ACTION
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_GENERAL_PURPOSE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_HEAVY
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_LIGHT
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_SEMI_AUTOMATIC
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_CARBINE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_GRENADE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_GRENADE_LAUNCHER
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_MACHINE_GUN
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_MELEE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_MINE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_PISTOL
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_RIFLE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_ROCKET_LAUNCHER
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_SHOTGUN
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_SUB_MACHINE_GUN
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
@@ -30,10 +30,18 @@ class FrameworkTypeConversionsKtTest {
     // region Weapon
     @Test
     fun weapon_fromDbToDomain() {
-        val manufacturer = Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
-        val country = Country(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG)
+        val manufacturer = Manufacturer(
+            MANUFACTURER_ID,
+            MANUFACTURER_NAME
+        )
+        val country = Country(
+            COUNTRY_ID,
+            COUNTRY_NAME,
+            COUNTRY_FLAG
+        )
         val type = WeaponType.BoobyTrap(TYPE_ID)
-        val calibre = Calibre(CALIBRE_ID, CALIBRE)
+        val calibre =
+            Calibre(CALIBRE_ID, CALIBRE)
 
         val dbWeapon = DbWeapon(
             ID,
@@ -55,8 +63,15 @@ class FrameworkTypeConversionsKtTest {
             ID,
             WEAPON_NAME,
             YEAR,
-            Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME),
-            Country(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG),
+            Manufacturer(
+                MANUFACTURER_ID,
+                MANUFACTURER_NAME
+            ),
+            Country(
+                COUNTRY_ID,
+                COUNTRY_NAME,
+                COUNTRY_FLAG
+            ),
             WeaponType.BoobyTrap(TYPE_ID),
             LENGTH,
             WEIGHT,
@@ -90,8 +105,12 @@ class FrameworkTypeConversionsKtTest {
     // region Calibre
     @Test
     fun calibre_fromDomainToDb() {
-        val domain = Calibre(CALIBRE_ID, CALIBRE)
-        val expected = DbCalibre(CALIBRE_ID, CALIBRE)
+        val domain =
+            Calibre(CALIBRE_ID, CALIBRE)
+        val expected = DbCalibre(
+            CALIBRE_ID,
+            CALIBRE
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -100,8 +119,12 @@ class FrameworkTypeConversionsKtTest {
 
     @Test
     fun calibre_fromDbToDomain() {
-        val db = DbCalibre(CALIBRE_ID, CALIBRE)
-        val expected = Calibre(CALIBRE_ID, CALIBRE)
+        val db = DbCalibre(
+            CALIBRE_ID,
+            CALIBRE
+        )
+        val expected =
+            Calibre(CALIBRE_ID, CALIBRE)
 
         val actual = db.fromDbToDomain()
 
@@ -112,8 +135,16 @@ class FrameworkTypeConversionsKtTest {
     // region Country
     @Test
     fun country_fromDomainToDb() {
-        val domain = Country(ID, COUNTRY_NAME, COUNTRY_FLAG)
-        val expected = DbCountry(ID, COUNTRY_NAME, COUNTRY_FLAG)
+        val domain = Country(
+            ID,
+            COUNTRY_NAME,
+            COUNTRY_FLAG
+        )
+        val expected = DbCountry(
+            ID,
+            COUNTRY_NAME,
+            COUNTRY_FLAG
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -122,8 +153,16 @@ class FrameworkTypeConversionsKtTest {
 
     @Test
     fun country_fromDbToDomain() {
-        val db = DbCountry(ID, COUNTRY_NAME, COUNTRY_FLAG)
-        val expected = Country(ID, COUNTRY_NAME, COUNTRY_FLAG)
+        val db = DbCountry(
+            ID,
+            COUNTRY_NAME,
+            COUNTRY_FLAG
+        )
+        val expected = Country(
+            ID,
+            COUNTRY_NAME,
+            COUNTRY_FLAG
+        )
 
         val actual = db.fromDbToDomain()
 
@@ -134,8 +173,14 @@ class FrameworkTypeConversionsKtTest {
     // region Manufacturer
     @Test
     fun manufacturer_fromDomainToDb() {
-        val domain = Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
-        val expected = DbManufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
+        val domain = Manufacturer(
+            MANUFACTURER_ID,
+            MANUFACTURER_NAME
+        )
+        val expected = DbManufacturer(
+            MANUFACTURER_ID,
+            MANUFACTURER_NAME
+        )
 
         val actual = domain.fromDomainToDb()
 
@@ -144,8 +189,14 @@ class FrameworkTypeConversionsKtTest {
 
     @Test
     fun manufacturer_fromDbToDomain() {
-        val db = DbManufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
-        val expected = Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
+        val db = DbManufacturer(
+            MANUFACTURER_ID,
+            MANUFACTURER_NAME
+        )
+        val expected = Manufacturer(
+            MANUFACTURER_ID,
+            MANUFACTURER_NAME
+        )
 
         val actual = db.fromDbToDomain()
 

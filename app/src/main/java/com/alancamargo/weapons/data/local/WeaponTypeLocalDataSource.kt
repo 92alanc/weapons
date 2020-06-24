@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.data.local
 
-import com.alancamargo.weapons.domain.WeaponType
+import com.alancamargo.weapons.domain.entities.WeaponType
 
 interface WeaponTypeLocalDataSource {
 

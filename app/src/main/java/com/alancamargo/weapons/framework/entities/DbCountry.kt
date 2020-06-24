@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.framework.model.entities
+package com.alancamargo.weapons.framework.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
