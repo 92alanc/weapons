@@ -28,4 +28,8 @@
     <!-- region App texts -->
     <string name="error">Unfortunately an error occurred but don\'t worry, the developer has been notified and will fix it soon</string>
     <!-- endregion -->
+
+    <!-- region Queries -->
+    <string name="query_all_weapons">All weapons</string>
+    <!-- endregion -->
 </resources>
