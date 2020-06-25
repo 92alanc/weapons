@@ -8,6 +8,7 @@ import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.tools.hide
+import com.alancamargo.weapons.ui.tools.loadAds
 import com.alancamargo.weapons.ui.tools.show
 import com.alancamargo.weapons.ui.viewmodel.WeaponListViewModel
 import kotlinx.android.synthetic.main.fragment_weapon_list.*
@@ -22,13 +23,18 @@ class WeaponListFragment : Fragment(R.layout.fragment_weapon_list),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView.adapter = adapter
-        viewModel.getCommand().observe(viewLifecycleOwner, Observer {
-            processCommand(it)
-        })
+        observeCommand()
+        adView.loadAds()
     }
 
     override fun onItemClick(weapon: UiWeapon) {
         // TODO
+    }
+
+    private fun observeCommand() {
+        viewModel.getCommand().observe(viewLifecycleOwner, Observer {
+            processCommand(it)
+        })
     }
 
     private fun processCommand(command: WeaponListViewModel.Command?) {
