@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.di
 
+import androidx.room.Room
 import com.alancamargo.weapons.data.crash.CrashReportHelper
 import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.local.*
@@ -45,12 +46,21 @@ private val data = module {
 }
 
 private val framework = module {
-    factory { DatabaseProvider.getInstance(androidContext()).provideWeaponDao() }
-    factory { DatabaseProvider.getInstance(androidContext()).provideWeaponTypeDao() }
-    factory { DatabaseProvider.getInstance(androidContext()).provideCountryDao() }
-    factory { DatabaseProvider.getInstance(androidContext()).provideCalibreDao() }
-    factory { DatabaseProvider.getInstance(androidContext()).provideManufacturerDao() }
-    factory { DatabaseProvider.getInstance(androidContext()).provideYearDao() }
+    factory { get<DatabaseProvider>().provideWeaponDao() }
+    factory { get<DatabaseProvider>().provideWeaponTypeDao() }
+    factory { get<DatabaseProvider>().provideCountryDao() }
+    factory { get<DatabaseProvider>().provideCalibreDao() }
+    factory { get<DatabaseProvider>().provideManufacturerDao() }
+    factory { get<DatabaseProvider>().provideYearDao() }
+    single {
+        Room.databaseBuilder(
+            androidContext(),
+            DatabaseProvider::class.java,
+            "weapons-database"
+        ).fallbackToDestructiveMigration()
+            .createFromAsset("database.db")
+            .build()
+    }
 }
 
 private val ui = module {

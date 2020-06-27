@@ -3,6 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -88,6 +89,7 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     testImplementation "com.google.truth:truth:$truth_version"
     testImplementation 'junit:junit:4.13'
