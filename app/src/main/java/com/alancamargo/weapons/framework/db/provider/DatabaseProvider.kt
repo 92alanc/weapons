@@ -13,7 +13,8 @@ import com.alancamargo.weapons.framework.entities.*
         DbWeaponType::class,
         DbCalibre::class,
         DbCountry::class,
-        DbManufacturer::class
+        DbManufacturer::class,
+        DbYear::class
     ],
     version = 1,
     exportSchema = false
@@ -29,6 +30,8 @@ abstract class DatabaseProvider : RoomDatabase() {
     abstract fun provideCountryDao(): CountryDao
 
     abstract fun provideManufacturerDao(): ManufacturerDao
+
+    abstract fun provideYearDao(): YearDao
 
     companion object {
 

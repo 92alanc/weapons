@@ -19,7 +19,7 @@ class WeaponListViewModel(private val repository: WeaponRepository) : ViewModel(
     fun start(query: WeaponQuery) = when (query) {
         is WeaponQuery.All -> loadAllWeapons()
         is WeaponQuery.ByName -> loadWeaponsByName(query.name)
-        is WeaponQuery.ByYear -> loadWeaponsByYear(query.year)
+        is WeaponQuery.ByYear -> loadWeaponsByYear(query.yearId)
         is WeaponQuery.ByCountry -> loadWeaponsByCountry(query.countryId)
         is WeaponQuery.ByType -> loadWeaponsByType(query.typeId)
         is WeaponQuery.ByCalibre -> loadWeaponsByCalibre(query.calibreId)
@@ -36,8 +36,8 @@ class WeaponListViewModel(private val repository: WeaponRepository) : ViewModel(
         repository.getWeaponsByName(name)
     }
 
-    private fun loadWeaponsByYear(year: Int) = runQuery {
-        repository.getWeaponsByYear(year)
+    private fun loadWeaponsByYear(yearId: Long) = runQuery {
+        repository.getWeaponsByYear(yearId)
     }
 
     private fun loadWeaponsByCountry(countryId: Long) = runQuery {

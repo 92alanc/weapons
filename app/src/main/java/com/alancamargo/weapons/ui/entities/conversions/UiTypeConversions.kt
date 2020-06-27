@@ -6,7 +6,7 @@ import com.alancamargo.weapons.ui.entities.*
 fun Weapon.fromDomainToUi() = UiWeapon(
     id,
     name,
-    year,
+    year.fromDomainToUi(),
     manufacturer.fromDomainToUi(),
     country.fromDomainToUi(),
     type.fromDomainToUi(),
@@ -24,6 +24,8 @@ fun Country.fromDomainToUi() = UiCountry(id, nameId, flagId)
 fun Calibre.fromDomainToUi() = UiCalibre(id, nameId)
 
 fun Manufacturer.fromDomainToUi() = UiManufacturer(id, name)
+
+fun Year.fromDomainToUi() = UiYear(id, year)
 
 fun WeaponType.fromDomainToUi(): UiWeaponType = when (this) {
     is WeaponType.Rifle -> convertRifle()

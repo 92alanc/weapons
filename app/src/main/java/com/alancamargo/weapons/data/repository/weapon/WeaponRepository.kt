@@ -9,7 +9,7 @@ interface WeaponRepository {
 
     suspend fun getWeaponsByName(name: String): Result<List<Weapon>>
 
-    suspend fun getWeaponsByYear(year: Int): Result<List<Weapon>>
+    suspend fun getWeaponsByYear(yearId: Long): Result<List<Weapon>>
 
     suspend fun getWeaponsByCountry(countryId: Long): Result<List<Weapon>>
 

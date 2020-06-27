@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class UiWeapon(
     val id: Long,
     val name: String,
-    val year: Int,
+    val year: UiYear,
     val manufacturer: UiManufacturer,
     val country: UiCountry,
     val type: UiWeaponType,

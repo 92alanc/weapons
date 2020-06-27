@@ -40,13 +40,13 @@ class FrameworkTypeConversionsKtTest {
             COUNTRY_FLAG
         )
         val type = WeaponType.BoobyTrap(TYPE_ID)
-        val calibre =
-            Calibre(CALIBRE_ID, CALIBRE)
+        val calibre = Calibre(CALIBRE_ID, CALIBRE)
+        val year = Year(YEAR_ID, YEAR)
 
         val dbWeapon = DbWeapon(
             ID,
             WEAPON_NAME,
-            YEAR,
+            YEAR_ID,
             MANUFACTURER_ID,
             COUNTRY_ID,
             TYPE_ID,
@@ -62,16 +62,9 @@ class FrameworkTypeConversionsKtTest {
         val expected = Weapon(
             ID,
             WEAPON_NAME,
-            YEAR,
-            Manufacturer(
-                MANUFACTURER_ID,
-                MANUFACTURER_NAME
-            ),
-            Country(
-                COUNTRY_ID,
-                COUNTRY_NAME,
-                COUNTRY_FLAG
-            ),
+            year,
+            Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME),
+            Country(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG),
             WeaponType.BoobyTrap(TYPE_ID),
             LENGTH,
             WEIGHT,
@@ -82,12 +75,12 @@ class FrameworkTypeConversionsKtTest {
             listOf(PHOTO)
         )
 
-        val actual = dbWeapon.fromDbToDomain(manufacturer, country, type, calibre)
+        val actual = dbWeapon.fromDbToDomain(manufacturer, country, type, calibre, year)
 
         with(actual) {
             assertThat(id).isEqualTo(expected.id)
             assertThat(name).isEqualTo(expected.name)
-            assertThat(year).isEqualTo(expected.year)
+            assertThat(year.id).isEqualTo(expected.year.id)
             assertThat(manufacturer.id).isEqualTo(expected.manufacturer.id)
             assertThat(country.id).isEqualTo(expected.country.id)
             assertThat(type.id).isEqualTo(expected.type.id)
@@ -197,6 +190,18 @@ class FrameworkTypeConversionsKtTest {
             MANUFACTURER_ID,
             MANUFACTURER_NAME
         )
+
+        val actual = db.fromDbToDomain()
+
+        assertThat(actual).isEqualTo(expected)
+    }
+    // endregion
+
+    // region Year
+    @Test
+    fun year_fromDbToDomain() {
+        val db = DbYear(YEAR_ID, YEAR)
+        val expected = Year(YEAR_ID, YEAR)
 
         val actual = db.fromDbToDomain()
 
@@ -846,6 +851,7 @@ class FrameworkTypeConversionsKtTest {
         const val CALIBRE_ID = 789L
         const val CALIBRE = ".303 British"
         const val WEAPON_NAME = "Short Magazine Lee-Enfield No.1 Mk.3"
+        const val YEAR_ID = 999L
         const val YEAR = 1907
         const val MANUFACTURER_ID = 999L
         const val MANUFACTURER_NAME = "Lee-Enfield"

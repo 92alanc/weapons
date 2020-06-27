@@ -12,16 +12,9 @@ class UiTypeConversionsKtTest {
         val domain = Weapon(
             ID,
             WEAPON_NAME,
-            YEAR,
-            Manufacturer(
-                MANUFACTURER_ID,
-                MANUFACTURER_NAME
-            ),
-            Country(
-                COUNTRY_ID,
-                COUNTRY_NAME,
-                COUNTRY_FLAG
-            ),
+            Year(YEAR_ID, YEAR),
+            Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME),
+            Country(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG),
             WeaponType.BoobyTrap(TYPE_ID),
             LENGTH,
             WEIGHT,
@@ -35,7 +28,7 @@ class UiTypeConversionsKtTest {
         val expected = UiWeapon(
             ID,
             WEAPON_NAME,
-            YEAR,
+            UiYear(YEAR_ID, YEAR),
             UiManufacturer(MANUFACTURER_ID, MANUFACTURER_NAME),
             UiCountry(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG),
             UiWeaponType.BoobyTrap(TYPE_ID),
@@ -94,11 +87,18 @@ class UiTypeConversionsKtTest {
 
     @Test
     fun manufacturer_fromDomainToUi() {
-        val domain = Manufacturer(
-            MANUFACTURER_ID,
-            MANUFACTURER_NAME
-        )
+        val domain = Manufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
         val expected = UiManufacturer(MANUFACTURER_ID, MANUFACTURER_NAME)
+
+        val actual = domain.fromDomainToUi()
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun year_fromDomainToUi() {
+        val domain = Year(YEAR_ID, YEAR)
+        val expected = UiYear(YEAR_ID, YEAR)
 
         val actual = domain.fromDomainToUi()
 
@@ -294,6 +294,7 @@ class UiTypeConversionsKtTest {
         const val CALIBRE_ID = 789L
         const val CALIBRE = ".303 British"
         const val WEAPON_NAME = "Short Magazine Lee-Enfield No.1 Mk.3"
+        const val YEAR_ID = 999L
         const val YEAR = 1907
         const val MANUFACTURER_ID = 999L
         const val MANUFACTURER_NAME = "Lee-Enfield"

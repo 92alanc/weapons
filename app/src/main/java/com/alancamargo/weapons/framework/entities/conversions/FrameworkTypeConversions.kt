@@ -29,7 +29,8 @@ fun DbWeapon.fromDbToDomain(
     manufacturer: Manufacturer,
     country: Country,
     type: WeaponType,
-    calibre: Calibre
+    calibre: Calibre,
+    year: Year
 ): Weapon {
     val gson = Gson()
     val jsonType = object : TypeToken<List<String>>() {}.type
@@ -52,23 +53,17 @@ fun DbWeapon.fromDbToDomain(
     )
 }
 
-fun Calibre.fromDomainToDb() =
-    DbCalibre(id, nameId)
+fun Calibre.fromDomainToDb() = DbCalibre(id, nameId)
 
-fun DbCalibre.fromDbToDomain() =
-    Calibre(id, nameId)
+fun DbCalibre.fromDbToDomain() = Calibre(id, nameId)
 
-fun Country.fromDomainToDb() =
-    DbCountry(id, nameId, flagId)
+fun Country.fromDomainToDb() = DbCountry(id, nameId, flagId)
 
-fun DbCountry.fromDbToDomain() =
-    Country(id, nameId, flagId)
+fun DbCountry.fromDbToDomain() = Country(id, nameId, flagId)
 
-fun Manufacturer.fromDomainToDb() =
-    DbManufacturer(id, name)
+fun Manufacturer.fromDomainToDb() = DbManufacturer(id, name)
 
-fun DbManufacturer.fromDbToDomain() =
-    Manufacturer(id, name)
+fun DbManufacturer.fromDbToDomain() = Manufacturer(id, name)
 
 fun WeaponType.fromDomainToDb() = when (this) {
     is WeaponType.BoobyTrap -> DbWeaponType(
@@ -132,6 +127,8 @@ fun DbWeaponType.fromDbToDomain() = when (this.nameId) {
     NAME_SUB_MACHINE_GUN -> WeaponType.SubMachineGun(id)
     else -> throw IllegalArgumentException("Name must be a proper WeaponType name")
 }
+
+fun DbYear.fromDbToDomain() = Year(id, year)
 
 private fun WeaponType.Grenade.convertGrenade(): DbWeaponType {
     val category = when (this.category) {

@@ -8,6 +8,7 @@ import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_CALI
 import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_COUNTRY_ID
 import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_MANUFACTURER_ID
 import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_TYPE_ID
+import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_YEAR_ID
 
 @Entity(
     tableName = "WEAPON",
@@ -31,13 +32,18 @@ import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_TYPE
             entity = DbCalibre::class,
             parentColumns = [DbCalibre.COLUMN_ID],
             childColumns = [COLUMN_CALIBRE_ID]
+        ),
+        ForeignKey(
+            entity = DbYear::class,
+            parentColumns = [DbYear.COLUMN_ID],
+            childColumns = [COLUMN_YEAR_ID]
         )
     ]
 )
 data class DbWeapon(
     @PrimaryKey val id: Long,
     val name: String,
-    val year: Int,
+    @ColumnInfo(name = COLUMN_YEAR_ID) val yearId: Long,
     @ColumnInfo(name = COLUMN_MANUFACTURER_ID) val manufacturerId: Long,
     @ColumnInfo(name = COLUMN_COUNTRY_ID) val countryId: Long,
     @ColumnInfo(name = COLUMN_TYPE_ID) val typeId: Long,
@@ -55,6 +61,7 @@ data class DbWeapon(
         const val COLUMN_COUNTRY_ID = "country_id"
         const val COLUMN_TYPE_ID = "type_id"
         const val COLUMN_CALIBRE_ID = "calibre_id"
+        const val COLUMN_YEAR_ID = "year_id"
         const val COLUMN_RATE_OF_FIRE = "rate_of_fire"
         const val COLUMN_PHOTOS_JSON = "photos_json"
     }

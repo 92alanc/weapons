@@ -3,7 +3,7 @@ package com.alancamargo.weapons.domain.entities
 data class Weapon(
     val id: Long,
     val name: String,
-    val year: Int,
+    val year: Year,
     val manufacturer: Manufacturer,
     val country: Country,
     val type: WeaponType,

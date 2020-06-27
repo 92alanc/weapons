@@ -12,7 +12,7 @@ sealed class WeaponQuery : Parcelable {
     data class ByName(val name: String) : WeaponQuery()
 
     @Parcelize
-    data class ByYear(val year: Int) : WeaponQuery()
+    data class ByYear(val yearId: Long) : WeaponQuery()
 
     @Parcelize
     data class ByCountry(val countryId: Long) : WeaponQuery()

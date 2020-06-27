@@ -1,9 +1,6 @@
 package com.alancamargo.weapons.framework.local
 
-import com.alancamargo.weapons.data.local.CalibreLocalDataSource
-import com.alancamargo.weapons.data.local.CountryLocalDataSource
-import com.alancamargo.weapons.data.local.ManufacturerLocalDataSource
-import com.alancamargo.weapons.data.local.WeaponTypeLocalDataSource
+import com.alancamargo.weapons.data.local.*
 import com.alancamargo.weapons.domain.entities.WeaponType
 import com.alancamargo.weapons.framework.db.WeaponDao
 import com.google.common.truth.Truth.assertThat
@@ -23,6 +20,7 @@ class WeaponLocalDataSourceImplTest {
     @MockK lateinit var mockCountryLocalDataSource: CountryLocalDataSource
     @MockK lateinit var mockCalibreLocalDataSource: CalibreLocalDataSource
     @MockK lateinit var mockManufacturerLocalDataSource: ManufacturerLocalDataSource
+    @MockK lateinit var mockYearLocalDataSource: YearLocalDataSource
 
     private lateinit var localDataSource: WeaponLocalDataSourceImpl
 
@@ -34,7 +32,8 @@ class WeaponLocalDataSourceImplTest {
             mockWeaponTypeLocalDataSource,
             mockCountryLocalDataSource,
             mockCalibreLocalDataSource,
-            mockManufacturerLocalDataSource
+            mockManufacturerLocalDataSource,
+            mockYearLocalDataSource
         )
     }
 
@@ -147,14 +146,15 @@ class WeaponLocalDataSourceImplTest {
     }
 
     private fun mockSuccessfulOutput() {
-        mockWeaponDaoOutput()
-        mockWeaponTypeDaoOutput()
-        mockCountryDaoOutput()
-        mockCalibreDaoOutput()
-        mockManufacturerDaoOutput()
+        mockWeaponLocalDataSourceOutput()
+        mockWeaponTypeLocalDataSourceOutput()
+        mockCountryLocalDataSourceOutput()
+        mockCalibreLocalDataSourceOutput()
+        mockManufacturerLocalDataSourceOutput()
+        mockYearLocalDataSourceOutput()
     }
 
-    private fun mockWeaponDaoOutput() {
+    private fun mockWeaponLocalDataSourceOutput() {
         coEvery {
             mockWeaponDao.selectAll()
         } returns listOf(mockk(relaxed = true), mockk(relaxed = true), mockk(relaxed = true))
@@ -166,24 +166,28 @@ class WeaponLocalDataSourceImplTest {
         coEvery { mockWeaponDao.selectByManufacturer(any()) } returns listOf(mockk(relaxed = true))
     }
 
-    private fun mockWeaponTypeDaoOutput() {
+    private fun mockWeaponTypeLocalDataSourceOutput() {
         coEvery {
             mockWeaponTypeLocalDataSource.getWeaponTypeById(any())
         } returns WeaponType.BoobyTrap(TYPE_ID)
     }
 
-    private fun mockCountryDaoOutput() {
+    private fun mockCountryLocalDataSourceOutput() {
         coEvery { mockCountryLocalDataSource.getCountryById(any()) } returns mockk(relaxed = true)
     }
 
-    private fun mockCalibreDaoOutput() {
+    private fun mockCalibreLocalDataSourceOutput() {
         coEvery { mockCalibreLocalDataSource.getCalibreById(any()) } returns mockk(relaxed = true)
     }
 
-    private fun mockManufacturerDaoOutput() {
+    private fun mockManufacturerLocalDataSourceOutput() {
         coEvery {
             mockManufacturerLocalDataSource.getManufacturerById(any())
         } returns mockk(relaxed = true)
+    }
+
+    private fun mockYearLocalDataSourceOutput() {
+        coEvery { mockYearLocalDataSource.getYearById(any()) } returns mockk(relaxed = true)
     }
 
     private companion object {

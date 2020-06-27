@@ -56,7 +56,7 @@ class ManufacturerLocalDataSourceImplTest {
     }
 
     @Test(expected = IOException::class)
-    fun getCalibreById_databaseThrowsException_shouldThrow() {
+    fun getManufacturerById_databaseThrowsException_shouldThrow() {
         coEvery { mockManufacturerDao.selectById(any()) } throws IOException()
 
         runBlocking {

@@ -30,11 +30,14 @@ private val data = module {
     factory<CalibreRepository> { CalibreRepositoryImpl(get(), get()) }
     factory<ManufacturerRepository> { ManufacturerRepositoryImpl(get(), get()) }
 
-    factory<WeaponLocalDataSource> { WeaponLocalDataSourceImpl(get(), get(), get(), get(), get()) }
+    factory<WeaponLocalDataSource> {
+        WeaponLocalDataSourceImpl(get(), get(), get(), get(), get(), get())
+    }
     factory<WeaponTypeLocalDataSource> { WeaponTypeLocalDataSourceImpl(get()) }
     factory<CountryLocalDataSource> { CountryLocalDataSourceImpl(get()) }
     factory<CalibreLocalDataSource> { CalibreLocalDataSourceImpl(get()) }
     factory<ManufacturerLocalDataSource> { ManufacturerLocalDataSourceImpl(get()) }
+    factory<YearLocalDataSource> { YearLocalDataSourceImpl(get()) }
 
     factory { IoHelper(get()) }
     factory<CrashReportHelper> { CrashReportHelperImpl() }
@@ -46,6 +49,7 @@ private val framework = module {
     factory { DatabaseProvider.getInstance(androidContext()).provideCountryDao() }
     factory { DatabaseProvider.getInstance(androidContext()).provideCalibreDao() }
     factory { DatabaseProvider.getInstance(androidContext()).provideManufacturerDao() }
+    factory { DatabaseProvider.getInstance(androidContext()).provideYearDao() }
 }
 
 private val ui = module {

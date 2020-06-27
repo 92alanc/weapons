@@ -20,8 +20,8 @@ class WeaponRepositoryImpl(
         }
     }
 
-    override suspend fun getWeaponsByYear(year: Int): Result<List<Weapon>> = ioHelper.safeIoCall {
-        localDataSource.getWeaponsByYear(year)
+    override suspend fun getWeaponsByYear(yearId: Long): Result<List<Weapon>> = ioHelper.safeIoCall {
+        localDataSource.getWeaponsByYear(yearId)
     }
 
     override suspend fun getWeaponsByCountry(countryId: Long): Result<List<Weapon>> {
