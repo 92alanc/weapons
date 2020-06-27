@@ -31,5 +31,11 @@
 
     <!-- region Queries -->
     <string name="query_all_weapons">All weapons</string>
+    <string name="query_by_name">By name</string>
+    <string name="query_by_year">By year</string>
+    <string name="query_by_country">By country</string>
+    <string name="query_by_type">By type</string>
+    <string name="query_by_calibre">By calibre</string>
+    <string name="query_by_manufacturer">By manufacturer</string>
     <!-- endregion -->
 </resources>

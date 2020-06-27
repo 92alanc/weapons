@@ -17,12 +17,18 @@ class WeaponListViewModel(private val repository: WeaponRepository) : ViewModel(
     private val commandLiveData = MutableLiveData<Command>()
 
     fun start(query: WeaponQuery) = when (query) {
-        is WeaponQuery.All -> loadWeapons()
+        is WeaponQuery.All -> loadAllWeapons()
+        is WeaponQuery.ByName -> loadWeaponsByName(query.name)
+        is WeaponQuery.ByYear -> loadWeaponsByYear(query.year)
+        is WeaponQuery.ByCountry -> loadWeaponsByCountry(query.countryId)
+        is WeaponQuery.ByType -> loadWeaponsByType(query.typeId)
+        is WeaponQuery.ByCalibre -> loadWeaponsByCalibre(query.calibreId)
+        is WeaponQuery.ByManufacturer -> loadWeaponsByManufacturer(query.manufacturerId)
     }
 
     fun getCommand(): LiveData<Command> = commandLiveData
 
-    private fun loadWeapons() = runQuery {
+    private fun loadAllWeapons() = runQuery {
         repository.getWeapons()
     }
 
