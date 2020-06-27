@@ -17,6 +17,9 @@ import com.alancamargo.weapons.data.repository.weapon.WeaponRepositoryImpl
 import com.alancamargo.weapons.framework.crash.CrashReportHelperImpl
 import com.alancamargo.weapons.framework.db.provider.DatabaseProvider
 import com.alancamargo.weapons.framework.local.*
+import com.alancamargo.weapons.ui.adapter.WeaponAdapter
+import com.alancamargo.weapons.ui.tools.ResourcesHelper
+import com.alancamargo.weapons.ui.tools.ResourcesHelperImpl
 import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
 import com.alancamargo.weapons.ui.viewmodel.WeaponListViewModel
 import org.koin.android.ext.koin.androidContext
@@ -66,4 +69,8 @@ private val framework = module {
 private val ui = module {
     viewModel { WeaponListViewModel(get()) }
     viewModel { QueryViewModel() }
+    factory<ResourcesHelper> { ResourcesHelperImpl(androidContext(), get()) }
+    factory { (onItemClickListener: WeaponAdapter.OnItemClickListener) ->
+        WeaponAdapter(get(), onItemClickListener)
+    }
 }

@@ -14,14 +14,16 @@ import com.alancamargo.weapons.ui.tools.loadAds
 import com.alancamargo.weapons.ui.tools.show
 import com.alancamargo.weapons.ui.viewmodel.WeaponListViewModel
 import kotlinx.android.synthetic.main.activity_weapon_list.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
     WeaponAdapter.OnItemClickListener {
 
     private val viewModel by viewModel<WeaponListViewModel>()
     private val query by lazy { intent.getParcelableExtra<WeaponQuery>(EXTRA_QUERY) }
-    private val adapter = WeaponAdapter(this)
+    private val adapter by inject<WeaponAdapter> { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

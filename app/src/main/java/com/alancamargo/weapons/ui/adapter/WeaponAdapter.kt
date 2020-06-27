@@ -5,9 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.entities.UiWeapon
+import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.viewholder.WeaponViewHolder
 
 class WeaponAdapter(
+    private val resourcesHelper: ResourcesHelper,
     private val itemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<WeaponViewHolder>() {
 
@@ -21,7 +23,7 @@ class WeaponAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeaponViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val itemView = inflater.inflate(R.layout.item_weapon, parent, false)
-        return WeaponViewHolder(itemView)
+        return WeaponViewHolder(itemView, resourcesHelper)
     }
 
     override fun onBindViewHolder(holder: WeaponViewHolder, position: Int) {
