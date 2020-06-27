@@ -1,8 +1,9 @@
-package com.alancamargo.weapons.ui.fragments
+package com.alancamargo.weapons.ui.activities
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
@@ -12,18 +13,18 @@ import com.alancamargo.weapons.ui.tools.hide
 import com.alancamargo.weapons.ui.tools.loadAds
 import com.alancamargo.weapons.ui.tools.show
 import com.alancamargo.weapons.ui.viewmodel.WeaponListViewModel
-import kotlinx.android.synthetic.main.fragment_weapon_list.*
+import kotlinx.android.synthetic.main.activity_weapon_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class WeaponListFragment : Fragment(R.layout.fragment_weapon_list),
+class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
     WeaponAdapter.OnItemClickListener {
 
     private val viewModel by viewModel<WeaponListViewModel>()
-    private val query by lazy { requireArguments()[KEY_QUERY] as WeaponQuery }
+    private val query by lazy { intent.getParcelableExtra<WeaponQuery>(EXTRA_QUERY) }
     private val adapter = WeaponAdapter(this)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         viewModel.start(query)
         recyclerView.adapter = adapter
         observeCommand()
@@ -35,7 +36,7 @@ class WeaponListFragment : Fragment(R.layout.fragment_weapon_list),
     }
 
     private fun observeCommand() {
-        viewModel.getCommand().observe(viewLifecycleOwner, Observer {
+        viewModel.getCommand().observe(this, Observer {
             processCommand(it)
         })
     }
@@ -65,10 +66,10 @@ class WeaponListFragment : Fragment(R.layout.fragment_weapon_list),
     }
 
     companion object {
-        private const val KEY_QUERY = "query"
+        private const val EXTRA_QUERY = "query"
 
-        fun newInstance(query: WeaponQuery) = WeaponListFragment().apply {
-            arguments = Bundle().apply { putParcelable(KEY_QUERY, query) }
+        fun getIntent(context: Context, query: WeaponQuery): Intent {
+            return Intent(context, WeaponListActivity::class.java).putExtra(EXTRA_QUERY, query)
         }
     }
 

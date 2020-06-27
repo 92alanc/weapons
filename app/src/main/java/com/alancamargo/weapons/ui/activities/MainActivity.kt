@@ -1,9 +1,11 @@
 package com.alancamargo.weapons.ui.activities
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.QueryAdapter
+import com.alancamargo.weapons.ui.queries.WeaponQuery
 import com.alancamargo.weapons.ui.queries.WeaponQueryType
 import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -31,31 +33,32 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
     }
 
     private fun showAllWeapons() {
-        
+        val intent = WeaponListActivity.getIntent(this, WeaponQuery.All)
+        startActivity(intent)
     }
 
     private fun openCalibreSelector() {
-
+        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 
     private fun openCountrySelector() {
-
+        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 
     private fun openManufacturerSelector() {
-
+        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 
     private fun openNameSelector() {
-
+        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 
     private fun openTypeSelector() {
-
+        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 
     private fun openYearSelector() {
-
+        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 
 }
