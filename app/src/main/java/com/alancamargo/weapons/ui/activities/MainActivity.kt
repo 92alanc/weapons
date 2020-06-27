@@ -7,6 +7,7 @@ import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.QueryAdapter
 import com.alancamargo.weapons.ui.queries.WeaponQuery
 import com.alancamargo.weapons.ui.queries.WeaponQueryType
+import com.alancamargo.weapons.ui.tools.loadAds
 import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
         super.onCreate(savedInstanceState)
         recyclerView.adapter = adapter
         adapter.setData(viewModel.getQueries())
+        adView.loadAds()
     }
 
     override fun onItemClick(query: WeaponQueryType) = when (query) {
