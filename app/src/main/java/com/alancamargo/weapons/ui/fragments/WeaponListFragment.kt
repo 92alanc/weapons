@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.entities.UiWeapon
+import com.alancamargo.weapons.ui.queries.WeaponQuery
 import com.alancamargo.weapons.ui.tools.hide
 import com.alancamargo.weapons.ui.tools.loadAds
 import com.alancamargo.weapons.ui.tools.show
@@ -18,10 +19,12 @@ class WeaponListFragment : Fragment(R.layout.fragment_weapon_list),
     WeaponAdapter.OnItemClickListener {
 
     private val viewModel by viewModel<WeaponListViewModel>()
+    private val query by lazy { requireArguments()[KEY_QUERY] as WeaponQuery }
     private val adapter = WeaponAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.start(query)
         recyclerView.adapter = adapter
         observeCommand()
         adView.loadAds()
@@ -59,6 +62,14 @@ class WeaponListFragment : Fragment(R.layout.fragment_weapon_list),
     private fun showLoading() {
         groupError.hide()
         progressBar.show()
+    }
+
+    companion object {
+        private const val KEY_QUERY = "query"
+
+        fun newInstance(query: WeaponQuery) = WeaponListFragment().apply {
+            arguments = Bundle().apply { putParcelable(KEY_QUERY, query) }
+        }
     }
 
 }

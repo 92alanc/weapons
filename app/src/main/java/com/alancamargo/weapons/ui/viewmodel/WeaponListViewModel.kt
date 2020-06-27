@@ -9,15 +9,16 @@ import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
 import com.alancamargo.weapons.domain.entities.Weapon
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.entities.conversions.fromDomainToUi
+import com.alancamargo.weapons.ui.queries.WeaponQuery
 import kotlinx.coroutines.launch
 
 class WeaponListViewModel(private val repository: WeaponRepository) : ViewModel() {
 
-    init {
-        loadWeapons()
-    }
-
     private val commandLiveData = MutableLiveData<Command>()
+
+    fun start(query: WeaponQuery) = when (query) {
+        is WeaponQuery.All -> loadWeapons()
+    }
 
     fun getCommand(): LiveData<Command> = commandLiveData
 
