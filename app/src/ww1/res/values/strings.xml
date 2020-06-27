@@ -10,5 +10,6 @@
     <string name="country_russia">Russian Empire</string>
     <string name="country_italy">Italian Empire</string>
     <string name="country_japan">Japanese Empire</string>
+    <style name="country_usa">United States</style>
     <!-- endregion -->
 </resources>
