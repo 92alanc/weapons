@@ -2,6 +2,7 @@ package com.alancamargo.weapons.ui.viewholder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import coil.api.load
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import kotlinx.android.extensions.LayoutContainer
@@ -18,7 +19,7 @@ class WeaponViewHolder(
         txtName.text = weapon.name
         val flagDrawable = resourcesHelper.getDrawable(weapon.country.flagId)
         imgFlag.setImageDrawable(flagDrawable)
-        // TODO: set photo
+        imgPhoto.load(weapon.photos.first())
     }
 
 }
