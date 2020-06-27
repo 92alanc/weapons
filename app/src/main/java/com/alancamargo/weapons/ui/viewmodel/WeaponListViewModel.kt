@@ -22,10 +22,38 @@ class WeaponListViewModel(private val repository: WeaponRepository) : ViewModel(
 
     fun getCommand(): LiveData<Command> = commandLiveData
 
-    private fun loadWeapons() {
+    private fun loadWeapons() = runQuery {
+        repository.getWeapons()
+    }
+
+    private fun loadWeaponsByName(name: String) = runQuery {
+        repository.getWeaponsByName(name)
+    }
+
+    private fun loadWeaponsByYear(year: Int) = runQuery {
+        repository.getWeaponsByYear(year)
+    }
+
+    private fun loadWeaponsByCountry(countryId: Long) = runQuery {
+        repository.getWeaponsByCountry(countryId)
+    }
+
+    private fun loadWeaponsByType(typeId: Long) = runQuery {
+        repository.getWeaponsByType(typeId)
+    }
+
+    private fun loadWeaponsByCalibre(calibreId: Long) = runQuery {
+        repository.getWeaponsByCalibre(calibreId)
+    }
+
+    private fun loadWeaponsByManufacturer(manufacturerId: Long) = runQuery {
+        repository.getWeaponsByManufacturer(manufacturerId)
+    }
+
+    private fun runQuery(query: suspend () -> Result<List<Weapon>>) {
         viewModelScope.launch {
             commandLiveData.postValue(Command.Load)
-            val result = repository.getWeapons()
+            val result = query.invoke()
             processResult(result)
         }
     }
