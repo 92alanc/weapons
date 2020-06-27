@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "icon": "@drawable/ic_all_weapons",
+      "text": "@string/query_all_weapons"
+    },
+    {
+      "icon": "@drawable/ic_name",
+      "text": "@string/query_by_name"
+    },
+    {
+      "icon": "@drawable/ic_country",
+      "text": "@string/query_by_country"
+    },
+    {
+      "icon": "@drawable/ic_year",
+      "text": "@string/query_by_year"
+    },
+    {
+      "icon": "@drawable/ic_calibre",
+      "text": "@string/query_by_calibre"
+    },
+    {
+      "icon": "@drawable/ic_type",
+      "text": "@string/query_by_type"
+    },
+    {
+      "icon": "@drawable/ic_manufacturer",
+      "text": "@string/query_by_manufacturer"
+    }
+  ]
+}
