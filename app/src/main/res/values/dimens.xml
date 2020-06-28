@@ -5,4 +5,5 @@
     <dimen name="size_list_photo">80dp</dimen>
     <dimen name="margin_default">8dp</dimen>
     <dimen name="size_query_card">160dp</dimen>
+    <dimen name="size_flag">50dp</dimen>
 </resources>

@@ -35,8 +35,8 @@
 
         <ImageView
             android:id="@+id/imgFlag"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/size_flag"
+            android:layout_height="@dimen/size_flag"
             android:contentDescription="@null"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

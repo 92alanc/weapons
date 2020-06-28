@@ -31,5 +31,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="@sample/weapons.json/data/name"/>
 
+        <ImageView
+            android:id="@+id/imgFlag"
+            android:layout_width="@dimen/size_flag"
+            android:layout_height="@dimen/size_flag"
+            
+            tools:src="@sample/weapons.json/data/flag"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
