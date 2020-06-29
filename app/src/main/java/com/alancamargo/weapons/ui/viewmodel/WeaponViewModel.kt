@@ -12,9 +12,9 @@ import com.alancamargo.weapons.ui.entities.conversions.fromDomainToUi
 import com.alancamargo.weapons.ui.queries.WeaponQuery
 import kotlinx.coroutines.launch
 
-class WeaponListViewModel(private val repository: WeaponRepository) : ViewModel() {
+class WeaponViewModel(private val repository: WeaponRepository) : ViewModel() {
 
-    private val commandLiveData = MutableLiveData<Command>()
+    private val stateLiveData = MutableLiveData<State>()
 
     fun start(query: WeaponQuery) = when (query) {
         is WeaponQuery.All -> loadAllWeapons()
@@ -26,7 +26,7 @@ class WeaponListViewModel(private val repository: WeaponRepository) : ViewModel(
         is WeaponQuery.ByManufacturer -> loadWeaponsByManufacturer(query.manufacturerId)
     }
 
-    fun getCommand(): LiveData<Command> = commandLiveData
+    fun getState(): LiveData<State> = stateLiveData
 
     private fun loadAllWeapons() = runQuery {
         repository.getWeapons()
@@ -58,7 +58,7 @@ class WeaponListViewModel(private val repository: WeaponRepository) : ViewModel(
 
     private fun runQuery(query: suspend () -> Result<List<Weapon>>) {
         viewModelScope.launch {
-            commandLiveData.postValue(Command.Load)
+            stateLiveData.postValue(State.Loading)
             val result = query.invoke()
             processResult(result)
         }
@@ -68,16 +68,16 @@ class WeaponListViewModel(private val repository: WeaponRepository) : ViewModel(
         when (result) {
             is Result.Success -> {
                 val weapons = result.body.map { it.fromDomainToUi() }
-                commandLiveData.postValue(Command.Display(weapons))
+                stateLiveData.postValue(State.Ready(weapons))
             }
-            is Result.Error -> commandLiveData.postValue(Command.Error)
+            is Result.Error -> stateLiveData.postValue(State.Error)
         }
     }
 
-    sealed class Command {
-        object Load : Command()
-        data class Display(val weapons: List<UiWeapon>) : Command()
-        object Error : Command()
+    sealed class State {
+        object Loading : State()
+        data class Ready(val weapons: List<UiWeapon>) : State()
+        object Error : State()
     }
 
 }

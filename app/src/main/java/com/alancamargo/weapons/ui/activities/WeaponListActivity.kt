@@ -12,7 +12,7 @@ import com.alancamargo.weapons.ui.queries.WeaponQuery
 import com.alancamargo.weapons.ui.tools.hide
 import com.alancamargo.weapons.ui.tools.loadAds
 import com.alancamargo.weapons.ui.tools.show
-import com.alancamargo.weapons.ui.viewmodel.WeaponListViewModel
+import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
 import kotlinx.android.synthetic.main.activity_weapon_list.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,7 +21,7 @@ import org.koin.core.parameter.parametersOf
 class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
     WeaponAdapter.OnItemClickListener {
 
-    private val viewModel by viewModel<WeaponListViewModel>()
+    private val viewModel by viewModel<WeaponViewModel>()
     private val query by lazy { intent.getParcelableExtra<WeaponQuery>(EXTRA_QUERY) }
     private val adapter by inject<WeaponAdapter> { parametersOf(this) }
 
@@ -29,7 +29,7 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
         super.onCreate(savedInstanceState)
         viewModel.start(query)
         recyclerView.adapter = adapter
-        observeCommand()
+        observeState()
         adView.loadAds()
     }
 
@@ -38,17 +38,17 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
         startActivity(intent)
     }
 
-    private fun observeCommand() {
-        viewModel.getCommand().observe(this, Observer {
+    private fun observeState() {
+        viewModel.getState().observe(this, Observer {
             processCommand(it)
         })
     }
 
-    private fun processCommand(command: WeaponListViewModel.Command?) {
-        when (command) {
-            is WeaponListViewModel.Command.Display -> displayWeapons(command.weapons)
-            is WeaponListViewModel.Command.Error -> showError()
-            is WeaponListViewModel.Command.Load -> showLoading()
+    private fun processCommand(state: WeaponViewModel.State?) {
+        when (state) {
+            is WeaponViewModel.State.Ready -> displayWeapons(state.weapons)
+            is WeaponViewModel.State.Error -> showError()
+            is WeaponViewModel.State.Loading -> showLoading()
         }
     }
 
