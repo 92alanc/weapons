@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.ui.entities.conversions
 
+import com.alancamargo.weapons.R
 import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.ui.entities.*
 import com.google.common.truth.Truth.assertThat
@@ -284,6 +285,168 @@ class UiTypeConversionsKtTest {
         val actual = domain.fromDomainToUi()
 
         assertThat(actual.id).isEqualTo(expected.id)
+    }
+
+    @Test
+    fun melee_fromUiToStringId() {
+        val ui = UiWeaponType.Melee(ID)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_melee)
+    }
+
+    @Test
+    fun pistol_fromUiToStringId() {
+        val ui = UiWeaponType.Pistol(ID)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_pistol)
+    }
+
+    @Test
+    fun boltActionRifle_fromUiToStringId() {
+        val ui = UiWeaponType.Rifle(ID, UiWeaponType.Rifle.Category.BOLT_ACTION)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_rifle_bolt_action)
+    }
+
+    @Test
+    fun semiAutomaticRifle_fromUiToStringId() {
+        val ui = UiWeaponType.Rifle(ID, UiWeaponType.Rifle.Category.SEMI_AUTOMATIC)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_rifle_semi_automatic)
+    }
+
+    @Test
+    fun automaticRifle_fromUiToStringId() {
+        val ui = UiWeaponType.Rifle(ID, UiWeaponType.Rifle.Category.AUTOMATIC)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_rifle_automatic)
+    }
+
+    @Test
+    fun shotgun_fromUiToStringId() {
+        val ui = UiWeaponType.Shotgun(ID)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_shotgun)
+    }
+
+    @Test
+    fun carbine_fromUiToStringId() {
+        val ui = UiWeaponType.Carbine(ID)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_carbine)
+    }
+
+    @Test
+    fun lightMachineGun_fromUiToStringId() {
+        val ui = UiWeaponType.MachineGun(ID, UiWeaponType.MachineGun.Category.LIGHT)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_machine_gun_light)
+    }
+
+    @Test
+    fun generalPurposeMachineGun_fromUiToStringId() {
+        val ui = UiWeaponType.MachineGun(ID, UiWeaponType.MachineGun.Category.GENERAL_PURPOSE)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_machine_gun_general_purpose)
+    }
+
+    @Test
+    fun heavyMachineGun_fromUiToStringId() {
+        val ui = UiWeaponType.MachineGun(ID, UiWeaponType.MachineGun.Category.HEAVY)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_machine_gun_heavy)
+    }
+
+    @Test
+    fun subMachineGun_fromUiToStringId() {
+        val ui = UiWeaponType.SubMachineGun(ID)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_sub_machine_gun)
+    }
+
+    @Test
+    fun antiPersonnelGrenade_fromUiToStringId() {
+        val ui = UiWeaponType.Grenade(ID, UiWeaponType.Grenade.Category.ANTI_PERSONNEL)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_grenade_anti_personnel)
+    }
+
+    @Test
+    fun antiTankGrenade_fromUiToStringId() {
+        val ui = UiWeaponType.Grenade(ID, UiWeaponType.Grenade.Category.ANTI_TANK)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_grenade_anti_tank)
+    }
+
+    @Test
+    fun antiPersonnelMine_fromUiToStringId() {
+        val ui = UiWeaponType.Mine(ID, UiWeaponType.Mine.Category.ANTI_PERSONNEL)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_mine_anti_personnel)
+    }
+
+    @Test
+    fun antiTankMine_fromUiToStringId() {
+        val ui = UiWeaponType.Mine(ID, UiWeaponType.Mine.Category.ANTI_TANK)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_mine_anti_tank)
+    }
+
+    @Test
+    fun grenadeLauncher_fromUiToStringId() {
+        val ui = UiWeaponType.GrenadeLauncher(ID)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_grenade_launcher)
+    }
+
+    @Test
+    fun rocketLauncher_fromUiToStringId() {
+        val ui = UiWeaponType.RocketLauncher(ID)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_rocket_launcher)
+    }
+
+    @Test
+    fun boobyTrap_fromUiToStringId() {
+        val ui = UiWeaponType.BoobyTrap(ID)
+
+        val actual = ui.fromUiToStringId()
+
+        assertThat(actual).isEqualTo(R.string.type_booby_trap)
     }
     // endregion
 

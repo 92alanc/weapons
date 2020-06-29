@@ -43,7 +43,7 @@ fun WeaponType.fromDomainToUi(): UiWeaponType = when (this) {
     is WeaponType.Pistol -> UiWeaponType.Pistol(id)
 }
 
-fun UiWeaponType.fromUiToString(): Int = when (this) {
+fun UiWeaponType.fromUiToStringId(): Int = when (this) {
     is UiWeaponType.BoobyTrap -> R.string.type_booby_trap
     is UiWeaponType.Carbine -> R.string.type_carbine
     is UiWeaponType.GrenadeLauncher -> R.string.type_grenade_launcher
