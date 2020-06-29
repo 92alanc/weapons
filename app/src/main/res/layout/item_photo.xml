@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imgPhoto"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txtIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_view_pager_indicator"
+        android:padding="@dimen/padding_small"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/imgPhoto"
+        app:layout_constraintEnd_toEndOf="@id/imgPhoto"
+        tools:text="Photo 1 / 3"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

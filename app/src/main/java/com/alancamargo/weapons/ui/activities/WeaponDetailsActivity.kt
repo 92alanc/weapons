@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.alancamargo.weapons.R
+import com.alancamargo.weapons.ui.adapter.ViewPagerAdapter
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.entities.conversions.fromUiToStringId
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
@@ -25,6 +26,7 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
 
     private fun bindTo(weapon: UiWeapon) {
         with(weapon) {
+            viewPager.adapter = ViewPagerAdapter(photos)
             txtName.text = name
             val flag = resourcesHelper.getDrawable(country.flagId)
             imgFlag.setImageDrawable(flag)
