@@ -26,7 +26,7 @@
     <string name="manufacturer_format">Manufacturer: %1$s</string>
     <string name="type_format">Type: %1$s</string>
     <string name="calibre_format">Calibre: %1$s</string>
-    <string name="length_format">Length: %1$fmm</string>
+    <string name="length_format">Length: %1$dmm</string>
     <string name="weight_format">Weight: %1$.2fkg</string>
     <string name="capacity_format">Capacity: %1$d rounds</string>
     <string name="rate_of_fire_format">Rate of fire: %1$d rounds per minute</string>

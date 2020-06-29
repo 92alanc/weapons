@@ -11,7 +11,7 @@ data class UiWeapon(
     val manufacturer: UiManufacturer,
     val country: UiCountry,
     val type: UiWeaponType,
-    val length: Float,
+    val length: Int,
     val weight: Float,
     val calibre: UiCalibre,
     val capacity: Int,

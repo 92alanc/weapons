@@ -47,7 +47,7 @@ data class DbWeapon(
     @ColumnInfo(name = COLUMN_MANUFACTURER_ID) val manufacturerId: Long,
     @ColumnInfo(name = COLUMN_COUNTRY_ID) val countryId: Long,
     @ColumnInfo(name = COLUMN_TYPE_ID) val typeId: Long,
-    val length: Float,
+    val length: Int,
     val weight: Float,
     @ColumnInfo(name = COLUMN_CALIBRE_ID) val calibreId: Long,
     val capacity: Int,

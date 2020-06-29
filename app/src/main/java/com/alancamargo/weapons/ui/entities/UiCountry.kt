@@ -4,4 +4,4 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class UiCountry(val id: Long, val nameId: String, val flagId: String) : Parcelable
+data class UiCountry(val id: Long, val name: String, val flagId: String) : Parcelable

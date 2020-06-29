@@ -57,9 +57,9 @@ fun Calibre.fromDomainToDb() = DbCalibre(id, nameId)
 
 fun DbCalibre.fromDbToDomain() = Calibre(id, name)
 
-fun Country.fromDomainToDb() = DbCountry(id, nameId, flagId)
+fun Country.fromDomainToDb() = DbCountry(id, name, flagId)
 
-fun DbCountry.fromDbToDomain() = Country(id, nameId, flagId)
+fun DbCountry.fromDbToDomain() = Country(id, name, flagId)
 
 fun Manufacturer.fromDomainToDb() = DbManufacturer(id, name)
 

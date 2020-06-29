@@ -7,7 +7,7 @@ data class Weapon(
     val manufacturer: Manufacturer,
     val country: Country,
     val type: WeaponType,
-    val length: Float,
+    val length: Int,
     val weight: Float,
     val calibre: Calibre,
     val capacity: Int,

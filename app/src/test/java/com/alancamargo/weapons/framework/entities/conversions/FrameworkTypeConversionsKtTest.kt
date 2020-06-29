@@ -857,7 +857,7 @@ class FrameworkTypeConversionsKtTest {
         const val MANUFACTURER_NAME = "Lee-Enfield"
         const val COUNTRY_ID = 222L
         const val TYPE_ID = 333L
-        const val LENGTH = 1.02f
+        const val LENGTH = 102
         const val WEIGHT = 2.5f
         const val CAPACITY = 10
         const val RATE_OF_FIRE = 20

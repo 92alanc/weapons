@@ -28,8 +28,7 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
             txtName.text = name
             val flag = resourcesHelper.getDrawable(country.flagId)
             imgFlag.setImageDrawable(flag)
-            val countryName = resourcesHelper.getString(country.nameId)
-            txtCountry.text = countryName
+            txtCountry.text = country.name
             txtYear.text = getString(R.string.year_format, year.year)
             txtManufacturer.text = getString(R.string.manufacturer_format, manufacturer.name)
             val typeString = getString(type.fromUiToStringId())

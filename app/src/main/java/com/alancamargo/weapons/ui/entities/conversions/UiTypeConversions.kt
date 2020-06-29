@@ -20,7 +20,7 @@ fun Weapon.fromDomainToUi() = UiWeapon(
     photos
 )
 
-fun Country.fromDomainToUi() = UiCountry(id, nameId, flagId)
+fun Country.fromDomainToUi() = UiCountry(id, name, flagId)
 
 fun Calibre.fromDomainToUi() = UiCalibre(id, nameId)
 
