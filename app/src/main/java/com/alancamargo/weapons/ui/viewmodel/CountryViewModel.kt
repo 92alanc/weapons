@@ -13,11 +13,11 @@ import kotlinx.coroutines.launch
 
 class CountryViewModel(private val repository: CountryRepository) : ViewModel() {
 
+    private val stateLiveData = MutableLiveData<State>()
+
     init {
         loadCountries()
     }
-
-    private val stateLiveData = MutableLiveData<State>()
 
     fun getState(): LiveData<State> = stateLiveData
 

@@ -3,51 +3,61 @@
     {
       "name": "Short Magazine Lee-Enfield No.1 Mk.3",
       "flag": "@drawable/flag_uk",
+      "country_name": "British Empire",
       "accessibility": "@string/country_uk"
     },
     {
       "name": "Gewehr 98",
       "flag": "@drawable/flag_germany",
+      "country_name": "German Empire",
       "accessibility": "@string/country_germany"
     },
     {
       "name": "Lebel",
       "flag": "@drawable/flag_france",
+      "country_name": "French Empire",
       "accessibility": "@string/country_france"
     },
     {
       "name": "Mosin-Nagant 1891",
       "flag": "@drawable/flag_russia",
+      "country_name": "Russian Empire",
       "accessibility": "@string/country_russia"
     },
     {
       "name": "Type 38 Arisaka",
       "flag": "@drawable/flag_japan",
+      "country_name": "Japanese Empire",
       "accessibility": "@string/country_japan"
     },
     {
       "name": "Mannlicher M1895",
       "flag": "@drawable/flag_austria_hungary",
+      "country_name": "Austro-Hungarian Empire",
       "accessibility": "@string/country_austria_hungary"
     },
     {
       "name": "Carcano",
       "flag": "@drawable/flag_italy",
+      "country_name": "Italian Empire",
       "accessibility": "@string/country_italy"
     },
     {
       "name": "Lewis Gun",
       "flag": "@drawable/flag_uk",
+      "country_name": "British Empire",
       "accessibility": "@string/country_uk"
     },
     {
       "name": "Mills Bomb",
       "flag": "@drawable/flag_uk",
+      "country_name": "British Empire",
       "accessibility": "@string/country_uk"
     },
     {
       "name": "Chauchat",
       "flag": "@drawable/flag_france",
+      "country_name": "French Empire",
       "accessibility": "@string/country_france"
     }
   ]

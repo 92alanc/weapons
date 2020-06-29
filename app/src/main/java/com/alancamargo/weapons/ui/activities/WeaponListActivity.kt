@@ -40,11 +40,11 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
 
     private fun observeState() {
         viewModel.getState().observe(this, Observer {
-            processCommand(it)
+            processState(it)
         })
     }
 
-    private fun processCommand(state: WeaponViewModel.State?) {
+    private fun processState(state: WeaponViewModel.State?) {
         when (state) {
             is WeaponViewModel.State.Ready -> displayWeapons(state.weapons)
             is WeaponViewModel.State.Error -> showError()

@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -44,7 +45,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
     }
 
     private fun openCountrySelector() {
-        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, CountryListActivity::class.java)
+        startActivity(intent)
     }
 
     private fun openManufacturerSelector() {
