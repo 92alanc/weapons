@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.ui.entities.conversions
 
+import com.alancamargo.weapons.R
 import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.ui.entities.*
 
@@ -42,6 +43,21 @@ fun WeaponType.fromDomainToUi(): UiWeaponType = when (this) {
     is WeaponType.Pistol -> UiWeaponType.Pistol(id)
 }
 
+fun UiWeaponType.fromUiToString(): Int = when (this) {
+    is UiWeaponType.BoobyTrap -> R.string.type_booby_trap
+    is UiWeaponType.Carbine -> R.string.type_carbine
+    is UiWeaponType.GrenadeLauncher -> R.string.type_grenade_launcher
+    is UiWeaponType.Melee -> R.string.type_melee
+    is UiWeaponType.Pistol -> R.string.type_pistol
+    is UiWeaponType.RocketLauncher -> R.string.type_rocket_launcher
+    is UiWeaponType.Shotgun -> R.string.type_shotgun
+    is UiWeaponType.SubMachineGun -> R.string.type_sub_machine_gun
+    is UiWeaponType.Rifle -> convertRifle()
+    is UiWeaponType.Grenade -> convertGrenade()
+    is UiWeaponType.Mine -> convertMine()
+    is UiWeaponType.MachineGun -> convertMachineGun()
+}
+
 private fun WeaponType.Rifle.convertRifle(): UiWeaponType.Rifle {
     val category = when (this.category) {
         WeaponType.Rifle.Category.AUTOMATIC -> UiWeaponType.Rifle.Category.AUTOMATIC
@@ -81,4 +97,26 @@ private fun WeaponType.Mine.convertMine(): UiWeaponType.Mine {
     }
 
     return UiWeaponType.Mine(id, category)
+}
+
+private fun UiWeaponType.Rifle.convertRifle() = when (category) {
+    UiWeaponType.Rifle.Category.AUTOMATIC -> R.string.type_rifle_automatic
+    UiWeaponType.Rifle.Category.SEMI_AUTOMATIC -> R.string.type_rifle_semi_automatic
+    UiWeaponType.Rifle.Category.BOLT_ACTION -> R.string.type_rifle_bolt_action
+}
+
+private fun UiWeaponType.Grenade.convertGrenade() = when (category) {
+    UiWeaponType.Grenade.Category.ANTI_PERSONNEL -> R.string.type_grenade_anti_personnel
+    UiWeaponType.Grenade.Category.ANTI_TANK -> R.string.type_grenade_anti_tank
+}
+
+private fun UiWeaponType.Mine.convertMine() = when (category) {
+    UiWeaponType.Mine.Category.ANTI_PERSONNEL -> R.string.type_mine_anti_personnel
+    UiWeaponType.Mine.Category.ANTI_TANK -> R.string.type_mine_anti_tank
+}
+
+private fun UiWeaponType.MachineGun.convertMachineGun() = when (category) {
+    UiWeaponType.MachineGun.Category.GENERAL_PURPOSE -> R.string.type_machine_gun_general_purpose
+    UiWeaponType.MachineGun.Category.HEAVY -> R.string.type_machine_gun_heavy
+    UiWeaponType.MachineGun.Category.LIGHT -> R.string.type_machine_gun_light
 }

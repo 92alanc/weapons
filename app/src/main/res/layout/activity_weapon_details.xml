@@ -171,7 +171,7 @@
                 tools:text="Rate of fire: 30 rounds per minute"/>
 
             <TextView
-                android:id="@+id/txtRange"
+                android:id="@+id/txtAccuracy"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

@@ -2,31 +2,35 @@
     <!-- region Weapon types -->
     <string name="type_melee">Melee</string>
     <string name="type_pistol">Pistol</string>
-    <string name="type_rifle">Rifle</string>
+    <string name="type_rifle_bolt_action">Bolt action rifle</string>
+    <string name="type_rifle_semi_automatic">Semi-automatic rifle</string>
+    <string name="type_rifle_automatic">Automatic rifle</string>
     <string name="type_shotgun">Shotgun</string>
     <string name="type_carbine">Carbine</string>
-    <string name="type_machine_gun">Machine-gun</string>
+    <string name="type_machine_gun_light">Light machine-gun</string>
+    <string name="type_machine_gun_general_purpose">General purpose machine-gun</string>
+    <string name="type_machine_gun_heavy">Heavy machine-gun</string>
     <string name="type_sub_machine_gun">Sub machine-gun</string>
-    <string name="type_grenade">Grenade</string>
-    <string name="type_mine">Mine</string>
+    <string name="type_grenade_anti_personnel">Anti-personnel grenade</string>
+    <string name="type_grenade_anti_tank">Anti-tank grenade</string>
+    <string name="type_mine_anti_personnel">Anti-personnel mine</string>
+    <string name="type_mine_anti_tank">Anti-tank mine</string>
     <string name="type_grenade_launcher">Grenade launcher</string>
     <string name="type_rocket_launcher">Rocket launcher</string>
     <string name="type_booby_trap">Booby trap</string>
     <!-- endregion -->
 
-    <!-- region Weapon type categories -->
-    <string name="category_bolt_action">Bolt action</string>
-    <string name="category_semi_automatic">Semi-automatic</string>
-    <string name="category_automatic">Automatic</string>
-    <string name="category_light">Light</string>
-    <string name="category_general_purpose">General purpose</string>
-    <string name="category_heavy">Heavy</string>
-    <string name="category_anti_personnel">Anti personnel</string>
-    <string name="category_anti_tank">Anti tank</string>
-    <!-- endregion -->
-
     <!-- region App texts -->
     <string name="error">Unfortunately an error occurred but don\'t worry, the developer has been notified and will fix it soon</string>
+    <string name="year_format">Year: %1$d</string>
+    <string name="manufacturer_format">Manufacturer: %1$s</string>
+    <string name="type_format">Type: %1$s</string>
+    <string name="calibre_format">Calibre: %1$s</string>
+    <string name="length_format">Length: %1$fmm</string>
+    <string name="weight_format">Weight: %1$fkg</string>
+    <string name="capacity_format">Capacity: %1$d rounds</string>
+    <string name="rate_of_fire_format">Rate of fire: %1$d rounds per minute</string>
+    <string name="accuracy_format">Accuracy: %1$dm</string>
     <!-- endregion -->
 
     <!-- region Queries -->

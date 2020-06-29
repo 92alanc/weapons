@@ -34,7 +34,8 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
     }
 
     override fun onItemClick(weapon: UiWeapon) {
-        // TODO
+        val intent = WeaponDetailsActivity.getIntent(this, weapon)
+        startActivity(intent)
     }
 
     private fun observeCommand() {
