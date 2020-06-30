@@ -61,6 +61,7 @@ android {
 
     testOptions {
         unitTests.returnDefaultValues true
+        unitTests.includeAndroidResources true
     }
 
     androidExtensions {
@@ -101,10 +102,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     kapt "androidx.room:room-compiler:$room_version"
 
+    testImplementation 'androidx.test.ext:junit:1.1.1'
+    testImplementation 'androidx.test:core:1.2.0'
     testImplementation "com.google.truth:truth:$truth_version"
     testImplementation 'junit:junit:4.13'
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
+    testImplementation 'org.robolectric:robolectric:4.2.1'
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

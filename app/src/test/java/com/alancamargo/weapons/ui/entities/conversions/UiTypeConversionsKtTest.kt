@@ -1,20 +1,24 @@
 package com.alancamargo.weapons.ui.entities.conversions
 
-import com.alancamargo.weapons.domain.entities.Calibre
-import com.alancamargo.weapons.domain.entities.Country
-import com.alancamargo.weapons.domain.entities.Manufacturer
-import com.alancamargo.weapons.domain.entities.Year
-import com.alancamargo.weapons.ui.entities.UiCalibre
-import com.alancamargo.weapons.ui.entities.UiCountry
-import com.alancamargo.weapons.ui.entities.UiManufacturer
-import com.alancamargo.weapons.ui.entities.UiYear
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import com.alancamargo.weapons.R
+import com.alancamargo.weapons.domain.entities.*
+import com.alancamargo.weapons.ui.entities.*
 import com.google.common.truth.Truth.assertThat
+import org.junit.After
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.koin.core.context.stopKoin
+import org.robolectric.annotation.Config
 
+@RunWith(AndroidJUnit4::class)
+@Config(sdk = [28])
 class UiTypeConversionsKtTest {
 
-    // TODO: use Robolectric
-    /*@Test
+    private val context = InstrumentationRegistry.getInstrumentation().targetContext
+
+    @Test
     fun weapon_fromDomainToUi() {
         val domain = Weapon(
             ID,
@@ -38,7 +42,7 @@ class UiTypeConversionsKtTest {
             UiYear(YEAR_ID, YEAR),
             UiManufacturer(MANUFACTURER_ID, MANUFACTURER_NAME),
             UiCountry(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG),
-            UiWeaponType.BoobyTrap(TYPE_ID),
+            UiWeaponType(TYPE_ID, context.getString(R.string.type_booby_trap)),
             LENGTH,
             WEIGHT,
             UiCalibre(CALIBRE_ID, CALIBRE),
@@ -48,7 +52,7 @@ class UiTypeConversionsKtTest {
             listOf(PHOTO)
         )
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         with(actual) {
             assertThat(id).isEqualTo(expected.id)
@@ -65,7 +69,7 @@ class UiTypeConversionsKtTest {
             assertThat(accuracy).isEqualTo(expected.accuracy)
             assertThat(photos).isEqualTo(expected.photos)
         }
-    }*/
+    }
 
     @Test
     fun country_fromDomainToUi() {
@@ -112,13 +116,13 @@ class UiTypeConversionsKtTest {
         assertThat(actual).isEqualTo(expected)
     }
 
-    /*// region WeaponType
+    // region WeaponType
     @Test
     fun melee_fromDomainToUi() {
         val domain = WeaponType.Melee(ID)
-        val expected = UiWeaponType.Melee(ID)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_melee))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -126,9 +130,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun pistol_fromDomainToUi() {
         val domain = WeaponType.Pistol(ID)
-        val expected = UiWeaponType.Pistol(ID)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_pistol))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -136,9 +140,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun boltActionRifle_fromDomainToUi() {
         val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.BOLT_ACTION)
-        val expected = UiWeaponType.Rifle(ID, UiWeaponType.Rifle.Category.BOLT_ACTION)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_rifle_bolt_action))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -146,9 +150,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun semiAutomaticRifle_fromDomainToUi() {
         val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.SEMI_AUTOMATIC)
-        val expected = UiWeaponType.Rifle(ID, UiWeaponType.Rifle.Category.SEMI_AUTOMATIC)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_rifle_semi_automatic))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -156,9 +160,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun automaticRifle_fromDomainToUi() {
         val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.AUTOMATIC)
-        val expected = UiWeaponType.Rifle(ID, UiWeaponType.Rifle.Category.AUTOMATIC)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_rifle_automatic))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -166,9 +170,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun shotgun_fromDomainToUi() {
         val domain = WeaponType.Shotgun(ID)
-        val expected = UiWeaponType.Shotgun(ID)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_shotgun))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -176,9 +180,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun carbine_fromDomainToUi() {
         val domain = WeaponType.Carbine(ID)
-        val expected = UiWeaponType.Carbine(ID)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_carbine))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -186,9 +190,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun lightMachineGun_fromDomainToUi() {
         val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.LIGHT)
-        val expected = UiWeaponType.MachineGun(ID, UiWeaponType.MachineGun.Category.LIGHT)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_machine_gun_light))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -196,9 +200,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun generalPurposeMachineGun_fromDomainToUi() {
         val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.GENERAL_PURPOSE)
-        val expected = UiWeaponType.MachineGun(ID, UiWeaponType.MachineGun.Category.GENERAL_PURPOSE)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_machine_gun_general_purpose))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -206,9 +210,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun heavyMachineGun_fromDomainToUi() {
         val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.HEAVY)
-        val expected = UiWeaponType.MachineGun(ID, UiWeaponType.MachineGun.Category.LIGHT)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_machine_gun_heavy))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -216,9 +220,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun subMachineGun_fromDomainToUi() {
         val domain = WeaponType.SubMachineGun(ID)
-        val expected = UiWeaponType.SubMachineGun(ID)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_sub_machine_gun))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -226,9 +230,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun antiPersonnelGrenade_fromDomainToUi() {
         val domain = WeaponType.Grenade(ID, WeaponType.Grenade.Category.ANTI_PERSONNEL)
-        val expected = UiWeaponType.Grenade(ID, UiWeaponType.Grenade.Category.ANTI_PERSONNEL)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_grenade_anti_personnel))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -236,9 +240,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun antiTankGrenade_fromDomainToUi() {
         val domain = WeaponType.Grenade(ID, WeaponType.Grenade.Category.ANTI_TANK)
-        val expected = UiWeaponType.Grenade(ID, UiWeaponType.Grenade.Category.ANTI_TANK)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_grenade_anti_tank))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -246,9 +250,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun antiPersonnelMine_fromDomainToUi() {
         val domain = WeaponType.Mine(ID, WeaponType.Mine.Category.ANTI_PERSONNEL)
-        val expected = UiWeaponType.Mine(ID, UiWeaponType.Mine.Category.ANTI_PERSONNEL)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_mine_anti_personnel))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -256,9 +260,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun antiTankMine_fromDomainToUi() {
         val domain = WeaponType.Mine(ID, WeaponType.Mine.Category.ANTI_TANK)
-        val expected = UiWeaponType.Mine(ID, UiWeaponType.Mine.Category.ANTI_TANK)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_mine_anti_tank))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -266,9 +270,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun grenadeLauncher_fromDomainToUi() {
         val domain = WeaponType.GrenadeLauncher(ID)
-        val expected = UiWeaponType.GrenadeLauncher(ID)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_grenade_launcher))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -276,9 +280,9 @@ class UiTypeConversionsKtTest {
     @Test
     fun rocketLauncher_fromDomainToUi() {
         val domain = WeaponType.RocketLauncher(ID)
-        val expected = UiWeaponType.RocketLauncher(ID)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_rocket_launcher))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
@@ -286,175 +290,18 @@ class UiTypeConversionsKtTest {
     @Test
     fun boobyTrap_fromDomainToUi() {
         val domain = WeaponType.BoobyTrap(ID)
-        val expected = UiWeaponType.BoobyTrap(ID)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_booby_trap))
 
-        val actual = domain.fromDomainToUi()
+        val actual = domain.fromDomainToUi(context)
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
+    // endregion
 
-    @Test
-    fun melee_fromUiToStringId() {
-        val ui = UiWeaponType.Melee(ID)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_melee)
+    @After
+    fun tearDown() {
+        stopKoin()
     }
-
-    @Test
-    fun pistol_fromUiToStringId() {
-        val ui = UiWeaponType.Pistol(ID)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_pistol)
-    }
-
-    @Test
-    fun boltActionRifle_fromUiToStringId() {
-        val ui = UiWeaponType.Rifle(ID, UiWeaponType.Rifle.Category.BOLT_ACTION)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_rifle_bolt_action)
-    }
-
-    @Test
-    fun semiAutomaticRifle_fromUiToStringId() {
-        val ui = UiWeaponType.Rifle(ID, UiWeaponType.Rifle.Category.SEMI_AUTOMATIC)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_rifle_semi_automatic)
-    }
-
-    @Test
-    fun automaticRifle_fromUiToStringId() {
-        val ui = UiWeaponType.Rifle(ID, UiWeaponType.Rifle.Category.AUTOMATIC)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_rifle_automatic)
-    }
-
-    @Test
-    fun shotgun_fromUiToStringId() {
-        val ui = UiWeaponType.Shotgun(ID)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_shotgun)
-    }
-
-    @Test
-    fun carbine_fromUiToStringId() {
-        val ui = UiWeaponType.Carbine(ID)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_carbine)
-    }
-
-    @Test
-    fun lightMachineGun_fromUiToStringId() {
-        val ui = UiWeaponType.MachineGun(ID, UiWeaponType.MachineGun.Category.LIGHT)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_machine_gun_light)
-    }
-
-    @Test
-    fun generalPurposeMachineGun_fromUiToStringId() {
-        val ui = UiWeaponType.MachineGun(ID, UiWeaponType.MachineGun.Category.GENERAL_PURPOSE)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_machine_gun_general_purpose)
-    }
-
-    @Test
-    fun heavyMachineGun_fromUiToStringId() {
-        val ui = UiWeaponType.MachineGun(ID, UiWeaponType.MachineGun.Category.HEAVY)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_machine_gun_heavy)
-    }
-
-    @Test
-    fun subMachineGun_fromUiToStringId() {
-        val ui = UiWeaponType.SubMachineGun(ID)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_sub_machine_gun)
-    }
-
-    @Test
-    fun antiPersonnelGrenade_fromUiToStringId() {
-        val ui = UiWeaponType.Grenade(ID, UiWeaponType.Grenade.Category.ANTI_PERSONNEL)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_grenade_anti_personnel)
-    }
-
-    @Test
-    fun antiTankGrenade_fromUiToStringId() {
-        val ui = UiWeaponType.Grenade(ID, UiWeaponType.Grenade.Category.ANTI_TANK)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_grenade_anti_tank)
-    }
-
-    @Test
-    fun antiPersonnelMine_fromUiToStringId() {
-        val ui = UiWeaponType.Mine(ID, UiWeaponType.Mine.Category.ANTI_PERSONNEL)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_mine_anti_personnel)
-    }
-
-    @Test
-    fun antiTankMine_fromUiToStringId() {
-        val ui = UiWeaponType.Mine(ID, UiWeaponType.Mine.Category.ANTI_TANK)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_mine_anti_tank)
-    }
-
-    @Test
-    fun grenadeLauncher_fromUiToStringId() {
-        val ui = UiWeaponType.GrenadeLauncher(ID)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_grenade_launcher)
-    }
-
-    @Test
-    fun rocketLauncher_fromUiToStringId() {
-        val ui = UiWeaponType.RocketLauncher(ID)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_rocket_launcher)
-    }
-
-    @Test
-    fun boobyTrap_fromUiToStringId() {
-        val ui = UiWeaponType.BoobyTrap(ID)
-
-        val actual = ui.fromUiToStringId()
-
-        assertThat(actual).isEqualTo(R.string.type_booby_trap)
-    }
-    // endregion*/
 
     private companion object {
         const val ID = 12345L

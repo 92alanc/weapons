@@ -10,18 +10,6 @@ class ResourcesHelperImpl(
     private val crashReportHelper: CrashReportHelper
 ) : ResourcesHelper {
 
-    override fun getString(resourceName: String): String = try {
-        val resId = context.resources.getIdentifier(
-            resourceName,
-            "string",
-            context.packageName
-        )
-        context.getString(resId)
-    } catch (t: Throwable) {
-        crashReportHelper.log(t)
-        ""
-    }
-
     override fun getDrawable(resourceName: String): Drawable? = try {
         val resId = context.resources.getIdentifier(
             resourceName,
