@@ -23,7 +23,7 @@ fun Weapon.fromDomainToUi(context: Context) = UiWeapon(
 
 fun Country.fromDomainToUi() = UiCountry(id, name, flagId)
 
-fun Calibre.fromDomainToUi() = UiCalibre(id, nameId)
+fun Calibre.fromDomainToUi() = UiCalibre(id, name)
 
 fun Manufacturer.fromDomainToUi() = UiManufacturer(id, name)
 
