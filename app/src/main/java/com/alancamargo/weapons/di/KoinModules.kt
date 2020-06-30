@@ -14,6 +14,8 @@ import com.alancamargo.weapons.data.repository.type.WeaponTypeRepository
 import com.alancamargo.weapons.data.repository.type.WeaponTypeRepositoryImpl
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepositoryImpl
+import com.alancamargo.weapons.data.repository.year.YearRepository
+import com.alancamargo.weapons.data.repository.year.YearRepositoryImpl
 import com.alancamargo.weapons.framework.crash.CrashReportHelperImpl
 import com.alancamargo.weapons.framework.db.provider.DatabaseProvider
 import com.alancamargo.weapons.framework.local.*
@@ -21,10 +23,7 @@ import com.alancamargo.weapons.ui.adapter.CountryAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.ResourcesHelperImpl
-import com.alancamargo.weapons.ui.viewmodel.CalibreViewModel
-import com.alancamargo.weapons.ui.viewmodel.CountryViewModel
-import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
-import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
+import com.alancamargo.weapons.ui.viewmodel.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -37,6 +36,7 @@ private val data = module {
     factory<CountryRepository> { CountryRepositoryImpl(get(), get()) }
     factory<CalibreRepository> { CalibreRepositoryImpl(get(), get()) }
     factory<ManufacturerRepository> { ManufacturerRepositoryImpl(get(), get()) }
+    factory<YearRepository> { YearRepositoryImpl(get(), get()) }
 
     factory<WeaponLocalDataSource> {
         WeaponLocalDataSourceImpl(get(), get(), get(), get(), get(), get())
@@ -74,6 +74,8 @@ private val ui = module {
     viewModel { QueryViewModel() }
     viewModel { CountryViewModel(get()) }
     viewModel { CalibreViewModel(get()) }
+    viewModel { YearViewModel(get()) }
+
     factory<ResourcesHelper> { ResourcesHelperImpl(androidContext(), get()) }
     factory { (onItemClickListener: WeaponAdapter.OnItemClickListener) ->
         WeaponAdapter(get(), onItemClickListener)
