@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.ui.viewmodel
 
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,7 @@ import com.alancamargo.weapons.data.repository.country.CountryRepository
 import com.alancamargo.weapons.domain.entities.Country
 import com.alancamargo.weapons.ui.entities.UiCountry
 import com.alancamargo.weapons.ui.entities.conversions.fromDomainToUi
+import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.launch
 
 class CountryViewModel(private val repository: CountryRepository) : ViewModel() {
@@ -40,9 +42,15 @@ class CountryViewModel(private val repository: CountryRepository) : ViewModel() 
         }
     }
 
-    sealed class State {
+    sealed class State : Parcelable {
+
+        @Parcelize
         object Loading : State()
+
+        @Parcelize
         data class Ready(val countries: List<UiCountry>) : State()
+
+        @Parcelize
         object Error : State()
     }
 

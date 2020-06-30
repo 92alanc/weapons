@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
 
     override fun onItemClick(query: WeaponQueryType) = when (query) {
         WeaponQueryType.ALL -> showAllWeapons()
-        WeaponQueryType.BY_CALIBRE -> openCalibreSelector()
-        WeaponQueryType.BY_COUNTRY -> openCountrySelector()
-        WeaponQueryType.BY_MANUFACTURER -> openManufacturerSelector()
-        WeaponQueryType.BY_NAME -> openNameSelector()
-        WeaponQueryType.BY_TYPE -> openTypeSelector()
-        WeaponQueryType.BY_YEAR -> openYearSelector()
+        WeaponQueryType.BY_CALIBRE -> openCalibreListActivity()
+        WeaponQueryType.BY_COUNTRY -> openCountryListActivity()
+        WeaponQueryType.BY_MANUFACTURER -> openManufacturerListActivity()
+        WeaponQueryType.BY_NAME -> openNameSearchDialogue()
+        WeaponQueryType.BY_TYPE -> openTypeListActivity()
+        WeaponQueryType.BY_YEAR -> openYearListActivity()
     }
 
     private fun showAllWeapons() {
@@ -40,28 +40,28 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
         startActivity(intent)
     }
 
-    private fun openCalibreSelector() {
+    private fun openCalibreListActivity() {
         Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 
-    private fun openCountrySelector() {
+    private fun openCountryListActivity() {
         val intent = Intent(this, CountryListActivity::class.java)
         startActivity(intent)
     }
 
-    private fun openManufacturerSelector() {
+    private fun openManufacturerListActivity() {
         Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 
-    private fun openNameSelector() {
+    private fun openNameSearchDialogue() {
         Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 
-    private fun openTypeSelector() {
+    private fun openTypeListActivity() {
         Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 
-    private fun openYearSelector() {
+    private fun openYearListActivity() {
         Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 

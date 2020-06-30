@@ -22,11 +22,19 @@ class CountryListActivity : AppCompatActivity(R.layout.activity_country_list),
     private val viewModel by viewModel<CountryViewModel>()
     private val adapter by inject<CountryAdapter> { parametersOf(this) }
 
+    private var state: CountryViewModel.State? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         recyclerView.adapter = adapter
-        observeState()
+        state = savedInstanceState?.getParcelable(KEY_STATE)
+        state?.let(::processState) ?: fetchData()
         adView.loadAds()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable(KEY_STATE, state)
     }
 
     override fun onItemClick(country: UiCountry) {
@@ -35,13 +43,14 @@ class CountryListActivity : AppCompatActivity(R.layout.activity_country_list),
         startActivity(intent)
     }
 
-    private fun observeState() {
+    private fun fetchData() {
         viewModel.getState().observe(this, Observer {
+            state = it
             processState(it)
         })
     }
 
-    private fun processState(state: CountryViewModel.State?) {
+    private fun processState(state: CountryViewModel.State) {
         when (state) {
             is CountryViewModel.State.Ready -> displayCountries(state.countries)
             is CountryViewModel.State.Loading -> showLoading()
@@ -63,6 +72,10 @@ class CountryListActivity : AppCompatActivity(R.layout.activity_country_list),
     private fun showError() {
         progressBar.hide()
         groupError.show()
+    }
+
+    private companion object {
+        const val KEY_STATE = "state"
     }
 
 }
