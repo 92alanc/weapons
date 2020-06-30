@@ -25,12 +25,19 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
     private val query by lazy { intent.getParcelableExtra<WeaponQuery>(EXTRA_QUERY) }
     private val adapter by inject<WeaponAdapter> { parametersOf(this) }
 
+    private var state: WeaponViewModel.State? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.start(query)
         recyclerView.adapter = adapter
-        observeState()
+        state = savedInstanceState?.getParcelable(KEY_STATE)
+        state?.let(::processState) ?: fetchData()
         adView.loadAds()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        state?.let { outState.putParcelable(KEY_STATE, it) }
     }
 
     override fun onItemClick(weapon: UiWeapon) {
@@ -38,13 +45,19 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
         startActivity(intent)
     }
 
+    private fun fetchData() {
+        viewModel.start(query)
+        observeState()
+    }
+
     private fun observeState() {
         viewModel.getState().observe(this, Observer {
+            state = it
             processState(it)
         })
     }
 
-    private fun processState(state: WeaponViewModel.State?) {
+    private fun processState(state: WeaponViewModel.State) {
         when (state) {
             is WeaponViewModel.State.Ready -> displayWeapons(state.weapons)
             is WeaponViewModel.State.Error -> showError()
@@ -70,6 +83,7 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
 
     companion object {
         private const val EXTRA_QUERY = "query"
+        private const val KEY_STATE = "state"
 
         fun getIntent(context: Context, query: WeaponQuery): Intent {
             return Intent(context, WeaponListActivity::class.java).putExtra(EXTRA_QUERY, query)

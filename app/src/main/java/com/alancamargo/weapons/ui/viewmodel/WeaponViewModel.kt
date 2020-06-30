@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.ui.viewmodel
 
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,7 @@ import com.alancamargo.weapons.domain.entities.Weapon
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.entities.conversions.fromDomainToUi
 import com.alancamargo.weapons.ui.queries.WeaponQuery
+import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.launch
 
 class WeaponViewModel(private val repository: WeaponRepository) : ViewModel() {
@@ -74,9 +76,14 @@ class WeaponViewModel(private val repository: WeaponRepository) : ViewModel() {
         }
     }
 
-    sealed class State {
+    sealed class State : Parcelable {
+        @Parcelize
         object Loading : State()
+
+        @Parcelize
         data class Ready(val weapons: List<UiWeapon>) : State()
+
+        @Parcelize
         object Error : State()
     }
 
