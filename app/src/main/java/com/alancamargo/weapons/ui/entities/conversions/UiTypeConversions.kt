@@ -1,16 +1,17 @@
 package com.alancamargo.weapons.ui.entities.conversions
 
+import android.content.Context
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.ui.entities.*
 
-fun Weapon.fromDomainToUi() = UiWeapon(
+fun Weapon.fromDomainToUi(context: Context) = UiWeapon(
     id,
     name,
     year.fromDomainToUi(),
     manufacturer.fromDomainToUi(),
     country.fromDomainToUi(),
-    type.fromDomainToUi(),
+    type.fromDomainToUi(context),
     length,
     weight,
     calibre.fromDomainToUi(),
@@ -28,95 +29,84 @@ fun Manufacturer.fromDomainToUi() = UiManufacturer(id, name)
 
 fun Year.fromDomainToUi() = UiYear(id, year)
 
-fun WeaponType.fromDomainToUi(): UiWeaponType = when (this) {
-    is WeaponType.Rifle -> convertRifle()
-    is WeaponType.MachineGun -> convertMachineGun()
-    is WeaponType.Grenade -> convertGrenade()
-    is WeaponType.Mine -> convertMine()
-    is WeaponType.BoobyTrap -> UiWeaponType.BoobyTrap(id)
-    is WeaponType.RocketLauncher -> UiWeaponType.RocketLauncher(id)
-    is WeaponType.GrenadeLauncher -> UiWeaponType.GrenadeLauncher(id)
-    is WeaponType.SubMachineGun -> UiWeaponType.SubMachineGun(id)
-    is WeaponType.Shotgun -> UiWeaponType.Shotgun(id)
-    is WeaponType.Carbine -> UiWeaponType.Carbine(id)
-    is WeaponType.Melee -> UiWeaponType.Melee(id)
-    is WeaponType.Pistol -> UiWeaponType.Pistol(id)
+fun WeaponType.fromDomainToUi(context: Context): UiWeaponType = when (this) {
+    is WeaponType.Rifle -> convertRifle(context)
+    is WeaponType.MachineGun -> convertMachineGun(context)
+    is WeaponType.Grenade -> convertGrenade(context)
+    is WeaponType.Mine -> convertMine(context)
+    is WeaponType.BoobyTrap -> UiWeaponType(id, context.getString(R.string.type_booby_trap))
+    is WeaponType.RocketLauncher -> UiWeaponType(
+        id,
+        context.getString(R.string.type_rocket_launcher)
+    )
+    is WeaponType.GrenadeLauncher -> UiWeaponType(
+        id,
+        context.getString(R.string.type_grenade_launcher)
+    )
+    is WeaponType.SubMachineGun -> UiWeaponType(
+        id,
+        context.getString(R.string.type_sub_machine_gun)
+    )
+    is WeaponType.Shotgun -> UiWeaponType(id, context.getString(R.string.type_shotgun))
+    is WeaponType.Carbine -> UiWeaponType(id, context.getString(R.string.type_carbine))
+    is WeaponType.Melee -> UiWeaponType(id, context.getString(R.string.type_melee))
+    is WeaponType.Pistol -> UiWeaponType(id, context.getString(R.string.type_pistol))
 }
 
-fun UiWeaponType.fromUiToStringId(): Int = when (this) {
-    is UiWeaponType.BoobyTrap -> R.string.type_booby_trap
-    is UiWeaponType.Carbine -> R.string.type_carbine
-    is UiWeaponType.GrenadeLauncher -> R.string.type_grenade_launcher
-    is UiWeaponType.Melee -> R.string.type_melee
-    is UiWeaponType.Pistol -> R.string.type_pistol
-    is UiWeaponType.RocketLauncher -> R.string.type_rocket_launcher
-    is UiWeaponType.Shotgun -> R.string.type_shotgun
-    is UiWeaponType.SubMachineGun -> R.string.type_sub_machine_gun
-    is UiWeaponType.Rifle -> convertRifle()
-    is UiWeaponType.Grenade -> convertGrenade()
-    is UiWeaponType.Mine -> convertMine()
-    is UiWeaponType.MachineGun -> convertMachineGun()
+private fun WeaponType.Rifle.convertRifle(context: Context) = when (this.category) {
+    WeaponType.Rifle.Category.AUTOMATIC -> UiWeaponType(
+        id,
+        context.getString(R.string.type_rifle_automatic)
+    )
+
+    WeaponType.Rifle.Category.SEMI_AUTOMATIC -> UiWeaponType(
+        id,
+        context.getString(R.string.type_rifle_semi_automatic)
+    )
+
+    WeaponType.Rifle.Category.BOLT_ACTION -> UiWeaponType(
+        id,
+        context.getString(R.string.type_rifle_bolt_action)
+    )
 }
 
-private fun WeaponType.Rifle.convertRifle(): UiWeaponType.Rifle {
-    val category = when (this.category) {
-        WeaponType.Rifle.Category.AUTOMATIC -> UiWeaponType.Rifle.Category.AUTOMATIC
-        WeaponType.Rifle.Category.SEMI_AUTOMATIC -> UiWeaponType.Rifle.Category.SEMI_AUTOMATIC
-        WeaponType.Rifle.Category.BOLT_ACTION -> UiWeaponType.Rifle.Category.BOLT_ACTION
-    }
+private fun WeaponType.MachineGun.convertMachineGun(context: Context) = when (this.category) {
+    WeaponType.MachineGun.Category.GENERAL_PURPOSE -> UiWeaponType(
+        id,
+        context.getString(R.string.type_machine_gun_general_purpose)
+    )
 
-    return UiWeaponType.Rifle(id, category)
+    WeaponType.MachineGun.Category.HEAVY -> UiWeaponType(
+        id,
+        context.getString(R.string.type_machine_gun_heavy)
+    )
+
+    WeaponType.MachineGun.Category.LIGHT -> UiWeaponType(
+        id,
+        context.getString(R.string.type_machine_gun_light)
+    )
 }
 
-private fun WeaponType.MachineGun.convertMachineGun(): UiWeaponType.MachineGun {
-    val category = when (this.category) {
-        WeaponType.MachineGun.Category.GENERAL_PURPOSE -> {
-            UiWeaponType.MachineGun.Category.GENERAL_PURPOSE
-        }
+private fun WeaponType.Grenade.convertGrenade(context: Context) = when (this.category) {
+    WeaponType.Grenade.Category.ANTI_PERSONNEL -> UiWeaponType(
+        id,
+        context.getString(R.string.type_grenade_anti_personnel)
+    )
 
-        WeaponType.MachineGun.Category.HEAVY -> UiWeaponType.MachineGun.Category.HEAVY
-        WeaponType.MachineGun.Category.LIGHT -> UiWeaponType.MachineGun.Category.LIGHT
-    }
-
-    return UiWeaponType.MachineGun(id, category)
+    WeaponType.Grenade.Category.ANTI_TANK -> UiWeaponType(
+        id,
+        context.getString(R.string.type_grenade_anti_tank)
+    )
 }
 
-private fun WeaponType.Grenade.convertGrenade(): UiWeaponType.Grenade {
-    val category = when (this.category) {
-        WeaponType.Grenade.Category.ANTI_PERSONNEL -> UiWeaponType.Grenade.Category.ANTI_PERSONNEL
-        WeaponType.Grenade.Category.ANTI_TANK -> UiWeaponType.Grenade.Category.ANTI_TANK
-    }
+private fun WeaponType.Mine.convertMine(context: Context) = when (this.category) {
+    WeaponType.Mine.Category.ANTI_PERSONNEL -> UiWeaponType(
+        id,
+        context.getString(R.string.type_mine_anti_personnel)
+    )
 
-    return UiWeaponType.Grenade(id, category)
-}
-
-private fun WeaponType.Mine.convertMine(): UiWeaponType.Mine {
-    val category = when (this.category) {
-        WeaponType.Mine.Category.ANTI_PERSONNEL -> UiWeaponType.Mine.Category.ANTI_PERSONNEL
-        WeaponType.Mine.Category.ANTI_TANK -> UiWeaponType.Mine.Category.ANTI_TANK
-    }
-
-    return UiWeaponType.Mine(id, category)
-}
-
-private fun UiWeaponType.Rifle.convertRifle() = when (category) {
-    UiWeaponType.Rifle.Category.AUTOMATIC -> R.string.type_rifle_automatic
-    UiWeaponType.Rifle.Category.SEMI_AUTOMATIC -> R.string.type_rifle_semi_automatic
-    UiWeaponType.Rifle.Category.BOLT_ACTION -> R.string.type_rifle_bolt_action
-}
-
-private fun UiWeaponType.Grenade.convertGrenade() = when (category) {
-    UiWeaponType.Grenade.Category.ANTI_PERSONNEL -> R.string.type_grenade_anti_personnel
-    UiWeaponType.Grenade.Category.ANTI_TANK -> R.string.type_grenade_anti_tank
-}
-
-private fun UiWeaponType.Mine.convertMine() = when (category) {
-    UiWeaponType.Mine.Category.ANTI_PERSONNEL -> R.string.type_mine_anti_personnel
-    UiWeaponType.Mine.Category.ANTI_TANK -> R.string.type_mine_anti_tank
-}
-
-private fun UiWeaponType.MachineGun.convertMachineGun() = when (category) {
-    UiWeaponType.MachineGun.Category.GENERAL_PURPOSE -> R.string.type_machine_gun_general_purpose
-    UiWeaponType.MachineGun.Category.HEAVY -> R.string.type_machine_gun_heavy
-    UiWeaponType.MachineGun.Category.LIGHT -> R.string.type_machine_gun_light
+    WeaponType.Mine.Category.ANTI_TANK -> UiWeaponType(
+        id,
+        context.getString(R.string.type_mine_anti_tank)
+    )
 }

@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.ui.viewmodel
 
+import android.content.Context
 import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +15,10 @@ import com.alancamargo.weapons.ui.queries.WeaponQuery
 import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.launch
 
-class WeaponViewModel(private val repository: WeaponRepository) : ViewModel() {
+class WeaponViewModel(
+    private val repository: WeaponRepository,
+    private val context: Context
+) : ViewModel() {
 
     private val stateLiveData = MutableLiveData<State>()
 
@@ -69,7 +73,7 @@ class WeaponViewModel(private val repository: WeaponRepository) : ViewModel() {
     private fun processResult(result: Result<List<Weapon>>) {
         when (result) {
             is Result.Success -> {
-                val weapons = result.body.map { it.fromDomainToUi() }
+                val weapons = result.body.map { it.fromDomainToUi(context) }
                 stateLiveData.postValue(State.Ready(weapons))
             }
             is Result.Error -> stateLiveData.postValue(State.Error)

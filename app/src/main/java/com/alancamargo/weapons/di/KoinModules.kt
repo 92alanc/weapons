@@ -70,7 +70,7 @@ private val framework = module {
 }
 
 private val ui = module {
-    viewModel { WeaponViewModel(get()) }
+    viewModel { WeaponViewModel(get(), androidContext()) }
     viewModel { QueryViewModel() }
     viewModel { CountryViewModel(get()) }
     viewModel { CalibreViewModel(get()) }

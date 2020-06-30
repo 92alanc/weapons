@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.ViewPagerAdapter
 import com.alancamargo.weapons.ui.entities.UiWeapon
-import com.alancamargo.weapons.ui.entities.conversions.fromUiToStringId
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.loadAds
 import kotlinx.android.synthetic.main.activity_weapon_details.*
@@ -33,8 +32,7 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
             txtCountry.text = country.name
             txtYear.text = getString(R.string.year_format, year.year)
             txtManufacturer.text = getString(R.string.manufacturer_format, manufacturer.name)
-            val typeString = getString(type.fromUiToStringId())
-            txtType.text = getString(R.string.type_format, typeString)
+            txtType.text = getString(R.string.type_format, type.name)
             txtCalibre.text = getString(R.string.calibre_format, calibre.name)
             txtLength.text = getString(R.string.length_format, length)
             txtWeight.text = getString(R.string.weight_format, weight)
