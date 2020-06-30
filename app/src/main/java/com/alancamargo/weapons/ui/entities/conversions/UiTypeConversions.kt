@@ -35,18 +35,22 @@ fun WeaponType.fromDomainToUi(context: Context): UiWeaponType = when (this) {
     is WeaponType.Grenade -> convertGrenade(context)
     is WeaponType.Mine -> convertMine(context)
     is WeaponType.BoobyTrap -> UiWeaponType(id, context.getString(R.string.type_booby_trap))
+
     is WeaponType.RocketLauncher -> UiWeaponType(
         id,
         context.getString(R.string.type_rocket_launcher)
     )
+
     is WeaponType.GrenadeLauncher -> UiWeaponType(
         id,
         context.getString(R.string.type_grenade_launcher)
     )
+
     is WeaponType.SubMachineGun -> UiWeaponType(
         id,
         context.getString(R.string.type_sub_machine_gun)
     )
+
     is WeaponType.Shotgun -> UiWeaponType(id, context.getString(R.string.type_shotgun))
     is WeaponType.Carbine -> UiWeaponType(id, context.getString(R.string.type_carbine))
     is WeaponType.Melee -> UiWeaponType(id, context.getString(R.string.type_melee))

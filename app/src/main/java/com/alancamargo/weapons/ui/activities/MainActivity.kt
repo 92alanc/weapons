@@ -59,7 +59,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
     }
 
     private fun openTypeListActivity() {
-        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, TypeListActivity::class.java)
+        startActivity(intent)
     }
 
     private fun openYearListActivity() {
