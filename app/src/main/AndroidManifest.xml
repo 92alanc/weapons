@@ -25,6 +25,7 @@
         <activity android:name=".ui.activities.CalibreListActivity"/>
         <activity android:name=".ui.activities.YearListActivity"/>
         <activity android:name=".ui.activities.TypeListActivity"/>
+        <activity android:name=".ui.activities.ManufacturerListActivity"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

@@ -51,7 +51,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
     }
 
     private fun openManufacturerListActivity() {
-        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, ManufacturerListActivity::class.java)
+        startActivity(intent)
     }
 
     private fun openNameSearchDialogue() {

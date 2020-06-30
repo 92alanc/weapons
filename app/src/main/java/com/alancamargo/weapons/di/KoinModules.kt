@@ -76,6 +76,7 @@ private val ui = module {
     viewModel { CalibreViewModel(get()) }
     viewModel { YearViewModel(get()) }
     viewModel { WeaponTypeViewModel(get(), androidContext()) }
+    viewModel { ManufacturerViewModel(get()) }
 
     factory<ResourcesHelper> { ResourcesHelperImpl(androidContext(), get()) }
     factory { (onItemClickListener: WeaponAdapter.OnItemClickListener) ->
