@@ -3,6 +3,7 @@ package com.alancamargo.weapons.ui.entities
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
+// TODO: implement SimpleTextEntity
 sealed class UiWeaponType(open val id: Long) : Parcelable {
 
     @Parcelize

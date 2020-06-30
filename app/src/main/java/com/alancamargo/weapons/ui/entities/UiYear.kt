@@ -4,4 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class UiYear(val id: Long, val year: Int) : Parcelable
+data class UiYear(val id: Long, val year: Int) : Parcelable, SimpleTextEntity {
+
+    override fun getText(): String = "$year"
+
+}

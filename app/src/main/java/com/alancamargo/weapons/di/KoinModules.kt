@@ -21,6 +21,7 @@ import com.alancamargo.weapons.ui.adapter.CountryAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.ResourcesHelperImpl
+import com.alancamargo.weapons.ui.viewmodel.CalibreViewModel
 import com.alancamargo.weapons.ui.viewmodel.CountryViewModel
 import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
@@ -72,6 +73,7 @@ private val ui = module {
     viewModel { WeaponViewModel(get()) }
     viewModel { QueryViewModel() }
     viewModel { CountryViewModel(get()) }
+    viewModel { CalibreViewModel(get()) }
     factory<ResourcesHelper> { ResourcesHelperImpl(androidContext(), get()) }
     factory { (onItemClickListener: WeaponAdapter.OnItemClickListener) ->
         WeaponAdapter(get(), onItemClickListener)

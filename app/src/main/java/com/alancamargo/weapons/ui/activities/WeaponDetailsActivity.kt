@@ -35,7 +35,7 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
             txtManufacturer.text = getString(R.string.manufacturer_format, manufacturer.name)
             val typeString = getString(type.fromUiToStringId())
             txtType.text = getString(R.string.type_format, typeString)
-            txtCalibre.text = getString(R.string.calibre_format, calibre.nameId)
+            txtCalibre.text = getString(R.string.calibre_format, calibre.name)
             txtLength.text = getString(R.string.length_format, length)
             txtWeight.text = getString(R.string.weight_format, weight)
             txtCapacity.text = getString(R.string.capacity_format, capacity)

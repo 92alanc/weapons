@@ -4,4 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class UiCalibre(val id: Long, val nameId: String) : Parcelable
+data class UiCalibre(val id: Long, val name: String) : Parcelable, SimpleTextEntity {
+
+    override fun getText(): String  = name
+
+}

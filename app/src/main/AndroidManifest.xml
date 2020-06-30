@@ -22,6 +22,7 @@
         <activity android:name=".ui.activities.WeaponListActivity"/>
         <activity android:name=".ui.activities.WeaponDetailsActivity"/>
         <activity android:name=".ui.activities.CountryListActivity"/>
+        <activity android:name=".ui.activities.CalibreListActivity"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
