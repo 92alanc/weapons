@@ -4,8 +4,5 @@
     <string name="banner_main">ca-app-pub-3993772572074236/6462699596</string>
     <string name="banner_weapon_details">ca-app-pub-3993772572074236/9237639387</string>
     <string name="banner_country_list">ca-app-pub-3993772572074236/7330689018</string>
-    <string name="banner_type_list">ca-app-pub-3993772572074236/4413715788</string>
-    <string name="banner_manufacturer_list">ca-app-pub-3993772572074236/3728794856</string>
-    <string name="banner_calibre_list">ca-app-pub-3993772572074236/9883139660</string>
-    <string name="banner_year_list">ca-app-pub-3993772572074236/3363523844</string>
+    <string name="banner_text_list">ca-app-pub-3993772572074236/9883139660</string>
 </resources>
