@@ -62,6 +62,39 @@
         android:visibility="gone"
         app:constraint_referenced_ids="imgError,txtError"/>
 
+    <ImageView
+        android:id="@+id/imgNoResults"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_no_results"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintDimensionRatio="4:2"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/txtNoResults"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:padding="@dimen/padding_default"
+        android:text="@string/no_results"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/imgNoResults"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupNoResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="imgNoResults,txtNoResults"/>
+
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="wrap_content"

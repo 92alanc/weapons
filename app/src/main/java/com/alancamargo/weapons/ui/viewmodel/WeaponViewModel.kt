@@ -73,8 +73,12 @@ class WeaponViewModel(
     private fun processResult(result: Result<List<Weapon>>) {
         when (result) {
             is Result.Success -> {
-                val weapons = result.body.map { it.fromDomainToUi(context) }
-                stateLiveData.postValue(State.Ready(weapons))
+                if (result.body.isEmpty()) {
+                    stateLiveData.postValue(State.NoResults)
+                } else {
+                    val weapons = result.body.map { it.fromDomainToUi(context) }
+                    stateLiveData.postValue(State.Ready(weapons))
+                }
             }
             is Result.Error -> stateLiveData.postValue(State.Error)
         }
@@ -89,6 +93,9 @@ class WeaponViewModel(
 
         @Parcelize
         object Error : State()
+
+        @Parcelize
+        object NoResults : State()
     }
 
 }

@@ -32,6 +32,7 @@
     <string name="rate_of_fire_format">Rate of fire: %1$d rounds per minute</string>
     <string name="accuracy_format">Accuracy: %1$dm</string>
     <string name="photo_indicator_format">Photo %1$d / %2$d</string>
+    <string name="no_results">No results found. Try searching a different name</string>
     <!-- endregion -->
 
     <!-- region Queries -->

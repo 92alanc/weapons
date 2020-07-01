@@ -62,23 +62,33 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
             is WeaponViewModel.State.Ready -> displayWeapons(state.weapons)
             is WeaponViewModel.State.Error -> showError()
             is WeaponViewModel.State.Loading -> showLoading()
+            is WeaponViewModel.State.NoResults -> showNoResults()
         }
     }
 
     private fun displayWeapons(weapons: List<UiWeapon>) {
         groupError.hide()
+        groupNoResults.hide()
         adapter.setData(weapons)
         progressBar.hide()
     }
 
     private fun showError() {
         progressBar.hide()
+        groupNoResults.hide()
         groupError.show()
     }
 
     private fun showLoading() {
         groupError.hide()
+        groupNoResults.hide()
         progressBar.show()
+    }
+
+    private fun showNoResults() {
+        progressBar.hide()
+        groupError.hide()
+        groupNoResults.show()
     }
 
     companion object {
