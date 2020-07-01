@@ -12,8 +12,6 @@ android {
         applicationId "com.alancamargo.weapons"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -41,21 +39,29 @@ android {
         ww1 {
             dimension "version"
             applicationIdSuffix ".ww1"
+            versionCode 1
+            versionName "2020.3.0"
         }
 
         ww2 {
             dimension "version"
             applicationIdSuffix ".ww2"
+            versionCode 1
+            versionName "2020.3.0"
         }
 
         korea {
             dimension "version"
             applicationIdSuffix ".korea"
+            versionCode 1
+            versionName "2020.3.0"
         }
 
         vietnam {
             dimension "version"
             applicationIdSuffix ".vietnam"
+            versionCode 1
+            versionName "2020.3.0"
         }
     }
 
