@@ -2,10 +2,10 @@ package com.alancamargo.weapons.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.QueryAdapter
+import com.alancamargo.weapons.ui.fragments.NameSearchDialogue
 import com.alancamargo.weapons.ui.queries.WeaponQuery
 import com.alancamargo.weapons.ui.queries.WeaponQueryType
 import com.alancamargo.weapons.ui.tools.loadAds
@@ -56,7 +56,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
     }
 
     private fun openNameSearchDialogue() {
-        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
+        val dialogue = NameSearchDialogue()
+        dialogue.show(supportFragmentManager, NameSearchDialogue.TAG)
     }
 
     private fun openTypeListActivity() {
