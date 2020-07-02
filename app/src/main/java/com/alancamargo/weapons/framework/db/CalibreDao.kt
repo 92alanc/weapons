@@ -7,7 +7,7 @@ import com.alancamargo.weapons.framework.entities.DbCalibre
 @Dao
 interface CalibreDao {
 
-    @Query("SELECT * FROM CALIBRE")
+    @Query("SELECT * FROM CALIBRE ORDER BY NAME")
     suspend fun selectAll(): List<DbCalibre>
 
     @Query("SELECT * FROM CALIBRE WHERE ID = :id")
