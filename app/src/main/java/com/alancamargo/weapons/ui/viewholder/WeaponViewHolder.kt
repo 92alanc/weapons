@@ -17,7 +17,9 @@ class WeaponViewHolder(
 
     fun bindTo(weapon: UiWeapon) {
         txtName.text = weapon.name
-        val flagDrawable = resourcesHelper.getDrawable(weapon.country.flagId)
+        val flagDrawable = weapon.country?.flagId?.let {
+            resourcesHelper.getDrawable(it)
+        }
         imgFlag.setImageDrawable(flagDrawable)
         imgPhoto.load(weapon.photos.first())
     }

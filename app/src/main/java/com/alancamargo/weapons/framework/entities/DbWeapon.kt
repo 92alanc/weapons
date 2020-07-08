@@ -43,16 +43,16 @@ import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_YEAR
 data class DbWeapon(
     @PrimaryKey val id: Long,
     val name: String,
-    @ColumnInfo(name = COLUMN_YEAR_ID) val yearId: Long,
-    @ColumnInfo(name = COLUMN_MANUFACTURER_ID) val manufacturerId: Long,
-    @ColumnInfo(name = COLUMN_COUNTRY_ID) val countryId: Long,
+    @ColumnInfo(name = COLUMN_YEAR_ID) val yearId: Long?,
+    @ColumnInfo(name = COLUMN_MANUFACTURER_ID) val manufacturerId: Long?,
+    @ColumnInfo(name = COLUMN_COUNTRY_ID) val countryId: Long?,
     @ColumnInfo(name = COLUMN_TYPE_ID) val typeId: Long,
     val length: Int,
     val weight: Float,
-    @ColumnInfo(name = COLUMN_CALIBRE_ID) val calibreId: Long,
-    val capacity: Int,
-    @ColumnInfo(name = COLUMN_RATE_OF_FIRE) val rateOfFire: Int,
-    val accuracy: Int,
+    @ColumnInfo(name = COLUMN_CALIBRE_ID) val calibreId: Long?,
+    val capacity: Int?,
+    @ColumnInfo(name = COLUMN_RATE_OF_FIRE) val rateOfFire: Int?,
+    val accuracy: Int?,
     @ColumnInfo(name = COLUMN_PHOTOS_JSON) val photosJson: String
 ) {
 

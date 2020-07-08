@@ -26,11 +26,11 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 fun DbWeapon.fromDbToDomain(
-    manufacturer: Manufacturer,
-    country: Country,
+    manufacturer: Manufacturer?,
+    country: Country?,
     type: WeaponType,
-    calibre: Calibre,
-    year: Year
+    calibre: Calibre?,
+    year: Year?
 ): Weapon {
     val gson = Gson()
     val jsonType = object : TypeToken<List<String>>() {}.type

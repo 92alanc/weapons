@@ -27,9 +27,15 @@ class WeaponLocalDataSourceImpl(
 
         return dbWeapons.map {
             val type = weaponTypeLocalDataSource.getWeaponTypeById(it.typeId)
-            val calibre = calibreLocalDataSource.getCalibreById(it.calibreId)
-            val manufacturer = manufacturerLocalDataSource.getManufacturerById(it.manufacturerId)
-            val country = countryLocalDataSource.getCountryById(it.countryId)
+            val calibre = it.calibreId?.let { calibreId ->
+                calibreLocalDataSource.getCalibreById(calibreId)
+            }
+            val manufacturer = it.manufacturerId?.let { manufacturerId ->
+                manufacturerLocalDataSource.getManufacturerById(manufacturerId)
+            }
+            val country = it.countryId?.let { countryId ->
+                countryLocalDataSource.getCountryById(countryId)
+            }
             it.fromDbToDomain(manufacturer, country, type, calibre, year)
         }
     }
@@ -40,9 +46,15 @@ class WeaponLocalDataSourceImpl(
 
         return dbWeapons.map {
             val type = weaponTypeLocalDataSource.getWeaponTypeById(it.typeId)
-            val calibre = calibreLocalDataSource.getCalibreById(it.calibreId)
-            val manufacturer = manufacturerLocalDataSource.getManufacturerById(it.manufacturerId)
-            val year = yearLocalDataSource.getYearById(it.yearId)
+            val calibre = it.calibreId?.let { calibreId ->
+                calibreLocalDataSource.getCalibreById(calibreId)
+            }
+            val manufacturer = it.manufacturerId?.let { manufacturerId ->
+                manufacturerLocalDataSource.getManufacturerById(manufacturerId)
+            }
+            val year = it.yearId?.let { yearId ->
+                yearLocalDataSource.getYearById(yearId)
+            }
             it.fromDbToDomain(manufacturer, country, type, calibre, year)
         }
     }
@@ -52,10 +64,18 @@ class WeaponLocalDataSourceImpl(
         val type = weaponTypeLocalDataSource.getWeaponTypeById(typeId)
 
         return dbWeapons.map {
-            val country = countryLocalDataSource.getCountryById(it.countryId)
-            val calibre = calibreLocalDataSource.getCalibreById(it.calibreId)
-            val manufacturer = manufacturerLocalDataSource.getManufacturerById(it.manufacturerId)
-            val year = yearLocalDataSource.getYearById(it.yearId)
+            val country = it.countryId?.let { countryId ->
+                countryLocalDataSource.getCountryById(countryId)
+            }
+            val calibre = it.calibreId?.let { calibreId ->
+                calibreLocalDataSource.getCalibreById(calibreId)
+            }
+            val manufacturer = it.manufacturerId?.let { manufacturerId ->
+                manufacturerLocalDataSource.getManufacturerById(manufacturerId)
+            }
+            val year = it.yearId?.let { yearId ->
+                yearLocalDataSource.getYearById(yearId)
+            }
             it.fromDbToDomain(manufacturer, country, type, calibre, year)
         }
     }
@@ -65,10 +85,16 @@ class WeaponLocalDataSourceImpl(
         val calibre = calibreLocalDataSource.getCalibreById(calibreId)
 
         return dbWeapons.map {
-            val country = countryLocalDataSource.getCountryById(it.countryId)
+            val country = it.countryId?.let { countryId ->
+                countryLocalDataSource.getCountryById(countryId)
+            }
             val type = weaponTypeLocalDataSource.getWeaponTypeById(it.typeId)
-            val manufacturer = manufacturerLocalDataSource.getManufacturerById(it.manufacturerId)
-            val year = yearLocalDataSource.getYearById(it.yearId)
+            val manufacturer = it.manufacturerId?.let { manufacturerId ->
+                manufacturerLocalDataSource.getManufacturerById(manufacturerId)
+            }
+            val year = it.yearId?.let { yearId ->
+                yearLocalDataSource.getYearById(yearId)
+            }
             it.fromDbToDomain(manufacturer, country, type, calibre, year)
         }
     }
@@ -78,10 +104,16 @@ class WeaponLocalDataSourceImpl(
         val manufacturer = manufacturerLocalDataSource.getManufacturerById(manufacturerId)
 
         return dbWeapons.map {
-            val country = countryLocalDataSource.getCountryById(it.countryId)
+            val country = it.countryId?.let { countryId ->
+                countryLocalDataSource.getCountryById(countryId)
+            }
             val type = weaponTypeLocalDataSource.getWeaponTypeById(it.typeId)
-            val calibre = calibreLocalDataSource.getCalibreById(it.calibreId)
-            val year = yearLocalDataSource.getYearById(it.yearId)
+            val calibre = it.calibreId?.let { calibreId ->
+                calibreLocalDataSource.getCalibreById(calibreId)
+            }
+            val year = it.yearId?.let { yearId ->
+                yearLocalDataSource.getYearById(yearId)
+            }
             it.fromDbToDomain(manufacturer, country, type, calibre, year)
         }
     }
@@ -93,11 +125,19 @@ class WeaponLocalDataSourceImpl(
     }
 
     private suspend fun DbWeapon.fromDbToDomain(): Weapon {
-        val country = countryLocalDataSource.getCountryById(countryId)
+        val country = countryId?.let {
+            countryLocalDataSource.getCountryById(it)
+        }
         val type = weaponTypeLocalDataSource.getWeaponTypeById(typeId)
-        val calibre = calibreLocalDataSource.getCalibreById(calibreId)
-        val manufacturer = manufacturerLocalDataSource.getManufacturerById(manufacturerId)
-        val year = yearLocalDataSource.getYearById(yearId)
+        val calibre = calibreId?.let {
+            calibreLocalDataSource.getCalibreById(it)
+        }
+        val manufacturer = manufacturerId?.let {
+            manufacturerLocalDataSource.getManufacturerById(it)
+        }
+        val year = yearId?.let {
+            yearLocalDataSource.getYearById(it)
+        }
         return fromDbToDomain(manufacturer, country, type, calibre, year)
     }
 

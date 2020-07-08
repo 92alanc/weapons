@@ -27,13 +27,15 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
         with(weapon) {
             viewPager.adapter = ViewPagerAdapter(photos)
             txtName.text = name
-            val flag = resourcesHelper.getDrawable(country.flagId)
+            val flag = country?.flagId?.let {
+                resourcesHelper.getDrawable(it)
+            }
             imgFlag.setImageDrawable(flag)
-            txtCountry.text = country.name
-            txtYear.text = getString(R.string.year_format, year.year)
-            txtManufacturer.text = getString(R.string.manufacturer_format, manufacturer.name)
+            txtCountry.text = country?.name
+            txtYear.text = getString(R.string.year_format, year?.year)
+            txtManufacturer.text = getString(R.string.manufacturer_format, manufacturer?.name)
             txtType.text = getString(R.string.type_format, type.name)
-            txtCalibre.text = getString(R.string.calibre_format, calibre.name)
+            txtCalibre.text = getString(R.string.calibre_format, calibre?.name)
             txtLength.text = getString(R.string.length_format, length)
             txtWeight.text = getString(R.string.weight_format, weight)
             txtCapacity.text = getString(R.string.capacity_format, capacity)
