@@ -9,6 +9,8 @@ import com.alancamargo.weapons.ui.adapter.ViewPagerAdapter
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.loadAds
+import com.alancamargo.weapons.ui.tools.setDrawableOrHide
+import com.alancamargo.weapons.ui.tools.setTextOrHide
 import kotlinx.android.synthetic.main.activity_weapon_details.*
 import org.koin.android.ext.android.inject
 
@@ -27,20 +29,48 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
         with(weapon) {
             viewPager.adapter = ViewPagerAdapter(photos)
             txtName.text = name
+
             val flag = country?.flagId?.let {
                 resourcesHelper.getDrawable(it)
             }
-            imgFlag.setImageDrawable(flag)
-            txtCountry.text = country?.name
-            txtYear.text = getString(R.string.year_format, year?.year)
-            txtManufacturer.text = getString(R.string.manufacturer_format, manufacturer?.name)
+
+            imgFlag.setDrawableOrHide(flag)
+            txtCountry.setTextOrHide(country?.name)
+
+            val yearText = resourcesHelper.getFormattedStringOrNull(
+                R.string.year_format, year?.year
+            )
+            txtYear.setTextOrHide(yearText)
+
+            val manufacturerText = resourcesHelper.getFormattedStringOrNull(
+                R.string.manufacturer_format, manufacturer?.name
+            )
+            txtManufacturer.setTextOrHide(manufacturerText)
+
             txtType.text = getString(R.string.type_format, type.name)
-            txtCalibre.text = getString(R.string.calibre_format, calibre?.name)
+
+            val calibreText = resourcesHelper.getFormattedStringOrNull(
+                R.string.calibre_format, calibre?.name
+            )
+            txtCalibre.setTextOrHide(calibreText)
+
             txtLength.text = getString(R.string.length_format, length)
             txtWeight.text = getString(R.string.weight_format, weight)
-            txtCapacity.text = getString(R.string.capacity_format, capacity)
-            txtRateOfFire.text = getString(R.string.rate_of_fire_format, rateOfFire)
-            txtAccuracy.text = getString(R.string.accuracy_format, accuracy)
+
+            val capacityText = resourcesHelper.getFormattedStringOrNull(
+                R.string.capacity_format, capacity
+            )
+            txtCapacity.setTextOrHide(capacityText)
+
+            val rateOfFireText = resourcesHelper.getFormattedStringOrNull(
+                R.string.rate_of_fire_format, rateOfFire
+            )
+            txtRateOfFire.setTextOrHide(rateOfFireText)
+
+            val accuracyText = resourcesHelper.getFormattedStringOrNull(
+                R.string.accuracy_format, accuracy
+            )
+            txtAccuracy.setTextOrHide(accuracyText)
         }
     }
 

@@ -22,4 +22,8 @@ class ResourcesHelperImpl(
         null
     }
 
+    override fun getFormattedStringOrNull(stringId: Int, arg: Any?): String? = arg?.let {
+        context.getString(stringId, it)
+    }
+
 }

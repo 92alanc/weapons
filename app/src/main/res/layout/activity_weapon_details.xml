@@ -53,7 +53,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:src="@sample/weapons.json/data/flag"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtCountry"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
@@ -66,7 +66,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="@string/country_uk"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtYear"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
@@ -79,7 +79,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Year: 1907"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtManufacturer"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
@@ -92,7 +92,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Manufacturer: Lee-Enfield"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtType"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
@@ -105,7 +105,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Type: Bolt action rifle"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtCalibre"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
@@ -118,7 +118,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Calibre: .303 British"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtLength"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
@@ -131,7 +131,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Length: 1132mm"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtWeight"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
@@ -144,7 +144,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Weight: 3.96kg"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtCapacity"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
@@ -157,7 +157,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Capacity: 10 rounds"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtRateOfFire"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
@@ -170,7 +170,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Rate of fire: 30 rounds per minute"/>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtAccuracy"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
