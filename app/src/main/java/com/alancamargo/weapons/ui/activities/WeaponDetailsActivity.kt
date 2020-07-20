@@ -54,8 +54,15 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
             )
             txtCalibre.setTextOrHide(calibreText)
 
-            txtLength.text = getString(R.string.length_format, length)
-            txtWeight.text = getString(R.string.weight_format, weight)
+            val lengthText = resourcesHelper.getFormattedStringOrNull(
+                R.string.length_format, length
+            )
+            txtLength.setTextOrHide(lengthText)
+
+            val weightText = resourcesHelper.getFormattedStringOrNull(
+                R.string.weight_format, weight
+            )
+            txtWeight.setTextOrHide(weightText)
 
             val capacityText = resourcesHelper.getFormattedStringOrNull(
                 R.string.capacity_format, capacity
