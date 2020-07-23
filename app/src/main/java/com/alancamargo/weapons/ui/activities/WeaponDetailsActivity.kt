@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import coil.ImageLoader
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.ViewPagerAdapter
 import com.alancamargo.weapons.ui.entities.UiWeapon
@@ -17,6 +18,7 @@ import org.koin.android.ext.android.inject
 class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details) {
 
     private val resourcesHelper by inject<ResourcesHelper>()
+    private val imageLoader by inject<ImageLoader>()
     private val weapon by lazy { intent.getParcelableExtra<UiWeapon>(EXTRA_WEAPON) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +29,7 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
 
     private fun bindTo(weapon: UiWeapon) {
         with(weapon) {
-            viewPager.adapter = ViewPagerAdapter(photos)
+            viewPager.adapter = ViewPagerAdapter(photos, imageLoader)
             txtName.text = name
 
             val flag = country?.flagId?.let {

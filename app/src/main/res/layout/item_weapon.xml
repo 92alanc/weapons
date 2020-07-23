@@ -20,6 +20,28 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:src="@tools:sample/avatars"/>
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/imgPhoto"
+            app:layout_constraintBottom_toBottomOf="@id/imgPhoto"
+            app:layout_constraintStart_toStartOf="@id/imgPhoto"
+            app:layout_constraintEnd_toEndOf="@id/imgPhoto"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/txtError"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/error_loading_photo"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/imgPhoto"
+            app:layout_constraintBottom_toBottomOf="@id/imgPhoto"
+            app:layout_constraintStart_toStartOf="@id/imgPhoto"
+            app:layout_constraintEnd_toEndOf="@id/imgPhoto"/>
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtName"
             style="@style/TextAppearance.MaterialComponents.Body1"

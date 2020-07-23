@@ -1,6 +1,8 @@
 package com.alancamargo.weapons.di
 
 import androidx.room.Room
+import coil.ImageLoaderBuilder
+import coil.request.CachePolicy
 import com.alancamargo.weapons.data.crash.CrashReportHelper
 import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.local.*
@@ -58,6 +60,7 @@ private val framework = module {
     factory { get<DatabaseProvider>().provideCalibreDao() }
     factory { get<DatabaseProvider>().provideManufacturerDao() }
     factory { get<DatabaseProvider>().provideYearDao() }
+
     single {
         Room.databaseBuilder(
             androidContext(),
@@ -80,9 +83,16 @@ private val ui = module {
 
     factory<ResourcesHelper> { ResourcesHelperImpl(androidContext(), get()) }
     factory { (onItemClickListener: WeaponAdapter.OnItemClickListener) ->
-        WeaponAdapter(get(), onItemClickListener)
+        WeaponAdapter(get(), onItemClickListener, get())
     }
     factory { (onItemClickListener: CountryAdapter.OnItemClickListener) ->
         CountryAdapter(get(), onItemClickListener)
+    }
+
+    single {
+        ImageLoaderBuilder(androidContext())
+            .diskCachePolicy(CachePolicy.ENABLED)
+            .memoryCachePolicy(CachePolicy.ENABLED)
+            .build()
     }
 }
