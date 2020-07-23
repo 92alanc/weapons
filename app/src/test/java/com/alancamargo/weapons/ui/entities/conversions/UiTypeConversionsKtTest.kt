@@ -296,6 +296,16 @@ class UiTypeConversionsKtTest {
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
+
+    @Test
+    fun flamethrower_fromDomainToUi() {
+        val domain = WeaponType.Flamethrower(ID)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_flamethrower))
+
+        val actual = domain.fromDomainToUi(context)
+
+        assertThat(actual.id).isEqualTo(expected.id)
+    }
     // endregion
 
     @After

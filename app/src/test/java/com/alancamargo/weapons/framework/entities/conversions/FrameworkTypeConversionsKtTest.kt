@@ -12,6 +12,7 @@ import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGOR
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_SEMI_AUTOMATIC
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_CARBINE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_FLAMETHROWER
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_GRENADE
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_GRENADE_LAUNCHER
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_MACHINE_GUN
@@ -829,6 +830,37 @@ class FrameworkTypeConversionsKtTest {
         with(actual) {
             assertThat(id).isEqualTo(expected.id)
             assertThat(this).isInstanceOf(WeaponType.BoobyTrap::class.java)
+        }
+    }
+
+    @Test
+    fun flamethrower_fromDomainToDb() {
+        val domain = WeaponType.Flamethrower(ID)
+        val expected = DbWeaponType(
+            ID,
+            NAME_FLAMETHROWER,
+            categoryId = null
+        )
+
+        val actual = domain.fromDomainToDb()
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun flamethrower_fromDbToDomain() {
+        val db = DbWeaponType(
+            ID,
+            NAME_FLAMETHROWER,
+            categoryId = null
+        )
+        val expected = WeaponType.Flamethrower(ID)
+
+        val actual = db.fromDbToDomain()
+
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Flamethrower::class.java)
         }
     }
 

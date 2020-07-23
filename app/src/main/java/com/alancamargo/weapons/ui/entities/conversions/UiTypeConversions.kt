@@ -55,6 +55,7 @@ fun WeaponType.fromDomainToUi(context: Context): UiWeaponType = when (this) {
     is WeaponType.Carbine -> UiWeaponType(id, context.getString(R.string.type_carbine))
     is WeaponType.Melee -> UiWeaponType(id, context.getString(R.string.type_melee))
     is WeaponType.Pistol -> UiWeaponType(id, context.getString(R.string.type_pistol))
+    is WeaponType.Flamethrower -> UiWeaponType(id, context.getString(R.string.type_flamethrower))
 }
 
 private fun WeaponType.Rifle.convertRifle(context: Context) = when (this.category) {

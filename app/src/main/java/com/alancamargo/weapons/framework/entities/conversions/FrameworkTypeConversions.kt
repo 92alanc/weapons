@@ -12,6 +12,7 @@ import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGOR
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_SEMI_AUTOMATIC
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_CARBINE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_FLAMETHROWER
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_GRENADE
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_GRENADE_LAUNCHER
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_MACHINE_GUN
@@ -110,6 +111,11 @@ fun WeaponType.fromDomainToDb() = when (this) {
         NAME_SUB_MACHINE_GUN,
         categoryId = null
     )
+    is WeaponType.Flamethrower -> DbWeaponType(
+        id,
+        NAME_FLAMETHROWER,
+        categoryId = null
+    )
 }
 
 fun DbWeaponType.fromDbToDomain() = when (this.nameId) {
@@ -125,6 +131,7 @@ fun DbWeaponType.fromDbToDomain() = when (this.nameId) {
     NAME_ROCKET_LAUNCHER -> WeaponType.RocketLauncher(id)
     NAME_SHOTGUN -> WeaponType.Shotgun(id)
     NAME_SUB_MACHINE_GUN -> WeaponType.SubMachineGun(id)
+    NAME_FLAMETHROWER -> WeaponType.Flamethrower(id)
     else -> throw IllegalArgumentException("Name must be a proper WeaponType name")
 }
 

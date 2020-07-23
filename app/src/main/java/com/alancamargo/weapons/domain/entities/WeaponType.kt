@@ -56,4 +56,6 @@ sealed class WeaponType(val id: Long) {
 
     class BoobyTrap(id: Long) : WeaponType(id)
 
+    class Flamethrower(id: Long) : WeaponType(id)
+
 }
