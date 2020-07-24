@@ -58,7 +58,7 @@ class TypeListActivity : AppCompatActivity(R.layout.activity_simple_text_list),
 
     private fun displayTypes(types: List<UiWeaponType>) {
         groupError.hide()
-        adapter.setData(types)
+        adapter.setData(types.sortedBy { it.name })
         progressBar.hide()
     }
 
