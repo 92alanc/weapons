@@ -24,7 +24,7 @@ sealed class WeaponType(val id: Long) {
 
         enum class Category {
             LIGHT,
-            GENERAL_PURPOSE,
+            MEDIUM,
             HEAVY
         }
 

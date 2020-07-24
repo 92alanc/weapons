@@ -6,7 +6,7 @@ import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGOR
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_ANTI_TANK
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_AUTOMATIC
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_BOLT_ACTION
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_GENERAL_PURPOSE
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_MEDIUM
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_HEAVY
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_LIGHT
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_SEMI_AUTOMATIC
@@ -164,7 +164,7 @@ private fun DbWeaponType.convertGrenade() = when (this.categoryId) {
 
 private fun WeaponType.MachineGun.convertMachineGun(): DbWeaponType {
     val category = when (this.category) {
-        WeaponType.MachineGun.Category.GENERAL_PURPOSE -> CATEGORY_GENERAL_PURPOSE
+        WeaponType.MachineGun.Category.MEDIUM -> CATEGORY_MEDIUM
         WeaponType.MachineGun.Category.HEAVY -> CATEGORY_HEAVY
         WeaponType.MachineGun.Category.LIGHT -> CATEGORY_LIGHT
     }
@@ -177,8 +177,8 @@ private fun WeaponType.MachineGun.convertMachineGun(): DbWeaponType {
 }
 
 private fun DbWeaponType.convertMachineGun() = when (this.categoryId) {
-    CATEGORY_GENERAL_PURPOSE -> {
-        WeaponType.MachineGun(id, WeaponType.MachineGun.Category.GENERAL_PURPOSE)
+    CATEGORY_MEDIUM -> {
+        WeaponType.MachineGun(id, WeaponType.MachineGun.Category.MEDIUM)
     }
 
     CATEGORY_HEAVY -> {

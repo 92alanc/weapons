@@ -8,7 +8,7 @@
     <string name="type_shotgun">Shotgun</string>
     <string name="type_carbine">Carbine</string>
     <string name="type_machine_gun_light">Light machine-gun</string>
-    <string name="type_machine_gun_general_purpose">General purpose machine-gun</string>
+    <string name="type_machine_gun_medium">Medium machine-gun</string>
     <string name="type_machine_gun_heavy">Heavy machine-gun</string>
     <string name="type_sub_machine_gun">Sub machine-gun</string>
     <string name="type_grenade_anti_personnel">Anti-personnel grenade</string>

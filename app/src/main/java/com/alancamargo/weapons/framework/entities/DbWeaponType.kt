@@ -34,7 +34,7 @@ data class DbWeaponType(
         const val CATEGORY_SEMI_AUTOMATIC = "category_semi_automatic"
         const val CATEGORY_AUTOMATIC = "category_automatic"
         const val CATEGORY_LIGHT = "category_light"
-        const val CATEGORY_GENERAL_PURPOSE = "category_general_purpose"
+        const val CATEGORY_MEDIUM = "category_medium"
         const val CATEGORY_HEAVY = "category_heavy"
         const val CATEGORY_ANTI_PERSONNEL = "category_anti_personnel"
         const val CATEGORY_ANTI_TANK = "category_anti_tank"

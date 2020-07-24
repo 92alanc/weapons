@@ -198,9 +198,9 @@ class UiTypeConversionsKtTest {
     }
 
     @Test
-    fun generalPurposeMachineGun_fromDomainToUi() {
-        val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.GENERAL_PURPOSE)
-        val expected = UiWeaponType(ID, context.getString(R.string.type_machine_gun_general_purpose))
+    fun mediumMachineGun_fromDomainToUi() {
+        val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.MEDIUM)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_machine_gun_medium))
 
         val actual = domain.fromDomainToUi(context)
 

@@ -6,9 +6,9 @@ import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGOR
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_ANTI_TANK
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_AUTOMATIC
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_BOLT_ACTION
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_GENERAL_PURPOSE
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_HEAVY
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_LIGHT
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_MEDIUM
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_SEMI_AUTOMATIC
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_CARBINE
@@ -479,12 +479,12 @@ class FrameworkTypeConversionsKtTest {
     }
 
     @Test
-    fun generalPurposeMachineGun_fromDomainToDb() {
-        val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.GENERAL_PURPOSE)
+    fun mediumMachineGun_fromDomainToDb() {
+        val domain = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.MEDIUM)
         val expected = DbWeaponType(
             ID,
             NAME_MACHINE_GUN,
-            CATEGORY_GENERAL_PURPOSE
+            CATEGORY_MEDIUM
         )
 
         val actual = domain.fromDomainToDb()
@@ -493,13 +493,13 @@ class FrameworkTypeConversionsKtTest {
     }
 
     @Test
-    fun generalPurposeMachineGun_fromDbToDomain() {
+    fun mediumMachineGun_fromDbToDomain() {
         val db = DbWeaponType(
             ID,
             NAME_MACHINE_GUN,
-            CATEGORY_GENERAL_PURPOSE
+            CATEGORY_MEDIUM
         )
-        val expected = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.GENERAL_PURPOSE)
+        val expected = WeaponType.MachineGun(ID, WeaponType.MachineGun.Category.MEDIUM)
 
         val actual = db.fromDbToDomain()
 
@@ -507,7 +507,7 @@ class FrameworkTypeConversionsKtTest {
             assertThat(id).isEqualTo(expected.id)
             assertThat(this).isInstanceOf(WeaponType.MachineGun::class.java)
             require(this is WeaponType.MachineGun)
-            assertThat(category).isEqualTo(WeaponType.MachineGun.Category.GENERAL_PURPOSE)
+            assertThat(category).isEqualTo(WeaponType.MachineGun.Category.MEDIUM)
         }
     }
 
