@@ -4,14 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.queries.WeaponQuery
-import com.alancamargo.weapons.ui.tools.hide
 import com.alancamargo.weapons.ui.tools.loadAds
-import com.alancamargo.weapons.ui.tools.show
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
 import kotlinx.android.synthetic.main.activity_weapon_list.*
 import org.koin.android.ext.android.inject
@@ -67,28 +66,28 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
     }
 
     private fun displayWeapons(weapons: List<UiWeapon>) {
-        groupError.hide()
-        groupNoResults.hide()
+        groupError.isVisible = false
+        groupNoResults.isVisible = false
         adapter.setData(weapons)
-        progressBar.hide()
+        progressBar.isVisible = false
     }
 
     private fun showError() {
-        progressBar.hide()
-        groupNoResults.hide()
-        groupError.show()
+        progressBar.isVisible = false
+        groupNoResults.isVisible = false
+        groupError.isVisible = true
     }
 
     private fun showLoading() {
-        groupError.hide()
-        groupNoResults.hide()
-        progressBar.show()
+        groupError.isVisible = false
+        groupNoResults.isVisible = false
+        progressBar.isVisible = true
     }
 
     private fun showNoResults() {
-        progressBar.hide()
-        groupError.hide()
-        groupNoResults.show()
+        progressBar.isVisible = false
+        groupError.isVisible = false
+        groupNoResults.isVisible = true
     }
 
     companion object {

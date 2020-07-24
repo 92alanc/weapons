@@ -1,13 +1,12 @@
 package com.alancamargo.weapons.ui.viewholder
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.api.load
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
-import com.alancamargo.weapons.ui.tools.hide
-import com.alancamargo.weapons.ui.tools.show
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_weapon.*
 
@@ -28,13 +27,13 @@ class WeaponViewHolder(
 
         imgPhoto.load(weapon.photos.first(), imageLoader) {
             target(onStart = {
-                txtError.hide()
-                progressBar.show()
+                txtError.isVisible = false
+                progressBar.isVisible = true
             }, onError = {
-                progressBar.hide()
-                txtError.show()
+                progressBar.isVisible = false
+                txtError.isVisible = true
             }, onSuccess = {
-                progressBar.hide()
+                progressBar.isVisible = false
                 imgPhoto.setImageDrawable(it)
             })
         }

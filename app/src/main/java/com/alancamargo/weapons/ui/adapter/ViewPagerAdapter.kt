@@ -3,12 +3,11 @@ package com.alancamargo.weapons.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.viewpager.widget.PagerAdapter
 import coil.ImageLoader
 import coil.api.load
 import com.alancamargo.weapons.R
-import com.alancamargo.weapons.ui.tools.hide
-import com.alancamargo.weapons.ui.tools.show
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.android.synthetic.main.item_photo.view.*
 
@@ -30,13 +29,13 @@ class ViewPagerAdapter(
 
                 imgPhoto.load(data[position], imageLoader) {
                     target(onStart = {
-                        txtError.hide()
-                        progressBar.show()
+                        txtError.isVisible = false
+                        progressBar.isVisible = true
                     }, onError = {
-                        progressBar.hide()
-                        txtError.show()
+                        progressBar.isVisible = false
+                        txtError.isVisible = true
                     }, onSuccess = {
-                        progressBar.hide()
+                        progressBar.isVisible = false
                         imgPhoto.setImageDrawable(it)
                     })
                 }

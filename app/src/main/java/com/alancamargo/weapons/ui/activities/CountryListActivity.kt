@@ -2,14 +2,13 @@ package com.alancamargo.weapons.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.CountryAdapter
 import com.alancamargo.weapons.ui.entities.UiCountry
 import com.alancamargo.weapons.ui.queries.WeaponQuery
-import com.alancamargo.weapons.ui.tools.hide
 import com.alancamargo.weapons.ui.tools.loadAds
-import com.alancamargo.weapons.ui.tools.show
 import com.alancamargo.weapons.ui.viewmodel.CountryViewModel
 import kotlinx.android.synthetic.main.activity_country_list.*
 import org.koin.android.ext.android.inject
@@ -59,19 +58,19 @@ class CountryListActivity : AppCompatActivity(R.layout.activity_country_list),
     }
 
     private fun displayCountries(countries: List<UiCountry>) {
-        groupError.hide()
+        groupError.isVisible = false
         adapter.setData(countries)
-        progressBar.hide()
+        progressBar.isVisible = false
     }
 
     private fun showLoading() {
-        groupError.hide()
-        progressBar.show()
+        groupError.isVisible = false
+        progressBar.isVisible = true
     }
 
     private fun showError() {
-        progressBar.hide()
-        groupError.show()
+        progressBar.isVisible = false
+        groupError.isVisible = true
     }
 
     private companion object {

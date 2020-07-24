@@ -7,14 +7,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.material.textview.MaterialTextView
 
-fun View.show() {
-    visibility = View.VISIBLE
-}
-
-fun View.hide() {
-    visibility = View.GONE
-}
-
 fun AdView.loadAds() {
     val request = AdRequest.Builder().build()
     loadAd(request)
@@ -30,4 +22,8 @@ fun ImageView.setDrawableOrHide(drawable: Drawable?) {
     drawable?.let {
         setImageDrawable(it)
     } ?: hide()
+}
+
+private fun View.hide() {
+    visibility = View.GONE
 }
