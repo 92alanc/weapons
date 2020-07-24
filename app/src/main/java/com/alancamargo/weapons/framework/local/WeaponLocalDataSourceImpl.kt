@@ -18,7 +18,7 @@ class WeaponLocalDataSourceImpl(
     override suspend fun getWeapons(): List<Weapon> = weaponDao.selectAll().fromDbToDomain()
 
     override suspend fun getWeaponsByName(name: String): List<Weapon> {
-        return weaponDao.selectByName(name).fromDbToDomain()
+        return weaponDao.selectByName("%$name%").fromDbToDomain()
     }
 
     override suspend fun getWeaponsByYear(yearId: Long): List<Weapon> {
