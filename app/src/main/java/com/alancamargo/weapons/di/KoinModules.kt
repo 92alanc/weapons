@@ -3,6 +3,7 @@ package com.alancamargo.weapons.di
 import androidx.room.Room
 import coil.ImageLoaderBuilder
 import coil.request.CachePolicy
+import com.alancamargo.weapons.R
 import com.alancamargo.weapons.data.crash.CrashReportHelper
 import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.local.*
@@ -91,6 +92,10 @@ private val ui = module {
 
     single {
         ImageLoaderBuilder(androidContext())
+            .crossfade(true)
+            .error(R.drawable.ic_placeholder)
+            .fallback(R.drawable.ic_placeholder)
+            .placeholder(R.drawable.ic_placeholder)
             .diskCachePolicy(CachePolicy.ENABLED)
             .memoryCachePolicy(CachePolicy.ENABLED)
             .build()

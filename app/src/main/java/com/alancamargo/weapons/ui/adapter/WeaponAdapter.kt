@@ -40,6 +40,10 @@ class WeaponAdapter(
 
     override fun getItemCount(): Int = data.size
 
+    override fun getItemId(position: Int): Long = data[position].id
+
+    override fun getItemViewType(position: Int): Int = position
+
     interface OnItemClickListener {
         fun onItemClick(weapon: UiWeapon)
     }
