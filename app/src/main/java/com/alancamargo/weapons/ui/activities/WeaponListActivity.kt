@@ -3,6 +3,7 @@ package com.alancamargo.weapons.ui.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
@@ -70,6 +71,8 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
         groupNoResults.isVisible = false
         adapter.setData(weapons)
         progressBar.isVisible = false
+        val text = getString(R.string.results_format, weapons.size)
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
     private fun showError() {
