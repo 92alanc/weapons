@@ -71,7 +71,7 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
         groupNoResults.isVisible = false
         adapter.setData(weapons)
         progressBar.isVisible = false
-        val text = getString(R.string.results_format, weapons.size)
+        val text = resources.getQuantityString(R.plurals.results_plural, weapons.size, weapons.size)
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 

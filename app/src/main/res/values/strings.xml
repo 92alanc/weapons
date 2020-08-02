@@ -43,7 +43,10 @@
     <string name="privacy_notice">Privacy notice</string>
     <string name="privacy_notice_text">I couldn\'t care less about your data so I don\'t and I won\'t ever even try to have access to, track or store ANY of it, full stop.</string>
     <string name="error_loading_photo">Error loading photo</string>
-    <string name="results_format">%d results</string>
+    <plurals name="results_plural">
+        <item quantity="one">%d result</item>
+        <item quantity="other">%d results</item>
+    </plurals>
     <!-- endregion -->
 
     <!-- region Queries -->
