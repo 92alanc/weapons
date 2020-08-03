@@ -46,7 +46,7 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
     }
 
     private fun fetchData() {
-        viewModel.start(query)
+        query?.let(viewModel::start)
         observeState()
     }
 

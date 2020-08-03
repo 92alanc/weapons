@@ -23,7 +23,7 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindTo(weapon)
+        weapon?.let(::bindTo)
         adView.loadAds()
     }
 
