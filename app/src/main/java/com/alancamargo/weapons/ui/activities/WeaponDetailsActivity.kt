@@ -57,29 +57,29 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
             txtCalibre.setTextOrHide(calibreText)
 
             val lengthText = resourcesHelper.getFormattedStringOrNull(
-                R.string.length_format, length
+                R.string.length_format, lengthInMm
             )
             txtLength.setTextOrHide(lengthText)
 
-            val weightText = resourcesHelper.getFormattedStringOrNull(
-                R.string.weight_format, weight
+            val massText = resourcesHelper.getFormattedStringOrNull(
+                R.string.mass_format, massInKg
             )
-            txtWeight.setTextOrHide(weightText)
+            txtMass.setTextOrHide(massText)
 
             val capacityText = resourcesHelper.getFormattedStringOrNull(
-                R.string.capacity_format, capacity
+                R.string.capacity_format, capacityInRounds
             )
             txtCapacity.setTextOrHide(capacityText)
 
             val rateOfFireText = resourcesHelper.getFormattedStringOrNull(
-                R.string.rate_of_fire_format, rateOfFire
+                R.string.rate_of_fire_format, rateOfFireInRpm
             )
             txtRateOfFire.setTextOrHide(rateOfFireText)
 
-            val accuracyText = resourcesHelper.getFormattedStringOrNull(
-                R.string.accuracy_format, accuracy
+            val effectiveRangeText = resourcesHelper.getFormattedStringOrNull(
+                R.string.effective_range_format, effectiveRangeInM
             )
-            txtAccuracy.setTextOrHide(accuracyText)
+            txtEffectiveRange.setTextOrHide(effectiveRangeText)
         }
     }
 

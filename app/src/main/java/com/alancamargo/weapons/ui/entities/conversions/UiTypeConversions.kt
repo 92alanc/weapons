@@ -12,12 +12,12 @@ fun Weapon.fromDomainToUi(context: Context) = UiWeapon(
     manufacturer?.fromDomainToUi(),
     country?.fromDomainToUi(),
     type.fromDomainToUi(context),
-    length,
-    weight,
+    lengthInMm,
+    massInKg,
     calibre?.fromDomainToUi(),
-    capacity,
-    rateOfFire,
-    accuracy,
+    capacityInRounds,
+    rateOfFireInRpm,
+    effectiveRangeInM,
     photos
 )
 

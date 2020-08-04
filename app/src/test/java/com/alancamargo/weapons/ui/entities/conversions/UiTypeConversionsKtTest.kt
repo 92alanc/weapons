@@ -28,11 +28,11 @@ class UiTypeConversionsKtTest {
             Country(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG),
             WeaponType.BoobyTrap(TYPE_ID),
             LENGTH,
-            WEIGHT,
+            MASS,
             Calibre(CALIBRE_ID, CALIBRE),
             CAPACITY,
             RATE_OF_FIRE,
-            ACCURACY,
+            EFFECTIVE_RANGE,
             listOf(PHOTO)
         )
 
@@ -44,11 +44,11 @@ class UiTypeConversionsKtTest {
             UiCountry(COUNTRY_ID, COUNTRY_NAME, COUNTRY_FLAG),
             UiWeaponType(TYPE_ID, context.getString(R.string.type_booby_trap)),
             LENGTH,
-            WEIGHT,
+            MASS,
             UiCalibre(CALIBRE_ID, CALIBRE),
             CAPACITY,
             RATE_OF_FIRE,
-            ACCURACY,
+            EFFECTIVE_RANGE,
             listOf(PHOTO)
         )
 
@@ -61,12 +61,12 @@ class UiTypeConversionsKtTest {
             assertThat(manufacturer?.id).isEqualTo(expected.manufacturer?.id)
             assertThat(country?.id).isEqualTo(expected.country?.id)
             assertThat(type.id).isEqualTo(expected.type.id)
-            assertThat(length).isEqualTo(expected.length)
-            assertThat(weight).isEqualTo(expected.weight)
+            assertThat(lengthInMm).isEqualTo(expected.lengthInMm)
+            assertThat(massInKg).isEqualTo(expected.massInKg)
             assertThat(calibre?.id).isEqualTo(expected.calibre?.id)
-            assertThat(capacity).isEqualTo(expected.capacity)
-            assertThat(rateOfFire).isEqualTo(expected.rateOfFire)
-            assertThat(accuracy).isEqualTo(expected.accuracy)
+            assertThat(capacityInRounds).isEqualTo(expected.capacityInRounds)
+            assertThat(rateOfFireInRpm).isEqualTo(expected.rateOfFireInRpm)
+            assertThat(effectiveRangeInM).isEqualTo(expected.effectiveRangeInM)
             assertThat(photos).isEqualTo(expected.photos)
         }
     }
@@ -327,10 +327,10 @@ class UiTypeConversionsKtTest {
         const val COUNTRY_ID = 222L
         const val TYPE_ID = 333L
         const val LENGTH = 102
-        const val WEIGHT = 2.5f
+        const val MASS = 2.5f
         const val CAPACITY = 10
         const val RATE_OF_FIRE = 20
-        const val ACCURACY = 300
+        const val EFFECTIVE_RANGE = 300
         const val PHOTO = "photo1"
     }
 

@@ -47,22 +47,27 @@ data class DbWeapon(
     @ColumnInfo(name = COLUMN_MANUFACTURER_ID) val manufacturerId: Long?,
     @ColumnInfo(name = COLUMN_COUNTRY_ID) val countryId: Long?,
     @ColumnInfo(name = COLUMN_TYPE_ID) val typeId: Long,
-    val length: Int?,
-    val weight: Float?,
+    @ColumnInfo(name = COLUMN_LENGTH) val lengthInMm: Int?,
+    @ColumnInfo(name = COLUMN_MASS) val massInKg: Float?,
     @ColumnInfo(name = COLUMN_CALIBRE_ID) val calibreId: Long?,
-    val capacity: Int?,
-    @ColumnInfo(name = COLUMN_RATE_OF_FIRE) val rateOfFire: Int?,
-    val accuracy: Int?,
+    @ColumnInfo(name = COLUMN_CAPACITY) val capacityInRounds: Int?,
+    @ColumnInfo(name = COLUMN_RATE_OF_FIRE) val rateOfFireInRpm: Int?,
+    @ColumnInfo(name = COLUMN_EFFECTIVE_RANGE) val effectiveRangeInM: Int?,
     @ColumnInfo(name = COLUMN_PHOTOS_JSON) val photosJson: String
 ) {
 
     companion object {
+        private const val COLUMN_LENGTH = "length_mm"
+        private const val COLUMN_MASS = "mass_kg"
+        private const val COLUMN_CAPACITY = "capacity_rounds"
+        private const val COLUMN_RATE_OF_FIRE = "rate_of_fire_rpm"
+        private const val COLUMN_EFFECTIVE_RANGE = "effective_range_m"
+
         const val COLUMN_MANUFACTURER_ID = "manufacturer_id"
         const val COLUMN_COUNTRY_ID = "country_id"
         const val COLUMN_TYPE_ID = "type_id"
         const val COLUMN_CALIBRE_ID = "calibre_id"
         const val COLUMN_YEAR_ID = "year_id"
-        const val COLUMN_RATE_OF_FIRE = "rate_of_fire"
         const val COLUMN_PHOTOS_JSON = "photos_json"
     }
 

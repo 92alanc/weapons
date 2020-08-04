@@ -44,12 +44,12 @@ fun DbWeapon.fromDbToDomain(
         manufacturer,
         country,
         type,
-        length,
-        weight,
+        lengthInMm,
+        massInKg,
         calibre,
-        capacity,
-        rateOfFire,
-        accuracy,
+        capacityInRounds,
+        rateOfFireInRpm,
+        effectiveRangeInM,
         photos
     )
 }

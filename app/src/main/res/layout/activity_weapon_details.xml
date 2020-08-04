@@ -132,7 +132,7 @@
                 tools:text="Length: 1132mm"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txtWeight"
+                android:id="@+id/txtMass"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                 app:layout_constraintTop_toBottomOf="@id/txtLength"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Weight: 3.96kg"/>
+                tools:text="Mass: 3.96kg"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtCapacity"
@@ -152,7 +152,7 @@
                 android:layout_marginTop="@dimen/margin_default"
                 android:layout_marginStart="@dimen/margin_large"
                 android:layout_marginEnd="@dimen/margin_large"
-                app:layout_constraintTop_toBottomOf="@id/txtWeight"
+                app:layout_constraintTop_toBottomOf="@id/txtMass"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="Capacity: 10 rounds"/>
@@ -171,7 +171,7 @@
                 tools:text="Rate of fire: 30 rounds per minute"/>
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/txtAccuracy"
+                android:id="@+id/txtEffectiveRange"
                 style="@style/TextAppearance.MaterialComponents.Body1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
                 app:layout_constraintTop_toBottomOf="@id/txtRateOfFire"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="Accuracy: 503m"/>
+                tools:text="Effective range: 503m"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

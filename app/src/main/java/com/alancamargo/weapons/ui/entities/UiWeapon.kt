@@ -11,11 +11,11 @@ data class UiWeapon(
     val manufacturer: UiManufacturer?,
     val country: UiCountry?,
     val type: UiWeaponType,
-    val length: Int?,
-    val weight: Float?,
+    val lengthInMm: Int?,
+    val massInKg: Float?,
     val calibre: UiCalibre?,
-    val capacity: Int?,
-    val rateOfFire: Int?,
-    val accuracy: Int?,
+    val capacityInRounds: Int?,
+    val rateOfFireInRpm: Int?,
+    val effectiveRangeInM: Int?,
     val photos: List<String>
 ) : Parcelable

@@ -7,11 +7,11 @@ data class Weapon(
     val manufacturer: Manufacturer?,
     val country: Country?,
     val type: WeaponType,
-    val length: Int?,
-    val weight: Float?,
+    val lengthInMm: Int?,
+    val massInKg: Float?,
     val calibre: Calibre?,
-    val capacity: Int?,
-    val rateOfFire: Int?,
-    val accuracy: Int?,
+    val capacityInRounds: Int?,
+    val rateOfFireInRpm: Int?,
+    val effectiveRangeInM: Int?,
     val photos: List<String>
 )
