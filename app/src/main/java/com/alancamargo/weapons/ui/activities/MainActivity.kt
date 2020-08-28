@@ -1,6 +1,5 @@
 package com.alancamargo.weapons.ui.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -43,12 +42,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
 
     override fun onItemClick(query: WeaponQueryType) = when (query) {
         WeaponQueryType.ALL -> showAllWeapons()
-        WeaponQueryType.BY_CALIBRE -> openCalibreListActivity()
-        WeaponQueryType.BY_COUNTRY -> openCountryListActivity()
-        WeaponQueryType.BY_MANUFACTURER -> openManufacturerListActivity()
+        WeaponQueryType.BY_CALIBRE -> showWeaponsByCalibre()
+        WeaponQueryType.BY_COUNTRY -> showWeaponsByCountry()
+        WeaponQueryType.BY_MANUFACTURER -> showWeaponsByManufacturer()
         WeaponQueryType.BY_NAME -> openNameSearchDialogue()
-        WeaponQueryType.BY_TYPE -> openTypeListActivity()
-        WeaponQueryType.BY_YEAR -> openYearListActivity()
+        WeaponQueryType.BY_TYPE -> showWeaponsByType()
+        WeaponQueryType.BY_YEAR -> showWeaponsByYear()
     }
 
     private fun showAllWeapons() {
@@ -56,18 +55,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
         startActivity(intent)
     }
 
-    private fun openCalibreListActivity() {
-        val intent = Intent(this, CalibreListActivity::class.java)
+    private fun showWeaponsByCalibre() {
+        val intent = WeaponListActivity.getIntent(this, WeaponQuery.ByCalibre)
         startActivity(intent)
     }
 
-    private fun openCountryListActivity() {
-        val intent = Intent(this, CountryListActivity::class.java)
+    private fun showWeaponsByCountry() {
+        val intent = WeaponListActivity.getIntent(this, WeaponQuery.ByCountry)
         startActivity(intent)
     }
 
-    private fun openManufacturerListActivity() {
-        val intent = Intent(this, ManufacturerListActivity::class.java)
+    private fun showWeaponsByManufacturer() {
+        val intent = WeaponListActivity.getIntent(this, WeaponQuery.ByManufacturer)
         startActivity(intent)
     }
 
@@ -76,13 +75,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
         dialogue.show(supportFragmentManager, NameSearchDialogue.TAG)
     }
 
-    private fun openTypeListActivity() {
-        val intent = Intent(this, TypeListActivity::class.java)
+    private fun showWeaponsByType() {
+        val intent = WeaponListActivity.getIntent(this, WeaponQuery.ByType)
         startActivity(intent)
     }
 
-    private fun openYearListActivity() {
-        val intent = Intent(this, YearListActivity::class.java)
+    private fun showWeaponsByYear() {
+        val intent = WeaponListActivity.getIntent(this, WeaponQuery.ByYear)
         startActivity(intent)
     }
 

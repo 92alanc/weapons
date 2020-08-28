@@ -7,26 +7,18 @@ import com.alancamargo.weapons.R
 import com.alancamargo.weapons.data.crash.CrashReportHelper
 import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.local.*
-import com.alancamargo.weapons.data.repository.calibre.CalibreRepository
-import com.alancamargo.weapons.data.repository.calibre.CalibreRepositoryImpl
-import com.alancamargo.weapons.data.repository.country.CountryRepository
-import com.alancamargo.weapons.data.repository.country.CountryRepositoryImpl
-import com.alancamargo.weapons.data.repository.manufacturer.ManufacturerRepository
-import com.alancamargo.weapons.data.repository.manufacturer.ManufacturerRepositoryImpl
-import com.alancamargo.weapons.data.repository.type.WeaponTypeRepository
-import com.alancamargo.weapons.data.repository.type.WeaponTypeRepositoryImpl
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepositoryImpl
-import com.alancamargo.weapons.data.repository.year.YearRepository
-import com.alancamargo.weapons.data.repository.year.YearRepositoryImpl
 import com.alancamargo.weapons.framework.crash.CrashReportHelperImpl
 import com.alancamargo.weapons.framework.db.provider.DatabaseProvider
 import com.alancamargo.weapons.framework.local.*
-import com.alancamargo.weapons.ui.adapter.CountryAdapter
+import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
+import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.ResourcesHelperImpl
-import com.alancamargo.weapons.ui.viewmodel.*
+import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
+import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -35,11 +27,6 @@ fun getModules() = listOf(data, framework, ui)
 
 private val data = module {
     factory<WeaponRepository> { WeaponRepositoryImpl(get(), get()) }
-    factory<WeaponTypeRepository> { WeaponTypeRepositoryImpl(get(), get()) }
-    factory<CountryRepository> { CountryRepositoryImpl(get(), get()) }
-    factory<CalibreRepository> { CalibreRepositoryImpl(get(), get()) }
-    factory<ManufacturerRepository> { ManufacturerRepositoryImpl(get(), get()) }
-    factory<YearRepository> { YearRepositoryImpl(get(), get()) }
 
     factory<WeaponLocalDataSource> {
         WeaponLocalDataSourceImpl(get(), get(), get(), get(), get(), get())
@@ -76,18 +63,13 @@ private val framework = module {
 private val ui = module {
     viewModel { WeaponViewModel(get(), androidContext()) }
     viewModel { QueryViewModel() }
-    viewModel { CountryViewModel(get()) }
-    viewModel { CalibreViewModel(get()) }
-    viewModel { YearViewModel(get()) }
-    viewModel { WeaponTypeViewModel(get(), androidContext()) }
-    viewModel { ManufacturerViewModel(get()) }
 
     factory<ResourcesHelper> { ResourcesHelperImpl(androidContext(), get()) }
-    factory { (onItemClickListener: WeaponAdapter.OnItemClickListener) ->
+    factory { (onItemClickListener: OnItemClickListener) ->
         WeaponAdapter(get(), onItemClickListener, get())
     }
-    factory { (onItemClickListener: CountryAdapter.OnItemClickListener) ->
-        CountryAdapter(get(), onItemClickListener)
+    factory { (onItemClickListener: OnItemClickListener) ->
+        WeaponListWithHeaderAdapter(onItemClickListener, get(), get())
     }
 
     single {

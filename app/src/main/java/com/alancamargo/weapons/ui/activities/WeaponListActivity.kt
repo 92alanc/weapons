@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import com.alancamargo.weapons.R
+import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
+import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
 import com.alancamargo.weapons.ui.entities.UiWeapon
+import com.alancamargo.weapons.ui.entities.UiWeaponListHeader
 import com.alancamargo.weapons.ui.queries.WeaponQuery
 import com.alancamargo.weapons.ui.tools.loadAds
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
@@ -19,17 +21,20 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
-    WeaponAdapter.OnItemClickListener {
+    OnItemClickListener {
 
     private val viewModel by viewModel<WeaponViewModel>()
     private val query by lazy { intent.getParcelableExtra<WeaponQuery>(EXTRA_QUERY) }
-    private val adapter by inject<WeaponAdapter> { parametersOf(this) }
+
+    private val weaponAdapter by inject<WeaponAdapter> { parametersOf(this) }
+    private val weaponListWithHeaderAdapter by inject<WeaponListWithHeaderAdapter> {
+        parametersOf(this)
+    }
 
     private var state: WeaponViewModel.State? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        recyclerView.adapter = adapter
         state = savedInstanceState?.getParcelable(KEY_STATE)
         state?.let(::processState) ?: fetchData()
         adView.loadAds()
@@ -51,7 +56,7 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
     }
 
     private fun observeState() {
-        viewModel.getState().observe(this, Observer {
+        viewModel.getState().observe(this, {
             state = it
             processState(it)
         })
@@ -59,7 +64,10 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
 
     private fun processState(state: WeaponViewModel.State) {
         when (state) {
-            is WeaponViewModel.State.Ready -> displayWeapons(state.weapons)
+            is WeaponViewModel.State.WeaponListReady -> displayWeapons(state.weapons)
+            is WeaponViewModel.State.WeaponListWithHeaderReady -> displayWeaponListWithHeader(
+                state.weapons
+            )
             is WeaponViewModel.State.Error -> showError()
             is WeaponViewModel.State.Loading -> showLoading()
             is WeaponViewModel.State.NoResults -> showNoResults()
@@ -69,10 +77,19 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
     private fun displayWeapons(weapons: List<UiWeapon>) {
         groupError.isVisible = false
         groupNoResults.isVisible = false
-        adapter.setData(weapons)
+        recyclerView.adapter = weaponAdapter
+        weaponAdapter.setData(weapons)
         progressBar.isVisible = false
         val text = resources.getQuantityString(R.plurals.results_plural, weapons.size, weapons.size)
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun displayWeaponListWithHeader(weapons: Map<UiWeaponListHeader?, List<UiWeapon>>) {
+        groupError.isVisible = false
+        groupNoResults.isVisible = false
+        recyclerView.adapter = weaponListWithHeaderAdapter
+        weaponListWithHeaderAdapter.setData(weapons)
+        progressBar.isVisible = false
     }
 
     private fun showError() {

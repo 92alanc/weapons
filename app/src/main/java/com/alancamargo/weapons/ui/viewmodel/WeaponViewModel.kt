@@ -9,7 +9,9 @@ import androidx.lifecycle.viewModelScope
 import com.alancamargo.weapons.data.io.Result
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
 import com.alancamargo.weapons.domain.entities.Weapon
+import com.alancamargo.weapons.domain.entities.WeaponListHeader
 import com.alancamargo.weapons.ui.entities.UiWeapon
+import com.alancamargo.weapons.ui.entities.UiWeaponListHeader
 import com.alancamargo.weapons.ui.entities.conversions.fromDomainToUi
 import com.alancamargo.weapons.ui.queries.WeaponQuery
 import kotlinx.android.parcel.Parcelize
@@ -25,11 +27,11 @@ class WeaponViewModel(
     fun start(query: WeaponQuery) = when (query) {
         is WeaponQuery.All -> loadAllWeapons()
         is WeaponQuery.ByName -> loadWeaponsByName(query.name)
-        is WeaponQuery.ByYear -> loadWeaponsByYear(query.yearId)
-        is WeaponQuery.ByCountry -> loadWeaponsByCountry(query.countryId)
-        is WeaponQuery.ByType -> loadWeaponsByType(query.typeId)
-        is WeaponQuery.ByCalibre -> loadWeaponsByCalibre(query.calibreId)
-        is WeaponQuery.ByManufacturer -> loadWeaponsByManufacturer(query.manufacturerId)
+        is WeaponQuery.ByYear -> loadWeaponsByYear()
+        is WeaponQuery.ByCountry -> loadWeaponsByCountry()
+        is WeaponQuery.ByType -> loadWeaponsByType()
+        is WeaponQuery.ByCalibre -> loadWeaponsByCalibre()
+        is WeaponQuery.ByManufacturer -> loadWeaponsByManufacturer()
     }
 
     fun getState(): LiveData<State> = stateLiveData
@@ -42,27 +44,27 @@ class WeaponViewModel(
         repository.getWeaponsByName(name)
     }
 
-    private fun loadWeaponsByYear(yearId: Long) = runQuery {
-        repository.getWeaponsByYear(yearId)
+    private fun loadWeaponsByYear() = runQuery {
+        repository.getWeaponsByYear()
     }
 
-    private fun loadWeaponsByCountry(countryId: Long) = runQuery {
-        repository.getWeaponsByCountry(countryId)
+    private fun loadWeaponsByCountry() = runQuery {
+        repository.getWeaponsByCountry()
     }
 
-    private fun loadWeaponsByType(typeId: Long) = runQuery {
-        repository.getWeaponsByType(typeId)
+    private fun loadWeaponsByType() = runQuery {
+        repository.getWeaponsByType()
     }
 
-    private fun loadWeaponsByCalibre(calibreId: Long) = runQuery {
-        repository.getWeaponsByCalibre(calibreId)
+    private fun loadWeaponsByCalibre() = runQuery {
+        repository.getWeaponsByCalibre()
     }
 
-    private fun loadWeaponsByManufacturer(manufacturerId: Long) = runQuery {
-        repository.getWeaponsByManufacturer(manufacturerId)
+    private fun loadWeaponsByManufacturer() = runQuery {
+        repository.getWeaponsByManufacturer()
     }
 
-    private fun runQuery(query: suspend () -> Result<List<Weapon>>) {
+    private fun runQuery(query: suspend () -> Result<Map<WeaponListHeader?, List<Weapon>>>) {
         viewModelScope.launch {
             stateLiveData.postValue(State.Loading)
             val result = query.invoke()
@@ -70,18 +72,47 @@ class WeaponViewModel(
         }
     }
 
-    private fun processResult(result: Result<List<Weapon>>) {
+    private fun processResult(result: Result<Map<WeaponListHeader?, List<Weapon>>>) {
         when (result) {
             is Result.Success -> {
-                if (result.body.isEmpty()) {
+                val body = result.body
+
+                if (body.isEmpty()) {
                     stateLiveData.postValue(State.NoResults)
                 } else {
-                    val weapons = result.body.map { it.fromDomainToUi(context) }
-                    stateLiveData.postValue(State.Ready(weapons))
+                    if (body.isWeaponList())
+                        processWeaponList(body)
+                    else
+                        processWeaponListWithHeader(body)
                 }
             }
             is Result.Error -> stateLiveData.postValue(State.Error)
         }
+    }
+
+    private fun Map<WeaponListHeader?, List<Weapon>>.isWeaponList(): Boolean {
+        return size == 1 && entries.first().key == null
+    }
+
+    private fun processWeaponList(body: Map<WeaponListHeader?, List<Weapon>>) {
+        val weapons = body.values.first().map {
+            it.fromDomainToUi(context)
+        }
+
+        stateLiveData.postValue(State.WeaponListReady(weapons))
+    }
+
+    private fun processWeaponListWithHeader(body: Map<WeaponListHeader?, List<Weapon>>) {
+        // FIXME: WeaponType mapping needs fixing
+        val weapons = body.mapKeys {
+            it.key?.fromDomainToUi(context)
+        }.mapValues {
+            it.value.map { weapon ->
+                weapon.fromDomainToUi(context)
+            }
+        }
+
+        stateLiveData.postValue(State.WeaponListWithHeaderReady(weapons))
     }
 
     sealed class State : Parcelable {
@@ -89,7 +120,12 @@ class WeaponViewModel(
         object Loading : State()
 
         @Parcelize
-        data class Ready(val weapons: List<UiWeapon>) : State()
+        data class WeaponListWithHeaderReady(
+            val weapons: Map<UiWeaponListHeader?, List<UiWeapon>>
+        ) : State()
+
+        @Parcelize
+        data class WeaponListReady(val weapons: List<UiWeapon>) : State()
 
         @Parcelize
         object Error : State()

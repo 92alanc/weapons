@@ -1,3 +1,3 @@
 package com.alancamargo.weapons.domain.entities
 
-data class Manufacturer(val id: Long, val name: String)
+data class Manufacturer(val id: Long, val name: String) : WeaponListHeader

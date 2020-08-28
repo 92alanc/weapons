@@ -6,12 +6,14 @@ import kotlinx.coroutines.withContext
 
 class IoHelper(private val crashReportHelper: CrashReportHelper) {
 
-    suspend fun <T> safeIoCall(call: suspend () -> T): Result<T> = withContext(Dispatchers.IO) {
-        try {
-            Result.Success(call.invoke())
-        } catch (t: Throwable) {
-            crashReportHelper.log(t)
-            Result.Error
+    suspend fun <K, V> safeIoCall(call: suspend () -> Map<K, V>): Result<Map<K, V>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                Result.Success(call.invoke())
+            } catch (t: Throwable) {
+                crashReportHelper.log(t)
+                Result.Error
+            }
         }
     }
 

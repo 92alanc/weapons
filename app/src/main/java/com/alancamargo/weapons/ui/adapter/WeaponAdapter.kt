@@ -11,7 +11,7 @@ import com.alancamargo.weapons.ui.viewholder.WeaponViewHolder
 
 class WeaponAdapter(
     private val resourcesHelper: ResourcesHelper,
-    private val itemClickListener: OnItemClickListener,
+    private val onItemClickListener: OnItemClickListener,
     private val imageLoader: ImageLoader
 ) : RecyclerView.Adapter<WeaponViewHolder>() {
 
@@ -33,7 +33,7 @@ class WeaponAdapter(
         with(holder) {
             bindTo(weapon)
             itemView.setOnClickListener {
-                itemClickListener.onItemClick(weapon)
+                onItemClickListener.onItemClick(weapon)
             }
         }
     }
@@ -43,9 +43,5 @@ class WeaponAdapter(
     override fun getItemId(position: Int): Long = data[position].id
 
     override fun getItemViewType(position: Int): Int = position
-
-    interface OnItemClickListener {
-        fun onItemClick(weapon: UiWeapon)
-    }
 
 }

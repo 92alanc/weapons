@@ -4,47 +4,54 @@ import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.io.Result
 import com.alancamargo.weapons.data.local.WeaponLocalDataSource
 import com.alancamargo.weapons.domain.entities.Weapon
+import com.alancamargo.weapons.domain.entities.WeaponListHeader
 
 class WeaponRepositoryImpl(
     private val localDataSource: WeaponLocalDataSource,
     private val ioHelper: IoHelper
 ) : WeaponRepository {
 
-    override suspend fun getWeapons(): Result<List<Weapon>> = ioHelper.safeIoCall {
-        localDataSource.getWeapons()
+    override suspend fun getWeapons(): Result<Map<WeaponListHeader?, List<Weapon>>> {
+        return ioHelper.safeIoCall {
+            localDataSource.getWeapons()
+        }
     }
 
-    override suspend fun getWeaponsByName(name: String): Result<List<Weapon>> {
+    override suspend fun getWeaponsByName(
+        name: String
+    ): Result<Map<WeaponListHeader?, List<Weapon>>> {
         return ioHelper.safeIoCall {
             localDataSource.getWeaponsByName(name)
         }
     }
 
-    override suspend fun getWeaponsByYear(yearId: Long): Result<List<Weapon>> = ioHelper.safeIoCall {
-        localDataSource.getWeaponsByYear(yearId)
-    }
-
-    override suspend fun getWeaponsByCountry(countryId: Long): Result<List<Weapon>> {
+    override suspend fun getWeaponsByYear(): Result<Map<WeaponListHeader?, List<Weapon>>> {
         return ioHelper.safeIoCall {
-            localDataSource.getWeaponsByCountry(countryId)
+            localDataSource.getWeaponsByYear()
         }
     }
 
-    override suspend fun getWeaponsByType(typeId: Long): Result<List<Weapon>> {
+    override suspend fun getWeaponsByCountry(): Result<Map<WeaponListHeader?, List<Weapon>>> {
         return ioHelper.safeIoCall {
-            localDataSource.getWeaponsByType(typeId)
+            localDataSource.getWeaponsByCountry()
         }
     }
 
-    override suspend fun getWeaponsByCalibre(calibreId: Long): Result<List<Weapon>> {
+    override suspend fun getWeaponsByType(): Result<Map<WeaponListHeader?, List<Weapon>>> {
         return ioHelper.safeIoCall {
-            localDataSource.getWeaponsByCalibre(calibreId)
+            localDataSource.getWeaponsByType()
         }
     }
 
-    override suspend fun getWeaponsByManufacturer(manufacturerId: Long): Result<List<Weapon>> {
+    override suspend fun getWeaponsByCalibre(): Result<Map<WeaponListHeader?, List<Weapon>>> {
         return ioHelper.safeIoCall {
-            localDataSource.getWeaponsByManufacturer(manufacturerId)
+            localDataSource.getWeaponsByCalibre()
+        }
+    }
+
+    override suspend fun getWeaponsByManufacturer(): Result<Map<WeaponListHeader?, List<Weapon>>> {
+        return ioHelper.safeIoCall {
+            localDataSource.getWeaponsByManufacturer()
         }
     }
 

@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.domain.entities
 
-sealed class WeaponType(val id: Long) {
+sealed class WeaponType(val id: Long) : WeaponListHeader {
 
     class Melee(id: Long) : WeaponType(id)
 

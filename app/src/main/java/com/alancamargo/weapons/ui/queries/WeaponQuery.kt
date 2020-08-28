@@ -12,18 +12,18 @@ sealed class WeaponQuery : Parcelable {
     data class ByName(val name: String) : WeaponQuery()
 
     @Parcelize
-    data class ByYear(val yearId: Long) : WeaponQuery()
+    object ByYear : WeaponQuery()
 
     @Parcelize
-    data class ByCountry(val countryId: Long) : WeaponQuery()
+    object ByCountry : WeaponQuery()
 
     @Parcelize
-    data class ByType(val typeId: Long) : WeaponQuery()
+    object ByType : WeaponQuery()
 
     @Parcelize
-    data class ByCalibre(val calibreId: Long) : WeaponQuery()
+    object ByCalibre : WeaponQuery()
 
     @Parcelize
-    data class ByManufacturer(val manufacturerId: Long) : WeaponQuery()
+    object ByManufacturer : WeaponQuery()
 
 }
