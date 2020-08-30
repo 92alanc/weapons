@@ -8,8 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alancamargo.weapons.data.io.Result
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
-import com.alancamargo.weapons.domain.entities.Weapon
-import com.alancamargo.weapons.domain.entities.WeaponListHeader
+import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.entities.UiWeaponListHeader
 import com.alancamargo.weapons.ui.entities.conversions.fromDomainToUi
@@ -95,7 +94,9 @@ class WeaponViewModel(
     }
 
     private fun processWeaponList(body: Map<WeaponListHeader?, List<Weapon>>) {
-        val weapons = body.values.first().map {
+        val weapons = body.flatMap {
+            it.value
+        }.map {
             it.fromDomainToUi(context)
         }
 
@@ -103,16 +104,44 @@ class WeaponViewModel(
     }
 
     private fun processWeaponListWithHeader(body: Map<WeaponListHeader?, List<Weapon>>) {
-        // FIXME: WeaponType mapping needs fixing
-        val weapons = body.mapKeys {
-            it.key?.fromDomainToUi(context)
-        }.mapValues {
+        val weaponList = body.flatMap {
             it.value.map { weapon ->
                 weapon.fromDomainToUi(context)
             }
         }
 
+        val headerClass = body.keys.first { it != null }?.javaClass
+            ?: throw IllegalStateException("Type must not be null")
+
+        val weapons: Map<UiWeaponListHeader?, List<UiWeapon>> =
+            weaponList.createMapFromHeaderType(headerClass)
+
         stateLiveData.postValue(State.WeaponListWithHeaderReady(weapons))
+    }
+
+    private fun List<UiWeapon>.createMapFromHeaderType(
+        headerClass: Class<WeaponListHeader>
+    ): Map<UiWeaponListHeader?, List<UiWeapon>> {
+        return when (headerClass) {
+            Calibre::class.java -> groupBy { it.calibre }
+            Country::class.java -> groupBy { it.country }
+            WeaponType.Melee::class.java,
+            WeaponType.Pistol::class.java,
+            WeaponType.Rifle::class.java,
+            WeaponType.Shotgun::class.java,
+            WeaponType.BoobyTrap::class.java,
+            WeaponType.Carbine::class.java,
+            WeaponType.MachineGun::class.java,
+            WeaponType.SubMachineGun::class.java,
+            WeaponType.Grenade::class.java,
+            WeaponType.Mine::class.java,
+            WeaponType.GrenadeLauncher::class.java,
+            WeaponType.BoobyTrap::class.java,
+            WeaponType.Flamethrower::class.java -> groupBy { it.type }
+            Manufacturer::class.java -> groupBy { it.manufacturer }
+            Year::class.java -> groupBy { it.year }
+            else -> throw IllegalStateException("Must be an implementation of WeaponListHeader")
+        }
     }
 
     sealed class State : Parcelable {
