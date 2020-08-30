@@ -42,9 +42,13 @@ class WeaponListWithHeaderViewHolder(
     private fun processHeader(header: UiWeaponListHeader?) {
         txtHeader.text = when (header) {
             is UiCountry -> {
-                imgFlag.isVisible = true
                 val flag = resourcesHelper.getDrawable(header.flagId)
-                imgFlag.setImageDrawable(flag)
+
+                with(imgFlag) {
+                    isVisible = true
+                    setImageDrawable(flag)
+                }
+
                 header.name
             }
 
