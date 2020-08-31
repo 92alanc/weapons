@@ -58,15 +58,6 @@ fun WeaponType.fromDomainToUi(context: Context): UiWeaponType = when (this) {
     is WeaponType.Flamethrower -> UiWeaponType(id, context.getString(R.string.type_flamethrower))
 }
 
-fun WeaponListHeader.fromDomainToUi(context: Context): UiWeaponListHeader = when (this) {
-    is Calibre -> UiCalibre(id, name)
-    is Country -> UiCountry(id, name, flagId)
-    is Manufacturer -> UiManufacturer(id, name)
-    is WeaponType -> fromDomainToUi(context)
-    is Year -> UiYear(id, year)
-    else -> throw IllegalStateException("Must be an implementation of WeaponListFilter")
-}
-
 private fun WeaponType.Rifle.convertRifle(context: Context) = when (this.category) {
     WeaponType.Rifle.Category.AUTOMATIC -> UiWeaponType(
         id,
@@ -81,6 +72,11 @@ private fun WeaponType.Rifle.convertRifle(context: Context) = when (this.categor
     WeaponType.Rifle.Category.BOLT_ACTION -> UiWeaponType(
         id,
         context.getString(R.string.type_rifle_bolt_action)
+    )
+
+    WeaponType.Rifle.Category.ANTI_TANK -> UiWeaponType(
+        id,
+        context.getString(R.string.type_rifle_anti_tank)
     )
 }
 

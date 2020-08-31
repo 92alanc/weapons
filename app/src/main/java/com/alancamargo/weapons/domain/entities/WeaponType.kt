@@ -11,7 +11,8 @@ sealed class WeaponType(val id: Long) : WeaponListHeader {
         enum class Category {
             BOLT_ACTION,
             SEMI_AUTOMATIC,
-            AUTOMATIC
+            AUTOMATIC,
+            ANTI_TANK
         }
 
     }

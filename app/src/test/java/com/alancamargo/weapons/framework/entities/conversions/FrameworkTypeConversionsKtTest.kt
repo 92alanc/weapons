@@ -372,6 +372,39 @@ class FrameworkTypeConversionsKtTest {
         }
     }
 
+    @Test
+    fun antiTankRifle_fromDomainToDb() {
+        val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.ANTI_TANK)
+        val expected = DbWeaponType(
+            ID,
+            NAME_RIFLE,
+            CATEGORY_ANTI_TANK
+        )
+
+        val actual = domain.fromDomainToDb()
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun antiTankRifle_fromDbToDomain() {
+        val db = DbWeaponType(
+            ID,
+            NAME_RIFLE,
+            CATEGORY_ANTI_TANK
+        )
+        val expected = WeaponType.Rifle(ID, WeaponType.Rifle.Category.ANTI_TANK)
+
+        val actual = db.fromDbToDomain()
+
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Rifle::class.java)
+            require(this is WeaponType.Rifle)
+            assertThat(category).isEqualTo(WeaponType.Rifle.Category.ANTI_TANK)
+        }
+    }
+
     @Test(expected = IllegalArgumentException::class)
     fun invalidRifle_shouldThrowException() {
         val db = DbWeaponType(

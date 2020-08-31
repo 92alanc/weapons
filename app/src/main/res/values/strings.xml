@@ -19,6 +19,7 @@
     <string name="type_rocket_launcher">Rocket launcher</string>
     <string name="type_booby_trap">Booby trap</string>
     <string name="type_flamethrower">Flamethrower</string>
+    <string name="type_rifle_anti_tank">Anti-tank rifle</string>
     <!-- endregion -->
 
     <!-- region App texts -->

@@ -306,6 +306,16 @@ class UiTypeConversionsKtTest {
 
         assertThat(actual.id).isEqualTo(expected.id)
     }
+
+    @Test
+    fun antiTankRifle_fromDomainToUi() {
+        val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.ANTI_TANK)
+        val expected = UiWeaponType(ID, context.getString(R.string.type_rifle_anti_tank))
+
+        val actual = domain.fromDomainToUi(context)
+
+        assertThat(actual.id).isEqualTo(expected.id)
+    }
     // endregion
 
     @After
