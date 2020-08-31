@@ -4,6 +4,7 @@ import com.alancamargo.weapons.data.crash.CrashReportHelper
 import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.io.Result
 import com.alancamargo.weapons.data.local.WeaponLocalDataSource
+import com.alancamargo.weapons.domain.entities.*
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -32,13 +33,15 @@ class WeaponRepositoryImplTest {
 
     @Test
     fun shouldGetWeapons() = runBlocking {
-        coEvery { mockLocalDataSource.getWeapons() } returns listOf(mockk(), mockk(), mockk())
+        coEvery {
+            mockLocalDataSource.getWeapons()
+        } returns mapOf(null to listOf(mockk(), mockk(), mockk()))
 
         val result = repository.getWeapons()
 
         assertThat(result).isInstanceOf(Result.Success::class.java)
         require(result is Result.Success)
-        assertThat(result.body.size).isEqualTo(3)
+        assertThat(result.body.values.first().size).isEqualTo(3)
     }
 
     @Test
@@ -62,13 +65,15 @@ class WeaponRepositoryImplTest {
 
     @Test
     fun shouldGetWeaponsByName() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponsByName(any()) } returns listOf(mockk(), mockk())
+        coEvery {
+            mockLocalDataSource.getWeaponsByName(any())
+        } returns mapOf(null to listOf(mockk(), mockk()))
 
         val result = repository.getWeaponsByName("AK-47")
 
         assertThat(result).isInstanceOf(Result.Success::class.java)
         require(result is Result.Success)
-        assertThat(result.body.size).isEqualTo(2)
+        assertThat(result.body.values.first().size).isEqualTo(2)
     }
 
     @Test
@@ -92,9 +97,14 @@ class WeaponRepositoryImplTest {
 
     @Test
     fun shouldGetWeaponsByYear() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponsByYear(any()) } returns listOf(mockk(), mockk())
+        coEvery {
+            mockLocalDataSource.getWeaponsByYear()
+        } returns mapOf(
+            Year(1, 1947) to listOf(mockk()),
+            Year(2, 1949) to listOf(mockk())
+        )
 
-        val result = repository.getWeaponsByYear(1947)
+        val result = repository.getWeaponsByYear()
 
         assertThat(result).isInstanceOf(Result.Success::class.java)
         require(result is Result.Success)
@@ -104,27 +114,32 @@ class WeaponRepositoryImplTest {
     @Test
     fun getWeaponsByYear_localDataSourceThrowsException_shouldLogToCrashReport() = runBlocking {
         val exception = IOException()
-        coEvery { mockLocalDataSource.getWeaponsByYear(any()) } throws exception
+        coEvery { mockLocalDataSource.getWeaponsByYear() } throws exception
 
-        repository.getWeaponsByYear(1947)
+        repository.getWeaponsByYear()
 
         verify { mockCrashReportHelper.log(exception) }
     }
 
     @Test
     fun getWeaponsByYear_localDataSourceThrowsException_shouldReturnError() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponsByYear(any()) } throws IOException()
+        coEvery { mockLocalDataSource.getWeaponsByYear() } throws IOException()
 
-        val result = repository.getWeaponsByYear(1947)
+        val result = repository.getWeaponsByYear()
 
         assertThat(result).isInstanceOf(Result.Error::class.java)
     }
 
     @Test
     fun shouldGetWeaponsByCountry() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponsByCountry(any()) } returns listOf(mockk(), mockk())
+        coEvery {
+            mockLocalDataSource.getWeaponsByCountry()
+        } returns mapOf(
+            Country(1, "British Empire", "flag_uk") to listOf(mockk()),
+            Country(1, "Russian Empire", "flag_russia") to listOf(mockk())
+        )
 
-        val result = repository.getWeaponsByCountry(222L)
+        val result = repository.getWeaponsByCountry()
 
         assertThat(result).isInstanceOf(Result.Success::class.java)
         require(result is Result.Success)
@@ -134,27 +149,32 @@ class WeaponRepositoryImplTest {
     @Test
     fun getWeaponsByCountry_localDataSourceThrowsException_shouldLogToCrashReport() = runBlocking {
         val exception = IOException()
-        coEvery { mockLocalDataSource.getWeaponsByCountry(any()) } throws exception
+        coEvery { mockLocalDataSource.getWeaponsByCountry() } throws exception
 
-        repository.getWeaponsByCountry(222L)
+        repository.getWeaponsByCountry()
 
         verify { mockCrashReportHelper.log(exception) }
     }
 
     @Test
     fun getWeaponsByCountry_localDataSourceThrowsException_shouldReturnError() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponsByCountry(any()) } throws IOException()
+        coEvery { mockLocalDataSource.getWeaponsByCountry() } throws IOException()
 
-        val result = repository.getWeaponsByCountry(222L)
+        val result = repository.getWeaponsByCountry()
 
         assertThat(result).isInstanceOf(Result.Error::class.java)
     }
 
     @Test
     fun shouldGetWeaponsByType() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponsByType(any()) } returns listOf(mockk(), mockk())
+        coEvery {
+            mockLocalDataSource.getWeaponsByType()
+        } returns mapOf(
+            WeaponType.Rifle(1, WeaponType.Rifle.Category.BOLT_ACTION) to listOf(mockk()),
+            WeaponType.Pistol(2) to listOf(mockk())
+        )
 
-        val result = repository.getWeaponsByType(333L)
+        val result = repository.getWeaponsByType()
 
         assertThat(result).isInstanceOf(Result.Success::class.java)
         require(result is Result.Success)
@@ -164,27 +184,32 @@ class WeaponRepositoryImplTest {
     @Test
     fun getWeaponsByType_localDataSourceThrowsException_shouldLogToCrashReport() = runBlocking {
         val exception = IOException()
-        coEvery { mockLocalDataSource.getWeaponsByType(any()) } throws exception
+        coEvery { mockLocalDataSource.getWeaponsByType() } throws exception
 
-        repository.getWeaponsByType(333L)
+        repository.getWeaponsByType()
 
         verify { mockCrashReportHelper.log(exception) }
     }
 
     @Test
     fun getWeaponsByType_localDataSourceThrowsException_shouldReturnError() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponsByType(any()) } throws IOException()
+        coEvery { mockLocalDataSource.getWeaponsByType() } throws IOException()
 
-        val result = repository.getWeaponsByType(333L)
+        val result = repository.getWeaponsByType()
 
         assertThat(result).isInstanceOf(Result.Error::class.java)
     }
 
     @Test
     fun shouldGetWeaponsByCalibre() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponsByCalibre(any()) } returns listOf(mockk(), mockk())
+        coEvery {
+            mockLocalDataSource.getWeaponsByCalibre()
+        } returns mapOf(
+            Calibre(1, ".303 British") to listOf(mockk()),
+            Calibre(2, "5.56mm") to listOf(mockk())
+        )
 
-        val result = repository.getWeaponsByCalibre(444L)
+        val result = repository.getWeaponsByCalibre()
 
         assertThat(result).isInstanceOf(Result.Success::class.java)
         require(result is Result.Success)
@@ -194,18 +219,18 @@ class WeaponRepositoryImplTest {
     @Test
     fun getWeaponsByCalibre_localDataSourceThrowsException_shouldLogToCrashReport() = runBlocking {
         val exception = IOException()
-        coEvery { mockLocalDataSource.getWeaponsByCalibre(any()) } throws exception
+        coEvery { mockLocalDataSource.getWeaponsByCalibre() } throws exception
 
-        repository.getWeaponsByCalibre(444L)
+        repository.getWeaponsByCalibre()
 
         verify { mockCrashReportHelper.log(exception) }
     }
 
     @Test
     fun getWeaponsByCalibre_localDataSourceThrowsException_shouldReturnError() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponsByCalibre(any()) } throws IOException()
+        coEvery { mockLocalDataSource.getWeaponsByCalibre() } throws IOException()
 
-        val result = repository.getWeaponsByCalibre(444L)
+        val result = repository.getWeaponsByCalibre()
 
         assertThat(result).isInstanceOf(Result.Error::class.java)
     }
@@ -213,10 +238,13 @@ class WeaponRepositoryImplTest {
     @Test
     fun shouldGetWeaponsByManufacturer() = runBlocking {
         coEvery {
-            mockLocalDataSource.getWeaponsByManufacturer(any())
-        } returns listOf(mockk(), mockk())
+            mockLocalDataSource.getWeaponsByManufacturer()
+        } returns mapOf(
+            Manufacturer(1, "DWM") to listOf(mockk()),
+            Manufacturer(2, "Steyr-Mannlicher") to listOf(mockk())
+        )
 
-        val result = repository.getWeaponsByManufacturer(555L)
+        val result = repository.getWeaponsByManufacturer()
 
         assertThat(result).isInstanceOf(Result.Success::class.java)
         require(result is Result.Success)
@@ -226,18 +254,18 @@ class WeaponRepositoryImplTest {
     @Test
     fun getWeaponsByManufacturer_localDataSourceThrowsException_shouldLogToCrashReport() = runBlocking {
         val exception = IOException()
-        coEvery { mockLocalDataSource.getWeaponsByManufacturer(any()) } throws exception
+        coEvery { mockLocalDataSource.getWeaponsByManufacturer() } throws exception
 
-        repository.getWeaponsByManufacturer(555L)
+        repository.getWeaponsByManufacturer()
 
         verify { mockCrashReportHelper.log(exception) }
     }
 
     @Test
     fun getWeaponsByManufacturer_localDataSourceThrowsException_shouldReturnError() = runBlocking {
-        coEvery { mockLocalDataSource.getWeaponsByManufacturer(any()) } throws IOException()
+        coEvery { mockLocalDataSource.getWeaponsByManufacturer() } throws IOException()
 
-        val result = repository.getWeaponsByManufacturer(555L)
+        val result = repository.getWeaponsByManufacturer()
 
         assertThat(result).isInstanceOf(Result.Error::class.java)
     }

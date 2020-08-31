@@ -43,7 +43,7 @@ class WeaponLocalDataSourceImplTest {
 
         val weapons = localDataSource.getWeapons()
 
-        assertThat(weapons.size).isEqualTo(3)
+        assertThat(weapons.values.first().size).isEqualTo(3)
     }
 
     @Test(expected = IOException::class)
@@ -59,17 +59,17 @@ class WeaponLocalDataSourceImplTest {
     fun shouldGetWeaponsByYear() = runBlocking {
         mockSuccessfulOutput()
 
-        val weapons = localDataSource.getWeaponsByYear(1949)
+        val weapons = localDataSource.getWeaponsByYear()
 
         assertThat(weapons.size).isEqualTo(1)
     }
 
     @Test(expected = IOException::class)
     fun getWeaponsByYear_databaseThrowsException_shouldThrow() {
-        coEvery { mockWeaponDao.selectByYear(any()) } throws IOException()
+        coEvery { mockWeaponDao.selectAll() } throws IOException()
 
         runBlocking {
-            localDataSource.getWeaponsByYear(1967)
+            localDataSource.getWeaponsByYear()
         }
     }
 
@@ -77,17 +77,17 @@ class WeaponLocalDataSourceImplTest {
     fun shouldGetWeaponsByCountry() = runBlocking {
         mockSuccessfulOutput()
 
-        val weapons = localDataSource.getWeaponsByCountry(11L)
+        val weapons = localDataSource.getWeaponsByCountry()
 
         assertThat(weapons.size).isEqualTo(1)
     }
 
     @Test(expected = IOException::class)
     fun getWeaponsByCountry_databaseThrowsException_shouldThrow() {
-        coEvery { mockWeaponDao.selectByCountry(any()) } throws IOException()
+        coEvery { mockWeaponDao.selectAll() } throws IOException()
 
         runBlocking {
-            localDataSource.getWeaponsByCountry(22L)
+            localDataSource.getWeaponsByCountry()
         }
     }
 
@@ -95,17 +95,17 @@ class WeaponLocalDataSourceImplTest {
     fun shouldGetWeaponsByType() = runBlocking {
         mockSuccessfulOutput()
 
-        val weapons = localDataSource.getWeaponsByType(12L)
+        val weapons = localDataSource.getWeaponsByType()
 
         assertThat(weapons.size).isEqualTo(1)
     }
 
     @Test(expected = IOException::class)
     fun getWeaponsByType_databaseThrowsException_shouldThrow() {
-        coEvery { mockWeaponDao.selectByType(any()) } throws IOException()
+        coEvery { mockWeaponDao.selectAll() } throws IOException()
 
         runBlocking {
-            localDataSource.getWeaponsByType(33L)
+            localDataSource.getWeaponsByType()
         }
     }
 
@@ -113,17 +113,17 @@ class WeaponLocalDataSourceImplTest {
     fun shouldGetWeaponsByCalibre() = runBlocking {
         mockSuccessfulOutput()
 
-        val weapons = localDataSource.getWeaponsByCalibre(13L)
+        val weapons = localDataSource.getWeaponsByCalibre()
 
         assertThat(weapons.size).isEqualTo(1)
     }
 
     @Test(expected = IOException::class)
     fun getWeaponsByCalibre_databaseThrowsException_shouldThrow() {
-        coEvery { mockWeaponDao.selectByCalibre(any()) } throws IOException()
+        coEvery { mockWeaponDao.selectAll() } throws IOException()
 
         runBlocking {
-            localDataSource.getWeaponsByCalibre(44L)
+            localDataSource.getWeaponsByCalibre()
         }
     }
 
@@ -131,17 +131,17 @@ class WeaponLocalDataSourceImplTest {
     fun shouldGetWeaponsByManufacturer() = runBlocking {
         mockSuccessfulOutput()
 
-        val weapons = localDataSource.getWeaponsByManufacturer(14L)
+        val weapons = localDataSource.getWeaponsByManufacturer()
 
         assertThat(weapons.size).isEqualTo(1)
     }
 
     @Test(expected = IOException::class)
     fun getWeaponsByManufacturer_databaseThrowsException_shouldThrow() {
-        coEvery { mockWeaponDao.selectByManufacturer(any()) } throws IOException()
+        coEvery { mockWeaponDao.selectAll() } throws IOException()
 
         runBlocking {
-            localDataSource.getWeaponsByManufacturer(55L)
+            localDataSource.getWeaponsByManufacturer()
         }
     }
 
