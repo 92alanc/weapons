@@ -5,7 +5,8 @@ import br.com.concretesolutions.kappuccino.assertions.VisibilityAssertions.displ
 import br.com.concretesolutions.kappuccino.custom.intent.IntentMatcherInteractions.sentIntent
 import br.com.concretesolutions.kappuccino.custom.recyclerView.RecyclerViewInteractions.recyclerView
 import com.alancamargo.weapons.R
-import com.alancamargo.weapons.ui.activities.*
+import com.alancamargo.weapons.ui.activities.MainActivity
+import com.alancamargo.weapons.ui.activities.WeaponListActivity
 
 fun mainActivity(block: MainActivityRobot.() -> Unit) = MainActivityRobot().apply {
     ActivityScenario.launch(MainActivity::class.java)
@@ -101,36 +102,6 @@ class MainActivityAssertions {
     fun nameSearchDialogueIsDisplayed() {
         displayed {
             text(R.string.find_weapons_by_name)
-        }
-    }
-
-    fun countryListActivityIsLaunched() {
-        sentIntent {
-            className(CountryListActivity::class.java.name)
-        }
-    }
-
-    fun yearListActivityIsLaunched() {
-        sentIntent {
-            className(YearListActivity::class.java.name)
-        }
-    }
-
-    fun typeListActivityIsLaunched() {
-        sentIntent {
-            className(TypeListActivity::class.java.name)
-        }
-    }
-
-    fun calibreListActivityIsLaunched() {
-        sentIntent {
-            className(CalibreListActivity::class.java.name)
-        }
-    }
-
-    fun manufacturerListActivityIsLaunched() {
-        sentIntent {
-            className(ManufacturerListActivity::class.java.name)
         }
     }
 

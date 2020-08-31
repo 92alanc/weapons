@@ -35,42 +35,42 @@ class MainActivityTest {
     }
 
     @Test
-    fun clickByCountry_shouldLaunchCountryListActivity() {
+    fun clickByCountry_shouldLaunchWeaponListActivity() {
         mainActivity {
         } clickByCountry {
-            countryListActivityIsLaunched()
+            weaponListActivityIsLaunched()
         }
     }
 
     @Test
-    fun clickByYear_shouldLaunchCountryListActivity() {
+    fun clickByYear_shouldLaunchWeaponListActivity() {
         mainActivity {
         } clickByYear {
-            yearListActivityIsLaunched()
+            weaponListActivityIsLaunched()
         }
     }
 
     @Test
-    fun clickByType_shouldLaunchCountryListActivity() {
+    fun clickByType_shouldLaunchWeaponListActivity() {
         mainActivity {
         } clickByType {
-            typeListActivityIsLaunched()
+            weaponListActivityIsLaunched()
         }
     }
 
     @Test
-    fun clickByCalibre_shouldLaunchCountryListActivity() {
+    fun clickByCalibre_shouldLaunchWeaponListActivity() {
         mainActivity {
         } clickByCalibre {
-            calibreListActivityIsLaunched()
+            weaponListActivityIsLaunched()
         }
     }
 
     @Test
-    fun clickByManufacturer_shouldLaunchCountryListActivity() {
+    fun clickByManufacturer_shouldWeaponCountryListActivity() {
         mainActivity {
         } clickByManufacturer {
-            manufacturerListActivityIsLaunched()
+            weaponListActivityIsLaunched()
         }
     }
 
