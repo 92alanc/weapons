@@ -1,15 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">WW1 Weapons</string>
-
-    <!-- region Countries -->
-    <string name="country_uk">British Empire</string>
-    <string name="country_germany">German Empire</string>
-    <string name="country_france">French Empire</string>
-    <string name="country_austria_hungary">Austro-Hungarian Empire</string>
-    <string name="country_russia">Russian Empire</string>
-    <string name="country_italy">Italian Empire</string>
-    <string name="country_japan">Japanese Empire</string>
-    <style name="country_usa">United States</style>
-    <!-- endregion -->
 </resources>
