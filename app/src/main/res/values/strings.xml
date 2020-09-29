@@ -30,7 +30,6 @@
     <string name="calibre_format">Calibre: %1$s</string>
     <string name="length_format">Length: %1$dmm</string>
     <string name="mass_format">Mass: %1$.2fkg</string>
-    <string name="capacity_format">Capacity: %1$d rounds</string>
     <string name="rate_of_fire_format">Rate of fire: %1$d rounds per minute</string>
     <string name="effective_range_format">Effective range: %1$dm</string>
     <string name="photo_indicator_format">Photo %1$d / %2$d</string>
@@ -45,6 +44,10 @@
     <string name="privacy_notice_text">I couldn\'t care less about your data so I don\'t and I won\'t ever even try to have access to, track or store ANY of it, full stop.</string>
     <string name="error_loading_photo">Error loading photo</string>
     <string name="unknown">Unknown</string>
+    <plurals name="capacity_plural">
+        <item quantity="one">Capacity: %d round</item>
+        <item quantity="other">Capacity: %d rounds</item>
+    </plurals>
     <plurals name="results_plural">
         <item quantity="one">%d result</item>
         <item quantity="other">%d results</item>

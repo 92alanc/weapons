@@ -26,4 +26,8 @@ class ResourcesHelperImpl(
         context.getString(stringId, it)
     }
 
+    override fun getPluralStringOrNull(stringId: Int, quantity: Int?): String? = quantity?.let {
+        context.resources.getQuantityString(stringId, it, it)
+    }
+
 }

@@ -66,8 +66,8 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
             )
             txtMass.setTextOrHide(massText)
 
-            val capacityText = resourcesHelper.getFormattedStringOrNull(
-                R.string.capacity_format, capacityInRounds
+            val capacityText = resourcesHelper.getPluralStringOrNull(
+                R.plurals.capacity_plural, capacityInRounds
             )
             txtCapacity.setTextOrHide(capacityText)
 
