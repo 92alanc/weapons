@@ -38,6 +38,7 @@ data class DbWeaponType(
         const val CATEGORY_HEAVY = "category_heavy"
         const val CATEGORY_ANTI_PERSONNEL = "category_anti_personnel"
         const val CATEGORY_ANTI_TANK = "category_anti_tank"
+        const val CATEGORY_SINGLE_SHOT = "category_single_shot"
     }
 
 }

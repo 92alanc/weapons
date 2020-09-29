@@ -10,6 +10,7 @@ import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGOR
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_LIGHT
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_MEDIUM
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_SEMI_AUTOMATIC
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_SINGLE_SHOT
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_CARBINE
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_FLAMETHROWER
@@ -402,6 +403,39 @@ class FrameworkTypeConversionsKtTest {
             assertThat(this).isInstanceOf(WeaponType.Rifle::class.java)
             require(this is WeaponType.Rifle)
             assertThat(category).isEqualTo(WeaponType.Rifle.Category.ANTI_TANK)
+        }
+    }
+
+    @Test
+    fun singleShotRifle_fromDomainToDb() {
+        val domain = WeaponType.Rifle(ID, WeaponType.Rifle.Category.SINGLE_SHOT)
+        val expected = DbWeaponType(
+            ID,
+            NAME_RIFLE,
+            CATEGORY_SINGLE_SHOT
+        )
+
+        val actual = domain.fromDomainToDb()
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    @Test
+    fun singleShotRifle_fromDbToDomain() {
+        val db = DbWeaponType(
+            ID,
+            NAME_RIFLE,
+            CATEGORY_SINGLE_SHOT
+        )
+        val expected = WeaponType.Rifle(ID, WeaponType.Rifle.Category.SINGLE_SHOT)
+
+        val actual = db.fromDbToDomain()
+
+        with(actual) {
+            assertThat(id).isEqualTo(expected.id)
+            assertThat(this).isInstanceOf(WeaponType.Rifle::class.java)
+            require(this is WeaponType.Rifle)
+            assertThat(category).isEqualTo(WeaponType.Rifle.Category.SINGLE_SHOT)
         }
     }
 

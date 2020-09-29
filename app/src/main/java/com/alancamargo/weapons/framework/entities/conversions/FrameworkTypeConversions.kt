@@ -10,6 +10,7 @@ import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGOR
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_LIGHT
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_MEDIUM
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_SEMI_AUTOMATIC
+import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_SINGLE_SHOT
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_CARBINE
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_FLAMETHROWER
@@ -223,6 +224,7 @@ private fun WeaponType.Rifle.convertRifle(): DbWeaponType {
         WeaponType.Rifle.Category.SEMI_AUTOMATIC -> CATEGORY_SEMI_AUTOMATIC
         WeaponType.Rifle.Category.AUTOMATIC -> CATEGORY_AUTOMATIC
         WeaponType.Rifle.Category.ANTI_TANK -> CATEGORY_ANTI_TANK
+        WeaponType.Rifle.Category.SINGLE_SHOT -> CATEGORY_SINGLE_SHOT
     }
 
     return DbWeaponType(
@@ -247,6 +249,10 @@ private fun DbWeaponType.convertRifle() = when (this.categoryId) {
 
     CATEGORY_ANTI_TANK -> {
         WeaponType.Rifle(id, WeaponType.Rifle.Category.ANTI_TANK)
+    }
+
+    CATEGORY_SINGLE_SHOT -> {
+        WeaponType.Rifle(id, WeaponType.Rifle.Category.SINGLE_SHOT)
     }
 
     else -> throw IllegalArgumentException("Category must be a WeaponType.Rifle.Category")

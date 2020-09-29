@@ -12,7 +12,8 @@ sealed class WeaponType(val id: Long) : WeaponListHeader {
             BOLT_ACTION,
             SEMI_AUTOMATIC,
             AUTOMATIC,
-            ANTI_TANK
+            ANTI_TANK,
+            SINGLE_SHOT
         }
 
     }
