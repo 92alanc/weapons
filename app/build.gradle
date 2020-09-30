@@ -98,11 +98,11 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation "androidx.room:room-ktx:$room_version"
     implementation "androidx.room:room-runtime:$room_version"
-    implementation 'com.google.android.material:material:1.2.0'
-    implementation 'com.google.android.gms:play-services-ads:19.3.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.google.android.gms:play-services-ads:19.4.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.google.firebase:firebase-analytics-ktx:17.5.0'
-    implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
+    implementation 'com.google.firebase:firebase-crashlytics:17.2.2'
     implementation 'io.coil-kt:coil-base:0.10.0'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
