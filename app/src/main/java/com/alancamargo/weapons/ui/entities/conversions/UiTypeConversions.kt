@@ -83,6 +83,11 @@ private fun WeaponType.Rifle.convertRifle(context: Context) = when (this.categor
         id,
         context.getString(R.string.type_rifle_single_shot)
     )
+
+    WeaponType.Rifle.Category.LEVER_ACTION -> UiWeaponType(
+        id,
+        context.getString(R.string.type_rifle_lever_action)
+    )
 }
 
 private fun WeaponType.MachineGun.convertMachineGun(context: Context) = when (this.category) {

@@ -21,6 +21,7 @@
     <string name="type_flamethrower">Flamethrower</string>
     <string name="type_rifle_anti_tank">Anti-tank rifle</string>
     <string name="type_rifle_single_shot">Single shot rifle</string>
+    <string name="type_rifle_lever_action">Lever action rifle</string>
     <!-- endregion -->
 
     <!-- region App texts -->
