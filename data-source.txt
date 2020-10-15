@@ -1,5 +1,3 @@
-M1914 "Bottle" Grenade - Frag
-M1912 "Lantern" Grenade
 M1917 Chemical Grenade
 M1912 Shovel
 Karabina Mannlicher Obr. 1890G
