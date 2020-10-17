@@ -10,7 +10,7 @@ import com.alancamargo.weapons.ui.fragments.NameSearchDialogue
 import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
 import com.alancamargo.weapons.ui.queries.WeaponQuery
 import com.alancamargo.weapons.ui.queries.WeaponQueryType
-import com.alancamargo.weapons.ui.tools.loadAds
+import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,13 +21,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
 
     private val viewModel by viewModel<QueryViewModel>()
     private val weaponListActivityNavigation by inject<WeaponListActivityNavigation>()
+    private val adLoader by inject<AdLoader>()
     private val adapter = QueryAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         recyclerView.adapter = adapter
         adapter.setData(viewModel.getQueries())
-        adView.loadAds()
+        adLoader.loadAds(adView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

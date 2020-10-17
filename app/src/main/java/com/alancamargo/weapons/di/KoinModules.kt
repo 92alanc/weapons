@@ -23,6 +23,8 @@ import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigation
 import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigationImpl
 import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
 import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigationImpl
+import com.alancamargo.weapons.ui.tools.AdLoader
+import com.alancamargo.weapons.ui.tools.AdLoaderImpl
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.ResourcesHelperImpl
 import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
@@ -119,6 +121,8 @@ private val ui = module {
 
     factory<WeaponListActivityNavigation> { WeaponListActivityNavigationImpl() }
     factory<WeaponDetailsActivityNavigation> { WeaponDetailsActivityNavigationImpl() }
+
+    factory<AdLoader> { AdLoaderImpl() }
 
     factory<ResourcesHelper> { ResourcesHelperImpl(androidContext(), get()) }
     factory { (onItemClickListener: OnItemClickListener) ->

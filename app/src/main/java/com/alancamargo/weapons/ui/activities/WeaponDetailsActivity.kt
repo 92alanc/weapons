@@ -8,8 +8,8 @@ import coil.ImageLoader
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.ViewPagerAdapter
 import com.alancamargo.weapons.ui.entities.UiWeapon
+import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
-import com.alancamargo.weapons.ui.tools.loadAds
 import com.alancamargo.weapons.ui.tools.setDrawableOrHide
 import com.alancamargo.weapons.ui.tools.setTextOrHide
 import kotlinx.android.synthetic.main.activity_weapon_details.*
@@ -19,13 +19,14 @@ class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details
 
     private val resourcesHelper by inject<ResourcesHelper>()
     private val imageLoader by inject<ImageLoader>()
+    private val adLoader by inject<AdLoader>()
     private val weapon by lazy { intent.getParcelableExtra<UiWeapon>(EXTRA_WEAPON) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         weapon?.let(::bindTo)
-        adView.loadAds()
+        adLoader.loadAds(adView)
     }
 
     private fun bindTo(weapon: UiWeapon) {

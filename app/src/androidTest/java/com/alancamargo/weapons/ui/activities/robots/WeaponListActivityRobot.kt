@@ -7,6 +7,7 @@ import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.activities.WeaponListActivity
 import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigation
 import com.alancamargo.weapons.ui.queries.WeaponQuery
+import com.alancamargo.weapons.ui.tools.AdLoader
 import io.mockk.verify
 import org.koin.test.KoinTest
 import org.koin.test.get
@@ -51,6 +52,12 @@ class WeaponListActivityAssertions : KoinTest {
     fun weaponDetailsActivityIsLaunched() {
         verify {
             get<WeaponDetailsActivityNavigation>().startActivity(any(), any())
+        }
+    }
+
+    fun adsAreLoaded() {
+        verify {
+            get<AdLoader>().loadAds(any())
         }
     }
 

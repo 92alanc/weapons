@@ -6,6 +6,7 @@ import br.com.concretesolutions.kappuccino.custom.recyclerView.RecyclerViewInter
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.activities.MainActivity
 import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
+import com.alancamargo.weapons.ui.tools.AdLoader
 import io.mockk.verify
 import org.koin.test.KoinTest
 import org.koin.test.get
@@ -87,7 +88,7 @@ class MainActivityRobot {
         assert(assertion)
     }
 
-    private infix fun assert(block: MainActivityAssertions.() -> Unit) {
+    infix fun assert(block: MainActivityAssertions.() -> Unit) {
         MainActivityAssertions().run(block)
     }
 
@@ -104,6 +105,12 @@ class MainActivityAssertions : KoinTest {
     fun nameSearchDialogueIsDisplayed() {
         displayed {
             text(R.string.find_weapons_by_name)
+        }
+    }
+
+    fun adsAreLoaded() {
+        verify {
+            get<AdLoader>().loadAds(any())
         }
     }
 

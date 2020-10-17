@@ -14,18 +14,18 @@ import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.entities.UiWeaponListHeader
 import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigation
 import com.alancamargo.weapons.ui.queries.WeaponQuery
-import com.alancamargo.weapons.ui.tools.loadAds
+import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
 import kotlinx.android.synthetic.main.activity_weapon_list.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
-    OnItemClickListener {
+class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list), OnItemClickListener {
 
     private val viewModel by viewModel<WeaponViewModel>()
     private val weaponDetailsActivityNavigation by inject<WeaponDetailsActivityNavigation>()
+    private val adLoader by inject<AdLoader>()
     private val query by lazy { intent.getParcelableExtra<WeaponQuery>(EXTRA_QUERY) }
 
     private val weaponAdapter by inject<WeaponAdapter> { parametersOf(this) }
@@ -40,7 +40,7 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         state = savedInstanceState?.getParcelable(KEY_STATE)
         state?.let(::processState) ?: fetchData()
-        adView.loadAds()
+        adLoader.loadAds(adView)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

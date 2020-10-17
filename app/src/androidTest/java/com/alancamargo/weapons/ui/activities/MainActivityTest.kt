@@ -2,6 +2,7 @@ package com.alancamargo.weapons.ui.activities
 
 import com.alancamargo.weapons.ui.activities.robots.mainActivity
 import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
+import com.alancamargo.weapons.ui.tools.AdLoader
 import io.mockk.mockk
 import org.junit.Before
 import org.junit.Test
@@ -71,9 +72,18 @@ class MainActivityTest {
         }
     }
 
+    @Test
+    fun shouldLoadAds() {
+        mainActivity {
+        } assert {
+            adsAreLoaded()
+        }
+    }
+
     private fun initialiseKoin() {
         loadKoinModules(module {
             single<WeaponListActivityNavigation>(override = true) { mockk(relaxed = true) }
+            single<AdLoader>(override = true) { mockk(relaxed = true) }
         })
     }
 
