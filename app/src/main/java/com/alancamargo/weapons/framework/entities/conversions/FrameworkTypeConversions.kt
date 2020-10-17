@@ -56,8 +56,6 @@ fun DbWeapon.fromDbToDomain(
     )
 }
 
-fun Country.fromDomainToDb() = DbCountry(id, name, flagId)
-
 fun DbCountry.fromDbToDomain() = Country(id, name, flagId)
 
 fun Manufacturer.fromDomainToDb() = DbManufacturer(id, name)

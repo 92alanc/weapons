@@ -99,24 +99,6 @@ class FrameworkTypeConversionsKtTest {
 
     // region Country
     @Test
-    fun country_fromDomainToDb() {
-        val domain = Country(
-            ID,
-            COUNTRY_NAME,
-            COUNTRY_FLAG
-        )
-        val expected = DbCountry(
-            ID,
-            COUNTRY_NAME,
-            COUNTRY_FLAG
-        )
-
-        val actual = domain.fromDomainToDb()
-
-        assertThat(actual).isEqualTo(expected)
-    }
-
-    @Test
     fun country_fromDbToDomain() {
         val db = DbCountry(
             ID,

@@ -20,4 +20,5 @@ class CalibreToDbCalibreMapperTest {
 
         assertThat(actual).isEqualTo(expected)
     }
+
 }

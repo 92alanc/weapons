@@ -10,13 +10,16 @@ import com.alancamargo.weapons.data.local.*
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepositoryImpl
 import com.alancamargo.weapons.domain.entities.Calibre
+import com.alancamargo.weapons.domain.entities.Country
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.crash.CrashReportHelperImpl
 import com.alancamargo.weapons.framework.db.provider.DatabaseProvider
 import com.alancamargo.weapons.framework.entities.DbCalibre
+import com.alancamargo.weapons.framework.entities.DbCountry
 import com.alancamargo.weapons.framework.local.*
 import com.alancamargo.weapons.framework.mappers.calibre.CalibreToDbCalibreMapper
 import com.alancamargo.weapons.framework.mappers.calibre.DbCalibreToCalibreMapper
+import com.alancamargo.weapons.framework.mappers.country.CountryToDbCountryMapper
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
@@ -31,6 +34,7 @@ import org.koin.dsl.module
 
 private const val DB_CALIBRE_MAPPER = "DB_CALIBRE_MAPPER"
 private const val CALIBRE_MAPPER = "CALIBRE_MAPPER"
+private const val COUNTRY_MAPPER = "COUNTRY_MAPPER"
 
 fun getModules() = listOf(data, framework, ui)
 
@@ -63,6 +67,7 @@ private val framework = module {
     factory<EntityMapper<DbCalibre, Calibre>>(named(DB_CALIBRE_MAPPER)) {
         DbCalibreToCalibreMapper()
     }
+    factory<EntityMapper<Country, DbCountry>>(named(COUNTRY_MAPPER)) { CountryToDbCountryMapper() }
 
     single {
         Room.databaseBuilder(

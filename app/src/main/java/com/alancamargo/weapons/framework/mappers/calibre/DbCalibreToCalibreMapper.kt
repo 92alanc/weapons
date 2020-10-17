@@ -9,4 +9,5 @@ class DbCalibreToCalibreMapper : EntityMapper<DbCalibre, Calibre> {
     override fun map(input: DbCalibre): Calibre = with(input) {
         Calibre(id, name)
     }
+
 }
