@@ -12,6 +12,7 @@ import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.entities.UiWeaponListHeader
+import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigation
 import com.alancamargo.weapons.ui.queries.WeaponQuery
 import com.alancamargo.weapons.ui.tools.loadAds
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
@@ -24,6 +25,7 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
     OnItemClickListener {
 
     private val viewModel by viewModel<WeaponViewModel>()
+    private val weaponDetailsActivityNavigation by inject<WeaponDetailsActivityNavigation>()
     private val query by lazy { intent.getParcelableExtra<WeaponQuery>(EXTRA_QUERY) }
 
     private val weaponAdapter by inject<WeaponAdapter> { parametersOf(this) }
@@ -47,8 +49,7 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
     }
 
     override fun onItemClick(weapon: UiWeapon) {
-        val intent = WeaponDetailsActivity.getIntent(this, weapon)
-        startActivity(intent)
+        weaponDetailsActivityNavigation.startActivity(this, weapon)
     }
 
     private fun fetchData() {
