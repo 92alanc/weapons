@@ -1,6 +1,7 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.framework.db.YearDao
+import com.alancamargo.weapons.framework.mappers.DbYearMapper
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -22,7 +23,8 @@ class YearLocalDataSourceImplTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        localDataSource = YearLocalDataSourceImpl(mockYearDao)
+        val mapper = DbYearMapper()
+        localDataSource = YearLocalDataSourceImpl(mockYearDao, mapper)
     }
 
     @Test

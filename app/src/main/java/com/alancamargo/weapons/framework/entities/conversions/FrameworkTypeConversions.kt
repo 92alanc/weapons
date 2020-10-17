@@ -26,7 +26,6 @@ import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_RI
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_ROCKET_LAUNCHER
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_SHOTGUN
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_SUB_MACHINE_GUN
-import com.alancamargo.weapons.framework.entities.DbYear
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -126,8 +125,6 @@ fun DbWeaponType.fromDbToDomain() = when (this.nameId) {
     NAME_FLAMETHROWER -> WeaponType.Flamethrower(id)
     else -> throw IllegalArgumentException("Name must be a proper WeaponType name")
 }
-
-fun DbYear.fromDbToDomain() = Year(id, year)
 
 private fun WeaponType.Grenade.convertGrenade(): DbWeaponType {
     val category = when (this.category) {
