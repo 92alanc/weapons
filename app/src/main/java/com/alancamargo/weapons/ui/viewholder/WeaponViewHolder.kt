@@ -31,7 +31,9 @@ class WeaponViewHolder(
         }
 
         imgFlag.setImageDrawable(flagDrawable)
-        imgPhoto.load(imageLoader, weapon.photos.first(), progressBar, txtError)
+
+        if (weapon.photos.isNotEmpty())
+            imgPhoto.load(imageLoader, weapon.photos.first(), progressBar, txtError)
     }
 
 }
