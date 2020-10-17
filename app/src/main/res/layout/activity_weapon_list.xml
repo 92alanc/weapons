@@ -5,7 +5,8 @@
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -51,6 +52,7 @@
         android:padding="@dimen/padding_default"
         android:text="@string/error"
         android:gravity="center"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/imgError"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -84,6 +86,7 @@
         android:padding="@dimen/padding_default"
         android:text="@string/no_results"
         android:gravity="center"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/imgNoResults"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
