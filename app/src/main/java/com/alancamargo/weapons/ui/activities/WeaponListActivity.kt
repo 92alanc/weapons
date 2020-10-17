@@ -35,6 +35,7 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         state = savedInstanceState?.getParcelable(KEY_STATE)
         state?.let(::processState) ?: fetchData()
         adView.loadAds()
