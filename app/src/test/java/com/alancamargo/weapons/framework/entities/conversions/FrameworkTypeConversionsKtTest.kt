@@ -1,7 +1,6 @@
 package com.alancamargo.weapons.framework.entities.conversions
 
 import com.alancamargo.weapons.domain.entities.*
-import com.alancamargo.weapons.framework.entities.DbManufacturer
 import com.alancamargo.weapons.framework.entities.DbWeapon
 import com.alancamargo.weapons.framework.entities.DbWeaponType
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_ANTI_PERSONNEL
@@ -97,40 +96,6 @@ class FrameworkTypeConversionsKtTest {
             assertThat(effectiveRangeInM).isEqualTo(expected.effectiveRangeInM)
             assertThat(photos).isEqualTo(expected.photos)
         }
-    }
-    // endregion
-
-    // region Manufacturer
-    @Test
-    fun manufacturer_fromDomainToDb() {
-        val domain = Manufacturer(
-            MANUFACTURER_ID,
-            MANUFACTURER_NAME
-        )
-        val expected = DbManufacturer(
-            MANUFACTURER_ID,
-            MANUFACTURER_NAME
-        )
-
-        val actual = domain.fromDomainToDb()
-
-        assertThat(actual).isEqualTo(expected)
-    }
-
-    @Test
-    fun manufacturer_fromDbToDomain() {
-        val db = DbManufacturer(
-            MANUFACTURER_ID,
-            MANUFACTURER_NAME
-        )
-        val expected = Manufacturer(
-            MANUFACTURER_ID,
-            MANUFACTURER_NAME
-        )
-
-        val actual = db.fromDbToDomain()
-
-        assertThat(actual).isEqualTo(expected)
     }
     // endregion
 

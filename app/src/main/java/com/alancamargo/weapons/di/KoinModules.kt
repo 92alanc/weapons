@@ -11,14 +11,17 @@ import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepositoryImpl
 import com.alancamargo.weapons.domain.entities.Calibre
 import com.alancamargo.weapons.domain.entities.Country
+import com.alancamargo.weapons.domain.entities.Manufacturer
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.crash.CrashReportHelperImpl
 import com.alancamargo.weapons.framework.db.provider.DatabaseProvider
 import com.alancamargo.weapons.framework.entities.DbCalibre
 import com.alancamargo.weapons.framework.entities.DbCountry
+import com.alancamargo.weapons.framework.entities.DbManufacturer
 import com.alancamargo.weapons.framework.local.*
 import com.alancamargo.weapons.framework.mappers.DbCalibreMapper
 import com.alancamargo.weapons.framework.mappers.DbCountryMapper
+import com.alancamargo.weapons.framework.mappers.DbManufacturerMapper
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
@@ -33,6 +36,7 @@ import org.koin.dsl.module
 
 private const val DB_CALIBRE_MAPPER = "DB_CALIBRE_MAPPER"
 private const val DB_COUNTRY_MAPPER = "DB_COUNTRY_MAPPER"
+private const val DB_MANUFACTURER_MAPPER = "DB_MANUFACTURER_MAPPER"
 
 fun getModules() = listOf(data, framework, ui)
 
@@ -49,7 +53,12 @@ private val data = module {
     factory<CalibreLocalDataSource> {
         CalibreLocalDataSourceImpl(get(), get(named(DB_CALIBRE_MAPPER)))
     }
-    factory<ManufacturerLocalDataSource> { ManufacturerLocalDataSourceImpl(get()) }
+    factory<EntityMapper<DbManufacturer, Manufacturer>>(named(DB_MANUFACTURER_MAPPER)) {
+        DbManufacturerMapper()
+    }
+    factory<ManufacturerLocalDataSource> {
+        ManufacturerLocalDataSourceImpl(get(), get(named(DB_MANUFACTURER_MAPPER)))
+    }
     factory<YearLocalDataSource> { YearLocalDataSourceImpl(get()) }
 
     factory { IoHelper(get()) }

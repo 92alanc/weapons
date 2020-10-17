@@ -1,6 +1,7 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.framework.db.ManufacturerDao
+import com.alancamargo.weapons.framework.mappers.DbManufacturerMapper
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -21,7 +22,8 @@ class ManufacturerLocalDataSourceImplTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        localDataSource = ManufacturerLocalDataSourceImpl(mockManufacturerDao)
+        val mapper = DbManufacturerMapper()
+        localDataSource = ManufacturerLocalDataSourceImpl(mockManufacturerDao, mapper)
     }
 
     @Test

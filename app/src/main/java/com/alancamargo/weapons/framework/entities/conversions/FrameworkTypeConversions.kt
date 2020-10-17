@@ -1,7 +1,6 @@
 package com.alancamargo.weapons.framework.entities.conversions
 
 import com.alancamargo.weapons.domain.entities.*
-import com.alancamargo.weapons.framework.entities.DbManufacturer
 import com.alancamargo.weapons.framework.entities.DbWeapon
 import com.alancamargo.weapons.framework.entities.DbWeaponType
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_ANTI_PERSONNEL
@@ -58,10 +57,6 @@ fun DbWeapon.fromDbToDomain(
         photos
     )
 }
-
-fun Manufacturer.fromDomainToDb() = DbManufacturer(id, name)
-
-fun DbManufacturer.fromDbToDomain() = Manufacturer(id, name)
 
 fun WeaponType.fromDomainToDb() = when (this) {
     is WeaponType.BoobyTrap -> DbWeaponType(
