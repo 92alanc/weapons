@@ -17,9 +17,8 @@ import com.alancamargo.weapons.framework.db.provider.DatabaseProvider
 import com.alancamargo.weapons.framework.entities.DbCalibre
 import com.alancamargo.weapons.framework.entities.DbCountry
 import com.alancamargo.weapons.framework.local.*
-import com.alancamargo.weapons.framework.mappers.calibre.CalibreToDbCalibreMapper
-import com.alancamargo.weapons.framework.mappers.calibre.DbCalibreToCalibreMapper
-import com.alancamargo.weapons.framework.mappers.country.CountryToDbCountryMapper
+import com.alancamargo.weapons.framework.mappers.DbCalibreMapper
+import com.alancamargo.weapons.framework.mappers.DbCountryMapper
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
@@ -33,8 +32,7 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 private const val DB_CALIBRE_MAPPER = "DB_CALIBRE_MAPPER"
-private const val CALIBRE_MAPPER = "CALIBRE_MAPPER"
-private const val COUNTRY_MAPPER = "COUNTRY_MAPPER"
+private const val DB_COUNTRY_MAPPER = "DB_COUNTRY_MAPPER"
 
 fun getModules() = listOf(data, framework, ui)
 
@@ -45,7 +43,9 @@ private val data = module {
         WeaponLocalDataSourceImpl(get(), get(), get(), get(), get(), get())
     }
     factory<WeaponTypeLocalDataSource> { WeaponTypeLocalDataSourceImpl(get()) }
-    factory<CountryLocalDataSource> { CountryLocalDataSourceImpl(get()) }
+    factory<CountryLocalDataSource> { 
+        CountryLocalDataSourceImpl(get(), get(named(DB_COUNTRY_MAPPER))) 
+    }
     factory<CalibreLocalDataSource> {
         CalibreLocalDataSourceImpl(get(), get(named(DB_CALIBRE_MAPPER)))
     }
@@ -63,11 +63,12 @@ private val framework = module {
     factory { get<DatabaseProvider>().provideCalibreDao() }
     factory { get<DatabaseProvider>().provideManufacturerDao() }
     factory { get<DatabaseProvider>().provideYearDao() }
-    factory<EntityMapper<Calibre, DbCalibre>>(named(CALIBRE_MAPPER)) { CalibreToDbCalibreMapper() }
     factory<EntityMapper<DbCalibre, Calibre>>(named(DB_CALIBRE_MAPPER)) {
-        DbCalibreToCalibreMapper()
+        DbCalibreMapper()
     }
-    factory<EntityMapper<Country, DbCountry>>(named(COUNTRY_MAPPER)) { CountryToDbCountryMapper() }
+    factory<EntityMapper<DbCountry, Country>>(named(DB_COUNTRY_MAPPER)) {
+        DbCountryMapper()
+    }
 
     single {
         Room.databaseBuilder(

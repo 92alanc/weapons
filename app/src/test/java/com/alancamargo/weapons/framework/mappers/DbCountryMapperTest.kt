@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.framework.mappers.country
+package com.alancamargo.weapons.framework.mappers
 
 import com.alancamargo.weapons.domain.entities.Country
 import com.alancamargo.weapons.framework.entities.DbCountry
@@ -8,16 +8,16 @@ import com.alancamargo.weapons.util.ID
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class CountryToDbCountryMapperTest {
+class DbCountryMapperTest {
 
-    private val mapper = CountryToDbCountryMapper()
+    private val mapper = DbCountryMapper()
 
     @Test
-    fun shouldConvertCountryToDbCountry() {
-        val domain = Country(ID, COUNTRY_NAME, COUNTRY_FLAG)
-        val expected = DbCountry(ID, COUNTRY_NAME, COUNTRY_FLAG)
+    fun shouldConvertDbCountryToCountry() {
+        val db = DbCountry(ID, COUNTRY_NAME, COUNTRY_FLAG)
+        val expected = Country(ID, COUNTRY_NAME, COUNTRY_FLAG)
 
-        val actual = mapper.map(domain)
+        val actual = mapper.map(db)
 
         assertThat(actual).isEqualTo(expected)
     }

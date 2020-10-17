@@ -1,7 +1,9 @@
 package com.alancamargo.weapons.framework.entities.conversions
 
 import com.alancamargo.weapons.domain.entities.*
-import com.alancamargo.weapons.framework.entities.*
+import com.alancamargo.weapons.framework.entities.DbManufacturer
+import com.alancamargo.weapons.framework.entities.DbWeapon
+import com.alancamargo.weapons.framework.entities.DbWeaponType
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_ANTI_PERSONNEL
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_ANTI_TANK
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.CATEGORY_AUTOMATIC
@@ -25,6 +27,7 @@ import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_RI
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_ROCKET_LAUNCHER
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_SHOTGUN
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_SUB_MACHINE_GUN
+import com.alancamargo.weapons.framework.entities.DbYear
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -55,8 +58,6 @@ fun DbWeapon.fromDbToDomain(
         photos
     )
 }
-
-fun DbCountry.fromDbToDomain() = Country(id, name, flagId)
 
 fun Manufacturer.fromDomainToDb() = DbManufacturer(id, name)
 

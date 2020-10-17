@@ -1,6 +1,7 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.framework.db.CountryDao
+import com.alancamargo.weapons.framework.mappers.DbCountryMapper
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -21,7 +22,8 @@ class CountryLocalDataSourceImplTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        localDataSource = CountryLocalDataSourceImpl(mockCountryDao)
+        val mapper = DbCountryMapper()
+        localDataSource = CountryLocalDataSourceImpl(mockCountryDao, mapper)
     }
 
     @Test
