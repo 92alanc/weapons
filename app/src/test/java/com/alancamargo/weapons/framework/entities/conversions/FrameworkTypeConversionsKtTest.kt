@@ -97,36 +97,6 @@ class FrameworkTypeConversionsKtTest {
     }
     // endregion
 
-    // region Calibre
-    @Test
-    fun calibre_fromDomainToDb() {
-        val domain =
-            Calibre(CALIBRE_ID, CALIBRE)
-        val expected = DbCalibre(
-            CALIBRE_ID,
-            CALIBRE
-        )
-
-        val actual = domain.fromDomainToDb()
-
-        assertThat(actual).isEqualTo(expected)
-    }
-
-    @Test
-    fun calibre_fromDbToDomain() {
-        val db = DbCalibre(
-            CALIBRE_ID,
-            CALIBRE
-        )
-        val expected =
-            Calibre(CALIBRE_ID, CALIBRE)
-
-        val actual = db.fromDbToDomain()
-
-        assertThat(actual).isEqualTo(expected)
-    }
-    // endregion
-
     // region Country
     @Test
     fun country_fromDomainToDb() {

@@ -1,6 +1,7 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.framework.db.CalibreDao
+import com.alancamargo.weapons.framework.mappers.calibre.DbCalibreToCalibreMapper
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -21,7 +22,8 @@ class CalibreLocalDataSourceImplTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        localDataSource = CalibreLocalDataSourceImpl(mockCalibreDao)
+        val mapper = DbCalibreToCalibreMapper()
+        localDataSource = CalibreLocalDataSourceImpl(mockCalibreDao, mapper)
     }
 
     @Test

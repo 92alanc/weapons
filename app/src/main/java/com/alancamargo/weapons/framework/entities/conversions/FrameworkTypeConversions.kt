@@ -56,10 +56,6 @@ fun DbWeapon.fromDbToDomain(
     )
 }
 
-fun Calibre.fromDomainToDb() = DbCalibre(id, name)
-
-fun DbCalibre.fromDbToDomain() = Calibre(id, name)
-
 fun Country.fromDomainToDb() = DbCountry(id, name, flagId)
 
 fun DbCountry.fromDbToDomain() = Country(id, name, flagId)

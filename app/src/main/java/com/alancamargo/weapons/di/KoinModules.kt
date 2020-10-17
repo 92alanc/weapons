@@ -9,9 +9,14 @@ import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.local.*
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepositoryImpl
+import com.alancamargo.weapons.domain.entities.Calibre
+import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.crash.CrashReportHelperImpl
 import com.alancamargo.weapons.framework.db.provider.DatabaseProvider
+import com.alancamargo.weapons.framework.entities.DbCalibre
 import com.alancamargo.weapons.framework.local.*
+import com.alancamargo.weapons.framework.mappers.calibre.CalibreToDbCalibreMapper
+import com.alancamargo.weapons.framework.mappers.calibre.DbCalibreToCalibreMapper
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
@@ -21,7 +26,11 @@ import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
+
+private const val DB_CALIBRE_MAPPER = "DB_CALIBRE_MAPPER"
+private const val CALIBRE_MAPPER = "CALIBRE_MAPPER"
 
 fun getModules() = listOf(data, framework, ui)
 
@@ -33,7 +42,9 @@ private val data = module {
     }
     factory<WeaponTypeLocalDataSource> { WeaponTypeLocalDataSourceImpl(get()) }
     factory<CountryLocalDataSource> { CountryLocalDataSourceImpl(get()) }
-    factory<CalibreLocalDataSource> { CalibreLocalDataSourceImpl(get()) }
+    factory<CalibreLocalDataSource> {
+        CalibreLocalDataSourceImpl(get(), get(named(DB_CALIBRE_MAPPER)))
+    }
     factory<ManufacturerLocalDataSource> { ManufacturerLocalDataSourceImpl(get()) }
     factory<YearLocalDataSource> { YearLocalDataSourceImpl(get()) }
 
@@ -48,6 +59,10 @@ private val framework = module {
     factory { get<DatabaseProvider>().provideCalibreDao() }
     factory { get<DatabaseProvider>().provideManufacturerDao() }
     factory { get<DatabaseProvider>().provideYearDao() }
+    factory<EntityMapper<Calibre, DbCalibre>>(named(CALIBRE_MAPPER)) { CalibreToDbCalibreMapper() }
+    factory<EntityMapper<DbCalibre, Calibre>>(named(DB_CALIBRE_MAPPER)) {
+        DbCalibreToCalibreMapper()
+    }
 
     single {
         Room.databaseBuilder(
