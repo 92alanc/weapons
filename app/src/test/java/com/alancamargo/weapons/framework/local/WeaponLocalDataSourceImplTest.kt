@@ -1,16 +1,27 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.data.local.*
+import com.alancamargo.weapons.di.DB_WEAPON_MAPPER
+import com.alancamargo.weapons.domain.entities.Weapon
 import com.alancamargo.weapons.domain.entities.WeaponType
+import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.db.WeaponDao
+import com.alancamargo.weapons.framework.entities.DbWeapon
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
+import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import java.io.IOException
 
 class WeaponLocalDataSourceImplTest {
@@ -26,6 +37,7 @@ class WeaponLocalDataSourceImplTest {
 
     @Before
     fun setUp() {
+        initialiseKoin()
         MockKAnnotations.init(this)
         localDataSource = WeaponLocalDataSourceImpl(
             mockWeaponDao,
@@ -43,7 +55,7 @@ class WeaponLocalDataSourceImplTest {
 
         val weapons = localDataSource.getWeapons()
 
-        assertThat(weapons.values.first().size).isEqualTo(3)
+        assertThat(weapons.values.first().size).isEqualTo(1)
     }
 
     @Test(expected = IOException::class)
@@ -145,6 +157,23 @@ class WeaponLocalDataSourceImplTest {
         }
     }
 
+    @After
+    fun tearDown() {
+        stopKoin()
+    }
+
+    private fun initialiseKoin() {
+        startKoin {
+            loadKoinModules(module {
+                factory(named(DB_WEAPON_MAPPER)) { mockDbWeaponMapper() }
+            })
+        }
+    }
+
+    private fun mockDbWeaponMapper() = mockk<EntityMapper<DbWeapon, Weapon>>().apply {
+        every { map(any()) } returns mockk(relaxed = true)
+    }
+
     private fun mockSuccessfulOutput() {
         mockWeaponLocalDataSourceOutput()
         mockWeaponTypeLocalDataSourceOutput()
@@ -155,9 +184,7 @@ class WeaponLocalDataSourceImplTest {
     }
 
     private fun mockWeaponLocalDataSourceOutput() {
-        coEvery {
-            mockWeaponDao.selectAll()
-        } returns listOf(mockk(relaxed = true), mockk(relaxed = true), mockk(relaxed = true))
+        coEvery { mockWeaponDao.selectAll() } returns listOf(mockk(relaxed = true))
         coEvery { mockWeaponDao.selectByName(any()) } returns listOf(mockk(relaxed = true))
         coEvery { mockWeaponDao.selectByYear(any()) } returns listOf(mockk(relaxed = true))
         coEvery { mockWeaponDao.selectByCountry(any()) } returns listOf(mockk(relaxed = true))
