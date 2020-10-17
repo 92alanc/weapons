@@ -7,17 +7,20 @@ import androidx.appcompat.app.AppCompatActivity
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.adapter.QueryAdapter
 import com.alancamargo.weapons.ui.fragments.NameSearchDialogue
+import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
 import com.alancamargo.weapons.ui.queries.WeaponQuery
 import com.alancamargo.weapons.ui.queries.WeaponQueryType
 import com.alancamargo.weapons.ui.tools.loadAds
 import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnItemClickListener {
 
     private val viewModel by viewModel<QueryViewModel>()
+    private val weaponListActivityNavigation by inject<WeaponListActivityNavigation>()
     private val adapter = QueryAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,23 +54,19 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
     }
 
     private fun showAllWeapons() {
-        val intent = WeaponListActivity.getIntent(this, WeaponQuery.All)
-        startActivity(intent)
+        weaponListActivityNavigation.startActivity(this, WeaponQuery.All)
     }
 
     private fun showWeaponsByCalibre() {
-        val intent = WeaponListActivity.getIntent(this, WeaponQuery.ByCalibre)
-        startActivity(intent)
+        weaponListActivityNavigation.startActivity(this, WeaponQuery.ByCalibre)
     }
 
     private fun showWeaponsByCountry() {
-        val intent = WeaponListActivity.getIntent(this, WeaponQuery.ByCountry)
-        startActivity(intent)
+        weaponListActivityNavigation.startActivity(this, WeaponQuery.ByCountry)
     }
 
     private fun showWeaponsByManufacturer() {
-        val intent = WeaponListActivity.getIntent(this, WeaponQuery.ByManufacturer)
-        startActivity(intent)
+        weaponListActivityNavigation.startActivity(this, WeaponQuery.ByManufacturer)
     }
 
     private fun openNameSearchDialogue() {
@@ -76,13 +75,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
     }
 
     private fun showWeaponsByType() {
-        val intent = WeaponListActivity.getIntent(this, WeaponQuery.ByType)
-        startActivity(intent)
+        weaponListActivityNavigation.startActivity(this, WeaponQuery.ByType)
     }
 
     private fun showWeaponsByYear() {
-        val intent = WeaponListActivity.getIntent(this, WeaponQuery.ByYear)
-        startActivity(intent)
+        weaponListActivityNavigation.startActivity(this, WeaponQuery.ByYear)
     }
 
     private fun showAppInfo() {

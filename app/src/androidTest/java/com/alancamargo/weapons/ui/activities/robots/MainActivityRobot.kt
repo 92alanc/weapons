@@ -2,11 +2,13 @@ package com.alancamargo.weapons.ui.activities.robots
 
 import androidx.test.core.app.ActivityScenario
 import br.com.concretesolutions.kappuccino.assertions.VisibilityAssertions.displayed
-import br.com.concretesolutions.kappuccino.custom.intent.IntentMatcherInteractions.sentIntent
 import br.com.concretesolutions.kappuccino.custom.recyclerView.RecyclerViewInteractions.recyclerView
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.activities.MainActivity
-import com.alancamargo.weapons.ui.activities.WeaponListActivity
+import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
+import io.mockk.verify
+import org.koin.test.KoinTest
+import org.koin.test.get
 
 fun mainActivity(block: MainActivityRobot.() -> Unit) = MainActivityRobot().apply {
     ActivityScenario.launch(MainActivity::class.java)
@@ -91,11 +93,11 @@ class MainActivityRobot {
 
 }
 
-class MainActivityAssertions {
+class MainActivityAssertions : KoinTest {
 
     fun weaponListActivityIsLaunched() {
-        sentIntent {
-            className(WeaponListActivity::class.java.name)
+        verify {
+            get<WeaponListActivityNavigation>().startActivity(any(), any())
         }
     }
 

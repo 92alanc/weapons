@@ -1,21 +1,18 @@
 package com.alancamargo.weapons.ui.activities
 
-import androidx.test.espresso.intent.Intents
 import com.alancamargo.weapons.ui.activities.robots.mainActivity
-import org.junit.After
+import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
+import io.mockk.mockk
 import org.junit.Before
 import org.junit.Test
+import org.koin.core.context.loadKoinModules
+import org.koin.dsl.module
 
 class MainActivityTest {
 
     @Before
     fun setUp() {
-        Intents.init()
-    }
-
-    @After
-    fun tearDown() {
-        Intents.release()
+        initialiseKoin()
     }
 
     @Test
@@ -72,6 +69,12 @@ class MainActivityTest {
         } clickByManufacturer {
             weaponListActivityIsLaunched()
         }
+    }
+
+    private fun initialiseKoin() {
+        loadKoinModules(module {
+            single<WeaponListActivityNavigation>(override = true) { mockk(relaxed = true) }
+        })
     }
 
 }

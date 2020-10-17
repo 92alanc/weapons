@@ -19,6 +19,8 @@ import com.alancamargo.weapons.framework.mappers.*
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
+import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
+import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigationImpl
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.ResourcesHelperImpl
 import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
@@ -112,6 +114,8 @@ private val framework = module {
 private val ui = module {
     viewModel { WeaponViewModel(get(), androidContext()) }
     viewModel { QueryViewModel() }
+
+    factory<WeaponListActivityNavigation> { WeaponListActivityNavigationImpl() }
 
     factory<ResourcesHelper> { ResourcesHelperImpl(androidContext(), get()) }
     factory { (onItemClickListener: OnItemClickListener) ->
