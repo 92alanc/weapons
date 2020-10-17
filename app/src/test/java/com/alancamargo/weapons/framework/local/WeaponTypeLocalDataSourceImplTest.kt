@@ -2,6 +2,7 @@ package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.framework.db.WeaponTypeDao
 import com.alancamargo.weapons.framework.entities.DbWeaponType
+import com.alancamargo.weapons.framework.mappers.DbWeaponTypeMapper
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -21,7 +22,8 @@ class WeaponTypeLocalDataSourceImplTest {
     fun setUp() {
         MockKAnnotations.init(this)
 
-        localDataSource = WeaponTypeLocalDataSourceImpl(mockWeaponTypeDao)
+        val mapper = DbWeaponTypeMapper()
+        localDataSource = WeaponTypeLocalDataSourceImpl(mockWeaponTypeDao, mapper)
     }
 
     @Test

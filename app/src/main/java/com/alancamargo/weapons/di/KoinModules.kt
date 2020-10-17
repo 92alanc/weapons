@@ -9,22 +9,13 @@ import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.local.*
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepositoryImpl
-import com.alancamargo.weapons.domain.entities.Calibre
-import com.alancamargo.weapons.domain.entities.Country
-import com.alancamargo.weapons.domain.entities.Manufacturer
-import com.alancamargo.weapons.domain.entities.Year
+import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.crash.CrashReportHelperImpl
 import com.alancamargo.weapons.framework.db.provider.DatabaseProvider
-import com.alancamargo.weapons.framework.entities.DbCalibre
-import com.alancamargo.weapons.framework.entities.DbCountry
-import com.alancamargo.weapons.framework.entities.DbManufacturer
-import com.alancamargo.weapons.framework.entities.DbYear
+import com.alancamargo.weapons.framework.entities.*
 import com.alancamargo.weapons.framework.local.*
-import com.alancamargo.weapons.framework.mappers.DbCalibreMapper
-import com.alancamargo.weapons.framework.mappers.DbCountryMapper
-import com.alancamargo.weapons.framework.mappers.DbManufacturerMapper
-import com.alancamargo.weapons.framework.mappers.DbYearMapper
+import com.alancamargo.weapons.framework.mappers.*
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
@@ -41,6 +32,7 @@ private const val DB_CALIBRE_MAPPER = "DB_CALIBRE_MAPPER"
 private const val DB_COUNTRY_MAPPER = "DB_COUNTRY_MAPPER"
 private const val DB_MANUFACTURER_MAPPER = "DB_MANUFACTURER_MAPPER"
 private const val DB_YEAR_MAPPER = "DB_YEAR_MAPPER"
+private const val DB_WEAPON_TYPE_MAPPER = "DB_WEAPON_TYPE_MAPPER"
 
 fun getModules() = listOf(data, framework, ui)
 
@@ -50,7 +42,9 @@ private val data = module {
     factory<WeaponLocalDataSource> {
         WeaponLocalDataSourceImpl(get(), get(), get(), get(), get(), get())
     }
-    factory<WeaponTypeLocalDataSource> { WeaponTypeLocalDataSourceImpl(get()) }
+    factory<WeaponTypeLocalDataSource> {
+        WeaponTypeLocalDataSourceImpl(get(), get(named(DB_WEAPON_TYPE_MAPPER)))
+    }
     factory<CountryLocalDataSource> { 
         CountryLocalDataSourceImpl(get(), get(named(DB_COUNTRY_MAPPER))) 
     }
@@ -61,6 +55,9 @@ private val data = module {
         DbManufacturerMapper()
     }
     factory<EntityMapper<DbYear, Year>>(named(DB_YEAR_MAPPER)) { DbYearMapper() }
+    factory<EntityMapper<DbWeaponType, WeaponType>>(named(DB_WEAPON_TYPE_MAPPER)) {
+        DbWeaponTypeMapper()
+    }
     factory<ManufacturerLocalDataSource> {
         ManufacturerLocalDataSourceImpl(get(), get(named(DB_MANUFACTURER_MAPPER)))
     }
