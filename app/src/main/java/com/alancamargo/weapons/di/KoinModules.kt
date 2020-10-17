@@ -33,6 +33,7 @@ private const val DB_COUNTRY_MAPPER = "DB_COUNTRY_MAPPER"
 private const val DB_MANUFACTURER_MAPPER = "DB_MANUFACTURER_MAPPER"
 private const val DB_YEAR_MAPPER = "DB_YEAR_MAPPER"
 private const val DB_WEAPON_TYPE_MAPPER = "DB_WEAPON_TYPE_MAPPER"
+const val DB_WEAPON_MAPPER = "DB_WEAPON_MAPPER"
 
 fun getModules() = listOf(data, framework, ui)
 
@@ -40,13 +41,20 @@ private val data = module {
     factory<WeaponRepository> { WeaponRepositoryImpl(get(), get()) }
 
     factory<WeaponLocalDataSource> {
-        WeaponLocalDataSourceImpl(get(), get(), get(), get(), get(), get())
+        WeaponLocalDataSourceImpl(
+            get(),
+            get(),
+            get(),
+            get(),
+            get(),
+            get()
+        )
     }
     factory<WeaponTypeLocalDataSource> {
         WeaponTypeLocalDataSourceImpl(get(), get(named(DB_WEAPON_TYPE_MAPPER)))
     }
-    factory<CountryLocalDataSource> { 
-        CountryLocalDataSourceImpl(get(), get(named(DB_COUNTRY_MAPPER))) 
+    factory<CountryLocalDataSource> {
+        CountryLocalDataSourceImpl(get(), get(named(DB_COUNTRY_MAPPER)))
     }
     factory<CalibreLocalDataSource> {
         CalibreLocalDataSourceImpl(get(), get(named(DB_CALIBRE_MAPPER)))
@@ -57,6 +65,15 @@ private val data = module {
     factory<EntityMapper<DbYear, Year>>(named(DB_YEAR_MAPPER)) { DbYearMapper() }
     factory<EntityMapper<DbWeaponType, WeaponType>>(named(DB_WEAPON_TYPE_MAPPER)) {
         DbWeaponTypeMapper()
+    }
+    factory<EntityMapper<DbWeapon, Weapon>>(named(DB_WEAPON_MAPPER)) { (
+                                                                           year: Year?,
+                                                                           manufacturer: Manufacturer?,
+                                                                           country: Country?,
+                                                                           type: WeaponType,
+                                                                           calibre: Calibre?
+                                                                       ) ->
+        DbWeaponMapper(year, manufacturer, country, type, calibre)
     }
     factory<ManufacturerLocalDataSource> {
         ManufacturerLocalDataSourceImpl(get(), get(named(DB_MANUFACTURER_MAPPER)))

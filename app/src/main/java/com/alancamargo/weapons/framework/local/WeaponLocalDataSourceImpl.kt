@@ -1,11 +1,16 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.data.local.*
+import com.alancamargo.weapons.di.DB_WEAPON_MAPPER
 import com.alancamargo.weapons.domain.entities.Weapon
 import com.alancamargo.weapons.domain.entities.WeaponListHeader
+import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.db.WeaponDao
 import com.alancamargo.weapons.framework.entities.DbWeapon
-import com.alancamargo.weapons.framework.entities.conversions.fromDbToDomain
+import org.koin.core.KoinComponent
+import org.koin.core.get
+import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.named
 
 class WeaponLocalDataSourceImpl(
     private val weaponDao: WeaponDao,
@@ -14,7 +19,7 @@ class WeaponLocalDataSourceImpl(
     private val calibreLocalDataSource: CalibreLocalDataSource,
     private val manufacturerLocalDataSource: ManufacturerLocalDataSource,
     private val yearLocalDataSource: YearLocalDataSource
-) : WeaponLocalDataSource {
+) : WeaponLocalDataSource, KoinComponent {
 
     override suspend fun getWeapons(): Map<WeaponListHeader?, List<Weapon>> {
         return mapOf(null to getAllWeaponsFromDb())
@@ -71,7 +76,10 @@ class WeaponLocalDataSourceImpl(
             yearLocalDataSource.getYearById(it)
         }
 
-        return fromDbToDomain(manufacturer, country, type, calibre, year)
+        val mapper = get<EntityMapper<DbWeapon, Weapon>>(named(DB_WEAPON_MAPPER)) {
+            parametersOf(year, manufacturer, country, type, calibre)
+        }
+        return mapper.map(this)
     }
 
 }
