@@ -34,36 +34,51 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
+const val DB_WEAPON_MAPPER = "DB_WEAPON_MAPPER"
+
 private const val DB_CALIBRE_MAPPER = "DB_CALIBRE_MAPPER"
 private const val DB_COUNTRY_MAPPER = "DB_COUNTRY_MAPPER"
 private const val DB_MANUFACTURER_MAPPER = "DB_MANUFACTURER_MAPPER"
 private const val DB_YEAR_MAPPER = "DB_YEAR_MAPPER"
 private const val DB_WEAPON_TYPE_MAPPER = "DB_WEAPON_TYPE_MAPPER"
-const val DB_WEAPON_MAPPER = "DB_WEAPON_MAPPER"
 
 fun getModules() = listOf(data, framework, ui)
 
 private val data = module {
-    factory<WeaponRepository> { WeaponRepositoryImpl(get(), get()) }
+    factory<WeaponRepository> {
+        WeaponRepositoryImpl(
+            localDataSource = get(),
+            ioHelper = get()
+        )
+    }
 
     factory<WeaponLocalDataSource> {
         WeaponLocalDataSourceImpl(
-            get(),
-            get(),
-            get(),
-            get(),
-            get(),
-            get()
+            weaponDao = get(),
+            weaponTypeLocalDataSource = get(),
+            countryLocalDataSource = get(),
+            calibreLocalDataSource = get(),
+            manufacturerLocalDataSource = get(),
+            yearLocalDataSource = get()
         )
     }
     factory<WeaponTypeLocalDataSource> {
-        WeaponTypeLocalDataSourceImpl(get(), get(named(DB_WEAPON_TYPE_MAPPER)))
+        WeaponTypeLocalDataSourceImpl(
+            weaponTypeDao = get(),
+            mapper = get(named(DB_WEAPON_TYPE_MAPPER))
+        )
     }
     factory<CountryLocalDataSource> {
-        CountryLocalDataSourceImpl(get(), get(named(DB_COUNTRY_MAPPER)))
+        CountryLocalDataSourceImpl(
+            countryDao = get(),
+            mapper = get(named(DB_COUNTRY_MAPPER))
+        )
     }
     factory<CalibreLocalDataSource> {
-        CalibreLocalDataSourceImpl(get(), get(named(DB_CALIBRE_MAPPER)))
+        CalibreLocalDataSourceImpl(
+            calibreDao = get(),
+            mapper = get(named(DB_CALIBRE_MAPPER))
+        )
     }
     factory<EntityMapper<DbManufacturer, Manufacturer>>(named(DB_MANUFACTURER_MAPPER)) {
         DbManufacturerMapper()
@@ -82,11 +97,19 @@ private val data = module {
         DbWeaponMapper(year, manufacturer, country, type, calibre)
     }
     factory<ManufacturerLocalDataSource> {
-        ManufacturerLocalDataSourceImpl(get(), get(named(DB_MANUFACTURER_MAPPER)))
+        ManufacturerLocalDataSourceImpl(
+            manufacturerDao = get(),
+            mapper = get(named(DB_MANUFACTURER_MAPPER))
+        )
     }
-    factory<YearLocalDataSource> { YearLocalDataSourceImpl(get(), get(named(DB_YEAR_MAPPER))) }
+    factory<YearLocalDataSource> {
+        YearLocalDataSourceImpl(
+            yearDao = get(),
+            mapper = get(named(DB_YEAR_MAPPER))
+        )
+    }
 
-    factory { IoHelper(get()) }
+    factory { IoHelper(crashReportHelper = get()) }
     factory<CrashReportHelper> { CrashReportHelperImpl() }
 }
 
@@ -116,7 +139,12 @@ private val framework = module {
 }
 
 private val ui = module {
-    viewModel { WeaponViewModel(get(), androidContext()) }
+    viewModel {
+        WeaponViewModel(
+            repository = get(),
+            context = androidContext()
+        )
+    }
     viewModel { QueryViewModel() }
 
     factory<WeaponListActivityNavigation> { WeaponListActivityNavigationImpl() }
@@ -124,12 +152,25 @@ private val ui = module {
 
     factory<AdLoader> { AdLoaderImpl() }
 
-    factory<ResourcesHelper> { ResourcesHelperImpl(androidContext(), get()) }
-    factory { (onItemClickListener: OnItemClickListener) ->
-        WeaponAdapter(get(), onItemClickListener, get())
+    factory<ResourcesHelper> {
+        ResourcesHelperImpl(
+            context = androidContext(),
+            crashReportHelper = get()
+        )
     }
     factory { (onItemClickListener: OnItemClickListener) ->
-        WeaponListWithHeaderAdapter(onItemClickListener, get(), get())
+        WeaponAdapter(
+            resourcesHelper = get(),
+            onItemClickListener = onItemClickListener,
+            imageLoader = get()
+        )
+    }
+    factory { (onItemClickListener: OnItemClickListener) ->
+        WeaponListWithHeaderAdapter(
+            onItemClickListener = onItemClickListener,
+            imageLoader = get(),
+            resourcesHelper = get()
+        )
     }
 
     single {
