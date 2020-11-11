@@ -1,20 +1,18 @@
 package com.alancamargo.weapons.framework.di
 
 import androidx.room.Room
-import com.alancamargo.weapons.di.DB_CALIBRE_MAPPER
-import com.alancamargo.weapons.di.DB_COUNTRY_MAPPER
-import com.alancamargo.weapons.di.LayerModule
-import com.alancamargo.weapons.domain.entities.Calibre
-import com.alancamargo.weapons.domain.entities.Country
+import com.alancamargo.weapons.di.*
+import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.db.provider.DatabaseProvider
-import com.alancamargo.weapons.framework.entities.DbCalibre
-import com.alancamargo.weapons.framework.entities.DbCountry
-import com.alancamargo.weapons.framework.mappers.DbCalibreMapper
-import com.alancamargo.weapons.framework.mappers.DbCountryMapper
+import com.alancamargo.weapons.framework.entities.*
+import com.alancamargo.weapons.framework.mappers.*
+import com.alancamargo.weapons.framework.tools.FileHelper
+import com.alancamargo.weapons.framework.tools.FileHelperImpl
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.Module
 import org.koin.core.qualifier.named
+import org.koin.core.scope.Scope
 import org.koin.dsl.module
 
 object FrameworkModule : LayerModule() {
@@ -23,6 +21,7 @@ object FrameworkModule : LayerModule() {
         databaseBuilder()
         dao()
         mappers()
+        tools()
     }
 
     private fun Module.databaseBuilder() {
@@ -38,17 +37,66 @@ object FrameworkModule : LayerModule() {
     }
 
     private fun Module.dao() {
-        factory { get<DatabaseProvider>().provideWeaponDao() }
-        factory { get<DatabaseProvider>().provideWeaponTypeDao() }
-        factory { get<DatabaseProvider>().provideCountryDao() }
-        factory { get<DatabaseProvider>().provideCalibreDao() }
-        factory { get<DatabaseProvider>().provideManufacturerDao() }
-        factory { get<DatabaseProvider>().provideYearDao() }
+        factory { getDatabaseProvider().provideWeaponDao() }
+        factory { getDatabaseProvider().provideWeaponTypeDao() }
+        factory { getDatabaseProvider().provideCountryDao() }
+        factory { getDatabaseProvider().provideCalibreDao() }
+        factory { getDatabaseProvider().provideManufacturerDao() }
+        factory { getDatabaseProvider().provideYearDao() }
     }
 
     private fun Module.mappers() {
+        dbWeaponMapper()
+        dbWeaponTypeMapper()
+        dbYearMapper()
+        dbManufacturerMapper()
+        dbCalibreMapper()
+        dbCountryMapper()
+    }
+
+    private fun Module.tools() {
+        factory<FileHelper> {
+            FileHelperImpl(
+                context = androidContext(),
+                countryDao = getDatabaseProvider().provideCountryDao()
+            )
+        }
+    }
+
+    private fun Scope.getDatabaseProvider() = get<DatabaseProvider>()
+
+    // region Mappers
+    private fun Module.dbWeaponMapper() {
+        factory<EntityMapper<DbWeapon, Weapon>>(
+            named(DB_WEAPON_MAPPER)
+        ) { (params: DbWeaponMapper.Params) ->
+            DbWeaponMapper(params)
+        }
+    }
+
+    private fun Module.dbWeaponTypeMapper() {
+        factory<EntityMapper<DbWeaponType, WeaponType>>(named(DB_WEAPON_TYPE_MAPPER)) {
+            DbWeaponTypeMapper()
+        }
+    }
+
+    private fun Module.dbYearMapper() {
+        factory<EntityMapper<DbYear, Year>>(named(DB_YEAR_MAPPER)) { DbYearMapper() }
+    }
+
+    private fun Module.dbManufacturerMapper() {
+        factory<EntityMapper<DbManufacturer, Manufacturer>>(named(DB_MANUFACTURER_MAPPER)) {
+            DbManufacturerMapper()
+        }
+    }
+
+    private fun Module.dbCalibreMapper() {
         factory<EntityMapper<DbCalibre, Calibre>>(named(DB_CALIBRE_MAPPER)) { DbCalibreMapper() }
+    }
+
+    private fun Module.dbCountryMapper() {
         factory<EntityMapper<DbCountry, Country>>(named(DB_COUNTRY_MAPPER)) { DbCountryMapper() }
     }
+    // endregion
 
 }

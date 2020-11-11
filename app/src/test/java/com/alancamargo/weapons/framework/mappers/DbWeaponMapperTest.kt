@@ -9,11 +9,14 @@ import org.junit.Test
 class DbWeaponMapperTest {
 
     private val mapper = DbWeaponMapper(
-        getYear(),
-        getManufacturer(),
-        getCountry(),
-        getWeaponType(),
-        getCalibre()
+        DbWeaponMapper.Params(
+            getYear(),
+            getManufacturer(),
+            getCountry(),
+            getWeaponType(),
+            getCalibre(),
+            listOf(PHOTO)
+        )
     )
 
     @Test

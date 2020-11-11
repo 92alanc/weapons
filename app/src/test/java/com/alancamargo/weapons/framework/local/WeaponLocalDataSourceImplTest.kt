@@ -7,6 +7,8 @@ import com.alancamargo.weapons.domain.entities.WeaponType
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.db.WeaponDao
 import com.alancamargo.weapons.framework.entities.DbWeapon
+import com.alancamargo.weapons.framework.tools.FileHelper
+import com.alancamargo.weapons.util.PHOTO
 import com.google.common.truth.Truth.assertThat
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -32,6 +34,7 @@ class WeaponLocalDataSourceImplTest {
     @MockK lateinit var mockCalibreLocalDataSource: CalibreLocalDataSource
     @MockK lateinit var mockManufacturerLocalDataSource: ManufacturerLocalDataSource
     @MockK lateinit var mockYearLocalDataSource: YearLocalDataSource
+    @MockK lateinit var mockFileHelper: FileHelper
 
     private lateinit var localDataSource: WeaponLocalDataSourceImpl
 
@@ -39,13 +42,17 @@ class WeaponLocalDataSourceImplTest {
     fun setUp() {
         initialiseKoin()
         MockKAnnotations.init(this)
+
+        coEvery { mockFileHelper.getImageFilePaths(any()) } returns listOf(PHOTO)
+
         localDataSource = WeaponLocalDataSourceImpl(
             mockWeaponDao,
             mockWeaponTypeLocalDataSource,
             mockCountryLocalDataSource,
             mockCalibreLocalDataSource,
             mockManufacturerLocalDataSource,
-            mockYearLocalDataSource
+            mockYearLocalDataSource,
+            mockFileHelper
         )
     }
 

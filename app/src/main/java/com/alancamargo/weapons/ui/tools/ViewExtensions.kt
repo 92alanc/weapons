@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.ui.tools
 
+import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
@@ -23,13 +24,16 @@ fun ImageView.setDrawableOrHide(drawable: Drawable?) {
 
 fun ImageView.load(
     imageLoader: ImageLoader,
-    url: String,
+    path: String,
     progressBar:
     ProgressBar,
     errorTextView: MaterialTextView
 ) {
+    val inputStream = context.assets.open(path)
+    val bitmap = BitmapFactory.decodeStream(inputStream)
+
     val request = LoadRequestBuilder(context)
-        .data(url)
+        .data(bitmap)
         .target(onStart = {
             errorTextView.isVisible = false
             progressBar.isVisible = true
