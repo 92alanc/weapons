@@ -52,8 +52,7 @@ data class DbWeapon(
     @ColumnInfo(name = COLUMN_CALIBRE_ID) val calibreId: Long?,
     @ColumnInfo(name = COLUMN_CAPACITY) val capacityInRounds: Int?,
     @ColumnInfo(name = COLUMN_RATE_OF_FIRE) val rateOfFireInRpm: Int?,
-    @ColumnInfo(name = COLUMN_EFFECTIVE_RANGE) val effectiveRangeInM: Int?,
-    @ColumnInfo(name = COLUMN_PHOTOS_JSON) val photosJson: String
+    @ColumnInfo(name = COLUMN_EFFECTIVE_RANGE) val effectiveRangeInM: Int?
 ) {
 
     companion object {
@@ -68,7 +67,6 @@ data class DbWeapon(
         const val COLUMN_TYPE_ID = "type_id"
         const val COLUMN_CALIBRE_ID = "calibre_id"
         const val COLUMN_YEAR_ID = "year_id"
-        const val COLUMN_PHOTOS_JSON = "photos_json"
     }
 
 }
