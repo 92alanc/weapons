@@ -16,9 +16,10 @@ import org.koin.core.context.stopKoin
 import org.robolectric.annotation.Config
 import java.io.FileNotFoundException
 
-private const val COUNTRY_NAME = "British Empire"
+private const val COUNTRY_NAME = "German Empire"
 private const val INVALID_WEAPON_NAME = "invalid"
-private const val VALID_WEAPON_NAME = "Short Magazine Lee-Enfield No.1 Mk.III"
+private const val VALID_WEAPON_NAME = "MG 08/15"
+private const val FORMATTED_WEAPON_NAME = "MG 08-15"
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [28])
@@ -46,9 +47,9 @@ class FileHelperImplTest {
         }
 
         assertThat(paths).containsExactly(
-            "$COUNTRY_NAME/$VALID_WEAPON_NAME/1.txt",
-            "$COUNTRY_NAME/$VALID_WEAPON_NAME/2.txt",
-            "$COUNTRY_NAME/$VALID_WEAPON_NAME/3.txt"
+            "$COUNTRY_NAME/$FORMATTED_WEAPON_NAME/1.txt",
+            "$COUNTRY_NAME/$FORMATTED_WEAPON_NAME/2.txt",
+            "$COUNTRY_NAME/$FORMATTED_WEAPON_NAME/3.txt"
         )
     }
 

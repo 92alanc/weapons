@@ -33,8 +33,7 @@ class DbWeaponMapperTest {
             CALIBRE_ID,
             CAPACITY,
             RATE_OF_FIRE,
-            EFFECTIVE_RANGE,
-            PHOTOS_JSON
+            EFFECTIVE_RANGE
         )
 
         val expected = Weapon(

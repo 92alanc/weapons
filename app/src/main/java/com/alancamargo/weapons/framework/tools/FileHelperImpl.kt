@@ -30,7 +30,7 @@ class FileHelperImpl(
             countryDao.getCountryByWeaponName(weaponName).name
         }
 
-        return "$countryName/$weaponName"
+        return "$countryName/${weaponName.replace("/", "-")}"
     }
 
 }
