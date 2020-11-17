@@ -1,6 +1,5 @@
 package com.alancamargo.weapons.ui.viewmodel
 
-import android.content.Context
 import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,16 +8,16 @@ import androidx.lifecycle.viewModelScope
 import com.alancamargo.weapons.data.io.Result
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
 import com.alancamargo.weapons.domain.entities.*
+import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.entities.UiWeaponListHeader
-import com.alancamargo.weapons.ui.entities.conversions.fromDomainToUi
 import com.alancamargo.weapons.ui.queries.WeaponQuery
 import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.launch
 
 class WeaponViewModel(
     private val repository: WeaponRepository,
-    private val context: Context
+    private val weaponMapper: EntityMapper<Weapon, UiWeapon>
 ) : ViewModel() {
 
     private val stateLiveData = MutableLiveData<State>()
@@ -96,18 +95,14 @@ class WeaponViewModel(
     private fun processWeaponList(body: Map<WeaponListHeader?, List<Weapon>>) {
         val weapons = body.flatMap {
             it.value
-        }.map {
-            it.fromDomainToUi(context)
-        }
+        }.map(weaponMapper::map)
 
         stateLiveData.postValue(State.WeaponListReady(weapons))
     }
 
     private fun processWeaponListWithHeader(body: Map<WeaponListHeader?, List<Weapon>>) {
         val weaponList = body.flatMap {
-            it.value.map { weapon ->
-                weapon.fromDomainToUi(context)
-            }
+            it.value.map(weaponMapper::map)
         }
 
         val headerClass = body.keys.first { it != null }?.javaClass

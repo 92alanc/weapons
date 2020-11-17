@@ -3,10 +3,14 @@ package com.alancamargo.weapons.ui.di
 import coil.ImageLoaderBuilder
 import coil.request.CachePolicy
 import com.alancamargo.weapons.R
-import com.alancamargo.weapons.di.LayerModule
+import com.alancamargo.weapons.di.*
+import com.alancamargo.weapons.domain.entities.*
+import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
+import com.alancamargo.weapons.ui.entities.*
+import com.alancamargo.weapons.ui.mappers.*
 import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigation
 import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigationImpl
 import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
@@ -20,6 +24,7 @@ import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 object UiModule : LayerModule() {
@@ -31,11 +36,21 @@ object UiModule : LayerModule() {
         imageLoader()
         adLoader()
         resourcesHelper()
+        mappers()
     }
 
     private fun Module.viewModels() {
         weaponViewModel()
         queryViewModel()
+    }
+
+    private fun Module.mappers() {
+        uiCountryMapper()
+        uiCalibreMapper()
+        uiManufacturerMapper()
+        uiYearMapper()
+        uiWeaponTypeMapper()
+        uiWeaponMapper()
     }
 
     private fun Module.navigation() {
@@ -91,13 +106,51 @@ object UiModule : LayerModule() {
         viewModel {
             WeaponViewModel(
                 repository = get(),
-                context = androidContext()
+                weaponMapper = get(named(UI_WEAPON_MAPPER))
             )
         }
     }
 
     private fun Module.queryViewModel() {
         viewModel { QueryViewModel() }
+    }
+    // endregion
+
+    // region Mappers
+    private fun Module.uiCountryMapper() {
+        factory<EntityMapper<Country, UiCountry>>(named(UI_COUNTRY_MAPPER)) { UiCountryMapper() }
+    }
+
+    private fun Module.uiCalibreMapper() {
+        factory<EntityMapper<Calibre, UiCalibre>>(named(UI_CALIBRE_MAPPER)) { UiCalibreMapper() }
+    }
+
+    private fun Module.uiManufacturerMapper() {
+        factory<EntityMapper<Manufacturer, UiManufacturer>>(named(UI_MANUFACTURER_MAPPER)) {
+            UiManufacturerMapper()
+        }
+    }
+
+    private fun Module.uiYearMapper() {
+        factory<EntityMapper<Year, UiYear>>(named(UI_YEAR_MAPPER)) { UiYearMapper() }
+    }
+
+    private fun Module.uiWeaponTypeMapper() {
+        factory<EntityMapper<WeaponType, UiWeaponType>>(named(UI_WEAPON_TYPE_MAPPER)) {
+            UiWeaponTypeMapper(androidContext())
+        }
+    }
+
+    private fun Module.uiWeaponMapper() {
+        factory<EntityMapper<Weapon, UiWeapon>>(named(UI_WEAPON_MAPPER)) {
+            UiWeaponMapper(
+                yearMapper = get(named(UI_YEAR_MAPPER)),
+                manufacturerMapper = get(named(UI_MANUFACTURER_MAPPER)),
+                countryMapper = get(named(UI_COUNTRY_MAPPER)),
+                weaponTypeMapper = get(named(UI_WEAPON_TYPE_MAPPER)),
+                calibreMapper = get(named(UI_CALIBRE_MAPPER))
+            )
+        }
     }
     // endregion
 
