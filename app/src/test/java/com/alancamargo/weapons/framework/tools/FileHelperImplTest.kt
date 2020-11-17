@@ -2,17 +2,16 @@ package com.alancamargo.weapons.framework.tools
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
+import com.alancamargo.weapons.TestApp
 import com.alancamargo.weapons.framework.db.CountryDao
 import com.alancamargo.weapons.framework.entities.DbCountry
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.core.context.stopKoin
 import org.robolectric.annotation.Config
 import java.io.FileNotFoundException
 
@@ -22,7 +21,7 @@ private const val VALID_WEAPON_NAME = "MG 08/15"
 private const val FORMATTED_WEAPON_NAME = "MG 08-15"
 
 @RunWith(AndroidJUnit4::class)
-@Config(sdk = [28])
+@Config(sdk = [28], application = TestApp::class)
 class FileHelperImplTest {
 
     private lateinit var fileHelper: FileHelperImpl
@@ -58,11 +57,6 @@ class FileHelperImplTest {
         runBlocking {
             fileHelper.getImageFilePaths(INVALID_WEAPON_NAME)
         }
-    }
-
-    @After
-    fun tearDown() {
-        stopKoin()
     }
 
 }

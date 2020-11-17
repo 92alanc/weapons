@@ -18,4 +18,3 @@ const val CAPACITY = 10
 const val RATE_OF_FIRE = 20
 const val EFFECTIVE_RANGE = 300
 const val PHOTO = "photo1"
-const val PHOTOS_JSON = "[\"$PHOTO\"]"
