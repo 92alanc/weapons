@@ -1,29 +1,22 @@
 package com.alancamargo.weapons.ui.viewholder
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
-import com.alancamargo.weapons.R
+import com.alancamargo.weapons.databinding.ItemWeaponBinding
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.load
-import com.google.android.material.textview.MaterialTextView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class WeaponViewHolder(
-    itemView: View,
+    private val binding: ItemWeaponBinding,
     private val resourcesHelper: ResourcesHelper,
     private val imageLoader: ImageLoader
-) : RecyclerView.ViewHolder(itemView) {
+) : RecyclerView.ViewHolder(binding.root) {
 
-    private val txtName by lazy { itemView.findViewById<MaterialTextView>(R.id.txtName) }
-    private val txtError by lazy { itemView.findViewById<MaterialTextView>(R.id.txtError) }
-    private val imgFlag by lazy { itemView.findViewById<ImageView>(R.id.imgFlag) }
-    private val imgPhoto by lazy { itemView.findViewById<ImageView>(R.id.imgPhoto) }
-    private val progressBar by lazy { itemView.findViewById<ProgressBar>(R.id.progressBar) }
-
-    fun bindTo(weapon: UiWeapon) {
+    fun bindTo(weapon: UiWeapon) = with(binding) {
         txtName.text = weapon.name
 
         val flagDrawable = weapon.country?.flagId?.let {
@@ -32,8 +25,11 @@ class WeaponViewHolder(
 
         imgFlag.setImageDrawable(flagDrawable)
 
-        if (weapon.photos.isNotEmpty())
-            imgPhoto.load(imageLoader, weapon.photos.first(), progressBar, txtError)
+        if (weapon.photos.isNotEmpty()) {
+            CoroutineScope(Dispatchers.Main).launch {
+                imgPhoto.load(imageLoader, weapon.photos.first(), progressBar, txtError)
+            }
+        }
     }
 
 }

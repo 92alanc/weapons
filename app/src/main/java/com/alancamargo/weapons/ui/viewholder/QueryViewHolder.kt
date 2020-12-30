@@ -1,16 +1,14 @@
 package com.alancamargo.weapons.ui.viewholder
 
-import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.alancamargo.weapons.databinding.ItemQueryBinding
 import com.alancamargo.weapons.ui.queries.WeaponQueryType
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_query.*
 
-class QueryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), LayoutContainer {
+class QueryViewHolder(
+    private val binding: ItemQueryBinding
+) : RecyclerView.ViewHolder(binding.root) {
 
-    override val containerView: View? = itemView
-
-    fun bindTo(query: WeaponQueryType) {
+    fun bindTo(query: WeaponQueryType) = with(binding) {
         imgQuery.setImageResource(query.iconId)
         txtQuery.setText(query.labelId)
     }

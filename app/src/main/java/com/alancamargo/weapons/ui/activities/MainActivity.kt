@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.alancamargo.weapons.R
+import com.alancamargo.weapons.databinding.ActivityMainBinding
 import com.alancamargo.weapons.ui.adapter.QueryAdapter
 import com.alancamargo.weapons.ui.fragments.NameSearchDialogue
 import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
@@ -13,11 +14,10 @@ import com.alancamargo.weapons.ui.queries.WeaponQueryType
 import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity(), QueryAdapter.OnItemClickListener {
 
     private val viewModel by viewModel<QueryViewModel>()
     private val weaponListActivityNavigation by inject<WeaponListActivityNavigation>()
@@ -26,9 +26,11 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), QueryAdapter.OnI
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        recyclerView.adapter = adapter
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.recyclerView.adapter = adapter
         adapter.setData(viewModel.getQueries())
-        adLoader.loadAds(adView)
+        adLoader.loadAds(binding.adView)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

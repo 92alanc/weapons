@@ -6,82 +6,86 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import coil.ImageLoader
 import com.alancamargo.weapons.R
+import com.alancamargo.weapons.databinding.ActivityWeaponDetailsBinding
 import com.alancamargo.weapons.ui.adapter.ViewPagerAdapter
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.setDrawableOrHide
 import com.alancamargo.weapons.ui.tools.setTextOrHide
-import kotlinx.android.synthetic.main.activity_weapon_details.*
 import org.koin.android.ext.android.inject
 
-class WeaponDetailsActivity : AppCompatActivity(R.layout.activity_weapon_details) {
+class WeaponDetailsActivity : AppCompatActivity() {
 
     private val resourcesHelper by inject<ResourcesHelper>()
     private val imageLoader by inject<ImageLoader>()
     private val adLoader by inject<AdLoader>()
     private val weapon by lazy { intent.getParcelableExtra<UiWeapon>(EXTRA_WEAPON) }
 
+    private lateinit var binding: ActivityWeaponDetailsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityWeaponDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         weapon?.let(::bindTo)
-        adLoader.loadAds(adView)
+        adLoader.loadAds(binding.adView)
     }
 
     private fun bindTo(weapon: UiWeapon) {
         with(weapon) {
-            viewPager.adapter = ViewPagerAdapter(photos, imageLoader)
-            txtName.text = name
+            binding.viewPager.adapter = ViewPagerAdapter(photos, imageLoader)
+            binding.txtName.text = name
 
             val flag = country?.flagId?.let {
                 resourcesHelper.getDrawable(it)
             }
 
-            imgFlag.setDrawableOrHide(flag)
-            txtCountry.setTextOrHide(country?.name)
+            binding.imgFlag.setDrawableOrHide(flag)
+            binding.txtCountry.setTextOrHide(country?.name)
 
             val yearText = resourcesHelper.getFormattedStringOrNull(
                 R.string.year_format, year?.year
             )
-            txtYear.setTextOrHide(yearText)
+            binding.txtYear.setTextOrHide(yearText)
 
             val manufacturerText = resourcesHelper.getFormattedStringOrNull(
                 R.string.manufacturer_format, manufacturer?.name
             )
-            txtManufacturer.setTextOrHide(manufacturerText)
+            binding.txtManufacturer.setTextOrHide(manufacturerText)
 
-            txtType.text = getString(R.string.type_format, type.name)
+            binding.txtType.text = getString(R.string.type_format, type.name)
 
             val calibreText = resourcesHelper.getFormattedStringOrNull(
                 R.string.calibre_format, calibre?.name
             )
-            txtCalibre.setTextOrHide(calibreText)
+            binding.txtCalibre.setTextOrHide(calibreText)
 
             val lengthText = resourcesHelper.getFormattedStringOrNull(
                 R.string.length_format, lengthInMm
             )
-            txtLength.setTextOrHide(lengthText)
+            binding.txtLength.setTextOrHide(lengthText)
 
             val massText = resourcesHelper.getFormattedStringOrNull(
                 R.string.mass_format, massInKg
             )
-            txtMass.setTextOrHide(massText)
+            binding.txtMass.setTextOrHide(massText)
 
             val capacityText = resourcesHelper.getPluralStringOrNull(
                 R.plurals.capacity_plural, capacityInRounds
             )
-            txtCapacity.setTextOrHide(capacityText)
+            binding.txtCapacity.setTextOrHide(capacityText)
 
             val rateOfFireText = resourcesHelper.getFormattedStringOrNull(
                 R.string.rate_of_fire_format, rateOfFireInRpm
             )
-            txtRateOfFire.setTextOrHide(rateOfFireText)
+            binding.txtRateOfFire.setTextOrHide(rateOfFireText)
 
             val effectiveRangeText = resourcesHelper.getFormattedStringOrNull(
                 R.string.effective_range_format, effectiveRangeInM
             )
-            txtEffectiveRange.setTextOrHide(effectiveRangeText)
+            binding.txtEffectiveRange.setTextOrHide(effectiveRangeText)
         }
     }
 

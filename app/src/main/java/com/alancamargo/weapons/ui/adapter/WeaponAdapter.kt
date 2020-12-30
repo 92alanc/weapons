@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
-import com.alancamargo.weapons.R
+import com.alancamargo.weapons.databinding.ItemWeaponBinding
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.viewholder.WeaponViewHolder
@@ -24,8 +24,8 @@ class WeaponAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WeaponViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val itemView = inflater.inflate(R.layout.item_weapon, parent, false)
-        return WeaponViewHolder(itemView, resourcesHelper, imageLoader)
+        val binding = ItemWeaponBinding.inflate(inflater, parent, false)
+        return WeaponViewHolder(binding, resourcesHelper, imageLoader)
     }
 
     override fun onBindViewHolder(holder: WeaponViewHolder, position: Int) {

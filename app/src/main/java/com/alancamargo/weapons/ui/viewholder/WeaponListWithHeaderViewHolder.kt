@@ -1,27 +1,26 @@
 package com.alancamargo.weapons.ui.viewholder
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import com.alancamargo.weapons.R
+import com.alancamargo.weapons.databinding.ItemListWithHeaderBinding
+import com.alancamargo.weapons.databinding.ItemWeaponSquareBinding
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.entities.*
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.load
-import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_list_with_header.*
-import kotlinx.android.synthetic.main.item_weapon_square.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class WeaponListWithHeaderViewHolder(
-    itemView: View,
     imageLoader: ImageLoader,
+    private val binding: ItemListWithHeaderBinding,
     private val resourcesHelper: ResourcesHelper
-) : RecyclerView.ViewHolder(itemView), LayoutContainer {
-
-    override val containerView: View? = itemView
+) : RecyclerView.ViewHolder(binding.root) {
 
     private var onItemClickListener: OnItemClickListener? = null
 
@@ -35,16 +34,16 @@ class WeaponListWithHeaderViewHolder(
         val header = entry.key
         processHeader(header)
         val list = entry.value.sortedBy { it.name }
-        recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter
         adapter.setData(list)
     }
 
     private fun processHeader(header: UiWeaponListHeader?) {
-        txtHeader.text = when (header) {
+        binding.txtHeader.text = when (header) {
             is UiCountry -> {
                 val flag = resourcesHelper.getDrawable(header.flagId)
 
-                with(imgFlag) {
+                with(binding.imgFlag) {
                     isVisible = true
                     setImageDrawable(flag)
                 }
@@ -76,8 +75,8 @@ class WeaponListWithHeaderViewHolder(
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InnerViewHolder {
             val inflater = LayoutInflater.from(parent.context)
 
-            val itemView = inflater.inflate(R.layout.item_weapon_square, parent, false)
-            return InnerViewHolder(itemView, imageLoader)
+            val binding = ItemWeaponSquareBinding.inflate(inflater, parent, false)
+            return InnerViewHolder(binding, imageLoader)
         }
 
         override fun onBindViewHolder(holder: InnerViewHolder, position: Int) {
@@ -100,15 +99,15 @@ class WeaponListWithHeaderViewHolder(
     }
 
     class InnerViewHolder(
-        itemView: View,
+        private val binding: ItemWeaponSquareBinding,
         private val imageLoader: ImageLoader
-    ) : RecyclerView.ViewHolder(itemView), LayoutContainer {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        override val containerView: View? = itemView
-
-        fun bindTo(weapon: UiWeapon) {
+        fun bindTo(weapon: UiWeapon) = with(binding) {
             txtName.text = weapon.name
-            imgPhoto.load(imageLoader, weapon.photos.first(), progressBar, txtError)
+            CoroutineScope(Dispatchers.Main).launch {
+                imgPhoto.load(imageLoader, weapon.photos.first(), progressBar, txtError)
+            }
         }
 
     }

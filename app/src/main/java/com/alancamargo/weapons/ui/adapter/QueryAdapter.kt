@@ -3,7 +3,7 @@ package com.alancamargo.weapons.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.alancamargo.weapons.R
+import com.alancamargo.weapons.databinding.ItemQueryBinding
 import com.alancamargo.weapons.ui.queries.WeaponQueryType
 import com.alancamargo.weapons.ui.viewholder.QueryViewHolder
 
@@ -20,8 +20,8 @@ class QueryAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QueryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val itemView = inflater.inflate(R.layout.item_query, parent, false)
-        return QueryViewHolder(itemView)
+        val binding = ItemQueryBinding.inflate(inflater, parent, false)
+        return QueryViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: QueryViewHolder, position: Int) {

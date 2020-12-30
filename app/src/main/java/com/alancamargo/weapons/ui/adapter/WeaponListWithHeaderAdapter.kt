@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
-import com.alancamargo.weapons.R
+import com.alancamargo.weapons.databinding.ItemListWithHeaderBinding
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.entities.UiWeaponListHeader
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
@@ -32,8 +32,8 @@ class WeaponListWithHeaderAdapter(
         viewType: Int
     ): WeaponListWithHeaderViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val itemView = inflater.inflate(R.layout.item_list_with_header, parent, false)
-        return WeaponListWithHeaderViewHolder(itemView, imageLoader, resourcesHelper).apply {
+        val binding = ItemListWithHeaderBinding.inflate(inflater, parent, false)
+        return WeaponListWithHeaderViewHolder(imageLoader, binding, resourcesHelper).apply {
             setOnItemClickListener(onItemClickListener)
         }
     }

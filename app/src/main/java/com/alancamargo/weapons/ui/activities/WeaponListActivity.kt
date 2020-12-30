@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.alancamargo.weapons.R
+import com.alancamargo.weapons.databinding.ActivityWeaponListBinding
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
@@ -16,12 +17,11 @@ import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigation
 import com.alancamargo.weapons.ui.queries.WeaponQuery
 import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
-import kotlinx.android.synthetic.main.activity_weapon_list.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list), OnItemClickListener {
+class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
 
     private val viewModel by viewModel<WeaponViewModel>()
     private val weaponDetailsActivityNavigation by inject<WeaponDetailsActivityNavigation>()
@@ -35,12 +35,16 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list), OnI
 
     private var state: WeaponViewModel.State? = null
 
+    private lateinit var binding: ActivityWeaponListBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityWeaponListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         state = savedInstanceState?.getParcelable(KEY_STATE)
         state?.let(::processState) ?: fetchData()
-        adLoader.loadAds(adView)
+        adLoader.loadAds(binding.adView)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -77,36 +81,38 @@ class WeaponListActivity : AppCompatActivity(R.layout.activity_weapon_list), OnI
     }
 
     private fun displayWeapons(weapons: List<UiWeapon>) {
-        groupError.isVisible = false
-        groupNoResults.isVisible = false
-        recyclerView.adapter = weaponAdapter
+        binding.groupError.isVisible = false
+        binding.groupNoResults.isVisible = false
+        binding.recyclerView.adapter = weaponAdapter
         weaponAdapter.setData(weapons)
-        progressBar.isVisible = false
+        binding.progressBar.isVisible = false
         val text = resources.getQuantityString(R.plurals.results_plural, weapons.size, weapons.size)
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
     private fun displayWeaponListWithHeader(weapons: Map<UiWeaponListHeader?, List<UiWeapon>>) {
-        groupError.isVisible = false
-        groupNoResults.isVisible = false
-        recyclerView.adapter = weaponListWithHeaderAdapter
-        weaponListWithHeaderAdapter.setData(weapons)
-        progressBar.isVisible = false
+        with(binding) {
+            groupError.isVisible = false
+            groupNoResults.isVisible = false
+            recyclerView.adapter = weaponListWithHeaderAdapter
+            weaponListWithHeaderAdapter.setData(weapons)
+            progressBar.isVisible = false
+        }
     }
 
-    private fun showError() {
+    private fun showError() = with(binding) {
         progressBar.isVisible = false
         groupNoResults.isVisible = false
         groupError.isVisible = true
     }
 
-    private fun showLoading() {
+    private fun showLoading() = with(binding) {
         groupError.isVisible = false
         groupNoResults.isVisible = false
         progressBar.isVisible = true
     }
 
-    private fun showNoResults() {
+    private fun showNoResults() = with(binding) {
         progressBar.isVisible = false
         groupError.isVisible = false
         groupNoResults.isVisible = true

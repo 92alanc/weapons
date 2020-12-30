@@ -12,8 +12,8 @@ import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.ui.entities.UiWeapon
 import com.alancamargo.weapons.ui.entities.UiWeaponListHeader
 import com.alancamargo.weapons.ui.queries.WeaponQuery
-import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
 
 class WeaponViewModel(
     private val repository: WeaponRepository,

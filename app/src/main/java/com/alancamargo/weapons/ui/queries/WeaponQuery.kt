@@ -1,7 +1,7 @@
 package com.alancamargo.weapons.ui.queries
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 sealed class WeaponQuery : Parcelable {
 

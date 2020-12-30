@@ -6,24 +6,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
-import com.alancamargo.weapons.R
+import com.alancamargo.weapons.databinding.DialogueNameSearchBinding
 import com.alancamargo.weapons.ui.activities.WeaponListActivity
 import com.alancamargo.weapons.ui.queries.WeaponQuery
-import kotlinx.android.synthetic.main.dialogue_name_search.*
 
 class NameSearchDialogue : DialogFragment() {
+
+    private var _binding: DialogueNameSearchBinding? = null
+
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.dialogue_name_search, container, false)
+    ): View {
+        _binding = DialogueNameSearchBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btOk.setOnClickListener {
+        binding.btOk.setOnClickListener {
             val query = prepareQuery()
             sendQuery(query)
         }
@@ -36,8 +40,13 @@ class NameSearchDialogue : DialogFragment() {
         dialog?.window?.setLayout(width, height)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     private fun prepareQuery(): WeaponQuery {
-        val name = edtSearch.text.toString()
+        val name = binding.edtSearch.text.toString()
         return WeaponQuery.ByName(name)
     }
 

@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.ui.di
 
-import coil.ImageLoaderBuilder
+import coil.ImageLoader
 import coil.request.CachePolicy
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.di.*
@@ -77,7 +77,7 @@ object UiModule : LayerModule() {
 
     private fun Module.imageLoader() {
         single {
-            ImageLoaderBuilder(androidContext())
+            ImageLoader.Builder(androidContext())
                 .crossfade(true)
                 .error(R.drawable.ic_placeholder)
                 .fallback(R.drawable.ic_placeholder)

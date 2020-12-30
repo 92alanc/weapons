@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
 import coil.ImageLoader
-import coil.request.LoadRequestBuilder
+import coil.request.ImageRequest
 import com.google.android.material.textview.MaterialTextView
 
 fun MaterialTextView.setTextOrHide(text: String?) {
@@ -22,7 +22,8 @@ fun ImageView.setDrawableOrHide(drawable: Drawable?) {
     } ?: hide()
 }
 
-fun ImageView.load(
+@Suppress("BlockingMethodInNonBlockingContext")
+suspend fun ImageView.load(
     imageLoader: ImageLoader,
     path: String,
     progressBar:
@@ -32,7 +33,7 @@ fun ImageView.load(
     val inputStream = context.assets.open(path)
     val bitmap = BitmapFactory.decodeStream(inputStream)
 
-    val request = LoadRequestBuilder(context)
+    val request = ImageRequest.Builder(context)
         .data(bitmap)
         .target(onStart = {
             errorTextView.isVisible = false
@@ -42,7 +43,7 @@ fun ImageView.load(
             errorTextView.isVisible = true
         }, onSuccess = {
             progressBar.isVisible = false
-            this.setImageDrawable(it)
+            setImageDrawable(it)
         }).build()
 
     imageLoader.execute(request)
