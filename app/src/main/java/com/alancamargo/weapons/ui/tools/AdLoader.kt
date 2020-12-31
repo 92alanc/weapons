@@ -1,9 +1,10 @@
 package com.alancamargo.weapons.ui.tools
 
-import com.google.android.gms.ads.AdView
+import android.view.View
+import androidx.annotation.StringRes
 
 interface AdLoader {
 
-    fun loadAds(adView: AdView)
+    fun loadBannerAds(target: View, @StringRes adIdRes: Int)
 
 }

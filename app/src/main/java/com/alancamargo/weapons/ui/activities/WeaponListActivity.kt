@@ -44,7 +44,7 @@ class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         state = savedInstanceState?.getParcelable(KEY_STATE)
         state?.let(::processState) ?: fetchData()
-        adLoader.loadAds(binding.adView)
+        adLoader.loadBannerAds(binding.banner, R.string.banner_weapon_list)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

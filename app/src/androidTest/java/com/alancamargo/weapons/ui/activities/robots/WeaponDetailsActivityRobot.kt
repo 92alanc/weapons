@@ -68,7 +68,7 @@ class WeaponDetailsActivityAssertions : KoinTest {
 
     fun adsAreLoaded() {
         verify {
-            get<AdLoader>().loadAds(any())
+            get<AdLoader>().loadBannerAds(any(),)
         }
     }
 
