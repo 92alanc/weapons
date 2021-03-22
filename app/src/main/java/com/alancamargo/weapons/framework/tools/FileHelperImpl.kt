@@ -13,24 +13,22 @@ class FileHelperImpl(
 
     @Suppress("BlockingMethodInNonBlockingContext")
     override suspend fun getImageFilePaths(weaponName: String): List<String> {
-        val relativePath = getRelativePath(weaponName)
+        return withContext(Dispatchers.IO) {
+            val relativePath = getRelativePath(weaponName)
+            val filesInRelativePath = context.assets.list(relativePath)
 
-        val assets = withContext(Dispatchers.IO) {
-            context.assets.list(relativePath)
+            if (filesInRelativePath.isNullOrEmpty())
+                throw FileNotFoundException()
+            else
+                filesInRelativePath.map { "$relativePath/$it" }
         }
-
-        if (assets.isNullOrEmpty())
-            throw FileNotFoundException()
-        else
-            return assets.map { "$relativePath/$it" }
     }
 
-    private suspend fun getRelativePath(weaponName: String): String {
-        val countryName = withContext(Dispatchers.IO) {
-            countryDao.getCountryByWeaponName(weaponName).name
-        }
+    private suspend fun getRelativePath(weaponName: String): String = withContext(Dispatchers.IO) {
+        val country = countryDao.getCountryByWeaponName(weaponName)
+        val countryName = country?.name ?: "Unknown"
 
-        return "$countryName/${weaponName.replace("/", "-")}"
+        "$countryName/${weaponName.replace("/", "-")}"
     }
 
 }
