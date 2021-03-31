@@ -33,8 +33,6 @@ class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
         parametersOf(this)
     }
 
-    private var state: WeaponViewModel.State? = null
-
     private lateinit var binding: ActivityWeaponListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,14 +40,8 @@ class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
         binding = ActivityWeaponListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        state = savedInstanceState?.getParcelable(KEY_STATE)
-        state?.let(::processState) ?: fetchData()
+        fetchData()
         adLoader.loadBannerAds(binding.banner, R.string.banner_weapon_list)
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        state?.let { outState.putParcelable(KEY_STATE, it) }
     }
 
     override fun onItemClick(weapon: UiWeapon) {
@@ -62,10 +54,9 @@ class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     private fun observeState() {
-        viewModel.getState().observe(this, {
-            state = it
+        viewModel.getState().observe(this) {
             processState(it)
-        })
+        }
     }
 
     private fun processState(state: WeaponViewModel.State) {
@@ -120,7 +111,6 @@ class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
 
     companion object {
         private const val EXTRA_QUERY = "query"
-        private const val KEY_STATE = "state"
 
         fun getIntent(context: Context, query: WeaponQuery): Intent {
             return Intent(context, WeaponListActivity::class.java).putExtra(EXTRA_QUERY, query)

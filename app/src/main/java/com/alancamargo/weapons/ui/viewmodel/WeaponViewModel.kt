@@ -20,7 +20,9 @@ class WeaponViewModel(
     private val weaponMapper: EntityMapper<Weapon, UiWeapon>
 ) : ViewModel() {
 
-    private val stateLiveData = MutableLiveData<State>()
+    private val stateLiveData = MutableLiveData<State>().apply {
+        value = State.Loading
+    }
 
     fun start(query: WeaponQuery) = when (query) {
         is WeaponQuery.All -> loadAllWeapons()
@@ -64,7 +66,6 @@ class WeaponViewModel(
 
     private fun runQuery(query: suspend () -> Result<Map<WeaponListHeader?, List<Weapon>>>) {
         viewModelScope.launch {
-            stateLiveData.postValue(State.Loading)
             val result = query.invoke()
             processResult(result)
         }
