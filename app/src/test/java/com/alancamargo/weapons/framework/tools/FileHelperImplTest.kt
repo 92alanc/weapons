@@ -1,12 +1,16 @@
 package com.alancamargo.weapons.framework.tools
 
+import android.content.Context
+import android.content.res.AssetManager
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import com.alancamargo.weapons.TestApp
 import com.alancamargo.weapons.framework.db.CountryDao
 import com.alancamargo.weapons.framework.entities.DbCountry
 import com.google.common.truth.Truth.assertThat
+import io.mockk.MockKAnnotations
 import io.mockk.coEvery
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -24,11 +28,18 @@ private const val FORMATTED_WEAPON_NAME = "MG 08-15"
 @Config(sdk = [28], application = TestApp::class)
 class FileHelperImplTest {
 
+    @MockK(relaxed = true)
+    lateinit var mockAssets: AssetManager
+
     private lateinit var fileHelper: FileHelperImpl
 
     @Before
     fun setUp() {
-        val context = InstrumentationRegistry.getInstrumentation().targetContext
+        MockKAnnotations.init(this)
+
+        val mockContext = mockk<Context>().apply {
+            every { assets } returns mockAssets
+        }
 
         val mockCountryDao = mockk<CountryDao>().apply {
             coEvery {
@@ -36,20 +47,26 @@ class FileHelperImplTest {
             } returns DbCountry(1, COUNTRY_NAME, "flag_id")
         }
 
-        fileHelper = FileHelperImpl(context, mockCountryDao)
+        fileHelper = FileHelperImpl(mockContext, mockCountryDao)
     }
 
     @Test
     fun shouldGetImageFilePaths() {
-        val paths = runBlocking {
-            fileHelper.getImageFilePaths(VALID_WEAPON_NAME)
-        }
-
-        assertThat(paths).containsExactly(
+        val expected = arrayOf(
             "$COUNTRY_NAME/$FORMATTED_WEAPON_NAME/1.txt",
             "$COUNTRY_NAME/$FORMATTED_WEAPON_NAME/2.txt",
             "$COUNTRY_NAME/$FORMATTED_WEAPON_NAME/3.txt"
         )
+
+        every {
+            mockAssets.list("$COUNTRY_NAME/$FORMATTED_WEAPON_NAME")
+        } returns arrayOf("1.txt", "2.txt", "3.txt")
+
+        val paths = runBlocking {
+            fileHelper.getImageFilePaths(VALID_WEAPON_NAME)
+        }
+
+        assertThat(paths).containsExactlyElementsIn(expected)
     }
 
     @Test(expected = FileNotFoundException::class)
