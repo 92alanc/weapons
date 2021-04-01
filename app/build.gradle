@@ -47,28 +47,28 @@ android {
             dimension "version"
             applicationIdSuffix ".ww1"
             versionCode 1
-            versionName "2020.3.0"
+            versionName "2021.2.0"
         }
 
         ww2 {
             dimension "version"
             applicationIdSuffix ".ww2"
             versionCode 1
-            versionName "2020.3.0"
+            versionName "2021.2.0"
         }
 
         korea {
             dimension "version"
             applicationIdSuffix ".korea"
             versionCode 1
-            versionName "2020.3.0"
+            versionName "2021.2.0"
         }
 
         vietnam {
             dimension "version"
             applicationIdSuffix ".vietnam"
             versionCode 1
-            versionName "2020.3.0"
+            versionName "2021.2.0"
         }
     }
 
