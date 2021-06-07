@@ -9,8 +9,8 @@ import com.alancamargo.weapons.framework.db.WeaponDao
 import com.alancamargo.weapons.framework.entities.DbWeapon
 import com.alancamargo.weapons.framework.mappers.DbWeaponMapper
 import com.alancamargo.weapons.framework.tools.FileHelper
-import org.koin.core.KoinComponent
-import org.koin.core.get
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.get
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 

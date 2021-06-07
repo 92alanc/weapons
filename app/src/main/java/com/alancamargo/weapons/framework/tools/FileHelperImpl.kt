@@ -28,7 +28,7 @@ class FileHelperImpl(
         val country = countryDao.getCountryByWeaponName(weaponName)
         val countryName = country?.name ?: "Unknown"
 
-        "$countryName/${weaponName.replace("/", "-")}"
+        "$countryName/${weaponName.replace("/", "-").replace("\"", "")}"
     }
 
 }
