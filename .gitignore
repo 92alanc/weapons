@@ -1,11 +1,13 @@
 .idea/
 .gradle/
+.DS_Store
 build/
 captures/
 app/ww1/
 app/ww2/
 app/korea/
 app/vietnam/
+app/.DS_Store
 *.iml
 *.jks
 *.aab
