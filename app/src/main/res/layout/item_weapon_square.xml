@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:padding="@dimen/padding_small"
         android:orientation="vertical"
-        android:background="@drawable/background">
+        android:background="@color/light_grey">
 
         <ImageView
             android:id="@+id/imgPhoto"
@@ -30,7 +30,6 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:gravity="center"
-            android:textColor="@color/white"
             tools:text="@sample/weapons.json/data/name"/>
 
         <ProgressBar
@@ -50,7 +49,6 @@
             android:layout_height="wrap_content"
             android:text="@string/error_loading_photo"
             android:visibility="gone"
-            android:textColor="@color/white"
             app:layout_constraintTop_toTopOf="@id/imgPhoto"
             app:layout_constraintBottom_toBottomOf="@id/imgPhoto"
             app:layout_constraintStart_toStartOf="@id/imgPhoto"
