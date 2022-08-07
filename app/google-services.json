@@ -1,0 +1,243 @@
+{
+  "project_info": {
+    "project_number": "378500152590",
+    "firebase_url": "https://weapons-ba44a.firebaseio.com",
+    "project_id": "weapons-ba44a",
+    "storage_bucket": "weapons-ba44a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378500152590:android:e2bfa97312d9603ca92b5f",
+        "android_client_info": {
+          "package_name": "com.alancamargo.weapons.korea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjqBDLpF8mMAS2tYNlkdHaGKF0AaBPVWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378500152590:android:07a36c65551f45aaa92b5f",
+        "android_client_info": {
+          "package_name": "com.alancamargo.weapons.korea.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjqBDLpF8mMAS2tYNlkdHaGKF0AaBPVWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378500152590:android:0f059b6024291753a92b5f",
+        "android_client_info": {
+          "package_name": "com.alancamargo.weapons.vietnam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjqBDLpF8mMAS2tYNlkdHaGKF0AaBPVWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378500152590:android:f8fcf45ef6ff7792a92b5f",
+        "android_client_info": {
+          "package_name": "com.alancamargo.weapons.vietnam.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjqBDLpF8mMAS2tYNlkdHaGKF0AaBPVWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378500152590:android:e12f982cb5009b45a92b5f",
+        "android_client_info": {
+          "package_name": "com.alancamargo.weapons.ww1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjqBDLpF8mMAS2tYNlkdHaGKF0AaBPVWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378500152590:android:0b73f4ffa1e61ac8a92b5f",
+        "android_client_info": {
+          "package_name": "com.alancamargo.weapons.ww1.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjqBDLpF8mMAS2tYNlkdHaGKF0AaBPVWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378500152590:android:9dce9bf071d7db89a92b5f",
+        "android_client_info": {
+          "package_name": "com.alancamargo.weapons.ww2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjqBDLpF8mMAS2tYNlkdHaGKF0AaBPVWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378500152590:android:4add2128375bf0b8a92b5f",
+        "android_client_info": {
+          "package_name": "com.alancamargo.weapons.ww2.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjqBDLpF8mMAS2tYNlkdHaGKF0AaBPVWY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378500152590-fs53mif18tgaur9pclsg4s29f86kj06f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

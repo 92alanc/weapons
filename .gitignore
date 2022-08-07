@@ -13,4 +13,3 @@ app/.DS_Store
 *.aab
 *.apk
 local.properties
-google-services.json
