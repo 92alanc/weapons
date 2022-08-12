@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity(), QueryAdapter.OnItemClickListener {
         adLoader.loadBannerAds(binding.banner, R.string.banner_main)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }

@@ -18,7 +18,7 @@ class App : Application() {
 
     private fun initialiseSmaato() {
         val config = Config.builder().setLogLevel(LogLevel.ERROR).build()
-        val publisherId = getString(R.string.publisher_id)
+        val publisherId = BuildConfig.SMAATO_PUBLISHER_ID
         SmaatoSdk.init(this, config, publisherId)
     }
 
