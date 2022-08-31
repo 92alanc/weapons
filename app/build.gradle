@@ -52,8 +52,8 @@ android {
         ww1 {
             dimension "version"
             applicationIdSuffix ".ww1"
-            versionCode 1
-            versionName "2021.2.0"
+            versionCode 2
+            versionName "2022.3.0"
         }
 
         ww2 {
