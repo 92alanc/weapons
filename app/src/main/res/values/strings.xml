@@ -54,7 +54,7 @@
         <item quantity="other">%d results</item>
     </plurals>
     <string name="refresh">Refresh</string>
-    <string name="privacy_policy_url">https://pastebin.com/Krd7c6aJ</string>
+    <string name="privacy_policy_url">https://pastebin.com/raw/Krd7c6aJ</string>
     <!-- endregion -->
 
     <!-- region Queries -->
