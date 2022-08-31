@@ -7,15 +7,28 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/padding_default">
 
+    <ImageView
+        android:id="@+id/imgFlag"
+        android:layout_width="@dimen/size_flag"
+        android:layout_height="@dimen/size_flag"
+        android:importantForAccessibility="no"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txtHeader"
+        tools:src="@sample/weapons.json/data/flag"
+        tools:visibility="visible"/>
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txtHeader"
         style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:translationZ="2dp"
-        android:textColor="@color/white"
+        android:layout_marginStart="@dimen/margin_default"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/imgFlag"
+        app:layout_constraintStart_toEndOf="@id/imgFlag"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@sample/weapons.json/data/country_name" />
 
@@ -25,26 +38,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/margin_large"
-        android:translationZ="2dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/txtHeader"
+        app:layout_constraintTop_toBottomOf="@id/imgFlag"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_weapon_square"/>
-
-    <ImageView
-        android:id="@+id/imgFlag"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="fitXY"
-        android:alpha="0.3"
-        android:importantForAccessibility="no"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/txtHeader"
-        app:layout_constraintBottom_toBottomOf="@id/recyclerView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@sample/weapons.json/data/flag"
-        tools:visibility="visible"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

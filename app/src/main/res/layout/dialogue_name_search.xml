@@ -4,8 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/padding_default"
-    android:background="@color/light_grey">
+    android:padding="@dimen/padding_default">
 
     <com.google.android.material.textview.MaterialTextView
         style="@style/TextAppearance.MaterialComponents.Headline6"
@@ -22,7 +21,6 @@
             android:id="@+id/edtSearch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:backgroundTint="@color/white"
             android:hint="@string/search"/>
     </com.google.android.material.textfield.TextInputLayout>
 

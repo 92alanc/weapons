@@ -27,7 +27,7 @@
     <!-- region App texts -->
     <string name="error">Unfortunately an error occurred but don\'t worry, the developer has been notified and will fix it soon</string>
     <string name="year_format">Year: %1$d</string>
-    <string name="manufacturer_format">Manufacturer: %1$s</string>
+    <string name="manufacturer_format">Make: %1$s</string>
     <string name="type_format">Type: %1$s</string>
     <string name="calibre_format">Calibre: %1$s</string>
     <string name="length_format">Length: %1$dmm</string>
@@ -63,6 +63,6 @@
     <string name="query_by_country">By country</string>
     <string name="query_by_type">By type</string>
     <string name="query_by_calibre">By calibre</string>
-    <string name="query_by_manufacturer">By manufacturer</string>
+    <string name="query_by_manufacturer">By make</string>
     <!-- endregion -->
 </resources>
