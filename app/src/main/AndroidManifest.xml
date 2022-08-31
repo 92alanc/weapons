@@ -31,6 +31,9 @@
         <activity
             android:name=".ui.activities.WeaponDetailsActivity"
             android:parentActivityName=".ui.activities.MainActivity" />
+        <activity android:name=".ui.activities.WebViewActivity"
+            android:parentActivityName=".ui.activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>
 

@@ -5,8 +5,8 @@
     <item android:id="@+id/itemAbout"
         android:title="@string/about"
         app:showAsAction="never"/>
-    <item android:id="@+id/itemPrivacyNotice"
-        android:title="@string/privacy_notice"
+    <item android:id="@+id/itemPrivacyPolicy"
+        android:title="@string/privacy_policy"
         app:showAsAction="never"/>
 
 </menu>

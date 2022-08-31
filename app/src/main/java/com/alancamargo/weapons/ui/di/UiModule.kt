@@ -6,21 +6,20 @@ import com.alancamargo.weapons.R
 import com.alancamargo.weapons.di.*
 import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.domain.mapper.EntityMapper
+import com.alancamargo.weapons.ui.activities.WebViewActivity
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
 import com.alancamargo.weapons.ui.entities.*
 import com.alancamargo.weapons.ui.mappers.*
-import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigation
-import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigationImpl
-import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
-import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigationImpl
+import com.alancamargo.weapons.ui.navigation.*
 import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.tools.AdLoaderImpl
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.ResourcesHelperImpl
 import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
+import com.alancamargo.weapons.ui.viewmodel.WebViewViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
@@ -42,6 +41,7 @@ object UiModule : LayerModule() {
     private fun Module.viewModels() {
         weaponViewModel()
         queryViewModel()
+        webViewViewModel()
     }
 
     private fun Module.mappers() {
@@ -56,6 +56,7 @@ object UiModule : LayerModule() {
     private fun Module.navigation() {
         factory<WeaponListActivityNavigation> { WeaponListActivityNavigationImpl() }
         factory<WeaponDetailsActivityNavigation> { WeaponDetailsActivityNavigationImpl() }
+        factory<WebViewActivityNavigation> { WebViewActivityNavigationImpl() }
     }
 
     private fun Module.adapters() {
@@ -113,6 +114,10 @@ object UiModule : LayerModule() {
 
     private fun Module.queryViewModel() {
         viewModel { QueryViewModel() }
+    }
+
+    private fun Module.webViewViewModel() {
+        viewModel { WebViewViewModel() }
     }
     // endregion
 

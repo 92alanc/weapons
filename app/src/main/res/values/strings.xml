@@ -42,8 +42,7 @@
     <string name="about">About</string>
     <string name="app_name_format">%1$s %2$s</string>
     <string name="about_message">App developed by Alan Camargo</string>
-    <string name="privacy_notice">Privacy notice</string>
-    <string name="privacy_notice_text">I have absolutely no interest in your personal data so I don\'t and I won\'t ever even try to have access to, track or store ANY of it, full stop.</string>
+    <string name="privacy_policy">Privacy policy</string>
     <string name="error_loading_photo">Error loading photo</string>
     <string name="unknown">Unknown</string>
     <plurals name="capacity_plural">
@@ -54,6 +53,8 @@
         <item quantity="one">%d result</item>
         <item quantity="other">%d results</item>
     </plurals>
+    <string name="refresh">Refresh</string>
+    <string name="privacy_policy_url">https://pastebin.com/Krd7c6aJ</string>
     <!-- endregion -->
 
     <!-- region Queries -->

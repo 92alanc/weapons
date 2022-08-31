@@ -9,11 +9,13 @@ import com.alancamargo.weapons.databinding.ActivityMainBinding
 import com.alancamargo.weapons.ui.adapter.QueryAdapter
 import com.alancamargo.weapons.ui.fragments.NameSearchDialogue
 import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
+import com.alancamargo.weapons.ui.navigation.WebViewActivityNavigation
 import com.alancamargo.weapons.ui.queries.WeaponQuery
 import com.alancamargo.weapons.ui.queries.WeaponQueryType
 import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity(), QueryAdapter.OnItemClickListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.itemAbout -> showAppInfo()
-            R.id.itemPrivacyNotice -> showPrivacyNotice()
+            R.id.itemPrivacyPolicy -> showPrivacyNotice()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -97,10 +99,12 @@ class MainActivity : AppCompatActivity(), QueryAdapter.OnItemClickListener {
     }
 
     private fun showPrivacyNotice() {
-        MaterialAlertDialogBuilder(this)
-            .setTitle(R.string.privacy_notice)
-            .setMessage(R.string.privacy_notice_text)
-            .show()
+        val navigation = get<WebViewActivityNavigation>()
+        navigation.startActivity(
+            context = this,
+            titleRes = R.string.privacy_policy,
+            url = getString(R.string.privacy_policy_url)
+        )
     }
 
 }
