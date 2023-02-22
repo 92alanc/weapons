@@ -30,7 +30,7 @@ class WeaponDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         weapon?.let(::bindTo)
-        adLoader.loadBannerAds(binding.banner, R.string.banner_weapon_details)
+        adLoader.loadBannerAds(binding.banner)
     }
 
     private fun bindTo(weapon: UiWeapon) {

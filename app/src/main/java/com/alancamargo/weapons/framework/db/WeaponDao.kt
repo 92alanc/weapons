@@ -10,7 +10,7 @@ interface WeaponDao {
     @Query("SELECT * FROM WEAPON ORDER BY NAME")
     suspend fun selectAll(): List<DbWeapon>
 
-    @Query("SELECT * FROM WEAPON WHERE NAME LIKE :name ORDER BY NAME")
+    @Query("SELECT * FROM WEAPON WHERE NAME LIKE '%' || :name || '%' ORDER BY NAME")
     suspend fun selectByName(name: String): List<DbWeapon>
 
     @Query("SELECT * FROM WEAPON WHERE YEAR_ID = :yearId ORDER BY NAME")

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ads_app_id">ca-app-pub-8160707058079016~4293133458</string>
+    <string name="banner_weapon_list">ca-app-pub-8160707058079016/9134396590</string>
+    <string name="banner_main">ca-app-pub-8160707058079016/2092112571</string>
+    <string name="banner_weapon_details">ca-app-pub-8160707058079016/2568988240</string>
+    <string name="banner_web_view">ca-app-pub-8160707058079016/7629743236</string>
+</resources>

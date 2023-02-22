@@ -41,7 +41,7 @@ class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         fetchData()
-        adLoader.loadBannerAds(binding.banner, R.string.banner_weapon_list)
+        adLoader.loadBannerAds(binding.banner)
     }
 
     override fun onItemClick(weapon: UiWeapon) {

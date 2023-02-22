@@ -5,6 +5,5 @@ import androidx.annotation.StringRes
 
 interface AdLoader {
 
-    fun loadBannerAds(target: View, @StringRes adIdRes: Int)
-
+    fun loadBannerAds(target: View)
 }

@@ -17,7 +17,7 @@ import com.alancamargo.weapons.databinding.ActivityWebViewBinding
 import com.alancamargo.weapons.ui.tools.*
 import com.alancamargo.weapons.ui.viewmodel.WebViewUiAction
 import com.alancamargo.weapons.ui.viewmodel.WebViewViewModel
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -61,15 +61,10 @@ class WebViewActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.banner.destroy()
-    }
-
     private fun setUpUi() {
         setUpToolbar()
         setUpWebView()
-        get<AdLoader>().loadBannerAds(binding.banner, R.string.banner_web_view)
+        get<AdLoader>().loadBannerAds(binding.banner)
     }
 
     private fun onActionChanged(action: WebViewUiAction) {

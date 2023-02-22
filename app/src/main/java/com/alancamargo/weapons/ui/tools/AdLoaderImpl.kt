@@ -1,16 +1,15 @@
 package com.alancamargo.weapons.ui.tools
 
 import android.view.View
-import com.smaato.sdk.banner.ad.BannerAdSize
-import com.smaato.sdk.banner.widget.BannerView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 
 class AdLoaderImpl : AdLoader {
 
-    override fun loadBannerAds(target: View, adIdRes: Int) {
-        (target as? BannerView)?.run {
-            val adId = context.getString(adIdRes)
-            loadAd(adId, BannerAdSize.XX_LARGE_320x50)
+    override fun loadBannerAds(target: View) {
+        (target as? AdView)?.let { adView ->
+            val adRequest = AdRequest.Builder().build()
+            adView.loadAd(adRequest)
         }
     }
-
 }

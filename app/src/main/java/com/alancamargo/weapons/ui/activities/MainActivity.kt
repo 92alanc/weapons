@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), QueryAdapter.OnItemClickListener {
         setContentView(binding.root)
         binding.recyclerView.adapter = adapter
         adapter.setData(viewModel.getQueries())
-        adLoader.loadBannerAds(binding.banner, R.string.banner_main)
+        adLoader.loadBannerAds(binding.banner)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
