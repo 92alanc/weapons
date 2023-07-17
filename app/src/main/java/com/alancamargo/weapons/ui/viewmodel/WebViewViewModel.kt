@@ -1,8 +1,8 @@
 package com.alancamargo.weapons.ui.viewmodel
 
-import com.alancamargo.weapons.core.arch.viewmodel.ActionViewModel
+import androidx.lifecycle.ViewModel
 
-class WebViewViewModel : ActionViewModel<WebViewUiAction>() {
+class WebViewViewModel : ViewModel() {
 
     fun onStartLoading() {
         sendAction { WebViewUiAction.ShowLoading }
@@ -23,5 +23,4 @@ class WebViewViewModel : ActionViewModel<WebViewUiAction>() {
     fun onNativeBackClicked() {
         sendAction { WebViewUiAction.Finish }
     }
-
 }

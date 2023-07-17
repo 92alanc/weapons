@@ -1,16 +1,14 @@
 package com.alancamargo.weapons
 
 import android.app.Application
-import com.alancamargo.weapons.di.KoinAppDeclarationProvider
 import com.google.android.gms.ads.MobileAds
-import org.koin.core.context.startKoin
+import dagger.hilt.android.HiltAndroidApp
 
-@Suppress("unused")
+@HiltAndroidApp
 class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startKoin(appDeclaration = KoinAppDeclarationProvider.provideAppDeclaration(this))
         MobileAds.initialize(this)
     }
 }

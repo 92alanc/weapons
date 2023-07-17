@@ -1,8 +1,6 @@
 package com.alancamargo.weapons.ui.viewmodel
 
-import com.alancamargo.weapons.core.arch.viewmodel.UiAction
-
-sealed class WebViewUiAction : UiAction {
+sealed class WebViewUiAction {
 
     object ShowLoading : WebViewUiAction()
 
@@ -11,5 +9,4 @@ sealed class WebViewUiAction : UiAction {
     object Refresh : WebViewUiAction()
 
     object Finish : WebViewUiAction()
-
 }

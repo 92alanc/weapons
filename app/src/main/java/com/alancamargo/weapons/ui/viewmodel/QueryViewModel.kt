@@ -6,5 +6,4 @@ import com.alancamargo.weapons.ui.queries.WeaponQueryType
 class QueryViewModel : ViewModel() {
 
     fun getQueries(): Array<WeaponQueryType> = WeaponQueryType.values()
-
 }
