@@ -16,5 +16,4 @@ internal class QueryViewHolder(
             onItemClick(query)
         }
     }
-
 }

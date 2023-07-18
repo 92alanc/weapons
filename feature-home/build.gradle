@@ -70,6 +70,7 @@ dependencies {
     implementation project(':navigation')
 
     implementation "$android_activity"
+    implementation "$android_fragment"
     implementation "$android_material"
     implementation "$google_ads"
     implementation "$hilt_android"

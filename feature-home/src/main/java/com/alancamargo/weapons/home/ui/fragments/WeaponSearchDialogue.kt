@@ -6,19 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import com.alancamargo.weapons.common.ui.WeaponQuery
+import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.home.databinding.DialogueNameSearchBinding
+import com.alancamargo.weapons.home.ui.viewmodel.weaponsearch.WeaponSearchViewAction
+import com.alancamargo.weapons.home.ui.viewmodel.weaponsearch.WeaponSearchViewModel
 import com.alancamargo.weapons.navigation.WeaponListActivityNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-internal class NameSearchDialogue : DialogFragment() {
+internal class WeaponSearchDialogue : DialogFragment() {
 
     private var _binding: DialogueNameSearchBinding? = null
 
     private val binding
         get() = _binding!!
+
+    private val viewModel by viewModels<WeaponSearchViewModel>()
 
     @Inject
     lateinit var weaponListActivityNavigation: WeaponListActivityNavigation
@@ -34,10 +40,8 @@ internal class NameSearchDialogue : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btOk.setOnClickListener {
-            val query = prepareQuery()
-            sendQuery(query)
-        }
+        observeFlow(viewModel.action, ::onAction)
+        setUpUi()
     }
 
     override fun onResume() {
@@ -47,17 +51,18 @@ internal class NameSearchDialogue : DialogFragment() {
         dialog?.window?.setLayout(width, height)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun setUpUi() = with(binding) {
+        btOk.setOnClickListener {
+            val weaponName = edtSearch.text.toString()
+            viewModel.onOkClicked(weaponName)
+        }
     }
 
-    private fun prepareQuery(): WeaponQuery {
-        val name = binding.edtSearch.text.toString()
-        return WeaponQuery.ByName(name)
+    private fun onAction(action: WeaponSearchViewAction) = when (action) {
+        is WeaponSearchViewAction.NavigateToWeaponList -> navigateToWeaponList(action.query)
     }
 
-    private fun sendQuery(query: WeaponQuery) {
+    private fun navigateToWeaponList(query: WeaponQuery) {
         weaponListActivityNavigation.startActivity(
             context = requireContext(),
             query = query
@@ -67,5 +72,4 @@ internal class NameSearchDialogue : DialogFragment() {
     companion object {
         const val TAG = "name_search"
     }
-
 }

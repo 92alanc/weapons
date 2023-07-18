@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.home.ui.viewmodel
+package com.alancamargo.weapons.home.ui.viewmodel.home
 
 import com.alancamargo.weapons.home.ui.model.WeaponQueryType
 

@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.home.ui.viewmodel
+package com.alancamargo.weapons.home.ui.viewmodel.home
 
 import app.cash.turbine.test
 import com.alancamargo.weapons.common.ui.WeaponQuery
@@ -37,13 +37,13 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `when query type is ALL onQueryItemClicked should send NavigateToWeaponsList action`() {
+    fun `when query type is ALL onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
             // WHEN
             viewModel.onQueryItemClicked(WeaponQueryType.ALL)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponsList(WeaponQuery.All)
+            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.All)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)
@@ -52,13 +52,13 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `when query type is BY_CALIBRE onQueryItemClicked should send NavigateToWeaponsList action`() {
+    fun `when query type is BY_CALIBRE onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
             // WHEN
             viewModel.onQueryItemClicked(WeaponQueryType.BY_CALIBRE)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponsList(WeaponQuery.ByCalibre)
+            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.ByCalibre)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)
@@ -67,13 +67,13 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `when query type is BY_COUNTRY onQueryItemClicked should send NavigateToWeaponsList action`() {
+    fun `when query type is BY_COUNTRY onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
             // WHEN
             viewModel.onQueryItemClicked(WeaponQueryType.BY_COUNTRY)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponsList(WeaponQuery.ByCountry)
+            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.ByCountry)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)
@@ -82,13 +82,13 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `when query type is BY_MANUFACTURER onQueryItemClicked should send NavigateToWeaponsList action`() {
+    fun `when query type is BY_MANUFACTURER onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
             // WHEN
             viewModel.onQueryItemClicked(WeaponQueryType.BY_MANUFACTURER)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponsList(WeaponQuery.ByManufacturer)
+            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.ByManufacturer)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)
@@ -112,13 +112,13 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `when query type is BY_TYPE onQueryItemClicked should send NavigateToWeaponsList action`() {
+    fun `when query type is BY_TYPE onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
             // WHEN
             viewModel.onQueryItemClicked(WeaponQueryType.BY_TYPE)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponsList(WeaponQuery.ByType)
+            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.ByType)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)
@@ -127,13 +127,13 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `when query type is BY_YEAR onQueryItemClicked should send NavigateToWeaponsList action`() {
+    fun `when query type is BY_YEAR onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
             // WHEN
             viewModel.onQueryItemClicked(WeaponQueryType.BY_YEAR)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponsList(WeaponQuery.ByYear)
+            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.ByYear)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)

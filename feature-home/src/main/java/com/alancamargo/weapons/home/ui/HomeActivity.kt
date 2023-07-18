@@ -11,10 +11,10 @@ import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.home.R
 import com.alancamargo.weapons.home.databinding.ActivityHomeBinding
 import com.alancamargo.weapons.home.ui.adapter.QueryAdapter
-import com.alancamargo.weapons.home.ui.fragments.NameSearchDialogue
-import com.alancamargo.weapons.home.ui.viewmodel.HomeViewAction
-import com.alancamargo.weapons.home.ui.viewmodel.HomeViewModel
-import com.alancamargo.weapons.home.ui.viewmodel.HomeViewState
+import com.alancamargo.weapons.home.ui.fragments.WeaponSearchDialogue
+import com.alancamargo.weapons.home.ui.viewmodel.home.HomeViewAction
+import com.alancamargo.weapons.home.ui.viewmodel.home.HomeViewModel
+import com.alancamargo.weapons.home.ui.viewmodel.home.HomeViewState
 import com.alancamargo.weapons.navigation.WeaponListActivityNavigation
 import com.alancamargo.weapons.navigation.WebViewActivityNavigation
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -79,7 +79,7 @@ internal class HomeActivity : AppCompatActivity() {
     }
 
     private fun onAction(action: HomeViewAction) = when (action) {
-        is HomeViewAction.NavigateToWeaponsList -> navigateToWeaponsList(action.query)
+        is HomeViewAction.NavigateToWeaponList -> navigateToWeaponsList(action.query)
         is HomeViewAction.ShowWeaponSearchDialogue -> showWeaponSearchDialogue()
         is HomeViewAction.ShowAppInfo -> showAppInfo()
         is HomeViewAction.ShowPrivacyPolicy -> showPrivacyPolicy()
@@ -90,8 +90,8 @@ internal class HomeActivity : AppCompatActivity() {
     }
 
     private fun showWeaponSearchDialogue() {
-        val dialogue = NameSearchDialogue()
-        dialogue.show(supportFragmentManager, NameSearchDialogue.TAG)
+        val dialogue = WeaponSearchDialogue()
+        dialogue.show(supportFragmentManager, WeaponSearchDialogue.TAG)
     }
 
     private fun showAppInfo() {
