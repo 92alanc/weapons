@@ -33,6 +33,10 @@ android {
     kotlinOptions {
         jvmTarget = "$java_version"
     }
+
+    testOptions {
+        unitTests.returnDefaultValues true
+    }
 }
 
 dependencies {
