@@ -7,16 +7,16 @@ import javax.inject.Inject
 private const val LOG_TAG = "WEAPONS_LOG"
 
 internal class LoggerImpl @Inject constructor(
-    private val crashlytics: FirebaseCrashlytics
+    private val firebaseCrashlytics: FirebaseCrashlytics
 ) : Logger {
 
     override fun debug(message: String) {
         Log.d(LOG_TAG, message)
-        crashlytics.log(message)
+        firebaseCrashlytics.log(message)
     }
 
     override fun error(throwable: Throwable) {
         Log.e(LOG_TAG, throwable.message, throwable)
-        crashlytics.recordException(throwable)
+        firebaseCrashlytics.recordException(throwable)
     }
 }

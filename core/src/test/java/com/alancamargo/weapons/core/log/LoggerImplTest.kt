@@ -14,8 +14,8 @@ private const val LOG_TAG = "WEAPONS_LOG"
 
 class LoggerImplTest {
 
-    private val mockCrashlytics = mockk<FirebaseCrashlytics>(relaxed = true)
-    private val logger = LoggerImpl(mockCrashlytics)
+    private val mockFirebaseCrashlytics = mockk<FirebaseCrashlytics>(relaxed = true)
+    private val logger = LoggerImpl(mockFirebaseCrashlytics)
 
     @Before
     fun setUp() {
@@ -48,7 +48,7 @@ class LoggerImplTest {
         logger.debug(message)
 
         // THEN
-        verify { mockCrashlytics.log(message) }
+        verify { mockFirebaseCrashlytics.log(message) }
     }
 
     @Test
@@ -72,6 +72,6 @@ class LoggerImplTest {
         logger.error(throwable)
 
         // THEN
-        verify { mockCrashlytics.recordException(throwable) }
+        verify { mockFirebaseCrashlytics.recordException(throwable) }
     }
 }
