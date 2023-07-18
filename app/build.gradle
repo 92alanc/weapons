@@ -102,6 +102,8 @@ android {
 }
 
 dependencies {
+    implementation project(':core-design')
+
     implementation platform("$firebase_bom")
 
     implementation "$android_appcompat"

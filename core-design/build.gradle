@@ -25,6 +25,26 @@ android {
         }
     }
 
+    flavorDimensions "version"
+
+    productFlavors {
+        ww1 {
+            dimension "version"
+        }
+
+        ww2 {
+            dimension "version"
+        }
+
+        korea {
+            dimension "version"
+        }
+
+        vietnam {
+            dimension "version"
+        }
+    }
+
     compileOptions {
         sourceCompatibility java_version
         targetCompatibility java_version
