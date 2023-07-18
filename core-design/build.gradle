@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.alancamargo.weapons.core'
+    namespace 'com.alancamargo.weapons.core.design'
     compileSdk target_sdk_version
 
     defaultConfig {
@@ -37,21 +37,12 @@ android {
     kotlin {
         jvmToolchain(java_version)
     }
-
-    testOptions {
-        unitTests.returnDefaultValues true
-    }
 }
 
 dependencies {
-    implementation platform("$firebase_bom")
-
-    implementation "$firebase_analytics"
-    implementation "$firebase_crashlytics"
+    implementation "$android_material"
+    implementation "$google_ads"
     implementation "$hilt_android"
 
     kapt "$hilt_compiler"
-
-    testImplementation "$junit"
-    testImplementation "$mockk_android"
 }

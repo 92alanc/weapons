@@ -88,6 +88,10 @@ android {
         jvmTarget = java_version.toString()
     }
 
+    kotlin {
+        jvmToolchain(java_version)
+    }
+
     sourceSets {
         main {
             assets {
