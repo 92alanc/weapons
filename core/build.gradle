@@ -46,6 +46,7 @@ android {
 dependencies {
     implementation platform("$firebase_bom")
 
+    implementation "$android_activity"
     implementation "$firebase_analytics"
     implementation "$firebase_crashlytics"
     implementation "$hilt_android"

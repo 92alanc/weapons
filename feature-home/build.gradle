@@ -65,6 +65,7 @@ android {
 
 dependencies {
     implementation project(':common')
+    implementation project(':core')
     implementation project(':core-design')
     implementation project(':navigation')
 
@@ -74,4 +75,10 @@ dependencies {
     implementation "$hilt_android"
 
     kapt "$hilt_compiler"
+
+    testImplementation "$coroutines_test"
+    testImplementation "$junit"
+    testImplementation "$mockk_android"
+    testImplementation "$truth"
+    testImplementation "$turbine"
 }

@@ -16,7 +16,6 @@ import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.tools.AdLoaderImpl
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.ResourcesHelperImpl
-import com.alancamargo.weapons.home.ui.viewmodel.QueryViewModel
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
 import com.alancamargo.weapons.ui.viewmodel.WebViewViewModel
 import org.koin.android.ext.koin.androidContext

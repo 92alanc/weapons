@@ -10,6 +10,7 @@ ext {
     android_test_orchestrator_version = '1.4.2'
     android_test_runner_version = '1.5.2'
     coil_version = '2.4.0'
+    coroutines_test_version = '1.7.2'
     firebase_bom_version = '32.2.0'
     firebase_crashlytics_version = '2.9.4'
     google_ads_version = '22.2.0'
@@ -22,7 +23,7 @@ ext {
     mockk_version = '1.13.3'
     room_version = '2.5.2'
     truth_version = '1.1.5'
-    turbine_version = '0.13.0'
+    turbine_version = '1.0.0'
 
     min_sdk_version = 23
     target_sdk_version = 33

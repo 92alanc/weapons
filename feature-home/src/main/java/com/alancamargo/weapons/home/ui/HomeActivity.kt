@@ -7,12 +7,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.alancamargo.weapons.common.ui.WeaponQuery
 import com.alancamargo.weapons.core.design.ads.AdLoader
+import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.home.R
 import com.alancamargo.weapons.home.databinding.ActivityHomeBinding
 import com.alancamargo.weapons.home.ui.adapter.QueryAdapter
 import com.alancamargo.weapons.home.ui.fragments.NameSearchDialogue
-import com.alancamargo.weapons.home.ui.model.WeaponQueryType
-import com.alancamargo.weapons.home.ui.viewmodel.QueryViewModel
+import com.alancamargo.weapons.home.ui.viewmodel.HomeViewAction
+import com.alancamargo.weapons.home.ui.viewmodel.HomeViewModel
+import com.alancamargo.weapons.home.ui.viewmodel.HomeViewState
 import com.alancamargo.weapons.navigation.WeaponListActivityNavigation
 import com.alancamargo.weapons.navigation.WebViewActivityNavigation
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -31,15 +33,25 @@ internal class HomeActivity : AppCompatActivity() {
     @Inject
     lateinit var webViewActivityNavigation: WebViewActivityNavigation
 
-    private val viewModel by viewModels<QueryViewModel>()
+    private var _binding: ActivityHomeBinding? = null
+
+    private val binding: ActivityHomeBinding
+        get() = _binding!!
+
+    private val viewModel by viewModels<HomeViewModel>()
     private val adapter by lazy { QueryAdapter(viewModel::onQueryItemClicked) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setUpUi()
+        observeViewModelFlows()
+        viewModel.getQueryTypes()
+    }
+
+    private fun setUpUi() {
         binding.recyclerView.adapter = adapter
-        adapter.submitList(viewModel.getQueries())
         adLoader.loadBannerAds(binding.banner)
     }
 
@@ -50,50 +62,36 @@ internal class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.itemAbout -> showAppInfo()
-            R.id.itemPrivacyPolicy -> showPrivacyNotice()
+            R.id.itemAbout -> viewModel.onAppInfoClicked()
+            R.id.itemPrivacyPolicy -> viewModel.onPrivacyPolicyClicked()
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    private fun onItemClick(query: WeaponQueryType) = when (query) {
-        WeaponQueryType.ALL -> showAllWeapons()
-        WeaponQueryType.BY_CALIBRE -> showWeaponsByCalibre()
-        WeaponQueryType.BY_COUNTRY -> showWeaponsByCountry()
-        WeaponQueryType.BY_MANUFACTURER -> showWeaponsByManufacturer()
-        WeaponQueryType.BY_NAME -> openNameSearchDialogue()
-        WeaponQueryType.BY_TYPE -> showWeaponsByType()
-        WeaponQueryType.BY_YEAR -> showWeaponsByYear()
+    private fun observeViewModelFlows() {
+        observeFlow(viewModel.state, ::onStateChanged)
+        observeFlow(viewModel.action, ::onAction)
     }
 
-    private fun showAllWeapons() {
-        weaponListActivityNavigation.startActivity(this, WeaponQuery.All)
+    private fun onStateChanged(state: HomeViewState) {
+        state.queryTypes?.let(adapter::submitList)
     }
 
-    private fun showWeaponsByCalibre() {
-        weaponListActivityNavigation.startActivity(this, WeaponQuery.ByCalibre)
+    private fun onAction(action: HomeViewAction) = when (action) {
+        is HomeViewAction.NavigateToWeaponsList -> navigateToWeaponsList(action.query)
+        is HomeViewAction.ShowWeaponSearchDialogue -> showWeaponSearchDialogue()
+        is HomeViewAction.ShowAppInfo -> showAppInfo()
+        is HomeViewAction.ShowPrivacyPolicy -> showPrivacyPolicy()
     }
 
-    private fun showWeaponsByCountry() {
-        weaponListActivityNavigation.startActivity(this, WeaponQuery.ByCountry)
+    private fun navigateToWeaponsList(query: WeaponQuery) {
+        weaponListActivityNavigation.startActivity(context = this, query)
     }
 
-    private fun showWeaponsByManufacturer() {
-        weaponListActivityNavigation.startActivity(this, WeaponQuery.ByManufacturer)
-    }
-
-    private fun openNameSearchDialogue() {
+    private fun showWeaponSearchDialogue() {
         val dialogue = NameSearchDialogue()
         dialogue.show(supportFragmentManager, NameSearchDialogue.TAG)
-    }
-
-    private fun showWeaponsByType() {
-        weaponListActivityNavigation.startActivity(this, WeaponQuery.ByType)
-    }
-
-    private fun showWeaponsByYear() {
-        weaponListActivityNavigation.startActivity(this, WeaponQuery.ByYear)
     }
 
     private fun showAppInfo() {
@@ -107,7 +105,7 @@ internal class HomeActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun showPrivacyNotice() {
+    private fun showPrivacyPolicy() {
         webViewActivityNavigation.startActivity(
             context = this,
             titleRes = R.string.privacy_policy,
