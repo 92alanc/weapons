@@ -1,13 +1,14 @@
-package com.alancamargo.weapons.ui.tools
+package com.alancamargo.weapons.core.resources
 
 import android.content.Context
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
-import com.alancamargo.weapons.data.crash.CrashReportHelper
+import com.alancamargo.weapons.core.log.Logger
+import javax.inject.Inject
 
-class ResourcesHelperImpl(
+internal class ResourcesHelperImpl @Inject constructor(
     private val context: Context,
-    private val crashReportHelper: CrashReportHelper
+    private val logger: Logger
 ) : ResourcesHelper {
 
     override fun getDrawable(resourceName: String): Drawable? = try {
@@ -16,9 +17,10 @@ class ResourcesHelperImpl(
             "drawable",
             context.packageName
         )
+
         ContextCompat.getDrawable(context, resId)
     } catch (t: Throwable) {
-        crashReportHelper.log(t)
+        logger.error(t)
         null
     }
 
@@ -29,5 +31,4 @@ class ResourcesHelperImpl(
     override fun getPluralStringOrNull(stringId: Int, quantity: Int?): String? = quantity?.let {
         context.resources.getQuantityString(stringId, it, it)
     }
-
 }

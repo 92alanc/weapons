@@ -7,10 +7,8 @@ import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.activities.WeaponListActivity
 import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigation
 import com.alancamargo.weapons.ui.queries.WeaponQuery
-import com.alancamargo.weapons.ui.tools.AdLoader
 import io.mockk.verify
 import org.koin.test.KoinTest
-import org.koin.test.get
 
 fun weaponListActivity(block: WeaponListActivityRobot.() -> Unit): WeaponListActivityRobot {
     return WeaponListActivityRobot().apply {

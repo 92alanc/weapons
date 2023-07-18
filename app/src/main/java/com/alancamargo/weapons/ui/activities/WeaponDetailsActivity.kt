@@ -9,15 +9,14 @@ import com.alancamargo.weapons.R
 import com.alancamargo.weapons.databinding.ActivityWeaponDetailsBinding
 import com.alancamargo.weapons.ui.adapter.ViewPagerAdapter
 import com.alancamargo.weapons.common.ui.UiWeapon
-import com.alancamargo.weapons.ui.tools.AdLoader
-import com.alancamargo.weapons.ui.tools.ResourcesHelper
+import com.alancamargo.weapons.core.resources.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.setDrawableOrHide
 import com.alancamargo.weapons.ui.tools.setTextOrHide
 import org.koin.android.ext.android.inject
 
 class WeaponDetailsActivity : AppCompatActivity() {
 
-    private val resourcesHelper by inject<ResourcesHelper>()
+    private val resourcesHelper by inject<com.alancamargo.weapons.core.resources.ResourcesHelper>()
     private val imageLoader by inject<ImageLoader>()
     private val adLoader by inject<AdLoader>()
     private val weapon by lazy { intent.getParcelableExtra<com.alancamargo.weapons.common.ui.UiWeapon>(EXTRA_WEAPON) }

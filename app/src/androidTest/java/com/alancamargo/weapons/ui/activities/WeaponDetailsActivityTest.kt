@@ -1,7 +1,6 @@
 package com.alancamargo.weapons.ui.activities
 
 import com.alancamargo.weapons.ui.activities.robots.weaponDetailsActivity
-import com.alancamargo.weapons.ui.tools.AdLoader
 import io.mockk.mockk
 import org.junit.Before
 import org.junit.Test

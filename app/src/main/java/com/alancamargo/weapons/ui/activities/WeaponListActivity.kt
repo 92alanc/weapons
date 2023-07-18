@@ -14,7 +14,6 @@ import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponListHeader
 import com.alancamargo.weapons.common.WeaponQuery
-import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel

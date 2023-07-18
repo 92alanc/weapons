@@ -7,7 +7,6 @@ import com.alancamargo.weapons.domain.entities.WeaponListHeader
 import com.alancamargo.weapons.domain.entities.WeaponType
 import com.alancamargo.weapons.ui.activities.robots.weaponListActivity
 import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigation
-import com.alancamargo.weapons.ui.tools.AdLoader
 import io.mockk.coEvery
 import io.mockk.mockk
 import org.junit.Before

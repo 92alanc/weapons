@@ -7,13 +7,13 @@ import coil.ImageLoader
 import com.alancamargo.weapons.databinding.ItemListWithHeaderBinding
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponListHeader
-import com.alancamargo.weapons.ui.tools.ResourcesHelper
+import com.alancamargo.weapons.core.resources.ResourcesHelper
 import com.alancamargo.weapons.ui.viewholder.WeaponListWithHeaderViewHolder
 
 class WeaponListWithHeaderAdapter(
     private val onItemClickListener: OnItemClickListener,
     private val imageLoader: ImageLoader,
-    private val resourcesHelper: ResourcesHelper
+    private val resourcesHelper: com.alancamargo.weapons.core.resources.ResourcesHelper
 ) : RecyclerView.Adapter<WeaponListWithHeaderViewHolder>() {
 
     private var data = emptyMap<com.alancamargo.weapons.common.ui.UiWeaponListHeader?, List<com.alancamargo.weapons.common.ui.UiWeapon>>()

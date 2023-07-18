@@ -6,7 +6,7 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.alancamargo.weapons.common.ui.WeaponQuery
-import com.alancamargo.weapons.core.design.ads.AdLoader
+import com.alancamargo.weapons.core.ads.AdLoader
 import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.home.R
 import com.alancamargo.weapons.home.databinding.ActivityHomeBinding

@@ -10,7 +10,7 @@ import com.alancamargo.weapons.databinding.ItemListWithHeaderBinding
 import com.alancamargo.weapons.databinding.ItemWeaponSquareBinding
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.entities.*
-import com.alancamargo.weapons.ui.tools.ResourcesHelper
+import com.alancamargo.weapons.core.resources.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.load
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 class WeaponListWithHeaderViewHolder(
     imageLoader: ImageLoader,
     private val binding: ItemListWithHeaderBinding,
-    private val resourcesHelper: ResourcesHelper
+    private val resourcesHelper: com.alancamargo.weapons.core.resources.ResourcesHelper
 ) : RecyclerView.ViewHolder(binding.root) {
 
     private var onItemClickListener: OnItemClickListener? = null

@@ -12,10 +12,8 @@ import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
 import com.alancamargo.weapons.ui.entities.*
 import com.alancamargo.weapons.ui.mappers.*
 import com.alancamargo.weapons.ui.navigation.*
-import com.alancamargo.weapons.ui.tools.AdLoader
-import com.alancamargo.weapons.ui.tools.AdLoaderImpl
-import com.alancamargo.weapons.ui.tools.ResourcesHelper
-import com.alancamargo.weapons.ui.tools.ResourcesHelperImpl
+import com.alancamargo.weapons.core.resources.ResourcesHelper
+import com.alancamargo.weapons.core.resources.ResourcesHelperImpl
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
 import com.alancamargo.weapons.ui.viewmodel.WebViewViewModel
 import org.koin.android.ext.koin.androidContext
@@ -92,7 +90,7 @@ object UiModule : LayerModule() {
     }
 
     private fun Module.resourcesHelper() {
-        factory<ResourcesHelper> {
+        factory<com.alancamargo.weapons.core.resources.ResourcesHelper> {
             ResourcesHelperImpl(
                 context = androidContext(),
                 crashReportHelper = get()

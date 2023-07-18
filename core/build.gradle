@@ -49,6 +49,7 @@ dependencies {
     implementation "$android_activity"
     implementation "$firebase_analytics"
     implementation "$firebase_crashlytics"
+    implementation "$google_ads"
     implementation "$hilt_android"
 
     kapt "$hilt_compiler"

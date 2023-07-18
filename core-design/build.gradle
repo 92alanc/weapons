@@ -1,8 +1,6 @@
 plugins {
     id 'com.android.library'
-    id 'com.google.dagger.hilt.android'
     id 'kotlin-android'
-    id 'kotlin-kapt'
 }
 
 android {
@@ -61,8 +59,4 @@ android {
 
 dependencies {
     implementation "$android_material"
-    implementation "$google_ads"
-    implementation "$hilt_android"
-
-    kapt "$hilt_compiler"
 }

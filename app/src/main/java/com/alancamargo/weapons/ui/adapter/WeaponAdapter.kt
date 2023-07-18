@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import com.alancamargo.weapons.databinding.ItemWeaponBinding
 import com.alancamargo.weapons.common.ui.UiWeapon
-import com.alancamargo.weapons.ui.tools.ResourcesHelper
+import com.alancamargo.weapons.core.resources.ResourcesHelper
 import com.alancamargo.weapons.ui.viewholder.WeaponViewHolder
 
 class WeaponAdapter(
-    private val resourcesHelper: ResourcesHelper,
+    private val resourcesHelper: com.alancamargo.weapons.core.resources.ResourcesHelper,
     private val onItemClickListener: OnItemClickListener,
     private val imageLoader: ImageLoader
 ) : RecyclerView.Adapter<WeaponViewHolder>() {

@@ -1,7 +1,6 @@
 package com.alancamargo.weapons.core.analytics
 
 import androidx.core.os.bundleOf
-import com.alancamargo.weapons.core.tools.BundleBuilder
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.logEvent
 import javax.inject.Inject

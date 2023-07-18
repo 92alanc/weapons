@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.ui.tools
+package com.alancamargo.weapons.core.resources
 
 import android.graphics.drawable.Drawable
 import androidx.annotation.PluralsRes
@@ -11,5 +11,4 @@ interface ResourcesHelper {
     fun getFormattedStringOrNull(@StringRes stringId: Int, arg: Any?): String?
 
     fun getPluralStringOrNull(@PluralsRes stringId: Int, quantity: Int?): String?
-
 }

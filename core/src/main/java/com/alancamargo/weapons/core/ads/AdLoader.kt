@@ -1,7 +1,6 @@
-package com.alancamargo.weapons.ui.tools
+package com.alancamargo.weapons.core.ads
 
 import android.view.View
-import androidx.annotation.StringRes
 
 interface AdLoader {
 

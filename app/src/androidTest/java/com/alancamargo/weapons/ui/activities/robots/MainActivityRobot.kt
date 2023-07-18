@@ -6,10 +6,8 @@ import br.com.concretesolutions.kappuccino.custom.recyclerView.RecyclerViewInter
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.ui.activities.MainActivity
 import com.alancamargo.weapons.ui.navigation.WeaponListActivityNavigation
-import com.alancamargo.weapons.ui.tools.AdLoader
 import io.mockk.verify
 import org.koin.test.KoinTest
-import org.koin.test.get
 
 fun mainActivity(block: MainActivityRobot.() -> Unit) = MainActivityRobot().apply {
     ActivityScenario.launch(MainActivity::class.java)

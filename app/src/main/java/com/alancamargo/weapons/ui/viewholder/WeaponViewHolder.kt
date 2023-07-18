@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import com.alancamargo.weapons.databinding.ItemWeaponBinding
 import com.alancamargo.weapons.common.ui.UiWeapon
-import com.alancamargo.weapons.ui.tools.ResourcesHelper
+import com.alancamargo.weapons.core.resources.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.load
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class WeaponViewHolder(
     private val binding: ItemWeaponBinding,
-    private val resourcesHelper: ResourcesHelper,
+    private val resourcesHelper: com.alancamargo.weapons.core.resources.ResourcesHelper,
     private val imageLoader: ImageLoader
 ) : RecyclerView.ViewHolder(binding.root) {
 

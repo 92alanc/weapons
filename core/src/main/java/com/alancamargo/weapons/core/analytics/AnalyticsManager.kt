@@ -1,7 +1,5 @@
 package com.alancamargo.weapons.core.analytics
 
-import com.alancamargo.weapons.core.tools.BundleBuilder
-
 interface AnalyticsManager {
 
     fun trackScreenViewed(screenName: String)

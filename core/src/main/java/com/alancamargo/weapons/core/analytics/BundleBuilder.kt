@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.core.tools
+package com.alancamargo.weapons.core.analytics
 
 import android.os.Bundle
 
