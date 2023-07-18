@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 rootProject.name = "Weapons"
 
 include ':app'
+include ':core'
