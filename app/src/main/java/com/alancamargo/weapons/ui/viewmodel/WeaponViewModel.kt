@@ -9,29 +9,29 @@ import com.alancamargo.weapons.data.io.Result
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepository
 import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.domain.mapper.EntityMapper
-import com.alancamargo.weapons.ui.entities.UiWeapon
-import com.alancamargo.weapons.ui.entities.UiWeaponListHeader
-import com.alancamargo.weapons.ui.queries.WeaponQuery
+import com.alancamargo.weapons.common.ui.UiWeapon
+import com.alancamargo.weapons.common.ui.UiWeaponListHeader
+import com.alancamargo.weapons.common.WeaponQuery
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 
 class WeaponViewModel(
     private val repository: WeaponRepository,
-    private val weaponMapper: EntityMapper<Weapon, UiWeapon>
+    private val weaponMapper: EntityMapper<Weapon, com.alancamargo.weapons.common.ui.UiWeapon>
 ) : ViewModel() {
 
     private val stateLiveData = MutableLiveData<State>().apply {
         value = State.Loading
     }
 
-    fun start(query: WeaponQuery) = when (query) {
-        is WeaponQuery.All -> loadAllWeapons()
-        is WeaponQuery.ByName -> loadWeaponsByName(query.name)
-        is WeaponQuery.ByYear -> loadWeaponsByYear()
-        is WeaponQuery.ByCountry -> loadWeaponsByCountry()
-        is WeaponQuery.ByType -> loadWeaponsByType()
-        is WeaponQuery.ByCalibre -> loadWeaponsByCalibre()
-        is WeaponQuery.ByManufacturer -> loadWeaponsByManufacturer()
+    fun start(query: com.alancamargo.weapons.common.WeaponQuery) = when (query) {
+        is com.alancamargo.weapons.common.WeaponQuery.All -> loadAllWeapons()
+        is com.alancamargo.weapons.common.WeaponQuery.ByName -> loadWeaponsByName(query.name)
+        is com.alancamargo.weapons.common.WeaponQuery.ByYear -> loadWeaponsByYear()
+        is com.alancamargo.weapons.common.WeaponQuery.ByCountry -> loadWeaponsByCountry()
+        is com.alancamargo.weapons.common.WeaponQuery.ByType -> loadWeaponsByType()
+        is com.alancamargo.weapons.common.WeaponQuery.ByCalibre -> loadWeaponsByCalibre()
+        is com.alancamargo.weapons.common.WeaponQuery.ByManufacturer -> loadWeaponsByManufacturer()
     }
 
     fun getState(): LiveData<State> = stateLiveData
@@ -109,15 +109,15 @@ class WeaponViewModel(
         val headerClass = body.keys.first { it != null }?.javaClass
             ?: throw IllegalStateException("Type must not be null")
 
-        val weapons: Map<UiWeaponListHeader?, List<UiWeapon>> =
+        val weapons: Map<com.alancamargo.weapons.common.ui.UiWeaponListHeader?, List<com.alancamargo.weapons.common.ui.UiWeapon>> =
             weaponList.createMapFromHeaderType(headerClass)
 
         stateLiveData.postValue(State.WeaponListWithHeaderReady(weapons))
     }
 
-    private fun List<UiWeapon>.createMapFromHeaderType(
+    private fun List<com.alancamargo.weapons.common.ui.UiWeapon>.createMapFromHeaderType(
         headerClass: Class<WeaponListHeader>
-    ): Map<UiWeaponListHeader?, List<UiWeapon>> {
+    ): Map<com.alancamargo.weapons.common.ui.UiWeaponListHeader?, List<com.alancamargo.weapons.common.ui.UiWeapon>> {
         return when (headerClass) {
             Calibre::class.java -> groupBy { it.calibre }
             Country::class.java -> groupBy { it.country }
@@ -146,11 +146,11 @@ class WeaponViewModel(
 
         @Parcelize
         data class WeaponListWithHeaderReady(
-            val weapons: Map<UiWeaponListHeader?, List<UiWeapon>>
+            val weapons: Map<com.alancamargo.weapons.common.ui.UiWeaponListHeader?, List<com.alancamargo.weapons.common.ui.UiWeapon>>
         ) : State()
 
         @Parcelize
-        data class WeaponListReady(val weapons: List<UiWeapon>) : State()
+        data class WeaponListReady(val weapons: List<com.alancamargo.weapons.common.ui.UiWeapon>) : State()
 
         @Parcelize
         object Error : State()

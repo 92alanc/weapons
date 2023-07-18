@@ -2,12 +2,12 @@ package com.alancamargo.weapons.ui.mappers
 
 import com.alancamargo.weapons.domain.entities.Manufacturer
 import com.alancamargo.weapons.domain.mapper.EntityMapper
-import com.alancamargo.weapons.ui.entities.UiManufacturer
+import com.alancamargo.weapons.common.ui.UiManufacturer
 
-class UiManufacturerMapper : EntityMapper<Manufacturer, UiManufacturer> {
+class UiManufacturerMapper : EntityMapper<Manufacturer, com.alancamargo.weapons.common.ui.UiManufacturer> {
 
     override fun map(input: Manufacturer) = with(input) {
-        UiManufacturer(id, name)
+        com.alancamargo.weapons.common.ui.UiManufacturer(id, name)
     }
 
 }

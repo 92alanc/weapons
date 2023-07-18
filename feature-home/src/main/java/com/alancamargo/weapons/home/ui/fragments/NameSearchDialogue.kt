@@ -1,0 +1,71 @@
+package com.alancamargo.weapons.home.ui.fragments
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.fragment.app.DialogFragment
+import com.alancamargo.weapons.common.ui.WeaponQuery
+import com.alancamargo.weapons.home.databinding.DialogueNameSearchBinding
+import com.alancamargo.weapons.navigation.WeaponListActivityNavigation
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
+@AndroidEntryPoint
+internal class NameSearchDialogue : DialogFragment() {
+
+    private var _binding: DialogueNameSearchBinding? = null
+
+    private val binding
+        get() = _binding!!
+
+    @Inject
+    lateinit var weaponListActivityNavigation: WeaponListActivityNavigation
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = DialogueNameSearchBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btOk.setOnClickListener {
+            val query = prepareQuery()
+            sendQuery(query)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val width = LinearLayout.LayoutParams.MATCH_PARENT
+        val height = LinearLayout.LayoutParams.WRAP_CONTENT
+        dialog?.window?.setLayout(width, height)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun prepareQuery(): WeaponQuery {
+        val name = binding.edtSearch.text.toString()
+        return WeaponQuery.ByName(name)
+    }
+
+    private fun sendQuery(query: WeaponQuery) {
+        weaponListActivityNavigation.startActivity(
+            context = requireContext(),
+            query = query
+        )
+    }
+
+    companion object {
+        const val TAG = "name_search"
+    }
+
+}

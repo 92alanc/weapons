@@ -11,10 +11,9 @@ import com.alancamargo.weapons.databinding.ActivityWeaponListBinding
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
-import com.alancamargo.weapons.ui.entities.UiWeapon
-import com.alancamargo.weapons.ui.entities.UiWeaponListHeader
-import com.alancamargo.weapons.ui.navigation.WeaponDetailsActivityNavigation
-import com.alancamargo.weapons.ui.queries.WeaponQuery
+import com.alancamargo.weapons.common.ui.UiWeapon
+import com.alancamargo.weapons.common.ui.UiWeaponListHeader
+import com.alancamargo.weapons.common.WeaponQuery
 import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
 import org.koin.android.ext.android.inject
@@ -26,7 +25,7 @@ class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
     private val viewModel by viewModel<WeaponViewModel>()
     private val weaponDetailsActivityNavigation by inject<WeaponDetailsActivityNavigation>()
     private val adLoader by inject<AdLoader>()
-    private val query by lazy { intent.getParcelableExtra<WeaponQuery>(EXTRA_QUERY) }
+    private val query by lazy { intent.getParcelableExtra<com.alancamargo.weapons.common.WeaponQuery>(EXTRA_QUERY) }
 
     private val weaponAdapter by inject<WeaponAdapter> { parametersOf(this) }
     private val weaponListWithHeaderAdapter by inject<WeaponListWithHeaderAdapter> {
@@ -44,7 +43,7 @@ class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
         adLoader.loadBannerAds(binding.banner)
     }
 
-    override fun onItemClick(weapon: UiWeapon) {
+    override fun onItemClick(weapon: com.alancamargo.weapons.common.ui.UiWeapon) {
         weaponDetailsActivityNavigation.startActivity(this, weapon)
     }
 
@@ -71,7 +70,7 @@ class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
         }
     }
 
-    private fun displayWeapons(weapons: List<UiWeapon>) {
+    private fun displayWeapons(weapons: List<com.alancamargo.weapons.common.ui.UiWeapon>) {
         binding.groupError.isVisible = false
         binding.groupNoResults.isVisible = false
         binding.recyclerView.adapter = weaponAdapter
@@ -81,7 +80,7 @@ class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
         Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 
-    private fun displayWeaponListWithHeader(weapons: Map<UiWeaponListHeader?, List<UiWeapon>>) {
+    private fun displayWeaponListWithHeader(weapons: Map<com.alancamargo.weapons.common.ui.UiWeaponListHeader?, List<com.alancamargo.weapons.common.ui.UiWeapon>>) {
         with(binding) {
             groupError.isVisible = false
             groupNoResults.isVisible = false
@@ -112,7 +111,7 @@ class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
     companion object {
         private const val EXTRA_QUERY = "query"
 
-        fun getIntent(context: Context, query: WeaponQuery): Intent {
+        fun getIntent(context: Context, query: com.alancamargo.weapons.common.WeaponQuery): Intent {
             return Intent(context, WeaponListActivity::class.java).putExtra(EXTRA_QUERY, query)
         }
     }

@@ -3,7 +3,7 @@ package com.alancamargo.weapons.ui.viewholder
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import com.alancamargo.weapons.databinding.ItemWeaponBinding
-import com.alancamargo.weapons.ui.entities.UiWeapon
+import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.load
 import kotlinx.coroutines.CoroutineScope
@@ -16,7 +16,7 @@ class WeaponViewHolder(
     private val imageLoader: ImageLoader
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bindTo(weapon: UiWeapon) = with(binding) {
+    fun bindTo(weapon: com.alancamargo.weapons.common.ui.UiWeapon) = with(binding) {
         txtName.text = weapon.name
 
         val flagDrawable = weapon.country?.flagId?.let {

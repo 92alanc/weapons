@@ -12,22 +12,14 @@
         android:theme="@style/AppTheme"
         tools:targetApi="n">
 
-        <activity android:name=".ui.activities.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".ui.activities.WeaponListActivity"
-            android:parentActivityName=".ui.activities.MainActivity" />
+            android:parentActivityName=".home.ui.HomeActivity" />
         <activity
             android:name=".ui.activities.WeaponDetailsActivity"
-            android:parentActivityName=".ui.activities.MainActivity" />
+            android:parentActivityName=".home.ui.HomeActivity" />
         <activity android:name=".ui.activities.WebViewActivity"
-            android:parentActivityName=".ui.activities.MainActivity"
+            android:parentActivityName=".home.ui.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <meta-data

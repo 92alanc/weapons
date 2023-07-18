@@ -30,7 +30,7 @@ class WeaponListWithHeaderViewHolder(
         this.onItemClickListener = onItemClickListener
     }
 
-    fun bindTo(entry: Map.Entry<UiWeaponListHeader?, List<UiWeapon>>) {
+    fun bindTo(entry: Map.Entry<com.alancamargo.weapons.common.ui.UiWeaponListHeader?, List<com.alancamargo.weapons.common.ui.UiWeapon>>) {
         val header = entry.key
         processHeader(header)
         val list = entry.value.sortedBy { it.name }
@@ -38,9 +38,9 @@ class WeaponListWithHeaderViewHolder(
         adapter.setData(list)
     }
 
-    private fun processHeader(header: UiWeaponListHeader?) {
+    private fun processHeader(header: com.alancamargo.weapons.common.ui.UiWeaponListHeader?) {
         binding.txtHeader.text = when (header) {
-            is UiCountry -> {
+            is com.alancamargo.weapons.common.ui.UiCountry -> {
                 val flag = resourcesHelper.getDrawable(header.flagId)
 
                 with(binding.imgFlag) {
@@ -51,10 +51,10 @@ class WeaponListWithHeaderViewHolder(
                 header.name
             }
 
-            is UiCalibre -> header.name
-            is UiManufacturer -> header.name
-            is UiWeaponType -> header.name
-            is UiYear -> header.year.toString()
+            is com.alancamargo.weapons.common.ui.UiCalibre -> header.name
+            is com.alancamargo.weapons.common.ui.UiManufacturer -> header.name
+            is com.alancamargo.weapons.common.ui.UiWeaponType -> header.name
+            is com.alancamargo.weapons.common.ui.UiYear -> header.year.toString()
             null -> itemView.context.getString(R.string.unknown)
             else -> throw IllegalStateException("Must be an implementation of UiWeaponListFilter")
         }
@@ -65,9 +65,9 @@ class WeaponListWithHeaderViewHolder(
         private val imageLoader: ImageLoader
     ) : RecyclerView.Adapter<InnerViewHolder>() {
 
-        private var data: List<UiWeapon> = emptyList()
+        private var data: List<com.alancamargo.weapons.common.ui.UiWeapon> = emptyList()
 
-        fun setData(data: List<UiWeapon>) {
+        fun setData(data: List<com.alancamargo.weapons.common.ui.UiWeapon>) {
             this.data = data
             notifyDataSetChanged()
         }
@@ -103,7 +103,7 @@ class WeaponListWithHeaderViewHolder(
         private val imageLoader: ImageLoader
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindTo(weapon: UiWeapon) = with(binding) {
+        fun bindTo(weapon: com.alancamargo.weapons.common.ui.UiWeapon) = with(binding) {
             txtName.text = weapon.name
             CoroutineScope(Dispatchers.Main).launch {
                 imgPhoto.load(imageLoader, weapon.photos.first(), progressBar, txtError)

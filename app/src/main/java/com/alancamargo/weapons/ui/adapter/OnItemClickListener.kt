@@ -1,7 +1,7 @@
 package com.alancamargo.weapons.ui.adapter
 
-import com.alancamargo.weapons.ui.entities.UiWeapon
+import com.alancamargo.weapons.common.ui.UiWeapon
 
 interface OnItemClickListener {
-    fun onItemClick(weapon: UiWeapon)
+    fun onItemClick(weapon: com.alancamargo.weapons.common.ui.UiWeapon)
 }

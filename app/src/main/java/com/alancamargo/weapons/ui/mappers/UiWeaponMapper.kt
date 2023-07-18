@@ -5,15 +5,15 @@ import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.ui.entities.*
 
 class UiWeaponMapper(
-    private val yearMapper: EntityMapper<Year, UiYear>,
-    private val manufacturerMapper: EntityMapper<Manufacturer, UiManufacturer>,
-    private val countryMapper: EntityMapper<Country, UiCountry>,
-    private val weaponTypeMapper: EntityMapper<WeaponType, UiWeaponType>,
-    private val calibreMapper: EntityMapper<Calibre, UiCalibre>
-) : EntityMapper<Weapon, UiWeapon> {
+    private val yearMapper: EntityMapper<Year, com.alancamargo.weapons.common.ui.UiYear>,
+    private val manufacturerMapper: EntityMapper<Manufacturer, com.alancamargo.weapons.common.ui.UiManufacturer>,
+    private val countryMapper: EntityMapper<Country, com.alancamargo.weapons.common.ui.UiCountry>,
+    private val weaponTypeMapper: EntityMapper<WeaponType, com.alancamargo.weapons.common.ui.UiWeaponType>,
+    private val calibreMapper: EntityMapper<Calibre, com.alancamargo.weapons.common.ui.UiCalibre>
+) : EntityMapper<Weapon, com.alancamargo.weapons.common.ui.UiWeapon> {
 
     override fun map(input: Weapon) = with(input) {
-        UiWeapon(
+        com.alancamargo.weapons.common.ui.UiWeapon(
             id,
             name,
             year?.let(yearMapper::map),

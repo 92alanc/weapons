@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import com.alancamargo.weapons.databinding.ItemListWithHeaderBinding
-import com.alancamargo.weapons.ui.entities.UiWeapon
-import com.alancamargo.weapons.ui.entities.UiWeaponListHeader
+import com.alancamargo.weapons.common.ui.UiWeapon
+import com.alancamargo.weapons.common.ui.UiWeaponListHeader
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.viewholder.WeaponListWithHeaderViewHolder
 
@@ -16,13 +16,13 @@ class WeaponListWithHeaderAdapter(
     private val resourcesHelper: ResourcesHelper
 ) : RecyclerView.Adapter<WeaponListWithHeaderViewHolder>() {
 
-    private var data = emptyMap<UiWeaponListHeader?, List<UiWeapon>>()
+    private var data = emptyMap<com.alancamargo.weapons.common.ui.UiWeaponListHeader?, List<com.alancamargo.weapons.common.ui.UiWeapon>>()
 
     private val dataAsList by lazy {
         data.entries.toList().sortedBy { it.key?.text }
     }
 
-    fun setData(data: Map<UiWeaponListHeader?, List<UiWeapon>>) {
+    fun setData(data: Map<com.alancamargo.weapons.common.ui.UiWeaponListHeader?, List<com.alancamargo.weapons.common.ui.UiWeapon>>) {
         this.data = data
         notifyDataSetChanged()
     }

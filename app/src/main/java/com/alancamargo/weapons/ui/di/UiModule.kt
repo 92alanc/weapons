@@ -6,7 +6,6 @@ import com.alancamargo.weapons.R
 import com.alancamargo.weapons.di.*
 import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.domain.mapper.EntityMapper
-import com.alancamargo.weapons.ui.activities.WebViewActivity
 import com.alancamargo.weapons.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
@@ -17,7 +16,7 @@ import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.tools.AdLoaderImpl
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.ResourcesHelperImpl
-import com.alancamargo.weapons.ui.viewmodel.QueryViewModel
+import com.alancamargo.weapons.home.ui.viewmodel.QueryViewModel
 import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
 import com.alancamargo.weapons.ui.viewmodel.WebViewViewModel
 import org.koin.android.ext.koin.androidContext
@@ -123,31 +122,31 @@ object UiModule : LayerModule() {
 
     // region Mappers
     private fun Module.uiCountryMapper() {
-        factory<EntityMapper<Country, UiCountry>>(named(UI_COUNTRY_MAPPER)) { UiCountryMapper() }
+        factory<EntityMapper<Country, com.alancamargo.weapons.common.ui.UiCountry>>(named(UI_COUNTRY_MAPPER)) { UiCountryMapper() }
     }
 
     private fun Module.uiCalibreMapper() {
-        factory<EntityMapper<Calibre, UiCalibre>>(named(UI_CALIBRE_MAPPER)) { UiCalibreMapper() }
+        factory<EntityMapper<Calibre, com.alancamargo.weapons.common.ui.UiCalibre>>(named(UI_CALIBRE_MAPPER)) { UiCalibreMapper() }
     }
 
     private fun Module.uiManufacturerMapper() {
-        factory<EntityMapper<Manufacturer, UiManufacturer>>(named(UI_MANUFACTURER_MAPPER)) {
+        factory<EntityMapper<Manufacturer, com.alancamargo.weapons.common.ui.UiManufacturer>>(named(UI_MANUFACTURER_MAPPER)) {
             UiManufacturerMapper()
         }
     }
 
     private fun Module.uiYearMapper() {
-        factory<EntityMapper<Year, UiYear>>(named(UI_YEAR_MAPPER)) { UiYearMapper() }
+        factory<EntityMapper<Year, com.alancamargo.weapons.common.ui.UiYear>>(named(UI_YEAR_MAPPER)) { UiYearMapper() }
     }
 
     private fun Module.uiWeaponTypeMapper() {
-        factory<EntityMapper<WeaponType, UiWeaponType>>(named(UI_WEAPON_TYPE_MAPPER)) {
+        factory<EntityMapper<WeaponType, com.alancamargo.weapons.common.ui.UiWeaponType>>(named(UI_WEAPON_TYPE_MAPPER)) {
             UiWeaponTypeMapper(androidContext())
         }
     }
 
     private fun Module.uiWeaponMapper() {
-        factory<EntityMapper<Weapon, UiWeapon>>(named(UI_WEAPON_MAPPER)) {
+        factory<EntityMapper<Weapon, com.alancamargo.weapons.common.ui.UiWeapon>>(named(UI_WEAPON_MAPPER)) {
             UiWeaponMapper(
                 yearMapper = get(named(UI_YEAR_MAPPER)),
                 manufacturerMapper = get(named(UI_MANUFACTURER_MAPPER)),

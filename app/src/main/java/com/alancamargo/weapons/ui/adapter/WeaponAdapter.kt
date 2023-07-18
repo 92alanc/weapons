@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import com.alancamargo.weapons.databinding.ItemWeaponBinding
-import com.alancamargo.weapons.ui.entities.UiWeapon
+import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.viewholder.WeaponViewHolder
 
@@ -15,9 +15,9 @@ class WeaponAdapter(
     private val imageLoader: ImageLoader
 ) : RecyclerView.Adapter<WeaponViewHolder>() {
 
-    private var data = emptyList<UiWeapon>()
+    private var data = emptyList<com.alancamargo.weapons.common.ui.UiWeapon>()
 
-    fun setData(data: List<UiWeapon>) {
+    fun setData(data: List<com.alancamargo.weapons.common.ui.UiWeapon>) {
         this.data = data
         notifyDataSetChanged()
     }

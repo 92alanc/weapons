@@ -8,7 +8,7 @@ import coil.ImageLoader
 import com.alancamargo.weapons.R
 import com.alancamargo.weapons.databinding.ActivityWeaponDetailsBinding
 import com.alancamargo.weapons.ui.adapter.ViewPagerAdapter
-import com.alancamargo.weapons.ui.entities.UiWeapon
+import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.ui.tools.AdLoader
 import com.alancamargo.weapons.ui.tools.ResourcesHelper
 import com.alancamargo.weapons.ui.tools.setDrawableOrHide
@@ -20,7 +20,7 @@ class WeaponDetailsActivity : AppCompatActivity() {
     private val resourcesHelper by inject<ResourcesHelper>()
     private val imageLoader by inject<ImageLoader>()
     private val adLoader by inject<AdLoader>()
-    private val weapon by lazy { intent.getParcelableExtra<UiWeapon>(EXTRA_WEAPON) }
+    private val weapon by lazy { intent.getParcelableExtra<com.alancamargo.weapons.common.ui.UiWeapon>(EXTRA_WEAPON) }
 
     private lateinit var binding: ActivityWeaponDetailsBinding
 
@@ -33,7 +33,7 @@ class WeaponDetailsActivity : AppCompatActivity() {
         adLoader.loadBannerAds(binding.banner)
     }
 
-    private fun bindTo(weapon: UiWeapon) {
+    private fun bindTo(weapon: com.alancamargo.weapons.common.ui.UiWeapon) {
         with(weapon) {
             binding.viewPager.adapter = ViewPagerAdapter(photos, imageLoader)
             binding.txtName.text = name
@@ -92,7 +92,7 @@ class WeaponDetailsActivity : AppCompatActivity() {
     companion object {
         private const val EXTRA_WEAPON = "weapon"
 
-        fun getIntent(context: Context, weapon: UiWeapon): Intent {
+        fun getIntent(context: Context, weapon: com.alancamargo.weapons.common.ui.UiWeapon): Intent {
             return Intent(context, WeaponDetailsActivity::class.java)
                 .putExtra(EXTRA_WEAPON, weapon)
         }
