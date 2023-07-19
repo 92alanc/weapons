@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.data.local
 
-import com.alancamargo.weapons.domain.entities.Year
+import com.alancamargo.weapons.catalogue.domain.model.Year
 
 interface YearLocalDataSource {
 

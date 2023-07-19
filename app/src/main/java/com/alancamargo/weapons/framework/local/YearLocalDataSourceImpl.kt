@@ -1,7 +1,7 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.data.local.YearLocalDataSource
-import com.alancamargo.weapons.domain.entities.Year
+import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.db.YearDao
 import com.alancamargo.weapons.framework.entities.DbYear

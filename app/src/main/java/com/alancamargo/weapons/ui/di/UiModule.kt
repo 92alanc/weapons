@@ -6,15 +6,21 @@ import com.alancamargo.weapons.R
 import com.alancamargo.weapons.di.*
 import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.domain.mapper.EntityMapper
-import com.alancamargo.weapons.ui.adapter.OnItemClickListener
-import com.alancamargo.weapons.ui.adapter.WeaponAdapter
-import com.alancamargo.weapons.ui.adapter.WeaponListWithHeaderAdapter
+import com.alancamargo.weapons.catalogue.adapter.OnItemClickListener
+import com.alancamargo.weapons.catalogue.adapter.WeaponAdapter
+import com.alancamargo.weapons.catalogue.adapter.WeaponListWithHeaderAdapter
+import com.alancamargo.weapons.catalogue.domain.model.Calibre
+import com.alancamargo.weapons.catalogue.domain.model.Country
+import com.alancamargo.weapons.catalogue.domain.model.Manufacturer
+import com.alancamargo.weapons.catalogue.domain.model.Weapon
+import com.alancamargo.weapons.catalogue.domain.model.WeaponType
+import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.ui.entities.*
 import com.alancamargo.weapons.ui.mappers.*
 import com.alancamargo.weapons.ui.navigation.*
 import com.alancamargo.weapons.core.resources.ResourcesHelper
 import com.alancamargo.weapons.core.resources.ResourcesHelperImpl
-import com.alancamargo.weapons.ui.viewmodel.WeaponViewModel
+import com.alancamargo.weapons.catalogue.viewmodel.WeaponViewModel
 import com.alancamargo.weapons.ui.viewmodel.WebViewViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -56,14 +62,14 @@ object UiModule : LayerModule() {
     }
 
     private fun Module.adapters() {
-        factory { (onItemClickListener: OnItemClickListener) ->
+        factory { (onItemClickListener: com.alancamargo.weapons.catalogue.adapter.OnItemClickListener) ->
             WeaponAdapter(
                 resourcesHelper = get(),
                 onItemClickListener = onItemClickListener,
                 imageLoader = get()
             )
         }
-        factory { (onItemClickListener: OnItemClickListener) ->
+        factory { (onItemClickListener: com.alancamargo.weapons.catalogue.adapter.OnItemClickListener) ->
             WeaponListWithHeaderAdapter(
                 onItemClickListener = onItemClickListener,
                 imageLoader = get(),

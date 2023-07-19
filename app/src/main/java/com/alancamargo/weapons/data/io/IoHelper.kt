@@ -1,6 +1,5 @@
 package com.alancamargo.weapons.data.io
 
-import com.alancamargo.weapons.data.crash.CrashReportHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

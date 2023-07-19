@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.ui.mappers
 
-import com.alancamargo.weapons.domain.entities.Country
+import com.alancamargo.weapons.catalogue.domain.model.Country
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.common.ui.UiCountry
 

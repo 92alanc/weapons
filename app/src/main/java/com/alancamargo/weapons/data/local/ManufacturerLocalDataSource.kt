@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.data.local
 
-import com.alancamargo.weapons.domain.entities.Manufacturer
+import com.alancamargo.weapons.catalogue.domain.model.Manufacturer
 
 interface ManufacturerLocalDataSource {
 

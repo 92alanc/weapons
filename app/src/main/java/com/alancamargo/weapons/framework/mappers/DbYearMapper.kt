@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.framework.mappers
 
-import com.alancamargo.weapons.domain.entities.Year
+import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.entities.DbYear
 

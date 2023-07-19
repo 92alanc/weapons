@@ -91,19 +91,12 @@ android {
     kotlin {
         jvmToolchain(java_version)
     }
-
-    sourceSets {
-        main {
-            assets {
-                srcDirs 'src/main/assets', 'src/test/assets'
-            }
-        }
-    }
 }
 
 dependencies {
     implementation project(':core-design')
     implementation project(':feature-home')
+    implementation project(':feature-catalogue')
 
     implementation platform("$firebase_bom")
 

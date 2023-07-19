@@ -2,8 +2,8 @@ package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.data.local.*
 import com.alancamargo.weapons.di.DB_WEAPON_MAPPER
-import com.alancamargo.weapons.domain.entities.Weapon
-import com.alancamargo.weapons.domain.entities.WeaponListHeader
+import com.alancamargo.weapons.catalogue.domain.model.Weapon
+import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.db.WeaponDao
 import com.alancamargo.weapons.framework.entities.DbWeapon

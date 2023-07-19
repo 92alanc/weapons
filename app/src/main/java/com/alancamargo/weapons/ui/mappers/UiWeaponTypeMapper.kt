@@ -2,7 +2,7 @@ package com.alancamargo.weapons.ui.mappers
 
 import android.content.Context
 import com.alancamargo.weapons.R
-import com.alancamargo.weapons.domain.entities.WeaponType
+import com.alancamargo.weapons.catalogue.domain.model.WeaponType
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.common.ui.UiWeaponType
 

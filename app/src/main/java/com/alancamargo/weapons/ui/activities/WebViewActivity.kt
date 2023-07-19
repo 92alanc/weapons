@@ -13,6 +13,8 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.alancamargo.weapons.R
+import com.alancamargo.weapons.core.extensions.args
+import com.alancamargo.weapons.core.extensions.createIntent
 import com.alancamargo.weapons.databinding.ActivityWebViewBinding
 import com.alancamargo.weapons.ui.tools.*
 import com.alancamargo.weapons.ui.viewmodel.WebViewUiAction

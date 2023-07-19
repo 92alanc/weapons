@@ -1,6 +1,12 @@
 package com.alancamargo.weapons.framework.di
 
 import androidx.room.Room
+import com.alancamargo.weapons.catalogue.domain.model.Calibre
+import com.alancamargo.weapons.catalogue.domain.model.Country
+import com.alancamargo.weapons.catalogue.domain.model.Manufacturer
+import com.alancamargo.weapons.catalogue.domain.model.Weapon
+import com.alancamargo.weapons.catalogue.domain.model.WeaponType
+import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.di.*
 import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.domain.mapper.EntityMapper

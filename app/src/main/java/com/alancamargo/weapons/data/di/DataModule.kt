@@ -1,6 +1,5 @@
 package com.alancamargo.weapons.data.di
 
-import com.alancamargo.weapons.data.crash.CrashReportHelper
 import com.alancamargo.weapons.data.io.IoHelper
 import com.alancamargo.weapons.data.local.*
 import com.alancamargo.weapons.data.repository.weapon.WeaponRepository

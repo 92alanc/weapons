@@ -11,7 +11,6 @@ class FileHelperImpl(
     private val countryDao: CountryDao
 ) : FileHelper {
 
-    @Suppress("BlockingMethodInNonBlockingContext")
     override suspend fun getImageFilePaths(weaponName: String): List<String> {
         return withContext(Dispatchers.IO) {
             val relativePath = getRelativePath(weaponName)
@@ -30,5 +29,4 @@ class FileHelperImpl(
 
         "$countryName/${weaponName.replace("/", "-").replace("\"", "")}"
     }
-
 }

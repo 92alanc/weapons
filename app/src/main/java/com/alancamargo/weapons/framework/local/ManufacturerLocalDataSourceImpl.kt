@@ -1,7 +1,7 @@
 package com.alancamargo.weapons.framework.local
 
 import com.alancamargo.weapons.data.local.ManufacturerLocalDataSource
-import com.alancamargo.weapons.domain.entities.Manufacturer
+import com.alancamargo.weapons.catalogue.domain.model.Manufacturer
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.db.ManufacturerDao
 import com.alancamargo.weapons.framework.entities.DbManufacturer

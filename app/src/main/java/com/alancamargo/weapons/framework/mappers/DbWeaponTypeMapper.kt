@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.framework.mappers
 
-import com.alancamargo.weapons.domain.entities.WeaponType
+import com.alancamargo.weapons.catalogue.domain.model.WeaponType
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.entities.DbWeaponType
 import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP

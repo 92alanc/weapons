@@ -1,6 +1,11 @@
 package com.alancamargo.weapons.framework.mappers
 
-import com.alancamargo.weapons.domain.entities.*
+import com.alancamargo.weapons.catalogue.domain.model.Calibre
+import com.alancamargo.weapons.catalogue.domain.model.Country
+import com.alancamargo.weapons.catalogue.domain.model.Manufacturer
+import com.alancamargo.weapons.catalogue.domain.model.Weapon
+import com.alancamargo.weapons.catalogue.domain.model.WeaponType
+import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.domain.mapper.EntityMapper
 import com.alancamargo.weapons.framework.entities.DbWeapon
 

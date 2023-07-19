@@ -47,6 +47,9 @@ dependencies {
     implementation platform("$firebase_bom")
 
     implementation "$android_activity"
+    implementation "$android_appcompat"
+    implementation "$android_material"
+    implementation "$coil"
     implementation "$firebase_analytics"
     implementation "$firebase_crashlytics"
     implementation "$google_ads"
