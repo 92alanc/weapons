@@ -1,7 +1,7 @@
 package com.alancamargo.weapons.home.ui.viewmodel.weaponsearch
 
 import app.cash.turbine.test
-import com.alancamargo.weapons.common.ui.WeaponQuery
+import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,7 +31,7 @@ class WeaponSearchViewModelTest {
         viewModel.onOkClicked(weaponName)
 
         // THEN
-        val query = WeaponQuery.ByName(weaponName)
+        val query = UiWeaponQuery.ByName(weaponName)
         val expected = WeaponSearchViewAction.NavigateToWeaponList(query)
         viewModel.action.test {
             val actual = awaitItem()

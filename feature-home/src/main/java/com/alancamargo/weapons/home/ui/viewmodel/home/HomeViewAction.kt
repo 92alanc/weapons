@@ -1,10 +1,10 @@
 package com.alancamargo.weapons.home.ui.viewmodel.home
 
-import com.alancamargo.weapons.common.ui.WeaponQuery
+import com.alancamargo.weapons.common.ui.UiWeaponQuery
 
 internal sealed class HomeViewAction {
 
-    data class NavigateToWeaponList(val query: WeaponQuery) : HomeViewAction()
+    data class NavigateToWeaponList(val query: UiWeaponQuery) : HomeViewAction()
 
     object ShowWeaponSearchDialogue : HomeViewAction()
 

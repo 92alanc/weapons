@@ -1,8 +1,8 @@
 package com.alancamargo.weapons.home.ui.viewmodel.weaponsearch
 
-import com.alancamargo.weapons.common.ui.WeaponQuery
+import com.alancamargo.weapons.common.ui.UiWeaponQuery
 
 internal sealed class WeaponSearchViewAction {
 
-    data class NavigateToWeaponList(val query: WeaponQuery.ByName) : WeaponSearchViewAction()
+    data class NavigateToWeaponList(val query: UiWeaponQuery.ByName) : WeaponSearchViewAction()
 }

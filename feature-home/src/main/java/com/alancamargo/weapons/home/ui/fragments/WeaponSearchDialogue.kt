@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import com.alancamargo.weapons.common.ui.WeaponQuery
+import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.home.databinding.DialogueNameSearchBinding
 import com.alancamargo.weapons.home.ui.viewmodel.weaponsearch.WeaponSearchViewAction
@@ -62,7 +62,7 @@ internal class WeaponSearchDialogue : DialogFragment() {
         is WeaponSearchViewAction.NavigateToWeaponList -> navigateToWeaponList(action.query)
     }
 
-    private fun navigateToWeaponList(query: WeaponQuery) {
+    private fun navigateToWeaponList(query: UiWeaponQuery) {
         weaponListActivityNavigation.startActivity(
             context = requireContext(),
             query = query

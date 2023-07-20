@@ -5,7 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.alancamargo.weapons.common.ui.WeaponQuery
+import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.ads.AdLoader
 import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.home.R
@@ -85,7 +85,7 @@ internal class HomeActivity : AppCompatActivity() {
         is HomeViewAction.ShowPrivacyPolicy -> showPrivacyPolicy()
     }
 
-    private fun navigateToWeaponsList(query: WeaponQuery) {
+    private fun navigateToWeaponsList(query: UiWeaponQuery) {
         weaponListActivityNavigation.startActivity(context = this, query)
     }
 

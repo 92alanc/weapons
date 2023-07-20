@@ -1,14 +1,14 @@
-package com.alancamargo.weapons.framework.entities
+package com.alancamargo.weapons.catalogue.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_CALIBRE_ID
-import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_COUNTRY_ID
-import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_MANUFACTURER_ID
-import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_TYPE_ID
-import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_YEAR_ID
+import com.alancamargo.weapons.catalogue.data.model.DbWeapon.Companion.COLUMN_CALIBRE_ID
+import com.alancamargo.weapons.catalogue.data.model.DbWeapon.Companion.COLUMN_COUNTRY_ID
+import com.alancamargo.weapons.catalogue.data.model.DbWeapon.Companion.COLUMN_MANUFACTURER_ID
+import com.alancamargo.weapons.catalogue.data.model.DbWeapon.Companion.COLUMN_TYPE_ID
+import com.alancamargo.weapons.catalogue.data.model.DbWeapon.Companion.COLUMN_YEAR_ID
 
 @Entity(
     tableName = "WEAPON",
@@ -40,7 +40,7 @@ import com.alancamargo.weapons.framework.entities.DbWeapon.Companion.COLUMN_YEAR
         )
     ]
 )
-data class DbWeapon(
+internal data class DbWeapon(
     @PrimaryKey val id: Long,
     val name: String,
     @ColumnInfo(name = COLUMN_YEAR_ID) val yearId: Long?,
@@ -68,5 +68,4 @@ data class DbWeapon(
         const val COLUMN_CALIBRE_ID = "calibre_id"
         const val COLUMN_YEAR_ID = "year_id"
     }
-
 }

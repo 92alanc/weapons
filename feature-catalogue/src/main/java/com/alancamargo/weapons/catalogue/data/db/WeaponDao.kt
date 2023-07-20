@@ -1,11 +1,11 @@
-package com.alancamargo.weapons.framework.db
+package com.alancamargo.weapons.catalogue.data.db
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.alancamargo.weapons.framework.entities.DbWeapon
+import com.alancamargo.weapons.catalogue.data.model.DbWeapon
 
 @Dao
-interface WeaponDao {
+internal interface WeaponDao {
 
     @Query("SELECT * FROM WEAPON ORDER BY NAME")
     suspend fun selectAll(): List<DbWeapon>
@@ -27,5 +27,4 @@ interface WeaponDao {
 
     @Query("SELECT * FROM WEAPON WHERE MANUFACTURER_ID = :manufacturerId ORDER BY NAME")
     suspend fun selectByManufacturer(manufacturerId: Long): List<DbWeapon>
-
 }

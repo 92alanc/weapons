@@ -5,8 +5,8 @@ import com.alancamargo.weapons.di.DB_WEAPON_MAPPER
 import com.alancamargo.weapons.catalogue.domain.model.Weapon
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
 import com.alancamargo.weapons.domain.mapper.EntityMapper
-import com.alancamargo.weapons.framework.db.WeaponDao
-import com.alancamargo.weapons.framework.entities.DbWeapon
+import com.alancamargo.weapons.catalogue.data.db.WeaponDao
+import com.alancamargo.weapons.catalogue.data.model.DbWeapon
 import com.alancamargo.weapons.framework.mappers.DbWeaponMapper
 import com.alancamargo.weapons.framework.tools.FileHelper
 import org.koin.core.component.KoinComponent

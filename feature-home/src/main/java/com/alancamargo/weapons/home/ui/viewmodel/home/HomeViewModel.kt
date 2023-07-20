@@ -2,7 +2,7 @@ package com.alancamargo.weapons.home.ui.viewmodel.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alancamargo.weapons.common.ui.WeaponQuery
+import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.di.IoDispatcher
 import com.alancamargo.weapons.home.ui.model.WeaponQueryType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,19 +34,19 @@ internal class HomeViewModel @Inject constructor(
     fun onQueryItemClicked(query: WeaponQueryType) {
         val action = when (query) {
             WeaponQueryType.ALL -> {
-                HomeViewAction.NavigateToWeaponList(WeaponQuery.All)
+                HomeViewAction.NavigateToWeaponList(UiWeaponQuery.All)
             }
 
             WeaponQueryType.BY_CALIBRE -> {
-                HomeViewAction.NavigateToWeaponList(WeaponQuery.ByCalibre)
+                HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByCalibre)
             }
 
             WeaponQueryType.BY_COUNTRY -> {
-                HomeViewAction.NavigateToWeaponList(WeaponQuery.ByCountry)
+                HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByCountry)
             }
 
             WeaponQueryType.BY_MANUFACTURER -> {
-                HomeViewAction.NavigateToWeaponList(WeaponQuery.ByManufacturer)
+                HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByManufacturer)
             }
 
             WeaponQueryType.BY_NAME -> {
@@ -54,11 +54,11 @@ internal class HomeViewModel @Inject constructor(
             }
 
             WeaponQueryType.BY_TYPE -> {
-                HomeViewAction.NavigateToWeaponList(WeaponQuery.ByType)
+                HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByType)
             }
 
             WeaponQueryType.BY_YEAR -> {
-                HomeViewAction.NavigateToWeaponList(WeaponQuery.ByYear)
+                HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByYear)
             }
         }
 

@@ -1,11 +1,11 @@
-package com.alancamargo.weapons.framework.entities
+package com.alancamargo.weapons.catalogue.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "COUNTRY")
-data class DbCountry(
+internal data class DbCountry(
     @PrimaryKey val id: Long,
     val name: String,
     @ColumnInfo(name = COLUMN_FLAG_ID) val flagId: String
@@ -15,5 +15,4 @@ data class DbCountry(
         const val COLUMN_ID = "id"
         const val COLUMN_FLAG_ID = "flag_id"
     }
-
 }

@@ -2,7 +2,7 @@ package com.alancamargo.weapons.home.ui.viewmodel.weaponsearch
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alancamargo.weapons.common.ui.WeaponQuery
+import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.di.IoDispatcher
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,7 +22,7 @@ internal class WeaponSearchViewModel @Inject constructor(
 
     fun onOkClicked(weaponName: String) {
         viewModelScope.launch(dispatcher) {
-            val query = WeaponQuery.ByName(weaponName)
+            val query = UiWeaponQuery.ByName(weaponName)
             val action = WeaponSearchViewAction.NavigateToWeaponList(query)
             _action.emit(action)
         }

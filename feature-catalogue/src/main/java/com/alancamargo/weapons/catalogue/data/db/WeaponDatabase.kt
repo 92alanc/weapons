@@ -1,9 +1,13 @@
-package com.alancamargo.weapons.framework.db.provider
+package com.alancamargo.weapons.catalogue.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.alancamargo.weapons.framework.db.*
-import com.alancamargo.weapons.framework.entities.*
+import com.alancamargo.weapons.catalogue.data.model.DbCalibre
+import com.alancamargo.weapons.catalogue.data.model.DbCountry
+import com.alancamargo.weapons.catalogue.data.model.DbManufacturer
+import com.alancamargo.weapons.catalogue.data.model.DbWeapon
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType
+import com.alancamargo.weapons.catalogue.data.model.DbYear
 
 @Database(
     entities = [
@@ -17,7 +21,7 @@ import com.alancamargo.weapons.framework.entities.*
     version = 1,
     exportSchema = false
 )
-abstract class DatabaseProvider : RoomDatabase() {
+internal abstract class WeaponDatabase : RoomDatabase() {
 
     abstract fun provideWeaponDao(): WeaponDao
 
@@ -30,5 +34,4 @@ abstract class DatabaseProvider : RoomDatabase() {
     abstract fun provideManufacturerDao(): ManufacturerDao
 
     abstract fun provideYearDao(): YearDao
-
 }

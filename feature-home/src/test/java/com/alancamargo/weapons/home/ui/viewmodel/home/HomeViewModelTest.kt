@@ -1,7 +1,7 @@
 package com.alancamargo.weapons.home.ui.viewmodel.home
 
 import app.cash.turbine.test
-import com.alancamargo.weapons.common.ui.WeaponQuery
+import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.home.ui.model.WeaponQueryType
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.Dispatchers
@@ -43,7 +43,7 @@ class HomeViewModelTest {
             viewModel.onQueryItemClicked(WeaponQueryType.ALL)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.All)
+            val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.All)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)
@@ -58,7 +58,7 @@ class HomeViewModelTest {
             viewModel.onQueryItemClicked(WeaponQueryType.BY_CALIBRE)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.ByCalibre)
+            val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByCalibre)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)
@@ -73,7 +73,7 @@ class HomeViewModelTest {
             viewModel.onQueryItemClicked(WeaponQueryType.BY_COUNTRY)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.ByCountry)
+            val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByCountry)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)
@@ -88,7 +88,7 @@ class HomeViewModelTest {
             viewModel.onQueryItemClicked(WeaponQueryType.BY_MANUFACTURER)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.ByManufacturer)
+            val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByManufacturer)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)
@@ -118,7 +118,7 @@ class HomeViewModelTest {
             viewModel.onQueryItemClicked(WeaponQueryType.BY_TYPE)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.ByType)
+            val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByType)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)
@@ -133,7 +133,7 @@ class HomeViewModelTest {
             viewModel.onQueryItemClicked(WeaponQueryType.BY_YEAR)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponList(WeaponQuery.ByYear)
+            val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByYear)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)

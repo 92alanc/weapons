@@ -1,28 +1,18 @@
-package com.alancamargo.weapons.common.ui
+package com.alancamargo.weapons.catalogue.domain.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+internal sealed class WeaponQuery {
 
-sealed class WeaponQuery : Parcelable {
-
-    @Parcelize
     object All : WeaponQuery()
 
-    @Parcelize
     data class ByName(val name: String) : WeaponQuery()
 
-    @Parcelize
     object ByYear : WeaponQuery()
 
-    @Parcelize
     object ByCountry : WeaponQuery()
 
-    @Parcelize
     object ByType : WeaponQuery()
 
-    @Parcelize
     object ByCalibre : WeaponQuery()
 
-    @Parcelize
     object ByManufacturer : WeaponQuery()
 }

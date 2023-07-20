@@ -54,8 +54,10 @@ dependencies {
     implementation "$firebase_crashlytics"
     implementation "$google_ads"
     implementation "$hilt_android"
+    implementation "$room"
 
     kapt "$hilt_compiler"
+    kapt "$room_compiler"
 
     testImplementation "$junit"
     testImplementation "$mockk_android"

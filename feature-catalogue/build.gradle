@@ -81,6 +81,8 @@ dependencies {
     implementation "$coil"
     implementation "$google_ads"
     implementation "$hilt_android"
+    implementation "$room"
 
     kapt "$hilt_compiler"
+    kapt "$room_compiler"
 }

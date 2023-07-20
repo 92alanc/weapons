@@ -10,8 +10,14 @@ import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.di.*
 import com.alancamargo.weapons.domain.entities.*
 import com.alancamargo.weapons.domain.mapper.EntityMapper
-import com.alancamargo.weapons.framework.db.provider.DatabaseProvider
-import com.alancamargo.weapons.framework.entities.*
+import com.alancamargo.weapons.catalogue.data.db.WeaponDatabase
+import com.alancamargo.weapons.catalogue.data.model.DbCalibre
+import com.alancamargo.weapons.catalogue.data.model.DbCountry
+import com.alancamargo.weapons.catalogue.data.model.DbManufacturer
+import com.alancamargo.weapons.catalogue.data.model.DbWeapon
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType
+import com.alancamargo.weapons.catalogue.data.model.DbYear
+import com.alancamargo.weapons.framework.model.*
 import com.alancamargo.weapons.framework.mappers.*
 import com.alancamargo.weapons.framework.tools.FileHelper
 import com.alancamargo.weapons.framework.tools.FileHelperImpl
@@ -69,7 +75,7 @@ object FrameworkModule : LayerModule() {
         }
     }
 
-    private fun Scope.getDatabaseProvider() = get<DatabaseProvider>()
+    private fun Scope.getDatabaseProvider() = get<WeaponDatabase>()
 
     // region Mappers
     private fun Module.dbWeaponMapper() {

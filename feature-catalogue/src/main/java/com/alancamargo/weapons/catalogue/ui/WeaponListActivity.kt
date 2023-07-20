@@ -13,10 +13,10 @@ import com.alancamargo.weapons.catalogue.databinding.ActivityWeaponListBinding
 import com.alancamargo.weapons.catalogue.ui.adapter.OnItemClickListener
 import com.alancamargo.weapons.catalogue.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.catalogue.ui.adapter.WeaponListWithHeaderAdapter
-import com.alancamargo.weapons.catalogue.ui.viewmodel.WeaponViewModel
+import com.alancamargo.weapons.catalogue.ui.viewmodel.WeaponListViewModel
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponListHeader
-import com.alancamargo.weapons.common.ui.WeaponQuery
+import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.ads.AdLoader
 import com.alancamargo.weapons.core.extensions.args
 import com.alancamargo.weapons.core.extensions.createIntent
@@ -35,7 +35,7 @@ internal class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
         get() = _binding!!
 
     private val args by args<Args>()
-    private val viewModel by viewModels<WeaponViewModel>()
+    private val viewModel by viewModels<WeaponListViewModel>()
 
     private val weaponAdapter by inject<WeaponAdapter> { parametersOf(this) }
     private val weaponListWithHeaderAdapter by inject<WeaponListWithHeaderAdapter> {
@@ -63,7 +63,7 @@ internal class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
 
     private fun fetchData() {
         observeState()
-        viewModel.start(args.query)
+        viewModel.handleQuery(args.query)
     }
 
     private fun observeState() {
@@ -72,15 +72,15 @@ internal class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
         }
     }
 
-    private fun processState(state: WeaponViewModel.State) {
+    private fun processState(state: WeaponListViewModel.State) {
         when (state) {
-            is WeaponViewModel.State.WeaponListReady -> displayWeapons(state.weapons)
-            is WeaponViewModel.State.WeaponListWithHeaderReady -> displayWeaponListWithHeader(
+            is WeaponListViewModel.State.WeaponListReady -> displayWeapons(state.weapons)
+            is WeaponListViewModel.State.WeaponListWithHeaderReady -> displayWeaponListWithHeader(
                 state.weapons
             )
-            is WeaponViewModel.State.Error -> showError()
-            is WeaponViewModel.State.Loading -> showLoading()
-            is WeaponViewModel.State.NoResults -> showNoResults()
+            is WeaponListViewModel.State.Error -> showError()
+            is WeaponListViewModel.State.Loading -> showLoading()
+            is WeaponListViewModel.State.NoResults -> showNoResults()
         }
     }
 
@@ -123,10 +123,10 @@ internal class WeaponListActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     @Parcelize
-    data class Args(val query: WeaponQuery) : Parcelable
+    data class Args(val query: UiWeaponQuery) : Parcelable
 
     companion object {
-        fun getIntent(context: Context, query: WeaponQuery): Intent {
+        fun getIntent(context: Context, query: UiWeaponQuery): Intent {
             val args = Args(query)
             return context.createIntent<WeaponListActivity>().putArguments(args)
         }

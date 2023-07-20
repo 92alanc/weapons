@@ -1,11 +1,11 @@
-package com.alancamargo.weapons.framework.entities
+package com.alancamargo.weapons.catalogue.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "WEAPON_TYPE")
-data class DbWeaponType(
+internal data class DbWeaponType(
     @PrimaryKey val id: Long,
     @ColumnInfo(name = COLUMN_NAME_ID) val nameId: String,
     @ColumnInfo(name = COLUMN_CATEGORY_ID) val categoryId: String?
@@ -41,5 +41,4 @@ data class DbWeaponType(
         const val CATEGORY_SINGLE_SHOT = "category_single_shot"
         const val CATEGORY_LEVER_ACTION = "category_lever_action"
     }
-
 }

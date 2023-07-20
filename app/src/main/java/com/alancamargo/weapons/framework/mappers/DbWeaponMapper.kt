@@ -7,7 +7,7 @@ import com.alancamargo.weapons.catalogue.domain.model.Weapon
 import com.alancamargo.weapons.catalogue.domain.model.WeaponType
 import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.domain.mapper.EntityMapper
-import com.alancamargo.weapons.framework.entities.DbWeapon
+import com.alancamargo.weapons.catalogue.data.model.DbWeapon
 
 class DbWeaponMapper(
     private val params: Params

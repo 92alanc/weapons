@@ -3,8 +3,8 @@ package com.alancamargo.weapons.framework.local
 import com.alancamargo.weapons.data.local.YearLocalDataSource
 import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.domain.mapper.EntityMapper
-import com.alancamargo.weapons.framework.db.YearDao
-import com.alancamargo.weapons.framework.entities.DbYear
+import com.alancamargo.weapons.catalogue.data.db.YearDao
+import com.alancamargo.weapons.catalogue.data.model.DbYear
 
 class YearLocalDataSourceImpl(
     private val yearDao: YearDao,

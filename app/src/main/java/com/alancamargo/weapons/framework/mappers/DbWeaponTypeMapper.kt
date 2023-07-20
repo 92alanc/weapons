@@ -2,20 +2,20 @@ package com.alancamargo.weapons.framework.mappers
 
 import com.alancamargo.weapons.catalogue.domain.model.WeaponType
 import com.alancamargo.weapons.domain.mapper.EntityMapper
-import com.alancamargo.weapons.framework.entities.DbWeaponType
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_BOOBY_TRAP
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_CARBINE
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_FLAMETHROWER
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_GRENADE
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_GRENADE_LAUNCHER
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_MACHINE_GUN
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_MELEE
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_MINE
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_PISTOL
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_RIFLE
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_ROCKET_LAUNCHER
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_SHOTGUN
-import com.alancamargo.weapons.framework.entities.DbWeaponType.Companion.NAME_SUB_MACHINE_GUN
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_BOOBY_TRAP
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_CARBINE
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_FLAMETHROWER
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_GRENADE
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_GRENADE_LAUNCHER
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_MACHINE_GUN
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_MELEE
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_MINE
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_PISTOL
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_RIFLE
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_ROCKET_LAUNCHER
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_SHOTGUN
+import com.alancamargo.weapons.catalogue.data.model.DbWeaponType.Companion.NAME_SUB_MACHINE_GUN
 
 class DbWeaponTypeMapper : EntityMapper<DbWeaponType, WeaponType> {
 

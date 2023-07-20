@@ -1,7 +1,7 @@
 package com.alancamargo.weapons.framework.tools
 
 import android.content.Context
-import com.alancamargo.weapons.framework.db.CountryDao
+import com.alancamargo.weapons.catalogue.data.db.CountryDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.FileNotFoundException
