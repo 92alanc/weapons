@@ -3,6 +3,8 @@ package com.alancamargo.weapons.catalogue.di
 import com.alancamargo.weapons.catalogue.data.local.WeaponLocalDataSource
 import com.alancamargo.weapons.catalogue.data.local.WeaponLocalDataSourceImpl
 import com.alancamargo.weapons.catalogue.data.repository.WeaponRepositoryImpl
+import com.alancamargo.weapons.catalogue.data.tools.FileHelper
+import com.alancamargo.weapons.catalogue.data.tools.FileHelperImpl
 import com.alancamargo.weapons.catalogue.domain.repository.WeaponRepository
 import com.alancamargo.weapons.catalogue.domain.usecase.GetWeaponsUseCase
 import com.alancamargo.weapons.catalogue.domain.usecase.GetWeaponsUseCaseImpl
@@ -27,4 +29,8 @@ internal abstract class CatalogueModule {
     @Binds
     @ViewModelScoped
     abstract fun bindGetWeaponsUseCase(impl: GetWeaponsUseCaseImpl): GetWeaponsUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindFileHelper(impl: FileHelperImpl): FileHelper
 }

@@ -2,29 +2,24 @@ package com.alancamargo.weapons.catalogue.data.db
 
 import androidx.room.Dao
 import androidx.room.Query
+import com.alancamargo.weapons.catalogue.data.model.DbCountry
 import com.alancamargo.weapons.catalogue.data.model.DbWeapon
 
 @Dao
 internal interface WeaponDao {
 
     @Query("SELECT * FROM WEAPON ORDER BY NAME")
-    suspend fun selectAll(): List<DbWeapon>
+    suspend fun getAllWeapons(): List<DbWeapon>
 
     @Query("SELECT * FROM WEAPON WHERE NAME LIKE '%' || :name || '%' ORDER BY NAME")
-    suspend fun selectByName(name: String): List<DbWeapon>
+    suspend fun getWeaponsByName(name: String): List<DbWeapon>
 
-    @Query("SELECT * FROM WEAPON WHERE YEAR_ID = :yearId ORDER BY NAME")
-    suspend fun selectByYear(yearId: Long): List<DbWeapon>
+    @Query("SELECT * FROM COUNTRY ORDER BY NAME")
+    suspend fun getAllCountries(): List<DbCountry>
 
-    @Query("SELECT * FROM WEAPON WHERE COUNTRY_ID = :countryId ORDER BY NAME")
-    suspend fun selectByCountry(countryId: Long): List<DbWeapon>
+    @Query("SELECT * FROM COUNTRY WHERE ID = :id")
+    suspend fun getCountryById(id: Long): DbCountry
 
-    @Query("SELECT * FROM WEAPON WHERE TYPE_ID = :typeId ORDER BY NAME")
-    suspend fun selectByType(typeId: Long): List<DbWeapon>
-
-    @Query("SELECT * FROM WEAPON WHERE CALIBRE_ID = :calibreId ORDER BY NAME")
-    suspend fun selectByCalibre(calibreId: Long): List<DbWeapon>
-
-    @Query("SELECT * FROM WEAPON WHERE MANUFACTURER_ID = :manufacturerId ORDER BY NAME")
-    suspend fun selectByManufacturer(manufacturerId: Long): List<DbWeapon>
+    @Query("SELECT * FROM COUNTRY WHERE ID = (SELECT countryId FROM WEAPON WHERE NAME = :weaponName)")
+    suspend fun getCountryByWeaponName(weaponName: String): DbCountry?
 }
