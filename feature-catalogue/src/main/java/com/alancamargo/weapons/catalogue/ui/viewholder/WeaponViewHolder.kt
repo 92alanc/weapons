@@ -1,20 +1,18 @@
 package com.alancamargo.weapons.catalogue.ui.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
-import coil.ImageLoader
-import com.alancamargo.weapons.databinding.ItemWeaponBinding
-import com.alancamargo.weapons.ui.tools.load
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import coil.load
+import com.alancamargo.weapons.catalogue.databinding.ItemWeaponBinding
+import com.alancamargo.weapons.common.ui.UiWeapon
+import com.alancamargo.weapons.core.resources.ResourcesHelper
 
-class WeaponViewHolder(
+internal class WeaponViewHolder(
     private val binding: ItemWeaponBinding,
-    private val resourcesHelper: com.alancamargo.weapons.core.resources.ResourcesHelper,
-    private val imageLoader: ImageLoader
+    private val resourcesHelper: ResourcesHelper,
+    private val onItemClick: (UiWeapon) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bindTo(weapon: com.alancamargo.weapons.common.ui.UiWeapon) = with(binding) {
+    fun bindTo(weapon: UiWeapon) = with(binding) {
         txtName.text = weapon.name
 
         val flagDrawable = weapon.country?.flagId?.let {
@@ -24,10 +22,11 @@ class WeaponViewHolder(
         imgFlag.setImageDrawable(flagDrawable)
 
         if (weapon.photos.isNotEmpty()) {
-            CoroutineScope(Dispatchers.Main).launch {
-                imgPhoto.load(imageLoader, weapon.photos.first(), progressBar, txtError)
-            }
+            imgPhoto.load(weapon.photos.first())
+        }
+
+        root.setOnClickListener {
+            onItemClick(weapon)
         }
     }
-
 }

@@ -2,27 +2,19 @@ package com.alancamargo.weapons.catalogue.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import coil.ImageLoader
-import com.alancamargo.weapons.databinding.ItemListWithHeaderBinding
-import com.alancamargo.weapons.ui.viewholder.WeaponListWithHeaderViewHolder
+import androidx.recyclerview.widget.ListAdapter
+import com.alancamargo.weapons.catalogue.databinding.ItemListWithHeaderBinding
+import com.alancamargo.weapons.catalogue.ui.viewholder.WeaponListWithHeaderViewHolder
+import com.alancamargo.weapons.common.ui.UiWeapon
+import com.alancamargo.weapons.common.ui.UiWeaponListHeader
+import com.alancamargo.weapons.core.resources.ResourcesHelper
 
-class WeaponListWithHeaderAdapter(
-    private val onItemClickListener: OnItemClickListener,
-    private val imageLoader: ImageLoader,
-    private val resourcesHelper: com.alancamargo.weapons.core.resources.ResourcesHelper
-) : RecyclerView.Adapter<WeaponListWithHeaderViewHolder>() {
-
-    private var data = emptyMap<com.alancamargo.weapons.common.ui.UiWeaponListHeader?, List<com.alancamargo.weapons.common.ui.UiWeapon>>()
-
-    private val dataAsList by lazy {
-        data.entries.toList().sortedBy { it.key?.text }
-    }
-
-    fun setData(data: Map<com.alancamargo.weapons.common.ui.UiWeaponListHeader?, List<com.alancamargo.weapons.common.ui.UiWeapon>>) {
-        this.data = data
-        notifyDataSetChanged()
-    }
+internal class WeaponListWithHeaderAdapter(
+    private val resourcesHelper: ResourcesHelper,
+    private val onItemClick: (UiWeapon) -> Unit
+) : ListAdapter<Map.Entry<UiWeaponListHeader?, List<UiWeapon>>, WeaponListWithHeaderViewHolder>(
+    WeaponListWithHeaderItemDiffCallback()
+) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -30,20 +22,11 @@ class WeaponListWithHeaderAdapter(
     ): WeaponListWithHeaderViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemListWithHeaderBinding.inflate(inflater, parent, false)
-        return WeaponListWithHeaderViewHolder(imageLoader, binding, resourcesHelper).apply {
-            setOnItemClickListener(onItemClickListener)
-        }
+        return WeaponListWithHeaderViewHolder(binding, resourcesHelper, onItemClick)
     }
 
     override fun onBindViewHolder(holder: WeaponListWithHeaderViewHolder, position: Int) {
-        val entry = dataAsList[position]
+        val entry = getItem(position)
         holder.bindTo(entry)
     }
-
-    override fun getItemCount(): Int = data.size
-
-    override fun getItemViewType(position: Int): Int = position
-
-    override fun getItemId(position: Int): Long = dataAsList[position].value.first().id
-
 }

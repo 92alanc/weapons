@@ -103,7 +103,9 @@ internal class WeaponListViewModel @Inject constructor(
         val headerClass = body.keys.first { it != null }?.javaClass
             ?: throw IllegalStateException("Type must not be null")
 
-        val weapons = weaponList.createMapFromHeaderType(headerClass)
+        val weapons = weaponList.createMapFromHeaderType(headerClass).entries.sortedBy {
+            it.key?.text
+        }
         _state.update { it.onWeaponListWithHeaderReceived(weapons) }
     }
 
