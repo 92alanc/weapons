@@ -23,7 +23,7 @@ internal class ViewPagerAdapter(
         val view = binding.root
         return view.apply {
             val indicatorText = context.getString(
-                R.string.photo_indicator_format,
+                com.alancamargo.weapons.core.design.R.string.photo_indicator_format,
                 position + 1,
                 data.size
             )

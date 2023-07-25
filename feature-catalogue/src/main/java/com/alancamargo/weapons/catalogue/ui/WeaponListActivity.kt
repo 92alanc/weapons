@@ -16,7 +16,6 @@ import com.alancamargo.weapons.catalogue.ui.viewmodel.WeaponListViewAction
 import com.alancamargo.weapons.catalogue.ui.viewmodel.WeaponListViewModel
 import com.alancamargo.weapons.catalogue.ui.viewmodel.WeaponListViewState
 import com.alancamargo.weapons.common.ui.UiWeapon
-import com.alancamargo.weapons.common.ui.UiWeaponListHeader
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.ads.AdLoader
 import com.alancamargo.weapons.core.extensions.args
@@ -82,8 +81,26 @@ internal class WeaponListActivity : AppCompatActivity() {
         observeFlow(viewModel.action, ::onAction)
     }
 
-    private fun onStateChanged(state: WeaponListViewState) {
-        // TODO
+    private fun onStateChanged(state: WeaponListViewState) = with(state) {
+        binding.progressBar.isVisible = isLoading
+        binding.groupError.isVisible = showError
+        binding.groupNoResults.isVisible = showEmptyState
+
+        weapons?.let {
+            binding.recyclerView.adapter = weaponAdapter
+            weaponAdapter.submitList(it)
+            resourcesHelper.getPluralStringOrNull(
+                R.plurals.results_plural,
+                it.size
+            )?.let { text ->
+                Toast.makeText(this@WeaponListActivity, text, Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        weaponListWithHeader?.let {
+            binding.recyclerView.adapter = weaponListWithHeaderAdapter
+            weaponListWithHeaderAdapter.submitList(it)
+        }
     }
 
     private fun onAction(action: WeaponListViewAction) = when (action) {
@@ -96,56 +113,6 @@ internal class WeaponListActivity : AppCompatActivity() {
             context = this,
             weapon = weapon
         )
-    }
-
-    private fun processState(state: WeaponListViewModel.State) {
-        when (state) {
-            is WeaponListViewModel.State.WeaponListReady -> displayWeapons(state.weapons)
-            is WeaponListViewModel.State.WeaponListWithHeaderReady -> displayWeaponListWithHeader(
-                state.weapons
-            )
-            is WeaponListViewModel.State.Error -> showError()
-            is WeaponListViewModel.State.Loading -> showLoading()
-            is WeaponListViewModel.State.NoResults -> showNoResults()
-        }
-    }
-
-    private fun displayWeapons(weapons: List<UiWeapon>) {
-        binding.groupError.isVisible = false
-        binding.groupNoResults.isVisible = false
-        binding.recyclerView.adapter = weaponAdapter
-        weaponAdapter.submitList(weapons)
-        binding.progressBar.isVisible = false
-        val text = resources.getQuantityString(R.plurals.results_plural, weapons.size, weapons.size)
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun displayWeaponListWithHeader(weapons: Map<UiWeaponListHeader?, List<UiWeapon>>) {
-        with(binding) {
-            groupError.isVisible = false
-            groupNoResults.isVisible = false
-            recyclerView.adapter = weaponListWithHeaderAdapter
-            weaponListWithHeaderAdapter.submitList(weapons.entries.toList())
-            progressBar.isVisible = false
-        }
-    }
-
-    private fun showError() = with(binding) {
-        progressBar.isVisible = false
-        groupNoResults.isVisible = false
-        groupError.isVisible = true
-    }
-
-    private fun showLoading() = with(binding) {
-        groupError.isVisible = false
-        groupNoResults.isVisible = false
-        progressBar.isVisible = true
-    }
-
-    private fun showNoResults() = with(binding) {
-        progressBar.isVisible = false
-        groupError.isVisible = false
-        groupNoResults.isVisible = true
     }
 
     @Parcelize

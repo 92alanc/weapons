@@ -22,4 +22,13 @@
     <string name="type_rifle_anti_tank">Anti-tank rifle</string>
     <string name="type_rifle_single_shot">Single shot rifle</string>
     <string name="type_rifle_lever_action">Lever action rifle</string>
+
+    <plurals name="capacity_plural">
+        <item quantity="one">Capacity: %d round</item>
+        <item quantity="other">Capacity: %d rounds</item>
+    </plurals>
+    <plurals name="results_plural">
+        <item quantity="one">%d result</item>
+        <item quantity="other">%d results</item>
+    </plurals>
 </resources>

@@ -52,7 +52,7 @@ class WeaponListWithHeaderViewHolder(
             is UiManufacturer -> header.name
             is UiWeaponType -> header.name
             is UiYear -> header.year.toString()
-            null -> itemView.context.getString(R.string.unknown)
+            null -> itemView.context.getString(com.alancamargo.weapons.core.design.R.string.unknown)
             else -> throw IllegalStateException("Must be an implementation of UiWeaponListFilter")
         }
     }

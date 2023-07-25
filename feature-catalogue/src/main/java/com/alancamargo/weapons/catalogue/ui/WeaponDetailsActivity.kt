@@ -52,7 +52,7 @@ internal class WeaponDetailsActivity : AppCompatActivity() {
         adLoader.loadBannerAds(binding.banner)
 
         with(args.weapon) {
-            binding.viewPager.adapter = ViewPagerAdapter(photos, imageLoader)
+            binding.viewPager.adapter = ViewPagerAdapter(photos)
             binding.txtName.text = name
 
             val flag = country?.flagId?.let {
@@ -63,29 +63,29 @@ internal class WeaponDetailsActivity : AppCompatActivity() {
             binding.txtCountry.setTextOrHide(country?.name)
 
             val yearText = resourcesHelper.getFormattedStringOrNull(
-                R.string.year_format, year?.year
+                com.alancamargo.weapons.core.design.R.string.year_format, year?.year
             )
             binding.txtYear.setTextOrHide(yearText)
 
             val manufacturerText = resourcesHelper.getFormattedStringOrNull(
-                R.string.manufacturer_format, manufacturer?.name
+                com.alancamargo.weapons.core.design.R.string.manufacturer_format, manufacturer?.name
             )
             binding.txtManufacturer.setTextOrHide(manufacturerText)
 
-            binding.txtType.text = getString(R.string.type_format, type.name)
+            binding.txtType.text = getString(com.alancamargo.weapons.core.design.R.string.type_format, type.name)
 
             val calibreText = resourcesHelper.getFormattedStringOrNull(
-                R.string.calibre_format, calibre?.name
+                com.alancamargo.weapons.core.design.R.string.calibre_format, calibre?.name
             )
             binding.txtCalibre.setTextOrHide(calibreText)
 
             val lengthText = resourcesHelper.getFormattedStringOrNull(
-                R.string.length_format, lengthInMm
+                com.alancamargo.weapons.core.design.R.string.length_format, lengthInMm
             )
             binding.txtLength.setTextOrHide(lengthText)
 
             val massText = resourcesHelper.getFormattedStringOrNull(
-                R.string.mass_format, massInKg
+                com.alancamargo.weapons.core.design.R.string.mass_format, massInKg
             )
             binding.txtMass.setTextOrHide(massText)
 
@@ -95,12 +95,12 @@ internal class WeaponDetailsActivity : AppCompatActivity() {
             binding.txtCapacity.setTextOrHide(capacityText)
 
             val rateOfFireText = resourcesHelper.getFormattedStringOrNull(
-                R.string.rate_of_fire_format, rateOfFireInRpm
+                com.alancamargo.weapons.core.design.R.string.rate_of_fire_format, rateOfFireInRpm
             )
             binding.txtRateOfFire.setTextOrHide(rateOfFireText)
 
             val effectiveRangeText = resourcesHelper.getFormattedStringOrNull(
-                R.string.effective_range_format, effectiveRangeInM
+                com.alancamargo.weapons.core.design.R.string.effective_range_format, effectiveRangeInM
             )
             binding.txtEffectiveRange.setTextOrHide(effectiveRangeText)
         }

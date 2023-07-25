@@ -95,21 +95,21 @@ internal class HomeActivity : AppCompatActivity() {
     }
 
     private fun showAppInfo() {
-        val appName = getString(R.string.app_name)
+        val appName = getString(com.alancamargo.weapons.core.design.R.string.app_name)
         val appVersion = packageManager.getPackageInfo(packageName, 0).versionName
-        val title = getString(R.string.app_name_format, appName, appVersion)
+        val title = getString(com.alancamargo.weapons.core.design.R.string.app_name_format, appName, appVersion)
 
         MaterialAlertDialogBuilder(this)
             .setTitle(title)
-            .setMessage(R.string.about_message)
+            .setMessage(com.alancamargo.weapons.core.design.R.string.about_message)
             .show()
     }
 
     private fun showPrivacyPolicy() {
         webViewActivityNavigation.startActivity(
             context = this,
-            titleRes = R.string.privacy_policy,
-            url = getString(R.string.privacy_policy_url)
+            titleRes = com.alancamargo.weapons.core.design.R.string.privacy_policy,
+            url = getString(com.alancamargo.weapons.core.design.R.string.privacy_policy_url)
         )
     }
 }

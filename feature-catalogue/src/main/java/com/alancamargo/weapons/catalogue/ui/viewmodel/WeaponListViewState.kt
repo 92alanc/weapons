@@ -4,11 +4,11 @@ import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponListHeader
 
 internal data class WeaponListViewState(
-    private val isLoading: Boolean = false,
-    private val weaponListWithHeader: List<Map.Entry<UiWeaponListHeader?, List<UiWeapon>>>? = null,
-    private val weapons: List<UiWeapon>? = null,
-    private val showEmptyState: Boolean = false,
-    private val showError: Boolean = false
+    val isLoading: Boolean = false,
+    val weaponListWithHeader: List<Map.Entry<UiWeaponListHeader?, List<UiWeapon>>>? = null,
+    val weapons: List<UiWeapon>? = null,
+    val showEmptyState: Boolean = false,
+    val showError: Boolean = false
 ) {
 
     fun onLoading() = copy(

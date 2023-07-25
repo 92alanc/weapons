@@ -7,9 +7,4 @@ import androidx.room.PrimaryKey
 internal data class DbYear(
     @PrimaryKey val id: Long,
     val year: Int
-) {
-
-    companion object {
-        const val COLUMN_ID = "id"
-    }
-}
+)
