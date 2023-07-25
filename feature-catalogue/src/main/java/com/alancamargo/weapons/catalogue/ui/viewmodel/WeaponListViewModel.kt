@@ -1,35 +1,30 @@
 package com.alancamargo.weapons.catalogue.ui.viewmodel
 
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alancamargo.weapons.catalogue.domain.model.Calibre
-import com.alancamargo.weapons.catalogue.domain.model.Country
-import com.alancamargo.weapons.catalogue.domain.model.Manufacturer
 import com.alancamargo.weapons.catalogue.domain.model.Weapon
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListResult
-import com.alancamargo.weapons.catalogue.domain.model.WeaponType
-import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.catalogue.domain.usecase.GetWeaponsUseCase
+import com.alancamargo.weapons.catalogue.ui.mapping.createMapFromHeaderType
 import com.alancamargo.weapons.catalogue.ui.mapping.toDomain
 import com.alancamargo.weapons.catalogue.ui.mapping.toUi
 import com.alancamargo.weapons.common.ui.UiWeapon
-import com.alancamargo.weapons.common.ui.UiWeaponListHeader
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.di.IoDispatcher
 import com.alancamargo.weapons.core.log.Logger
 import com.alancamargo.weapons.core.resources.ResourcesHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
 @HiltViewModel
@@ -41,8 +36,10 @@ internal class WeaponListViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(WeaponListViewState())
+    private val _action = MutableSharedFlow<WeaponListViewAction>()
 
     val state = _state.asStateFlow()
+    val action = _action.asSharedFlow()
 
     fun handleQuery(query: UiWeaponQuery) {
         viewModelScope.launch(dispatcher) {
@@ -55,6 +52,15 @@ internal class WeaponListViewModel @Inject constructor(
                 _state.update { it.onError() }
             }.collect(::handleResult)
         }
+    }
+
+    fun onWeaponClicked(weapon: UiWeapon) {
+        val action = WeaponListViewAction.NavigateToWeaponDetails(weapon)
+        sendAction(action)
+    }
+
+    fun onBackClicked() {
+        sendAction(WeaponListViewAction.Finish)
     }
 
     private fun handleResult(result: WeaponListResult) = when (result) {
@@ -97,53 +103,13 @@ internal class WeaponListViewModel @Inject constructor(
         val headerClass = body.keys.first { it != null }?.javaClass
             ?: throw IllegalStateException("Type must not be null")
 
-        val weapons: Map<UiWeaponListHeader?, List<UiWeapon>> =
-            weaponList.createMapFromHeaderType(headerClass)
-
+        val weapons = weaponList.createMapFromHeaderType(headerClass)
         _state.update { it.onWeaponListWithHeaderReceived(weapons) }
     }
 
-    private fun List<UiWeapon>.createMapFromHeaderType(
-        headerClass: Class<WeaponListHeader>
-    ): Map<UiWeaponListHeader?, List<UiWeapon>> {
-        return when (headerClass) {
-            Calibre::class.java -> groupBy { it.calibre }
-            Country::class.java -> groupBy { it.country }
-            WeaponType.Melee::class.java,
-            WeaponType.Pistol::class.java,
-            WeaponType.Rifle::class.java,
-            WeaponType.Shotgun::class.java,
-            WeaponType.BoobyTrap::class.java,
-            WeaponType.Carbine::class.java,
-            WeaponType.MachineGun::class.java,
-            WeaponType.SubMachineGun::class.java,
-            WeaponType.Grenade::class.java,
-            WeaponType.Mine::class.java,
-            WeaponType.GrenadeLauncher::class.java,
-            WeaponType.BoobyTrap::class.java,
-            WeaponType.Flamethrower::class.java -> groupBy { it.type }
-            Manufacturer::class.java -> groupBy { it.manufacturer }
-            Year::class.java -> groupBy { it.year }
-            else -> throw IllegalStateException("Must be an implementation of WeaponListHeader")
+    private fun sendAction(action: WeaponListViewAction) {
+        viewModelScope.launch(dispatcher) {
+            _action.emit(action)
         }
-    }
-
-    sealed class State : Parcelable {
-        @Parcelize
-        object Loading : State()
-
-        @Parcelize
-        data class WeaponListWithHeaderReady(
-            val weapons: Map<UiWeaponListHeader?, List<UiWeapon>>
-        ) : State()
-
-        @Parcelize
-        data class WeaponListReady(val weapons: List<UiWeapon>) : State()
-
-        @Parcelize
-        object Error : State()
-
-        @Parcelize
-        object NoResults : State()
     }
 }
