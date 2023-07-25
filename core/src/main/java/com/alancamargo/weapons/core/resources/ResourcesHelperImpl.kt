@@ -11,6 +11,10 @@ internal class ResourcesHelperImpl @Inject constructor(
     private val logger: Logger
 ) : ResourcesHelper {
 
+    override fun getString(stringId: Int): String {
+        return context.getString(stringId)
+    }
+
     override fun getDrawable(resourceName: String): Drawable? = try {
         val resId = context.resources.getIdentifier(
             resourceName,

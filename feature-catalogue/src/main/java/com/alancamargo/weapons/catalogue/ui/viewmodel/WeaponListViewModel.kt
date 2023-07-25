@@ -1,8 +1,6 @@
 package com.alancamargo.weapons.catalogue.ui.viewmodel
 
 import android.os.Parcelable
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alancamargo.weapons.catalogue.domain.model.Calibre
@@ -10,19 +8,26 @@ import com.alancamargo.weapons.catalogue.domain.model.Country
 import com.alancamargo.weapons.catalogue.domain.model.Manufacturer
 import com.alancamargo.weapons.catalogue.domain.model.Weapon
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
+import com.alancamargo.weapons.catalogue.domain.model.WeaponListResult
 import com.alancamargo.weapons.catalogue.domain.model.WeaponType
 import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.catalogue.domain.usecase.GetWeaponsUseCase
 import com.alancamargo.weapons.catalogue.ui.mapping.toDomain
+import com.alancamargo.weapons.catalogue.ui.mapping.toUi
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponListHeader
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.di.IoDispatcher
+import com.alancamargo.weapons.core.log.Logger
+import com.alancamargo.weapons.core.resources.ResourcesHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
@@ -30,62 +35,63 @@ import javax.inject.Inject
 @HiltViewModel
 internal class WeaponListViewModel @Inject constructor(
     private val getWeaponsUseCase: GetWeaponsUseCase,
+    private val logger: Logger,
+    private val resourcesHelper: ResourcesHelper,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val stateLiveData = MutableLiveData<State>().apply {
-        value = State.Loading
-    }
+    private val _state = MutableStateFlow(WeaponListViewState())
+
+    val state = _state.asStateFlow()
 
     fun handleQuery(query: UiWeaponQuery) {
         viewModelScope.launch(dispatcher) {
             getWeaponsUseCase(query.toDomain()).onStart {
-                // TODO
+                _state.update { it.onLoading() }
             }.onCompletion {
-                // TODO
-            }.catch {
-                // TODO
-            }.collect {
-                // TODO
-            }
+                _state.update { it.onFinishedLoading() }
+            }.catch { exception ->
+                logger.error(exception)
+                _state.update { it.onError() }
+            }.collect(::handleResult)
         }
     }
 
-    fun getState(): LiveData<State> = stateLiveData
+    private fun handleResult(result: WeaponListResult) = when (result) {
+        is WeaponListResult.Success -> {
+            val body = result.weapons
 
-    private fun processResult(result: Result<Map<WeaponListHeader?, List<Weapon>>>) {
-        when (result) {
-            is Result.Success -> {
-                val body = result.body
-
-                if (body.isEmpty()) {
-                    stateLiveData.postValue(State.NoResults)
+            if (body.isEmpty()) {
+                _state.update { it.onEmptyState() }
+            } else {
+                if (body.isWeaponList()) {
+                    handleWeaponList(body)
                 } else {
-                    if (body.isWeaponList())
-                        processWeaponList(body)
-                    else
-                        processWeaponListWithHeader(body)
+                    handleWeaponListWithHeader(body)
                 }
             }
-            is Result.Error -> stateLiveData.postValue(State.Error)
         }
+
+        is WeaponListResult.Error -> _state.update { it.onError() }
     }
 
     private fun Map<WeaponListHeader?, List<Weapon>>.isWeaponList(): Boolean {
         return size == 1 && entries.first().key == null
     }
 
-    private fun processWeaponList(body: Map<WeaponListHeader?, List<Weapon>>) {
+    private fun handleWeaponList(body: Map<WeaponListHeader?, List<Weapon>>) {
         val weapons = body.flatMap {
             it.value
-        }.map(weaponMapper::map)
+        }.map { it.toUi(resourcesHelper) }
 
-        stateLiveData.postValue(State.WeaponListReady(weapons))
+        _state.update { it.onWeaponsReceived(weapons) }
     }
 
-    private fun processWeaponListWithHeader(body: Map<WeaponListHeader?, List<Weapon>>) {
+    private fun handleWeaponListWithHeader(body: Map<WeaponListHeader?, List<Weapon>>) {
         val weaponList = body.flatMap {
-            it.value.map(weaponMapper::map)
+            it.value.map { weapon ->
+                weapon.toUi(resourcesHelper)
+            }
         }
 
         val headerClass = body.keys.first { it != null }?.javaClass
@@ -94,7 +100,7 @@ internal class WeaponListViewModel @Inject constructor(
         val weapons: Map<UiWeaponListHeader?, List<UiWeapon>> =
             weaponList.createMapFromHeaderType(headerClass)
 
-        stateLiveData.postValue(State.WeaponListWithHeaderReady(weapons))
+        _state.update { it.onWeaponListWithHeaderReceived(weapons) }
     }
 
     private fun List<UiWeapon>.createMapFromHeaderType(

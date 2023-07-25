@@ -6,6 +6,8 @@ import androidx.annotation.StringRes
 
 interface ResourcesHelper {
 
+    fun getString(@StringRes stringId: Int): String
+
     fun getDrawable(resourceName: String): Drawable?
 
     fun getFormattedStringOrNull(@StringRes stringId: Int, arg: Any?): String?
