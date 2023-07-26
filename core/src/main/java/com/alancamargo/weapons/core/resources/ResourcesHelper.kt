@@ -10,7 +10,7 @@ interface ResourcesHelper {
 
     fun getDrawable(resourceName: String): Drawable?
 
-    fun getFormattedStringOrNull(@StringRes stringId: Int, arg: Any?): String?
+    fun getFormattedString(@StringRes stringId: Int, arg: Any): String
 
-    fun getPluralStringOrNull(@PluralsRes stringId: Int, quantity: Int?): String?
+    fun getPluralString(@PluralsRes stringId: Int, quantity: Int): String
 }

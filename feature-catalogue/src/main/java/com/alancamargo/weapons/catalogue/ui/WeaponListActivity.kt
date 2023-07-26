@@ -92,7 +92,7 @@ internal class WeaponListActivity : AppCompatActivity() {
         weapons?.let {
             binding.recyclerView.adapter = weaponAdapter
             weaponAdapter.submitList(it)
-            resourcesHelper.getPluralStringOrNull(
+            resourcesHelper.getPluralString(
                 R.plurals.results_plural,
                 it.size
             )?.let { message ->

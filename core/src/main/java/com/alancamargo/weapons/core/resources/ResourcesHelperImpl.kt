@@ -28,11 +28,11 @@ internal class ResourcesHelperImpl @Inject constructor(
         null
     }
 
-    override fun getFormattedStringOrNull(stringId: Int, arg: Any?): String? = arg?.let {
-        context.getString(stringId, it)
+    override fun getFormattedString(stringId: Int, arg: Any): String {
+        return context.getString(stringId, arg)
     }
 
-    override fun getPluralStringOrNull(stringId: Int, quantity: Int?): String? = quantity?.let {
-        context.resources.getQuantityString(stringId, it, it)
+    override fun getPluralString(stringId: Int, quantity: Int): String {
+        return context.resources.getQuantityString(stringId, quantity, quantity)
     }
 }

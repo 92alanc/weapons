@@ -4,14 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.alancamargo.weapons.catalogue.R
 import com.alancamargo.weapons.catalogue.databinding.ActivityWeaponDetailsBinding
 import com.alancamargo.weapons.catalogue.ui.adapter.ViewPagerAdapter
+import com.alancamargo.weapons.catalogue.ui.viewmodel.weapondetails.WeaponDetailsViewAction
+import com.alancamargo.weapons.catalogue.ui.viewmodel.weapondetails.WeaponDetailsViewModel
+import com.alancamargo.weapons.catalogue.ui.viewmodel.weapondetails.WeaponDetailsViewState
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.core.ads.AdLoader
 import com.alancamargo.weapons.core.extensions.args
 import com.alancamargo.weapons.core.extensions.createIntent
+import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.core.extensions.putArguments
 import com.alancamargo.weapons.core.extensions.setDrawableOrHide
 import com.alancamargo.weapons.core.extensions.setTextOrHide
@@ -29,6 +33,7 @@ internal class WeaponDetailsActivity : AppCompatActivity() {
         get() = _binding!!
 
     private val args by args<Args>()
+    private val viewModel by viewModels<WeaponDetailsViewModel>()
 
     @Inject
     lateinit var adLoader: AdLoader
@@ -41,65 +46,44 @@ internal class WeaponDetailsActivity : AppCompatActivity() {
         _binding = ActivityWeaponDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpUi()
+        observeViewModelFlows()
+        viewModel.start(args.weapon)
+    }
+
+    override fun onBackPressed() {
+        viewModel.onNativeBackClicked()
     }
 
     private fun setUpUi() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         adLoader.loadBannerAds(binding.banner)
+    }
 
-        with(args.weapon) {
-            binding.viewPager.adapter = ViewPagerAdapter(photos)
-            binding.txtName.text = name
+    private fun observeViewModelFlows() {
+        observeFlow(viewModel.state, ::onStateChanged)
+        observeFlow(viewModel.action, ::onAction)
+    }
 
-            val flag = country?.flagId?.let {
-                resourcesHelper.getDrawable(it)
-            }
-
-            binding.imgFlag.setDrawableOrHide(flag)
-            binding.txtCountry.setTextOrHide(country?.name)
-
-            val yearText = resourcesHelper.getFormattedStringOrNull(
-                R.string.year_format, year?.year
-            )
-            binding.txtYear.setTextOrHide(yearText)
-
-            val manufacturerText = resourcesHelper.getFormattedStringOrNull(
-                R.string.manufacturer_format, manufacturer?.name
-            )
-            binding.txtManufacturer.setTextOrHide(manufacturerText)
-
-            binding.txtType.text = getString(R.string.type_format, type.name)
-
-            val calibreText = resourcesHelper.getFormattedStringOrNull(
-                R.string.calibre_format, calibre?.name
-            )
-            binding.txtCalibre.setTextOrHide(calibreText)
-
-            val lengthText = resourcesHelper.getFormattedStringOrNull(
-                R.string.length_format, lengthInMm
-            )
-            binding.txtLength.setTextOrHide(lengthText)
-
-            val massText = resourcesHelper.getFormattedStringOrNull(
-                R.string.mass_format, massInKg
-            )
-            binding.txtMass.setTextOrHide(massText)
-
-            val capacityText = resourcesHelper.getPluralStringOrNull(
-                R.plurals.capacity_plural, capacityInRounds
-            )
-            binding.txtCapacity.setTextOrHide(capacityText)
-
-            val rateOfFireText = resourcesHelper.getFormattedStringOrNull(
-                R.string.rate_of_fire_format, rateOfFireInRpm
-            )
-            binding.txtRateOfFire.setTextOrHide(rateOfFireText)
-
-            val effectiveRangeText = resourcesHelper.getFormattedStringOrNull(
-                R.string.effective_range_format, effectiveRangeInM
-            )
-            binding.txtEffectiveRange.setTextOrHide(effectiveRangeText)
+    private fun onStateChanged(state: WeaponDetailsViewState) = with(binding) {
+        state.weapon?.let { weapon ->
+            txtName.text = weapon.name
+            txtType.text = weapon.type
+            txtYear.setTextOrHide(weapon.year)
+            txtCalibre.setTextOrHide(weapon.calibre)
+            txtCountry.setTextOrHide(weapon.country?.name)
+            imgFlag.setDrawableOrHide(weapon.country?.flagDrawable)
+            txtCapacity.setTextOrHide(weapon.capacity)
+            txtLength.setTextOrHide(weapon.length)
+            txtManufacturer.setTextOrHide(weapon.manufacturer)
+            txtEffectiveRange.setTextOrHide(weapon.effectiveRange)
+            txtMass.setTextOrHide(weapon.mass)
+            txtRateOfFire.setTextOrHide(weapon.rateOfFire)
+            viewPager.adapter = ViewPagerAdapter(weapon.photos)
         }
+    }
+
+    private fun onAction(action: WeaponDetailsViewAction) = when (action) {
+        is WeaponDetailsViewAction.Finish -> finish()
     }
 
     @Parcelize
