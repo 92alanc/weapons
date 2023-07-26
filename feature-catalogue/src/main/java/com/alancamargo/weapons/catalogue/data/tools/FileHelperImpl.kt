@@ -17,7 +17,7 @@ internal class FileHelperImpl @Inject constructor(
         return if (filesInRelativePath.isNullOrEmpty()) {
             throw FileNotFoundException()
         } else {
-            filesInRelativePath.map { "$relativePath/$it" }
+            filesInRelativePath.map { "file:///android_asset/$relativePath/$it" }
         }
     }
 
