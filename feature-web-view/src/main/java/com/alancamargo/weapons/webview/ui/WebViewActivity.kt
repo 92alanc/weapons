@@ -22,9 +22,11 @@ import com.alancamargo.weapons.webview.R
 import com.alancamargo.weapons.webview.databinding.ActivityWebViewBinding
 import com.alancamargo.weapons.webview.ui.viewmodel.WebViewViewAction
 import com.alancamargo.weapons.webview.ui.viewmodel.WebViewViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
 
+@AndroidEntryPoint
 internal class WebViewActivity : AppCompatActivity() {
 
     private var _binding: ActivityWebViewBinding? = null

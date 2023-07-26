@@ -73,4 +73,9 @@ dependencies {
     implementation "$hilt_android"
 
     kapt "$hilt_compiler"
+
+    testImplementation "$coroutines_test"
+    testImplementation "$junit"
+    testImplementation "$truth"
+    testImplementation "$turbine"
 }
