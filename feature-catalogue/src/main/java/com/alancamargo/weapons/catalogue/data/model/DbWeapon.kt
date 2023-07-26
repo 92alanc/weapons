@@ -5,14 +5,14 @@ import androidx.room.Relation
 
 internal data class DbWeapon(
     @Embedded val weapon: RawDbWeapon,
-    @Relation(entity = DbYear::class, parentColumn = "yearId", entityColumn = "id")
+    @Relation(entity = DbYear::class, parentColumn = "year_id", entityColumn = "id")
     val year: DbYear?,
-    @Relation(entity = DbManufacturer::class, parentColumn = "manufacturerId", entityColumn = "id")
+    @Relation(entity = DbManufacturer::class, parentColumn = "manufacturer_id", entityColumn = "id")
     val manufacturer: DbManufacturer?,
-    @Relation(entity = DbCountry::class, parentColumn = "countryId", entityColumn = "id")
+    @Relation(entity = DbCountry::class, parentColumn = "country_id", entityColumn = "id")
     val country: DbCountry?,
-    @Relation(entity = DbWeaponType::class, parentColumn = "typeId", entityColumn = "id")
+    @Relation(entity = DbWeaponType::class, parentColumn = "type_id", entityColumn = "id")
     val type: DbWeaponType,
-    @Relation(entity = DbCalibre::class, parentColumn = "calibreId", entityColumn = "id")
+    @Relation(entity = DbCalibre::class, parentColumn = "calibre_id", entityColumn = "id")
     val calibre: DbCalibre?
 )

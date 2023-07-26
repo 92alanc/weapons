@@ -27,6 +27,6 @@ internal class FileHelperImpl @Inject constructor(
         val formattedWeaponName = weaponName.replace("/", "-")
             .replace("\"", "")
 
-        return "$countryName/$formattedWeaponName}"
+        return "$countryName/$formattedWeaponName"
     }
 }

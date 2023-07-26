@@ -19,7 +19,7 @@ import com.alancamargo.weapons.common.ui.UiWeaponType
 import com.alancamargo.weapons.common.ui.UiYear
 import com.alancamargo.weapons.core.resources.ResourcesHelper
 
-class WeaponListWithHeaderViewHolder(
+internal class WeaponListWithHeaderViewHolder(
     private val binding: ItemListWithHeaderBinding,
     private val resourcesHelper: ResourcesHelper,
     onItemClick: (UiWeapon) -> Unit
@@ -52,7 +52,7 @@ class WeaponListWithHeaderViewHolder(
             is UiManufacturer -> header.name
             is UiWeaponType -> header.name
             is UiYear -> header.year.toString()
-            null -> itemView.context.getString(com.alancamargo.weapons.core.design.R.string.unknown)
+            null -> itemView.context.getString(R.string.unknown)
             else -> throw IllegalStateException("Must be an implementation of UiWeaponListFilter")
         }
     }

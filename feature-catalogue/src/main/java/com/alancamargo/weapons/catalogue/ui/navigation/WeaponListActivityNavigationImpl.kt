@@ -10,7 +10,8 @@ internal class WeaponListActivityNavigationImpl @Inject constructor(
 ) : WeaponListActivityNavigation {
 
     override fun startActivity(context: Context, query: UiWeaponQuery) {
-        val intent = WeaponListActivity.getIntent(context, query)
+        val args = WeaponListActivity.Args(query)
+        val intent = WeaponListActivity.getIntent(context, args)
         context.startActivity(intent)
     }
 }

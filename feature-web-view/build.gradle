@@ -1,0 +1,76 @@
+plugins {
+    id 'com.android.library'
+    id 'com.google.dagger.hilt.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+
+android {
+    namespace 'com.alancamargo.weapons.webview'
+    compileSdk target_sdk_version
+
+    defaultConfig {
+        minSdk min_sdk_version
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions = ["version"]
+
+    productFlavors {
+        ww1 {
+            dimension "version"
+        }
+
+        ww2 {
+            dimension "version"
+        }
+
+        korea {
+            dimension "version"
+        }
+
+        vietnam {
+            dimension "version"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility java_version
+        targetCompatibility java_version
+    }
+
+    kotlinOptions {
+        jvmTarget = "$java_version"
+    }
+
+    kotlin {
+        jvmToolchain(java_version)
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(':core')
+    implementation project(':navigation')
+
+    implementation "$android_appcompat"
+    implementation "$android_activity"
+    implementation "$android_material"
+    implementation "$google_ads"
+    implementation "$hilt_android"
+
+    kapt "$hilt_compiler"
+}

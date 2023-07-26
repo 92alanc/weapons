@@ -119,8 +119,7 @@ internal class WeaponListActivity : AppCompatActivity() {
     data class Args(val query: UiWeaponQuery) : Parcelable
 
     companion object {
-        fun getIntent(context: Context, query: UiWeaponQuery): Intent {
-            val args = Args(query)
+        fun getIntent(context: Context, args: Args): Intent {
             return context.createIntent<WeaponListActivity>().putArguments(args)
         }
     }

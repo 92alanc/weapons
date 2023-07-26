@@ -1,36 +1,4 @@
 <resources>
-    <!-- region App texts -->
     <string name="error">Unfortunately an error occurred but don\'t worry, the developer has been notified and will fix it soon</string>
-    <string name="year_format">Year: %1$d</string>
-    <string name="manufacturer_format">Make: %1$s</string>
-    <string name="type_format">Type: %1$s</string>
-    <string name="calibre_format">Calibre: %1$s</string>
-    <string name="length_format">Length: %1$dmm</string>
-    <string name="mass_format">Mass: %1$.2fkg</string>
-    <string name="rate_of_fire_format">Rate of fire: %1$d rounds per minute</string>
-    <string name="effective_range_format">Effective range: %1$dm</string>
-    <string name="photo_indicator_format">Photo %1$d / %2$d</string>
-    <string name="no_results">No results found. Try searching a different name</string>
-    <string name="find_weapons_by_name">Find weapons by name</string>
-    <string name="search">Search</string>
     <string name="ok">OK</string>
-    <string name="about">About</string>
-    <string name="app_name_format">%1$s %2$s</string>
-    <string name="about_message">App developed by Alan Camargo</string>
-    <string name="privacy_policy">Privacy policy</string>
-    <string name="error_loading_photo">Error loading photo</string>
-    <string name="unknown">Unknown</string>
-    <string name="refresh">Refresh</string>
-    <string name="privacy_policy_url">https://pastebin.com/raw/Krd7c6aJ</string>
-    <!-- endregion -->
-
-    <!-- region Queries -->
-    <string name="query_all_weapons">All weapons</string>
-    <string name="query_by_name">By name</string>
-    <string name="query_by_year">By year</string>
-    <string name="query_by_country">By country</string>
-    <string name="query_by_type">By type</string>
-    <string name="query_by_calibre">By calibre</string>
-    <string name="query_by_manufacturer">By make</string>
-    <!-- endregion -->
 </resources>

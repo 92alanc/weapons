@@ -7,10 +7,12 @@ import com.alancamargo.weapons.core.database.DatabaseProvider
 import com.alancamargo.weapons.core.database.DatabaseProviderImpl
 import com.alancamargo.weapons.core.log.Logger
 import com.alancamargo.weapons.core.log.LoggerImpl
-import com.google.android.datatransport.runtime.dagger.Provides
+import com.alancamargo.weapons.core.resources.ResourcesHelper
+import com.alancamargo.weapons.core.resources.ResourcesHelperImpl
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
@@ -37,4 +39,11 @@ internal object CoreModule {
     fun provideDatabaseProvider(
         @ApplicationContext context: Context
     ): DatabaseProvider = DatabaseProviderImpl(context)
+
+    @Provides
+    @Singleton
+    fun provideResourcesHelper(
+        @ApplicationContext context: Context,
+        logger: Logger
+    ): ResourcesHelper = ResourcesHelperImpl(context, logger)
 }

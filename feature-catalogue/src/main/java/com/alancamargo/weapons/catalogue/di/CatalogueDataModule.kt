@@ -1,11 +1,15 @@
 package com.alancamargo.weapons.catalogue.di
 
+import android.content.Context
 import com.alancamargo.weapons.catalogue.data.db.WeaponDao
 import com.alancamargo.weapons.catalogue.data.db.WeaponDatabase
+import com.alancamargo.weapons.catalogue.data.tools.FileHelper
+import com.alancamargo.weapons.catalogue.data.tools.FileHelperImpl
 import com.alancamargo.weapons.core.database.DatabaseProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -30,4 +34,11 @@ internal object CatalogueDataModule {
     fun provideWeaponDao(database: WeaponDatabase): WeaponDao {
         return database.provideWeaponDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideFileHelper(
+        @ApplicationContext context: Context,
+        weaponDao: WeaponDao
+    ): FileHelper = FileHelperImpl(context, weaponDao)
 }

@@ -12,10 +12,6 @@
         android:theme="@style/AppTheme"
         tools:targetApi="n">
 
-        <activity android:name=".ui.activities.WebViewActivity"
-            android:parentActivityName=".home.ui.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/ads_app_id"/>

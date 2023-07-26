@@ -1,13 +1,14 @@
 package com.alancamargo.weapons.catalogue.data.model
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "WEAPON_TYPE")
 internal data class DbWeaponType(
     @PrimaryKey val id: Long,
-    val nameId: String,
-    val categoryId: String?
+    @ColumnInfo(name = "name_id") val nameId: String,
+    @ColumnInfo(name = "category_id") val categoryId: String?
 ) {
 
     companion object {

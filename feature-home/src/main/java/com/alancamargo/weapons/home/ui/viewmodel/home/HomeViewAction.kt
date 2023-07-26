@@ -10,5 +10,5 @@ internal sealed class HomeViewAction {
 
     object ShowAppInfo : HomeViewAction()
 
-    object ShowPrivacyPolicy : HomeViewAction()
+    data class ShowPrivacyPolicy(val url: String) : HomeViewAction()
 }

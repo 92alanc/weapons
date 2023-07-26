@@ -20,6 +20,6 @@ internal interface WeaponDao {
     @Query("SELECT * FROM COUNTRY WHERE ID = :id")
     suspend fun getCountryById(id: Long): DbCountry
 
-    @Query("SELECT * FROM COUNTRY WHERE ID = (SELECT countryId FROM WEAPON WHERE NAME = :weaponName)")
+    @Query("SELECT * FROM COUNTRY WHERE ID = (SELECT COUNTRY_ID FROM WEAPON WHERE NAME = :weaponName)")
     suspend fun getCountryByWeaponName(weaponName: String): DbCountry?
 }

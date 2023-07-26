@@ -15,6 +15,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val PRIVACY_POLICY_URL = "https://pastebin.com/raw/Krd7c6aJ"
+
 @HiltViewModel
 internal class HomeViewModel @Inject constructor(
     @IoDispatcher private val dispatcher: CoroutineDispatcher
@@ -71,7 +73,7 @@ internal class HomeViewModel @Inject constructor(
     }
 
     fun onPrivacyPolicyClicked() {
-        val action = HomeViewAction.ShowPrivacyPolicy
+        val action = HomeViewAction.ShowPrivacyPolicy(PRIVACY_POLICY_URL)
         sendAction(action)
     }
 

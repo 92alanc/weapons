@@ -20,6 +20,7 @@ import com.alancamargo.weapons.navigation.WebViewActivityNavigation
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import com.alancamargo.weapons.core.design.R as R2
 
 @AndroidEntryPoint
 internal class HomeActivity : AppCompatActivity() {
@@ -43,7 +44,7 @@ internal class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityHomeBinding.inflate(layoutInflater)
+        _binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpUi()
         observeViewModelFlows()
@@ -82,7 +83,7 @@ internal class HomeActivity : AppCompatActivity() {
         is HomeViewAction.NavigateToWeaponList -> navigateToWeaponsList(action.query)
         is HomeViewAction.ShowWeaponSearchDialogue -> showWeaponSearchDialogue()
         is HomeViewAction.ShowAppInfo -> showAppInfo()
-        is HomeViewAction.ShowPrivacyPolicy -> showPrivacyPolicy()
+        is HomeViewAction.ShowPrivacyPolicy -> showPrivacyPolicy(action.url)
     }
 
     private fun navigateToWeaponsList(query: UiWeaponQuery) {
@@ -95,21 +96,21 @@ internal class HomeActivity : AppCompatActivity() {
     }
 
     private fun showAppInfo() {
-        val appName = getString(com.alancamargo.weapons.core.design.R.string.app_name)
+        val appName = getString(R2.string.app_name)
         val appVersion = packageManager.getPackageInfo(packageName, 0).versionName
-        val title = getString(com.alancamargo.weapons.core.design.R.string.app_name_format, appName, appVersion)
+        val title = getString(R.string.app_name_format, appName, appVersion)
 
         MaterialAlertDialogBuilder(this)
             .setTitle(title)
-            .setMessage(com.alancamargo.weapons.core.design.R.string.about_message)
+            .setMessage(R.string.about_message)
             .show()
     }
 
-    private fun showPrivacyPolicy() {
+    private fun showPrivacyPolicy(url: String) {
         webViewActivityNavigation.startActivity(
             context = this,
-            titleRes = com.alancamargo.weapons.core.design.R.string.privacy_policy,
-            url = getString(com.alancamargo.weapons.core.design.R.string.privacy_policy_url)
+            titleRes = R.string.privacy_policy,
+            url = url
         )
     }
 }

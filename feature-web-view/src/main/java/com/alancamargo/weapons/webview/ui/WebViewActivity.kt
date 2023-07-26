@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.ui.activities
+package com.alancamargo.weapons.webview.ui
 
 import android.content.Context
 import android.content.Intent
@@ -9,34 +9,41 @@ import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.alancamargo.weapons.R
+import com.alancamargo.weapons.core.ads.AdLoader
 import com.alancamargo.weapons.core.extensions.args
 import com.alancamargo.weapons.core.extensions.createIntent
-import com.alancamargo.weapons.databinding.ActivityWebViewBinding
-import com.alancamargo.weapons.ui.tools.*
-import com.alancamargo.weapons.ui.viewmodel.WebViewUiAction
-import com.alancamargo.weapons.ui.viewmodel.WebViewViewModel
+import com.alancamargo.weapons.core.extensions.observeFlow
+import com.alancamargo.weapons.core.extensions.putArguments
+import com.alancamargo.weapons.webview.R
+import com.alancamargo.weapons.webview.databinding.ActivityWebViewBinding
+import com.alancamargo.weapons.webview.ui.viewmodel.WebViewViewAction
+import com.alancamargo.weapons.webview.ui.viewmodel.WebViewViewModel
 import kotlinx.parcelize.Parcelize
-import org.koin.android.ext.android.get
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
-class WebViewActivity : AppCompatActivity() {
+internal class WebViewActivity : AppCompatActivity() {
 
     private var _binding: ActivityWebViewBinding? = null
-    private val binding get() = _binding!!
+
+    private val binding
+        get() = _binding!!
 
     private val args by args<Args>()
-    private val viewModel by viewModel<WebViewViewModel>()
+    private val viewModel by viewModels<WebViewViewModel>()
+
+    @Inject
+    lateinit var adLoader: AdLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityWebViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setUpUi()
-        observeAction(viewModel, ::onActionChanged)
+        observeFlow(viewModel.action, ::onActionChanged)
     }
 
     override fun onBackPressed() {
@@ -66,15 +73,13 @@ class WebViewActivity : AppCompatActivity() {
     private fun setUpUi() {
         setUpToolbar()
         setUpWebView()
-        get<AdLoader>().loadBannerAds(binding.banner)
+        adLoader.loadBannerAds(binding.banner)
     }
 
-    private fun onActionChanged(action: WebViewUiAction) {
+    private fun onActionChanged(action: WebViewViewAction) {
         when (action) {
-            WebViewUiAction.ShowLoading -> binding.progressBar.isVisible = true
-            WebViewUiAction.HideLoading -> binding.progressBar.isVisible = false
-            WebViewUiAction.Refresh -> binding.webView.loadUrl(args.url)
-            WebViewUiAction.Finish -> finish()
+            WebViewViewAction.Refresh -> binding.webView.loadUrl(args.url)
+            WebViewViewAction.Finish -> finish()
         }
     }
 
@@ -90,12 +95,12 @@ class WebViewActivity : AppCompatActivity() {
             webViewClient = object : WebViewClient() {
                 override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                     super.onPageStarted(view, url, favicon)
-                    viewModel.onStartLoading()
+                    binding.progressBar.isVisible = true
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
-                    viewModel.onFinishedLoading()
+                    binding.progressBar.isVisible = false
                 }
             }
             settings.javaScriptEnabled = true
@@ -111,5 +116,4 @@ class WebViewActivity : AppCompatActivity() {
             return context.createIntent<WebViewActivity>().putArguments(args)
         }
     }
-
 }
