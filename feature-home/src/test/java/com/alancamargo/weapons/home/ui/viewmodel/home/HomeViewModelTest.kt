@@ -160,7 +160,7 @@ class HomeViewModelTest {
         viewModel.onPrivacyPolicyClicked()
 
         // THEN
-        val expected = HomeViewAction.ShowPrivacyPolicy
+        val expected = HomeViewAction.ShowPrivacyPolicy(url = "https://pastebin.com/raw/Krd7c6aJ")
         viewModel.action.test {
             val actual = awaitItem()
             assertThat(actual).isEqualTo(expected)
