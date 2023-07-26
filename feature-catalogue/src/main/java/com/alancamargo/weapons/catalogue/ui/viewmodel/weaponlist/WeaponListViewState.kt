@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.catalogue.ui.viewmodel
+package com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist
 
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponListHeader

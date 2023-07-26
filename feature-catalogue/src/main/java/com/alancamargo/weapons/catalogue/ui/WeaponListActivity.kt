@@ -11,9 +11,9 @@ import com.alancamargo.weapons.catalogue.R
 import com.alancamargo.weapons.catalogue.databinding.ActivityWeaponListBinding
 import com.alancamargo.weapons.catalogue.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.catalogue.ui.adapter.WeaponListWithHeaderAdapter
-import com.alancamargo.weapons.catalogue.ui.viewmodel.WeaponListViewAction
-import com.alancamargo.weapons.catalogue.ui.viewmodel.WeaponListViewModel
-import com.alancamargo.weapons.catalogue.ui.viewmodel.WeaponListViewState
+import com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist.WeaponListViewAction
+import com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist.WeaponListViewModel
+import com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist.WeaponListViewState
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.ads.AdLoader

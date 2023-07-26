@@ -1,4 +1,4 @@
-package com.alancamargo.weapons.catalogue.ui.viewmodel
+package com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
