@@ -63,6 +63,10 @@ internal class WeaponListViewModel @Inject constructor(
         sendAction(WeaponListViewAction.Finish)
     }
 
+    fun onNativeBackClicked() {
+        sendAction(WeaponListViewAction.Finish)
+    }
+
     private fun handleResult(result: WeaponListResult) = when (result) {
         is WeaponListResult.Success -> {
             val body = result.weapons

@@ -40,8 +40,4 @@
         <item quantity="one">Capacity: %d round</item>
         <item quantity="other">Capacity: %d rounds</item>
     </plurals>
-    <plurals name="results_plural">
-        <item quantity="one">%d result</item>
-        <item quantity="other">%d results</item>
-    </plurals>
 </resources>

@@ -7,7 +7,6 @@ import android.os.Parcelable
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.alancamargo.weapons.catalogue.R
 import com.alancamargo.weapons.catalogue.databinding.ActivityWeaponListBinding
 import com.alancamargo.weapons.catalogue.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.catalogue.ui.adapter.WeaponListWithHeaderAdapter
@@ -17,7 +16,6 @@ import com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist.WeaponListViewS
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.ads.AdLoader
-import com.alancamargo.weapons.core.design.toast.ToastHelper
 import com.alancamargo.weapons.core.extensions.args
 import com.alancamargo.weapons.core.extensions.createIntent
 import com.alancamargo.weapons.core.extensions.observeFlow
@@ -48,9 +46,6 @@ internal class WeaponListActivity : AppCompatActivity() {
     @Inject
     lateinit var resourcesHelper: ResourcesHelper
 
-    @Inject
-    lateinit var toastHelper: ToastHelper
-
     private val weaponAdapter by lazy {
         WeaponAdapter(
             resourcesHelper,
@@ -74,6 +69,10 @@ internal class WeaponListActivity : AppCompatActivity() {
         viewModel.handleQuery(args.query)
     }
 
+    override fun onBackPressed() {
+        viewModel.onNativeBackClicked()
+    }
+
     private fun setUpUi() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         adLoader.loadBannerAds(binding.banner)
@@ -92,15 +91,6 @@ internal class WeaponListActivity : AppCompatActivity() {
         weapons?.let {
             binding.recyclerView.adapter = weaponAdapter
             weaponAdapter.submitList(it)
-            resourcesHelper.getPluralString(
-                R.plurals.results_plural,
-                it.size
-            )?.let { message ->
-                toastHelper.showToast(
-                    context = this@WeaponListActivity,
-                    message = message
-                )
-            }
         }
 
         weaponListWithHeader?.let {
