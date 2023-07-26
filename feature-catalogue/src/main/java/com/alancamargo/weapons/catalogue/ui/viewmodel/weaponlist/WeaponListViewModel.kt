@@ -74,6 +74,7 @@ internal class WeaponListViewModel @Inject constructor(
             if (body.isEmpty()) {
                 _state.update { it.onEmptyState() }
             } else {
+                // TODO: delegate to use case
                 if (body.isWeaponList()) {
                     handleWeaponList(body)
                 } else {
