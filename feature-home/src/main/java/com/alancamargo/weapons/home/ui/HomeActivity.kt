@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.ads.AdLoader
+import com.alancamargo.weapons.core.design.dialogue.DialogueHelper
 import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.home.R
 import com.alancamargo.weapons.home.databinding.ActivityHomeBinding
@@ -17,7 +18,6 @@ import com.alancamargo.weapons.home.ui.viewmodel.home.HomeViewModel
 import com.alancamargo.weapons.home.ui.viewmodel.home.HomeViewState
 import com.alancamargo.weapons.navigation.WeaponListActivityNavigation
 import com.alancamargo.weapons.navigation.WebViewActivityNavigation
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import com.alancamargo.weapons.core.design.R as R2
@@ -33,6 +33,9 @@ internal class HomeActivity : AppCompatActivity() {
 
     @Inject
     lateinit var webViewActivityNavigation: WebViewActivityNavigation
+
+    @Inject
+    lateinit var dialogueHelper: DialogueHelper
 
     private var _binding: ActivityHomeBinding? = null
 
@@ -51,9 +54,9 @@ internal class HomeActivity : AppCompatActivity() {
         viewModel.getQueryTypes()
     }
 
-    private fun setUpUi() {
-        binding.recyclerView.adapter = adapter
-        adLoader.loadBannerAds(binding.banner)
+    private fun setUpUi() = with(binding) {
+        recyclerView.adapter = adapter
+        adLoader.loadBannerAds(banner)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -100,10 +103,11 @@ internal class HomeActivity : AppCompatActivity() {
         val appVersion = packageManager.getPackageInfo(packageName, 0).versionName
         val title = getString(R.string.app_name_format, appName, appVersion)
 
-        MaterialAlertDialogBuilder(this)
-            .setTitle(title)
-            .setMessage(R.string.about_message)
-            .show()
+        dialogueHelper.showDialogue(
+            context = this,
+            title = title,
+            messageRes = R.string.about_message
+        )
     }
 
     private fun showPrivacyPolicy(url: String) {

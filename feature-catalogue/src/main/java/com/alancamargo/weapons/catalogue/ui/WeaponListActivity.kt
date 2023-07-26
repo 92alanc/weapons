@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -18,6 +17,7 @@ import com.alancamargo.weapons.catalogue.ui.viewmodel.WeaponListViewState
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.ads.AdLoader
+import com.alancamargo.weapons.core.design.toast.ToastHelper
 import com.alancamargo.weapons.core.extensions.args
 import com.alancamargo.weapons.core.extensions.createIntent
 import com.alancamargo.weapons.core.extensions.observeFlow
@@ -47,6 +47,9 @@ internal class WeaponListActivity : AppCompatActivity() {
 
     @Inject
     lateinit var resourcesHelper: ResourcesHelper
+
+    @Inject
+    lateinit var toastHelper: ToastHelper
 
     private val weaponAdapter by lazy {
         WeaponAdapter(
@@ -92,8 +95,11 @@ internal class WeaponListActivity : AppCompatActivity() {
             resourcesHelper.getPluralStringOrNull(
                 R.plurals.results_plural,
                 it.size
-            )?.let { text ->
-                Toast.makeText(this@WeaponListActivity, text, Toast.LENGTH_SHORT).show()
+            )?.let { message ->
+                toastHelper.showToast(
+                    context = this@WeaponListActivity,
+                    message = message
+                )
             }
         }
 
