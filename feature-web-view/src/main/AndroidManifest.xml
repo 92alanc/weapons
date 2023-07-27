@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <application>
-        <activity android:name=".ui.WebViewActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+    <application android:theme="@style/AppTheme">
+        <activity android:name=".ui.WebViewActivity"/>
     </application>
 
 </manifest>

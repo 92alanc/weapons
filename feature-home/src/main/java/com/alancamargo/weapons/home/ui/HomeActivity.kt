@@ -55,6 +55,7 @@ internal class HomeActivity : AppCompatActivity() {
     }
 
     private fun setUpUi() = with(binding) {
+        setSupportActionBar(toolbar)
         recyclerView.adapter = adapter
         adLoader.loadBannerAds(banner)
     }

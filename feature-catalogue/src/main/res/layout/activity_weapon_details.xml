@@ -29,7 +29,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtName"
-                style="@style/TextAppearance.MaterialComponents.Headline5"
+                style="@style/TextAppearance.Material3.HeadlineSmall"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_large"
@@ -54,7 +54,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtCountry"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"
@@ -67,7 +67,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtYear"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
@@ -80,7 +80,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtManufacturer"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
@@ -93,7 +93,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtType"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
@@ -106,7 +106,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtCalibre"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
@@ -119,7 +119,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtLength"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
@@ -132,7 +132,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtMass"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
@@ -145,7 +145,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtCapacity"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
@@ -158,7 +158,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtRateOfFire"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"
@@ -171,7 +171,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtEffectiveRange"
-                style="@style/TextAppearance.MaterialComponents.Body1"
+                style="@style/TextAppearance.Material3.BodyLarge"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_default"

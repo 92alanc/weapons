@@ -62,5 +62,7 @@ dependencies {
     implementation "$android_material"
     implementation "$hilt_android"
 
+    api "$android_splash_screen"
+
     kapt "$hilt_compiler"
 }
