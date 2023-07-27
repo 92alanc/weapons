@@ -29,4 +29,8 @@ internal class WeaponListWithHeaderAdapter(
         val entry = getItem(position)
         holder.bindTo(entry)
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 }
