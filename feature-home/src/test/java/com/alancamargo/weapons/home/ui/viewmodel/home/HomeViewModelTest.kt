@@ -2,8 +2,11 @@ package com.alancamargo.weapons.home.ui.viewmodel.home
 
 import app.cash.turbine.test
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
+import com.alancamargo.weapons.home.ui.analytics.HomeAnalytics
 import com.alancamargo.weapons.home.ui.model.WeaponQueryType
 import com.google.common.truth.Truth.assertThat
+import io.mockk.mockk
+import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -15,12 +18,26 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
 
+    private val mockAnalytics = mockk<HomeAnalytics>(relaxed = true)
     private val testDispatcher = StandardTestDispatcher()
-    private val viewModel = HomeViewModel(testDispatcher)
+
+    private val viewModel = HomeViewModel(
+        mockAnalytics,
+        testDispatcher
+    )
 
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
+    }
+
+    @Test
+    fun `getQueryTypes should track screen view event`() {
+        // WHEN
+        viewModel.getQueryTypes()
+
+        // THEN
+        verify { mockAnalytics.trackScreenViewed() }
     }
 
     @Test
@@ -34,6 +51,15 @@ class HomeViewModelTest {
             val actual = awaitItem()
             assertThat(actual).isEqualTo(expected)
         }
+    }
+
+    @Test
+    fun `when query type is ALL onQueryItemClicked should track button click event`() {
+        // WHEN
+        viewModel.onQueryItemClicked(WeaponQueryType.ALL)
+
+        // THEN
+        verify { mockAnalytics.trackAllWeaponsClicked() }
     }
 
     @Test
@@ -52,6 +78,15 @@ class HomeViewModelTest {
     }
 
     @Test
+    fun `when query type is BY_CALIBRE onQueryItemClicked should track button click event`() {
+        // WHEN
+        viewModel.onQueryItemClicked(WeaponQueryType.BY_CALIBRE)
+
+        // THEN
+        verify { mockAnalytics.trackGroupByCalibreClicked() }
+    }
+
+    @Test
     fun `when query type is BY_CALIBRE onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
             // WHEN
@@ -64,6 +99,15 @@ class HomeViewModelTest {
                 assertThat(actual).isEqualTo(expected)
             }
         }
+    }
+
+    @Test
+    fun `when query type is BY_COUNTRY onQueryItemClicked should track button click event`() {
+        // WHEN
+        viewModel.onQueryItemClicked(WeaponQueryType.BY_COUNTRY)
+
+        // THEN
+        verify { mockAnalytics.trackGroupByCountryClicked() }
     }
 
     @Test
@@ -82,6 +126,15 @@ class HomeViewModelTest {
     }
 
     @Test
+    fun `when query type is BY_MANUFACTURER onQueryItemClicked should track button click event`() {
+        // WHEN
+        viewModel.onQueryItemClicked(WeaponQueryType.BY_MANUFACTURER)
+
+        // THEN
+        verify { mockAnalytics.trackGroupByManufacturerClicked() }
+    }
+
+    @Test
     fun `when query type is BY_MANUFACTURER onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
             // WHEN
@@ -94,6 +147,15 @@ class HomeViewModelTest {
                 assertThat(actual).isEqualTo(expected)
             }
         }
+    }
+
+    @Test
+    fun `when query type is BY_NAME onQueryItemClicked should track button click event`() {
+        // WHEN
+        viewModel.onQueryItemClicked(WeaponQueryType.BY_NAME)
+
+        // THEN
+        verify { mockAnalytics.trackGroupByNameClicked() }
     }
 
     @Test
@@ -112,6 +174,15 @@ class HomeViewModelTest {
     }
 
     @Test
+    fun `when query type is BY_TYPE onQueryItemClicked should track button click event`() {
+        // WHEN
+        viewModel.onQueryItemClicked(WeaponQueryType.BY_TYPE)
+
+        // THEN
+        verify { mockAnalytics.trackGroupByTypeClicked() }
+    }
+
+    @Test
     fun `when query type is BY_TYPE onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
             // WHEN
@@ -124,6 +195,15 @@ class HomeViewModelTest {
                 assertThat(actual).isEqualTo(expected)
             }
         }
+    }
+
+    @Test
+    fun `when query type is BY_YEAR onQueryItemClicked should track button click event`() {
+        // WHEN
+        viewModel.onQueryItemClicked(WeaponQueryType.BY_YEAR)
+
+        // THEN
+        verify { mockAnalytics.trackGroupByYearClicked() }
     }
 
     @Test
@@ -142,6 +222,15 @@ class HomeViewModelTest {
     }
 
     @Test
+    fun `onAppInfoClicked should track button click event`() {
+        // WHEN
+        viewModel.onAppInfoClicked()
+
+        // THEN
+        verify { mockAnalytics.trackAppInfoClicked() }
+    }
+
+    @Test
     fun `onAppInfoClicked should send ShowAppInfo action`() = runTest {
         // WHEN
         viewModel.onAppInfoClicked()
@@ -152,6 +241,15 @@ class HomeViewModelTest {
             val actual = awaitItem()
             assertThat(actual).isEqualTo(expected)
         }
+    }
+
+    @Test
+    fun `onPrivacyPolicyClicked should track button click event`() {
+        // WHEN
+        viewModel.onPrivacyPolicyClicked()
+
+        // THEN
+        verify { mockAnalytics.trackPrivacyPolicyClicked() }
     }
 
     @Test
