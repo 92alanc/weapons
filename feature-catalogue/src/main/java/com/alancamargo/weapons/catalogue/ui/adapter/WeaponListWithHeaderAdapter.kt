@@ -12,7 +12,7 @@ import com.alancamargo.weapons.core.resources.ResourcesHelper
 internal class WeaponListWithHeaderAdapter(
     private val resourcesHelper: ResourcesHelper,
     private val onItemClick: (UiWeapon) -> Unit
-) : ListAdapter<Map.Entry<UiWeaponListHeader?, List<UiWeapon>>, WeaponListWithHeaderViewHolder>(
+) : ListAdapter<Pair<UiWeaponListHeader?, List<UiWeapon>>, WeaponListWithHeaderViewHolder>(
     WeaponListWithHeaderItemDiffCallback()
 ) {
 

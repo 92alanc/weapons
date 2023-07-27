@@ -5,6 +5,7 @@ import com.alancamargo.weapons.catalogue.domain.model.Calibre
 import com.alancamargo.weapons.catalogue.domain.model.Country
 import com.alancamargo.weapons.catalogue.domain.model.Manufacturer
 import com.alancamargo.weapons.catalogue.domain.model.Weapon
+import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
 import com.alancamargo.weapons.catalogue.domain.model.WeaponType
 import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.common.ui.UiCalibre
@@ -30,6 +31,15 @@ internal fun Weapon.toUi(resourcesHelper: ResourcesHelper) = UiWeapon(
     effectiveRangeInM = effectiveRangeInM,
     photos = photos
 )
+
+internal fun WeaponListHeader.toUi(resourcesHelper: ResourcesHelper) = when (this) {
+    is Calibre -> toUi()
+    is Manufacturer -> toUi()
+    is Year -> toUi()
+    is Country -> toUi()
+    is WeaponType -> toUi(resourcesHelper)
+    else -> throw IllegalStateException("Must be an implementation of WeaponListHeader")
+}
 
 private fun Year.toUi() = UiYear(
     id = id,

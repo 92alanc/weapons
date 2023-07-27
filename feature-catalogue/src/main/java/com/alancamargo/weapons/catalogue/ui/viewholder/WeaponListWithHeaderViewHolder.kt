@@ -27,10 +27,10 @@ internal class WeaponListWithHeaderViewHolder(
 
     private val adapter = InnerAdapter(onItemClick)
 
-    fun bindTo(entry: Map.Entry<UiWeaponListHeader?, List<UiWeapon>>) {
-        val header = entry.key
+    fun bindTo(entry: Pair<UiWeaponListHeader?, List<UiWeapon>>) {
+        val header = entry.first
         processHeader(header)
-        val list = entry.value.sortedBy { it.name }
+        val list = entry.second.sortedBy { it.name }
         binding.recyclerView.adapter = adapter
         adapter.submitList(list)
     }

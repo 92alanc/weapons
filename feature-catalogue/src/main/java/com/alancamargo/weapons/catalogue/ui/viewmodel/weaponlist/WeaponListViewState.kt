@@ -5,7 +5,7 @@ import com.alancamargo.weapons.common.ui.UiWeaponListHeader
 
 internal data class WeaponListViewState(
     val isLoading: Boolean = false,
-    val weaponListWithHeader: List<Map.Entry<UiWeaponListHeader?, List<UiWeapon>>>? = null,
+    val weaponListWithHeader: List<Pair<UiWeaponListHeader?, List<UiWeapon>>>? = null,
     val weapons: List<UiWeapon>? = null,
     val showEmptyState: Boolean = false,
     val showError: Boolean = false
@@ -22,7 +22,7 @@ internal data class WeaponListViewState(
     fun onFinishedLoading() = copy(isLoading = false)
 
     fun onWeaponListWithHeaderReceived(
-        weaponListWithHeader: List<Map.Entry<UiWeaponListHeader?, List<UiWeapon>>>
+        weaponListWithHeader: List<Pair<UiWeaponListHeader?, List<UiWeapon>>>
     ) = copy(
         weaponListWithHeader = weaponListWithHeader,
         weapons = null,

@@ -5,19 +5,19 @@ import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponListHeader
 
 internal class WeaponListWithHeaderItemDiffCallback
-    : DiffUtil.ItemCallback<Map.Entry<UiWeaponListHeader?, List<UiWeapon>>>() {
+    : DiffUtil.ItemCallback<Pair<UiWeaponListHeader?, List<UiWeapon>>>() {
 
     override fun areItemsTheSame(
-        oldItem: Map.Entry<UiWeaponListHeader?, List<UiWeapon>>,
-        newItem: Map.Entry<UiWeaponListHeader?, List<UiWeapon>>
+        oldItem: Pair<UiWeaponListHeader?, List<UiWeapon>>,
+        newItem: Pair<UiWeaponListHeader?, List<UiWeapon>>
     ): Boolean {
-        return oldItem.key == newItem.key && oldItem.value.size == newItem.value.size
+        return oldItem.first == newItem.first && oldItem.second.size == newItem.second.size
     }
 
     override fun areContentsTheSame(
-        oldItem: Map.Entry<UiWeaponListHeader?, List<UiWeapon>>,
-        newItem: Map.Entry<UiWeaponListHeader?, List<UiWeapon>>
+        oldItem: Pair<UiWeaponListHeader?, List<UiWeapon>>,
+        newItem: Pair<UiWeaponListHeader?, List<UiWeapon>>
     ): Boolean {
-        return (oldItem.key?.equals(newItem) ?: false) && oldItem.value == newItem.value
+        return (oldItem.first?.equals(newItem) ?: false) && oldItem.second == newItem.second
     }
 }

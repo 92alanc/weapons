@@ -6,7 +6,6 @@ import com.alancamargo.weapons.catalogue.domain.model.Weapon
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListResult
 import com.alancamargo.weapons.catalogue.domain.usecase.GetWeaponsUseCase
-import com.alancamargo.weapons.catalogue.ui.mapping.createMapFromHeaderType
 import com.alancamargo.weapons.catalogue.ui.mapping.toDomain
 import com.alancamargo.weapons.catalogue.ui.mapping.toUi
 import com.alancamargo.weapons.common.ui.UiWeapon
@@ -74,7 +73,6 @@ internal class WeaponListViewModel @Inject constructor(
             if (body.isEmpty()) {
                 _state.update { it.onEmptyState() }
             } else {
-                // TODO: delegate to use case
                 if (body.isWeaponList()) {
                     handleWeaponList(body)
                 } else {
@@ -91,26 +89,20 @@ internal class WeaponListViewModel @Inject constructor(
     }
 
     private fun handleWeaponList(body: Map<WeaponListHeader?, List<Weapon>>) {
-        val weapons = body.flatMap {
-            it.value
+        val weapons = body.flatMap { (_, weapons) ->
+            weapons
         }.map { it.toUi(resourcesHelper) }
 
         _state.update { it.onWeaponsReceived(weapons) }
     }
 
     private fun handleWeaponListWithHeader(body: Map<WeaponListHeader?, List<Weapon>>) {
-        val weaponList = body.flatMap {
-            it.value.map { weapon ->
-                weapon.toUi(resourcesHelper)
-            }
+        val weapons = body.entries.map { (header, weapons) ->
+            header?.toUi(resourcesHelper) to weapons.map { it.toUi(resourcesHelper) }
+        }.toList().sortedBy { (header, _) ->
+            header?.text
         }
 
-        val headerClass = body.keys.first { it != null }?.javaClass
-            ?: throw IllegalStateException("Type must not be null")
-
-        val weapons = weaponList.createMapFromHeaderType(headerClass).entries.sortedBy {
-            it.key?.text
-        }
         _state.update { it.onWeaponListWithHeaderReceived(weapons) }
     }
 
