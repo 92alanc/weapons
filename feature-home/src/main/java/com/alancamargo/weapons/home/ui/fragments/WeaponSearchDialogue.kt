@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.home.ui.fragments
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,7 @@ internal class WeaponSearchDialogue : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         observeFlow(viewModel.action, ::onAction)
         setUpUi()
+        viewModel.start()
     }
 
     override fun onResume() {
@@ -49,6 +51,11 @@ internal class WeaponSearchDialogue : DialogFragment() {
         val width = LinearLayout.LayoutParams.MATCH_PARENT
         val height = LinearLayout.LayoutParams.WRAP_CONTENT
         dialog?.window?.setLayout(width, height)
+    }
+
+    override fun onCancel(dialog: DialogInterface) {
+        viewModel.onCancel()
+        super.onCancel(dialog)
     }
 
     private fun setUpUi() = with(binding) {
@@ -67,6 +74,7 @@ internal class WeaponSearchDialogue : DialogFragment() {
             context = requireContext(),
             query = query
         )
+        dismiss()
     }
 
     companion object {

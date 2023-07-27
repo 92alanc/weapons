@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.di.IoDispatcher
+import com.alancamargo.weapons.home.ui.analytics.WeaponSearchAnalytics
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -13,6 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class WeaponSearchViewModel @Inject constructor(
+    private val analytics: WeaponSearchAnalytics,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -20,7 +22,17 @@ internal class WeaponSearchViewModel @Inject constructor(
 
     val action: SharedFlow<WeaponSearchViewAction> = _action
 
+    fun start() {
+        analytics.trackDialogueViewed()
+    }
+
+    fun onCancel() {
+        analytics.trackDialogueCancelled()
+    }
+
     fun onOkClicked(weaponName: String) {
+        analytics.trackWeaponSearched(weaponName)
+
         viewModelScope.launch(dispatcher) {
             val query = UiWeaponQuery.ByName(weaponName)
             val action = WeaponSearchViewAction.NavigateToWeaponList(query)
