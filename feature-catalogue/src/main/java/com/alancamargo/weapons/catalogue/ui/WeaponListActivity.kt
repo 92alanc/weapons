@@ -69,6 +69,11 @@ internal class WeaponListActivity : AppCompatActivity() {
         viewModel.handleQuery(args.query)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        viewModel.onBackClicked()
+        return true
+    }
+
     override fun onBackPressed() {
         viewModel.onNativeBackClicked()
     }

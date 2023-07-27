@@ -50,6 +50,11 @@ internal class WeaponDetailsActivity : AppCompatActivity() {
         viewModel.start(args.weapon)
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        viewModel.onBackClicked()
+        return true
+    }
+
     override fun onBackPressed() {
         viewModel.onNativeBackClicked()
     }
