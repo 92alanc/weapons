@@ -91,7 +91,6 @@ internal class WebViewActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
-    @Suppress("SetJavaScriptEnabled")
     private fun setUpWebView() {
         with(binding.webView) {
             webViewClient = object : WebViewClient() {
@@ -105,7 +104,6 @@ internal class WebViewActivity : AppCompatActivity() {
                     binding.progressBar.isVisible = false
                 }
             }
-            settings.javaScriptEnabled = true
             loadUrl(args.url)
         }
     }
