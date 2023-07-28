@@ -4,6 +4,9 @@ import com.alancamargo.weapons.catalogue.data.mapping.toDomain
 import com.alancamargo.weapons.catalogue.data.model.DbWeapon
 import com.alancamargo.weapons.catalogue.data.model.DbWeaponType
 import com.alancamargo.weapons.catalogue.data.model.RawDbWeapon
+import com.alancamargo.weapons.catalogue.domain.model.Weapon
+import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
+import com.alancamargo.weapons.catalogue.domain.model.WeaponType
 
 internal fun stubDbWeaponList() = listOf(
     stubDbWeapon(),
@@ -19,6 +22,15 @@ internal fun stubWeaponList() = stubDbWeaponList().map {
     )
     it.toDomain(photos)
 }
+
+internal fun stubWeaponListWithHeaderMap(): Map<WeaponListHeader?, List<Weapon>> = mapOf(
+    WeaponType.Melee(id = 123) to stubWeaponList(),
+    WeaponType.Melee(id = 123) to stubWeaponList()
+)
+
+internal fun stubWeaponListMap(): Map<WeaponListHeader?, List<Weapon>> = mapOf(
+    null to stubWeaponList()
+)
 
 private fun stubDbWeapon() = DbWeapon(
     weapon = RawDbWeapon(

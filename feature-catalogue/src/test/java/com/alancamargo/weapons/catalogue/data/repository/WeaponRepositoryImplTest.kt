@@ -1,10 +1,8 @@
 package com.alancamargo.weapons.catalogue.data.repository
 
 import com.alancamargo.weapons.catalogue.data.local.WeaponLocalDataSource
-import com.alancamargo.weapons.catalogue.domain.model.Weapon
-import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListResult
-import com.alancamargo.weapons.catalogue.testtools.stubWeaponList
+import com.alancamargo.weapons.catalogue.testtools.stubWeaponListMap
 import com.alancamargo.weapons.core.log.Logger
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
@@ -26,7 +24,7 @@ class WeaponRepositoryImplTest {
     @Test
     fun `when local data source returns weapons getAllWeapons should return Success`() = runTest {
         // GIVEN
-        val expected = mapOf<WeaponListHeader?, List<Weapon>>(null to stubWeaponList())
+        val expected = stubWeaponListMap()
         coEvery { mockLocalDataSource.getAllWeapons() } returns expected
 
         // WHEN
@@ -67,7 +65,7 @@ class WeaponRepositoryImplTest {
         runTest {
             // GIVEN
             val name = "weapon"
-            val expected = mapOf<WeaponListHeader?, List<Weapon>>(null to stubWeaponList())
+            val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.filterWeaponsByName(name) } returns expected
 
             // WHEN
@@ -112,7 +110,7 @@ class WeaponRepositoryImplTest {
     fun `when local data source returns weapons groupWeaponsByYear should return Success`() {
         runTest {
             // GIVEN
-            val expected = mapOf<WeaponListHeader?, List<Weapon>>(null to stubWeaponList())
+            val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.groupWeaponsByYear() } returns expected
 
             // WHEN
@@ -155,7 +153,7 @@ class WeaponRepositoryImplTest {
     fun `when local data source returns weapons groupWeaponsByCountry should return Success`() {
         runTest {
             // GIVEN
-            val expected = mapOf<WeaponListHeader?, List<Weapon>>(null to stubWeaponList())
+            val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.groupWeaponsByCountry() } returns expected
 
             // WHEN
@@ -198,7 +196,7 @@ class WeaponRepositoryImplTest {
     fun `when local data source returns weapons groupWeaponsByType should return Success`() {
         runTest {
             // GIVEN
-            val expected = mapOf<WeaponListHeader?, List<Weapon>>(null to stubWeaponList())
+            val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.groupWeaponsByType() } returns expected
 
             // WHEN
@@ -241,7 +239,7 @@ class WeaponRepositoryImplTest {
     fun `when local data source returns weapons groupWeaponsByCalibre should return Success`() {
         runTest {
             // GIVEN
-            val expected = mapOf<WeaponListHeader?, List<Weapon>>(null to stubWeaponList())
+            val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.groupWeaponsByCalibre() } returns expected
 
             // WHEN
@@ -286,7 +284,7 @@ class WeaponRepositoryImplTest {
     fun `when local data source returns weapons groupWeaponsByManufacturer should return Success`() {
         runTest {
             // GIVEN
-            val expected = mapOf<WeaponListHeader?, List<Weapon>>(null to stubWeaponList())
+            val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.groupWeaponsByManufacturer() } returns expected
 
             // WHEN
