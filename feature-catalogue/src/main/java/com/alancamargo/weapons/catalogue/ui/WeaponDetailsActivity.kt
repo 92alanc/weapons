@@ -19,7 +19,6 @@ import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.core.extensions.putArguments
 import com.alancamargo.weapons.core.extensions.setDrawableOrHide
 import com.alancamargo.weapons.core.extensions.setTextOrHide
-import com.alancamargo.weapons.core.resources.ResourcesHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
@@ -37,9 +36,6 @@ internal class WeaponDetailsActivity : AppCompatActivity() {
 
     @Inject
     lateinit var adLoader: AdLoader
-
-    @Inject
-    lateinit var resourcesHelper: ResourcesHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +55,10 @@ internal class WeaponDetailsActivity : AppCompatActivity() {
         viewModel.onNativeBackClicked()
     }
 
-    private fun setUpUi() {
+    private fun setUpUi() = with(binding) {
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        adLoader.loadBannerAds(binding.banner)
+        adLoader.loadBannerAds(banner)
     }
 
     private fun observeViewModelFlows() {

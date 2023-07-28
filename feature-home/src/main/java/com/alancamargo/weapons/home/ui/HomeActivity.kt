@@ -1,5 +1,7 @@
 package com.alancamargo.weapons.home.ui
 
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -99,9 +101,19 @@ internal class HomeActivity : AppCompatActivity() {
         dialogue.show(supportFragmentManager, WeaponSearchDialogue.TAG)
     }
 
+    @Suppress("DEPRECATION")
     private fun showAppInfo() {
         val appName = getString(R2.string.app_name)
-        val appVersion = packageManager.getPackageInfo(packageName, 0).versionName
+        val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            packageManager.getPackageInfo(
+                packageName,
+                PackageManager.PackageInfoFlags.of(0)
+            )
+        } else {
+            packageManager.getPackageInfo(packageName, 0)
+        }
+
+        val appVersion = packageInfo.versionName
         val title = getString(R.string.app_name_format, appName, appVersion)
 
         dialogueHelper.showDialogue(

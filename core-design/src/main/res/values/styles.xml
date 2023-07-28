@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="Toolbar" parent="@style/Widget.Material3.Toolbar">
-        <item name="backgroundTint">@color/primary</item>
-        <item name="titleTextColor">@color/white</item>
-    </style>
-</resources>

@@ -78,9 +78,10 @@ internal class WeaponListActivity : AppCompatActivity() {
         viewModel.onNativeBackClicked()
     }
 
-    private fun setUpUi() {
+    private fun setUpUi() = with(binding) {
+        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        adLoader.loadBannerAds(binding.banner)
+        adLoader.loadBannerAds(banner)
     }
 
     private fun observeViewModelFlows() {

@@ -4,7 +4,7 @@
     <application>
         <activity android:name=".ui.HomeActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.Startup">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

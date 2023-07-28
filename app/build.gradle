@@ -47,7 +47,7 @@ android {
         viewBinding true
     }
 
-    flavorDimensions "version"
+    flavorDimensions = ["version"]
 
     productFlavors {
         ww1 {

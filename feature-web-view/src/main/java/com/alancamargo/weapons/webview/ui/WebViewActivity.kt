@@ -85,9 +85,9 @@ internal class WebViewActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUpToolbar() {
-        binding.toolbar.setTitle(args.titleRes)
-        setSupportActionBar(binding.toolbar)
+    private fun setUpToolbar() = with(binding) {
+        setSupportActionBar(toolbar)
+        toolbar.setTitle(args.titleRes)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
