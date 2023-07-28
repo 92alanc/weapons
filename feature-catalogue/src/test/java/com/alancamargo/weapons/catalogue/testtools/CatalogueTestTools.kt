@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.catalogue.testtools
 
+import com.alancamargo.weapons.catalogue.data.mapping.toDomain
 import com.alancamargo.weapons.catalogue.data.model.DbWeapon
 import com.alancamargo.weapons.catalogue.data.model.DbWeaponType
 import com.alancamargo.weapons.catalogue.data.model.RawDbWeapon
@@ -9,6 +10,15 @@ internal fun stubDbWeaponList() = listOf(
     stubDbWeapon(),
     stubDbWeapon()
 )
+
+internal fun stubWeaponList() = stubDbWeaponList().map {
+    val photos = listOf(
+        "photo1.jpg",
+        "photo2.jpg",
+        "photo3.jpg"
+    )
+    it.toDomain(photos)
+}
 
 private fun stubDbWeapon() = DbWeapon(
     weapon = RawDbWeapon(
