@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.ads.AdLoader
 import com.alancamargo.weapons.core.design.dialogue.DialogueHelper
@@ -48,6 +49,7 @@ internal class HomeActivity : AppCompatActivity() {
     private val adapter by lazy { QueryAdapter(viewModel::onQueryItemClicked) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         _binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
