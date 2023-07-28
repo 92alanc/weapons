@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListResult
 import com.alancamargo.weapons.catalogue.domain.model.WeaponQuery
 import com.alancamargo.weapons.catalogue.domain.usecase.GetWeaponsUseCase
+import com.alancamargo.weapons.catalogue.testtools.stubUiWeapon
 import com.alancamargo.weapons.catalogue.testtools.stubWeaponListMap
 import com.alancamargo.weapons.catalogue.testtools.stubWeaponListWithHeaderMap
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
@@ -140,6 +141,41 @@ class WeaponListViewModelTest {
             assertThat(awaitItem()).isEqualTo(empty)
             val finalState = empty.onFinishedLoading()
             assertThat(awaitItem()).isEqualTo(finalState)
+        }
+    }
+
+    @Test
+    fun `onWeaponClicked should send NavigateToWeaponDetails action`() = runTest {
+        // WHEN
+        val weapon = stubUiWeapon()
+        viewModel.onWeaponClicked(weapon)
+
+        // THEN
+        viewModel.action.test {
+            val expected = WeaponListViewAction.NavigateToWeaponDetails(weapon)
+            assertThat(awaitItem()).isEqualTo(expected)
+        }
+    }
+
+    @Test
+    fun `onBackClicked should send Finish action`() = runTest {
+        // WHEN
+        viewModel.onBackClicked()
+
+        // THEN
+        viewModel.action.test {
+            assertThat(awaitItem()).isEqualTo(WeaponListViewAction.Finish)
+        }
+    }
+
+    @Test
+    fun `onNativeBackClicked should send Finish action`() = runTest {
+        // WHEN
+        viewModel.onNativeBackClicked()
+
+        // THEN
+        viewModel.action.test {
+            assertThat(awaitItem()).isEqualTo(WeaponListViewAction.Finish)
         }
     }
 }

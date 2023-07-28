@@ -7,6 +7,8 @@ import com.alancamargo.weapons.catalogue.data.model.RawDbWeapon
 import com.alancamargo.weapons.catalogue.domain.model.Weapon
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
 import com.alancamargo.weapons.catalogue.domain.model.WeaponType
+import com.alancamargo.weapons.common.ui.UiWeapon
+import com.alancamargo.weapons.common.ui.UiWeaponType
 
 internal fun stubDbWeaponList() = listOf(
     stubDbWeapon(),
@@ -30,6 +32,22 @@ internal fun stubWeaponListWithHeaderMap(): Map<WeaponListHeader?, List<Weapon>>
 
 internal fun stubWeaponListMap(): Map<WeaponListHeader?, List<Weapon>> = mapOf(
     null to stubWeaponList()
+)
+
+internal fun stubUiWeapon() = UiWeapon(
+    id = 123,
+    name = "Weapon",
+    year = null,
+    manufacturer = null,
+    country = null,
+    type = UiWeaponType(id = 123, name = "Rifle"),
+    lengthInMm = null,
+    massInKg = null,
+    calibre = null,
+    capacityInRounds = null,
+    rateOfFireInRpm = null,
+    effectiveRangeInM = null,
+    photos = listOf("1.jpg", "2.jpg", "3.jpg")
 )
 
 private fun stubDbWeapon() = DbWeapon(
