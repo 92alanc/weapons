@@ -3,6 +3,7 @@ package com.alancamargo.weapons.catalogue.ui.viewmodel.weapondetails
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alancamargo.weapons.catalogue.R
+import com.alancamargo.weapons.catalogue.ui.analytics.WeaponDetailsAnalytics
 import com.alancamargo.weapons.catalogue.ui.model.UiLabelledCountry
 import com.alancamargo.weapons.catalogue.ui.model.UiLabelledWeapon
 import com.alancamargo.weapons.common.ui.UiWeapon
@@ -21,6 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class WeaponDetailsViewModel @Inject constructor(
     private val resourcesHelper: ResourcesHelper,
+    private val analytics: WeaponDetailsAnalytics,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -31,15 +33,18 @@ internal class WeaponDetailsViewModel @Inject constructor(
     val action = _action.asSharedFlow()
 
     fun start(weapon: UiWeapon) {
+        analytics.trackScreenViewed()
         val labelledWeapon = buildLabelledWeapon(weapon)
         _state.update { it.setWeapon(labelledWeapon) }
     }
 
     fun onBackClicked() {
+        analytics.trackBackClicked()
         sendAction(WeaponDetailsViewAction.Finish)
     }
 
     fun onNativeBackClicked() {
+        analytics.trackNativeBackClicked()
         sendAction(WeaponDetailsViewAction.Finish)
     }
 
