@@ -76,6 +76,7 @@ dependencies {
 
     testImplementation "$coroutines_test"
     testImplementation "$junit"
+    testImplementation "$mockk_android"
     testImplementation "$truth"
     testImplementation "$turbine"
 }

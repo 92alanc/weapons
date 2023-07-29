@@ -3,6 +3,7 @@ package com.alancamargo.weapons.webview.ui.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alancamargo.weapons.core.di.IoDispatcher
+import com.alancamargo.weapons.webview.ui.analytics.WebViewAnalytics
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -12,6 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class WebViewViewModel @Inject constructor(
+    private val analytics: WebViewAnalytics,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -19,15 +21,22 @@ internal class WebViewViewModel @Inject constructor(
 
     val action = _action.asSharedFlow()
 
+    fun start() {
+        analytics.trackScreenViewed()
+    }
+
     fun onRefresh() {
+        analytics.trackRefreshClicked()
         sendAction(WebViewViewAction.Refresh)
     }
 
     fun onBackClicked() {
+        analytics.trackBackClicked()
         sendAction(WebViewViewAction.Finish)
     }
 
     fun onNativeBackClicked() {
+        analytics.trackNativeBackClicked()
         sendAction(WebViewViewAction.Finish)
     }
 
