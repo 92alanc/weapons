@@ -38,13 +38,13 @@ import androidx.room.PrimaryKey
 internal data class RawDbWeapon(
     @PrimaryKey val id: Long,
     val name: String,
-    @ColumnInfo(name = "year_id") val yearId: Long?,
-    @ColumnInfo(name = "manufacturer_id") val manufacturerId: Long?,
-    @ColumnInfo(name = "country_id") val countryId: Long?,
-    @ColumnInfo(name = "type_id") val typeId: Long,
+    @ColumnInfo(name = "year_id", index = true) val yearId: Long?,
+    @ColumnInfo(name = "manufacturer_id", index = true) val manufacturerId: Long?,
+    @ColumnInfo(name = "country_id", index = true) val countryId: Long?,
+    @ColumnInfo(name = "type_id", index = true) val typeId: Long,
     @ColumnInfo(name = "length_mm") val lengthInMm: Int?,
     @ColumnInfo(name = "mass_kg") val massInKg: Float?,
-    @ColumnInfo(name = "calibre_id") val calibreId: Long?,
+    @ColumnInfo(name = "calibre_id", index = true) val calibreId: Long?,
     @ColumnInfo(name = "capacity_rounds") val capacityInRounds: Int?,
     @ColumnInfo(name = "rate_of_fire_rpm") val rateOfFireInRpm: Int?,
     @ColumnInfo(name = "effective_range_m") val effectiveRangeInM: Int?
