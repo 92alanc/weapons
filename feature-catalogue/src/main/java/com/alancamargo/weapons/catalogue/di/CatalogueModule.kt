@@ -6,6 +6,8 @@ import com.alancamargo.weapons.catalogue.data.repository.WeaponRepositoryImpl
 import com.alancamargo.weapons.catalogue.domain.repository.WeaponRepository
 import com.alancamargo.weapons.catalogue.domain.usecase.GetWeaponsUseCase
 import com.alancamargo.weapons.catalogue.domain.usecase.GetWeaponsUseCaseImpl
+import com.alancamargo.weapons.catalogue.ui.analytics.WeaponListAnalytics
+import com.alancamargo.weapons.catalogue.ui.analytics.WeaponListAnalyticsImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -27,4 +29,8 @@ internal abstract class CatalogueModule {
     @Binds
     @ViewModelScoped
     abstract fun bindGetWeaponsUseCase(impl: GetWeaponsUseCaseImpl): GetWeaponsUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindWeaponListAnalytics(impl: WeaponListAnalyticsImpl): WeaponListAnalytics
 }

@@ -7,6 +7,7 @@ import com.alancamargo.weapons.catalogue.domain.usecase.GetWeaponsUseCase
 import com.alancamargo.weapons.catalogue.testtools.stubUiWeapon
 import com.alancamargo.weapons.catalogue.testtools.stubWeaponListMap
 import com.alancamargo.weapons.catalogue.testtools.stubWeaponListWithHeaderMap
+import com.alancamargo.weapons.catalogue.ui.analytics.WeaponListAnalytics
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.log.Logger
 import com.alancamargo.weapons.core.resources.ResourcesHelper
@@ -31,12 +32,14 @@ class WeaponListViewModelTest {
     private val mockGetWeaponsUseCase = mockk<GetWeaponsUseCase>()
     private val mockLogger = mockk<Logger>(relaxed = true)
     private val mockResourcesHelper = mockk<ResourcesHelper>()
+    private val mockAnalytics = mockk<WeaponListAnalytics>(relaxed = true)
     private val testDispatcher = StandardTestDispatcher()
 
     private val viewModel = WeaponListViewModel(
         mockGetWeaponsUseCase,
         mockLogger,
         mockResourcesHelper,
+        mockAnalytics,
         testDispatcher
     )
 
@@ -44,6 +47,18 @@ class WeaponListViewModelTest {
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
         every { mockResourcesHelper.getString(stringId = any()) } returns "string"
+    }
+
+    @Test
+    fun `handleQuery should track screen view event`() {
+        // GIVEN
+        every { mockGetWeaponsUseCase(WeaponQuery.All) } returns flowOf(WeaponListResult.Error)
+
+        // WHEN
+        viewModel.handleQuery(UiWeaponQuery.All)
+
+        // THEN
+        verify { mockAnalytics.trackScreenViewed() }
     }
 
     @Test
@@ -145,6 +160,16 @@ class WeaponListViewModelTest {
     }
 
     @Test
+    fun `onWeaponClicked should track button click event`() {
+        // WHEN
+        val weapon = stubUiWeapon()
+        viewModel.onWeaponClicked(weapon)
+
+        // THEN
+        verify { mockAnalytics.trackWeaponClicked(weapon.name) }
+    }
+
+    @Test
     fun `onWeaponClicked should send NavigateToWeaponDetails action`() = runTest {
         // WHEN
         val weapon = stubUiWeapon()
@@ -158,6 +183,15 @@ class WeaponListViewModelTest {
     }
 
     @Test
+    fun `onBackClicked should track button click event`() {
+        // WHEN
+        viewModel.onBackClicked()
+
+        // THEN
+        verify { mockAnalytics.trackBackClicked() }
+    }
+
+    @Test
     fun `onBackClicked should send Finish action`() = runTest {
         // WHEN
         viewModel.onBackClicked()
@@ -166,6 +200,15 @@ class WeaponListViewModelTest {
         viewModel.action.test {
             assertThat(awaitItem()).isEqualTo(WeaponListViewAction.Finish)
         }
+    }
+
+    @Test
+    fun `onNativeBackClicked should track button click event`() {
+        // WHEN
+        viewModel.onNativeBackClicked()
+
+        // THEN
+        verify { mockAnalytics.trackNativeBackClicked() }
     }
 
     @Test

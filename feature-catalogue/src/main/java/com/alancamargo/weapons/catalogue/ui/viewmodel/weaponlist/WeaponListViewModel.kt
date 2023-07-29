@@ -6,6 +6,7 @@ import com.alancamargo.weapons.catalogue.domain.model.Weapon
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListResult
 import com.alancamargo.weapons.catalogue.domain.usecase.GetWeaponsUseCase
+import com.alancamargo.weapons.catalogue.ui.analytics.WeaponListAnalytics
 import com.alancamargo.weapons.catalogue.ui.mapping.toDomain
 import com.alancamargo.weapons.catalogue.ui.mapping.toUi
 import com.alancamargo.weapons.common.ui.UiWeapon
@@ -31,6 +32,7 @@ internal class WeaponListViewModel @Inject constructor(
     private val getWeaponsUseCase: GetWeaponsUseCase,
     private val logger: Logger,
     private val resourcesHelper: ResourcesHelper,
+    private val analytics: WeaponListAnalytics,
     @IoDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
@@ -41,6 +43,8 @@ internal class WeaponListViewModel @Inject constructor(
     val action = _action.asSharedFlow()
 
     fun handleQuery(query: UiWeaponQuery) {
+        analytics.trackScreenViewed()
+
         viewModelScope.launch(dispatcher) {
             getWeaponsUseCase(query.toDomain()).onStart {
                 _state.update { it.onLoading() }
@@ -54,15 +58,18 @@ internal class WeaponListViewModel @Inject constructor(
     }
 
     fun onWeaponClicked(weapon: UiWeapon) {
+        analytics.trackWeaponClicked(weapon.name)
         val action = WeaponListViewAction.NavigateToWeaponDetails(weapon)
         sendAction(action)
     }
 
     fun onBackClicked() {
+        analytics.trackBackClicked()
         sendAction(WeaponListViewAction.Finish)
     }
 
     fun onNativeBackClicked() {
+        analytics.trackNativeBackClicked()
         sendAction(WeaponListViewAction.Finish)
     }
 
