@@ -1,7 +1,6 @@
 package com.alancamargo.weapons.core.extensions
 
 import android.content.Intent
-import android.os.Build
 import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 
@@ -12,10 +11,11 @@ fun Intent.putArguments(args: Parcelable): Intent {
 }
 
 inline fun <reified T : Parcelable> AppCompatActivity.args(): Lazy<T> = lazy {
+    /* TODO: fix this in release if you're brave enough
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         intent.getParcelableExtra(EXTRA_ARGS, T::class.java)
-    } else {
+    } else {*/
         @Suppress("DEPRECATION")
-        intent.getParcelableExtra(EXTRA_ARGS)
-    } ?: throw IllegalStateException("Missing arguments")
+        intent.getParcelableExtra<T>(EXTRA_ARGS)
+    /*}*/ ?: throw IllegalStateException("Missing arguments")
 }
