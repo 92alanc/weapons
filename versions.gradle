@@ -1,5 +1,4 @@
 ext {
-    android_version = '8.1.0'
     android_activity_version = '1.7.2'
     android_appcompat_version = '1.6.1'
     android_core_version = '1.10.1'
@@ -16,6 +15,7 @@ ext {
     firebase_crashlytics_version = '2.9.4'
     google_ads_version = '22.2.0'
     google_services_version = '4.3.14'
+    gradle_version = '8.1.1'
     hilt_version = '2.47'
     java_version = 17
     junit_version = '4.13.2'
