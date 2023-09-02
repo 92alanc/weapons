@@ -12,5 +12,5 @@ internal enum class WeaponQueryType(@StringRes val labelId: Int, @DrawableRes va
     BY_YEAR(R.string.query_by_year, R.drawable.ic_year),
     BY_TYPE(R.string.query_by_type, R.drawable.ic_type),
     BY_CALIBRE(R.string.query_by_calibre, R.drawable.ic_calibre),
-    BY_MANUFACTURER(R.string.query_by_manufacturer, R.drawable.ic_manufacturer)
+    BY_MAKE(R.string.query_by_make, R.drawable.ic_make)
 }

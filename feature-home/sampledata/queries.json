@@ -25,8 +25,8 @@
       "text": "@string/query_by_type"
     },
     {
-      "icon": "@drawable/ic_manufacturer",
-      "text": "@string/query_by_manufacturer"
+      "icon": "@drawable/ic_make",
+      "text": "@string/query_by_make"
     }
   ]
 }

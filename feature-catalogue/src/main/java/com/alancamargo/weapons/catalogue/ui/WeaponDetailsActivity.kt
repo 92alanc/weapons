@@ -76,7 +76,7 @@ internal class WeaponDetailsActivity : AppCompatActivity() {
             imgFlag.setDrawableOrHide(weapon.country?.flagDrawable)
             txtCapacity.setTextOrHide(weapon.capacity)
             txtLength.setTextOrHide(weapon.length)
-            txtManufacturer.setTextOrHide(weapon.manufacturer)
+            txtMake.setTextOrHide(weapon.make)
             txtEffectiveRange.setTextOrHide(weapon.effectiveRange)
             txtMass.setTextOrHide(weapon.mass)
             txtRateOfFire.setTextOrHide(weapon.rateOfFire)

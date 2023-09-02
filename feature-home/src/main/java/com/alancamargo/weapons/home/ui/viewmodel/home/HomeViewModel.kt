@@ -53,9 +53,9 @@ internal class HomeViewModel @Inject constructor(
                 HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByCountry)
             }
 
-            WeaponQueryType.BY_MANUFACTURER -> {
-                analytics.trackGroupByManufacturerClicked()
-                HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByManufacturer)
+            WeaponQueryType.BY_MAKE -> {
+                analytics.trackGroupByMakeClicked()
+                HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByMake)
             }
 
             WeaponQueryType.BY_NAME -> {

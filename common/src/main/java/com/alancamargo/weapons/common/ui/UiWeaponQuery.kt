@@ -24,5 +24,5 @@ sealed class UiWeaponQuery : Parcelable {
     object ByCalibre : UiWeaponQuery()
 
     @Parcelize
-    object ByManufacturer : UiWeaponQuery()
+    object ByMake : UiWeaponQuery()
 }

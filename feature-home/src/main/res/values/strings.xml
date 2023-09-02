@@ -11,7 +11,7 @@
     <string name="query_by_country">By country</string>
     <string name="query_by_type">By type</string>
     <string name="query_by_calibre">By calibre</string>
-    <string name="query_by_manufacturer">By make</string>
+    <string name="query_by_make">By make</string>
 
     <string name="find_weapons_by_name">Find weapons by name</string>
     <string name="search">Search</string>

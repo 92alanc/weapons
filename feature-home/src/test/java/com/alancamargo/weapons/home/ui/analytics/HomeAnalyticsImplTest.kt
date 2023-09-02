@@ -114,9 +114,9 @@ class HomeAnalyticsImplTest {
     }
 
     @Test
-    fun `trackGroupByManufacturerClicked should track event correctly`() {
+    fun `trackGroupByMakeClicked should track event correctly`() {
         // WHEN
-        analytics.trackGroupByManufacturerClicked()
+        analytics.trackGroupByMakeClicked()
 
         // THEN
         verify {

@@ -4,7 +4,7 @@ internal data class UiLabelledWeapon(
     val name: String,
     val country: UiLabelledCountry?,
     val year: String?,
-    val manufacturer: String?,
+    val make: String?,
     val type: String,
     val calibre: String?,
     val length: String?,

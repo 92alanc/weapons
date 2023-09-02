@@ -37,8 +37,8 @@ internal class WeaponLocalDataSourceImpl @Inject constructor(
         return weaponDao.getAllWeapons().toDomain().groupBy { it.calibre }
     }
 
-    override suspend fun groupWeaponsByManufacturer(): Map<WeaponListHeader?, List<Weapon>> {
-        return weaponDao.getAllWeapons().toDomain().groupBy { it.manufacturer }
+    override suspend fun groupWeaponsByMake(): Map<WeaponListHeader?, List<Weapon>> {
+        return weaponDao.getAllWeapons().toDomain().groupBy { it.make }
     }
 
     private suspend fun List<DbWeapon>.toDomain() = map {

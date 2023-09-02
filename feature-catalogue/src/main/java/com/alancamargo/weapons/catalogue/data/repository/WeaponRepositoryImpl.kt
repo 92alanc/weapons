@@ -39,8 +39,8 @@ internal class WeaponRepositoryImpl @Inject constructor(
         return safelyGetWeaponListResult(localDataSource::groupWeaponsByCalibre)
     }
 
-    override suspend fun groupWeaponsByManufacturer(): WeaponListResult {
-        return safelyGetWeaponListResult(localDataSource::groupWeaponsByManufacturer)
+    override suspend fun groupWeaponsByMake(): WeaponListResult {
+        return safelyGetWeaponListResult(localDataSource::groupWeaponsByMake)
     }
 
     private suspend fun safelyGetWeaponListResult(

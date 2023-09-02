@@ -126,22 +126,22 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `when query type is BY_MANUFACTURER onQueryItemClicked should track button click event`() {
+    fun `when query type is BY_MAKE onQueryItemClicked should track button click event`() {
         // WHEN
-        viewModel.onQueryItemClicked(WeaponQueryType.BY_MANUFACTURER)
+        viewModel.onQueryItemClicked(WeaponQueryType.BY_MAKE)
 
         // THEN
-        verify { mockAnalytics.trackGroupByManufacturerClicked() }
+        verify { mockAnalytics.trackGroupByMakeClicked() }
     }
 
     @Test
-    fun `when query type is BY_MANUFACTURER onQueryItemClicked should send NavigateToWeaponList action`() {
+    fun `when query type is BY_MAKE onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
             // WHEN
-            viewModel.onQueryItemClicked(WeaponQueryType.BY_MANUFACTURER)
+            viewModel.onQueryItemClicked(WeaponQueryType.BY_MAKE)
 
             // THEN
-            val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByManufacturer)
+            val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByMake)
             viewModel.action.test {
                 val actual = awaitItem()
                 assertThat(actual).isEqualTo(expected)

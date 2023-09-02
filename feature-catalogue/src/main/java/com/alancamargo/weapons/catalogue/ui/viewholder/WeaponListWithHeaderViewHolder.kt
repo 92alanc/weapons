@@ -12,7 +12,7 @@ import com.alancamargo.weapons.catalogue.databinding.ItemWeaponSquareBinding
 import com.alancamargo.weapons.catalogue.ui.adapter.WeaponDiffCallback
 import com.alancamargo.weapons.common.ui.UiCalibre
 import com.alancamargo.weapons.common.ui.UiCountry
-import com.alancamargo.weapons.common.ui.UiManufacturer
+import com.alancamargo.weapons.common.ui.UiMake
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponListHeader
 import com.alancamargo.weapons.common.ui.UiWeaponType
@@ -49,7 +49,7 @@ internal class WeaponListWithHeaderViewHolder(
             }
 
             is UiCalibre -> header.name
-            is UiManufacturer -> header.name
+            is UiMake -> header.name
             is UiWeaponType -> header.name
             is UiYear -> header.year.toString()
             null -> itemView.context.getString(R.string.unknown)

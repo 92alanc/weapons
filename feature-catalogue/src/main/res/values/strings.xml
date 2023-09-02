@@ -24,7 +24,7 @@
     <string name="type_rifle_lever_action">Lever action rifle</string>
 
     <string name="year_format">Year: %1$d</string>
-    <string name="manufacturer_format">Make: %1$s</string>
+    <string name="make_format">Make: %1$s</string>
     <string name="type_format">Type: %1$s</string>
     <string name="calibre_format">Calibre: %1$s</string>
     <string name="length_format">Length: %1$dmm</string>

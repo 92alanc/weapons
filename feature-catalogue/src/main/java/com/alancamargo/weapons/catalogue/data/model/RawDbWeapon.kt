@@ -9,9 +9,9 @@ import androidx.room.PrimaryKey
     tableName = "WEAPON",
     foreignKeys = [
         ForeignKey(
-            entity = DbManufacturer::class,
+            entity = DbMake::class,
             parentColumns = ["id"],
-            childColumns = ["manufacturer_id"]
+            childColumns = ["make_id"]
         ),
         ForeignKey(
             entity = DbCountry::class,
@@ -39,7 +39,7 @@ internal data class RawDbWeapon(
     @PrimaryKey val id: Long,
     val name: String,
     @ColumnInfo(name = "year_id", index = true) val yearId: Long?,
-    @ColumnInfo(name = "manufacturer_id", index = true) val manufacturerId: Long?,
+    @ColumnInfo(name = "make_id", index = true) val makeId: Long?,
     @ColumnInfo(name = "country_id", index = true) val countryId: Long?,
     @ColumnInfo(name = "type_id", index = true) val typeId: Long,
     @ColumnInfo(name = "length_mm") val lengthInMm: Int?,

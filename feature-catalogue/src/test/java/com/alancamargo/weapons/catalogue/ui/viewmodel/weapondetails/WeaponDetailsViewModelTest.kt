@@ -72,7 +72,7 @@ class WeaponDetailsViewModelTest {
                 name = weapon.name,
                 country = null,
                 year = null,
-                manufacturer = null,
+                make = null,
                 type = "formatted string",
                 calibre = null,
                 length = null,

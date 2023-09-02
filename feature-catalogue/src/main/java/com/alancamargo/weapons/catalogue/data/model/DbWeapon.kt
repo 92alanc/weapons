@@ -7,8 +7,8 @@ internal data class DbWeapon(
     @Embedded val weapon: RawDbWeapon,
     @Relation(entity = DbYear::class, parentColumn = "year_id", entityColumn = "id")
     val year: DbYear?,
-    @Relation(entity = DbManufacturer::class, parentColumn = "manufacturer_id", entityColumn = "id")
-    val manufacturer: DbManufacturer?,
+    @Relation(entity = DbMake::class, parentColumn = "make_id", entityColumn = "id")
+    val make: DbMake?,
     @Relation(entity = DbCountry::class, parentColumn = "country_id", entityColumn = "id")
     val country: DbCountry?,
     @Relation(entity = DbWeaponType::class, parentColumn = "type_id", entityColumn = "id")

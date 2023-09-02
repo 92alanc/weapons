@@ -281,14 +281,14 @@ class WeaponRepositoryImplTest {
     }
 
     @Test
-    fun `when local data source returns weapons groupWeaponsByManufacturer should return Success`() {
+    fun `when local data source returns weapons groupWeaponsByMake should return Success`() {
         runTest {
             // GIVEN
             val expected = stubWeaponListMap()
-            coEvery { mockLocalDataSource.groupWeaponsByManufacturer() } returns expected
+            coEvery { mockLocalDataSource.groupWeaponsByMake() } returns expected
 
             // WHEN
-            val actual = repository.groupWeaponsByManufacturer()
+            val actual = repository.groupWeaponsByMake()
 
             // THEN
             assertThat(actual).isEqualTo(WeaponListResult.Success(expected))
@@ -296,14 +296,14 @@ class WeaponRepositoryImplTest {
     }
 
     @Test
-    fun `when local data source throws exception groupWeaponsByManufacturer should log error`() {
+    fun `when local data source throws exception groupWeaponsByMake should log error`() {
         runTest {
             // GIVEN
             val exception = Throwable()
-            coEvery { mockLocalDataSource.groupWeaponsByManufacturer() } throws exception
+            coEvery { mockLocalDataSource.groupWeaponsByMake() } throws exception
 
             // WHEN
-            repository.groupWeaponsByManufacturer()
+            repository.groupWeaponsByMake()
 
             // THEN
             verify { mockLogger.error(exception) }
@@ -311,14 +311,14 @@ class WeaponRepositoryImplTest {
     }
 
     @Test
-    fun `when local data source throws exception groupWeaponsByManufacturer should return Error`() {
+    fun `when local data source throws exception groupWeaponsByMake should return Error`() {
         runTest {
             // GIVEN
             val exception = Throwable()
-            coEvery { mockLocalDataSource.groupWeaponsByManufacturer() } throws exception
+            coEvery { mockLocalDataSource.groupWeaponsByMake() } throws exception
 
             // WHEN
-            val actual = repository.groupWeaponsByManufacturer()
+            val actual = repository.groupWeaponsByMake()
 
             // THEN
             assertThat(actual).isEqualTo(WeaponListResult.Error)

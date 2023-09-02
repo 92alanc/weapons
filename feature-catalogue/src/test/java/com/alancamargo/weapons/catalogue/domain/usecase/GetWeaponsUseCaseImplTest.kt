@@ -65,13 +65,13 @@ class GetWeaponsUseCaseImplTest {
     }
 
     @Test
-    fun `when query is ByManufacturer invoke should return correct result`() = runTest {
+    fun `when query is ByMake invoke should return correct result`() = runTest {
         // GIVEN
         val expected = WeaponListResult.Success(stubWeaponListMap())
-        coEvery { mockRepository.groupWeaponsByManufacturer() } returns expected
+        coEvery { mockRepository.groupWeaponsByMake() } returns expected
 
         // WHEN
-        val result = useCase(WeaponQuery.ByManufacturer)
+        val result = useCase(WeaponQuery.ByMake)
 
         // THEN
         result.test {

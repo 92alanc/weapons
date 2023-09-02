@@ -113,13 +113,13 @@ class WeaponLocalDataSourceImplTest {
     }
 
     @Test
-    fun `groupWeaponsByManufacturer should return weapons grouped by manufacturer`() = runTest {
+    fun `groupWeaponsByMake should return weapons grouped by make`() = runTest {
         // GIVEN
         val weapons = stubDbWeaponList()
         coEvery { mockDao.getAllWeapons() } returns weapons
 
         // WHEN
-        val actual = localDataSource.groupWeaponsByManufacturer()
+        val actual = localDataSource.groupWeaponsByMake()
 
         // THEN
         actual.assertMapHasNullKeyAndValuesAreCorrect()

@@ -8,7 +8,7 @@ data class UiWeapon(
     val id: Long,
     val name: String,
     val year: UiYear?,
-    val manufacturer: UiManufacturer?,
+    val make: UiMake?,
     val country: UiCountry?,
     val type: UiWeaponType,
     val lengthInMm: Int?,

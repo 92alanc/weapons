@@ -16,7 +16,7 @@ internal interface HomeAnalytics {
 
     fun trackGroupByCalibreClicked()
 
-    fun trackGroupByManufacturerClicked()
+    fun trackGroupByMakeClicked()
 
     fun trackAppInfoClicked()
 

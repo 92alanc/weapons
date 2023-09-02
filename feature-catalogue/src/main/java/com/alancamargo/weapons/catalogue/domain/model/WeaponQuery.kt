@@ -14,5 +14,5 @@ internal sealed class WeaponQuery {
 
     object ByCalibre : WeaponQuery()
 
-    object ByManufacturer : WeaponQuery()
+    object ByMake : WeaponQuery()
 }

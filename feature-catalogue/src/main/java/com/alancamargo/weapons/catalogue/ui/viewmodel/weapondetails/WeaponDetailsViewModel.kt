@@ -59,8 +59,8 @@ internal class WeaponDetailsViewModel @Inject constructor(
             resourcesHelper.getFormattedString(R.string.year_format, it.year)
         }
 
-        val manufacturer = weapon.manufacturer?.let {
-            resourcesHelper.getFormattedString(R.string.manufacturer_format, it.name)
+        val make = weapon.make?.let {
+            resourcesHelper.getFormattedString(R.string.make_format, it.name)
         }
 
         val type = resourcesHelper.getFormattedString(R.string.type_format, weapon.type.name)
@@ -93,7 +93,7 @@ internal class WeaponDetailsViewModel @Inject constructor(
             name = weapon.name,
             country = country,
             year = year,
-            manufacturer = manufacturer,
+            make = make,
             type = type,
             calibre = calibre,
             length = length,
