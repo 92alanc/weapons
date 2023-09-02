@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import com.alancamargo.weapons.catalogue.databinding.ActivityWeaponListBinding
 import com.alancamargo.weapons.catalogue.ui.adapter.WeaponAdapter
 import com.alancamargo.weapons.catalogue.ui.adapter.WeaponListWithHeaderAdapter
+import com.alancamargo.weapons.catalogue.ui.fragments.WeaponDetailsBottomSheet
 import com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist.WeaponListViewAction
 import com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist.WeaponListViewModel
 import com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist.WeaponListViewState
@@ -21,10 +22,11 @@ import com.alancamargo.weapons.core.extensions.createIntent
 import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.core.extensions.putArguments
 import com.alancamargo.weapons.core.resources.ResourcesHelper
-import com.alancamargo.weapons.navigation.WeaponDetailsActivityNavigation
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
+
+private const val TAG_WEAPON_DETAILS = "weapon-details"
 
 @AndroidEntryPoint
 internal class WeaponListActivity : AppCompatActivity() {
@@ -39,9 +41,6 @@ internal class WeaponListActivity : AppCompatActivity() {
 
     @Inject
     lateinit var adLoader: AdLoader
-
-    @Inject
-    lateinit var weaponDetailsActivityNavigation: WeaponDetailsActivityNavigation
 
     @Inject
     lateinit var resourcesHelper: ResourcesHelper
@@ -106,15 +105,13 @@ internal class WeaponListActivity : AppCompatActivity() {
     }
 
     private fun onAction(action: WeaponListViewAction) = when (action) {
-        is WeaponListViewAction.NavigateToWeaponDetails -> navigateToWeaponDetails(action.weapon)
+        is WeaponListViewAction.ShowWeaponDetails -> showWeaponDetails(action.weapon)
         is WeaponListViewAction.Finish -> finish()
     }
 
-    private fun navigateToWeaponDetails(weapon: UiWeapon) {
-        weaponDetailsActivityNavigation.startActivity(
-            context = this,
-            weapon = weapon
-        )
+    private fun showWeaponDetails(weapon: UiWeapon) {
+        val bottomSheet = WeaponDetailsBottomSheet.newInstance(weapon)
+        bottomSheet.show(supportFragmentManager, TAG_WEAPON_DETAILS)
     }
 
     @Parcelize

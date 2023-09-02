@@ -59,7 +59,7 @@ internal class WeaponListViewModel @Inject constructor(
 
     fun onWeaponClicked(weapon: UiWeapon) {
         analytics.trackWeaponClicked(weapon.name)
-        val action = WeaponListViewAction.NavigateToWeaponDetails(weapon)
+        val action = WeaponListViewAction.ShowWeaponDetails(weapon)
         sendAction(action)
     }
 

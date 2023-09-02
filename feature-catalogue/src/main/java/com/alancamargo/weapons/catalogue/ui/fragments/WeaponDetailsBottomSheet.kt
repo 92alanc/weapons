@@ -1,69 +1,53 @@
-package com.alancamargo.weapons.catalogue.ui
+package com.alancamargo.weapons.catalogue.ui.fragments
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import com.alancamargo.weapons.catalogue.databinding.ActivityWeaponDetailsBinding
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import com.alancamargo.weapons.catalogue.databinding.BottomSheetWeaponDetailsBinding
 import com.alancamargo.weapons.catalogue.ui.adapter.ViewPagerAdapter
-import com.alancamargo.weapons.catalogue.ui.viewmodel.weapondetails.WeaponDetailsViewAction
 import com.alancamargo.weapons.catalogue.ui.viewmodel.weapondetails.WeaponDetailsViewModel
 import com.alancamargo.weapons.catalogue.ui.viewmodel.weapondetails.WeaponDetailsViewState
 import com.alancamargo.weapons.common.ui.UiWeapon
-import com.alancamargo.weapons.core.ads.AdLoader
 import com.alancamargo.weapons.core.extensions.args
-import com.alancamargo.weapons.core.extensions.createIntent
 import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.core.extensions.putArguments
 import com.alancamargo.weapons.core.extensions.setDrawableOrHide
 import com.alancamargo.weapons.core.extensions.setTextOrHide
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
-import javax.inject.Inject
 
 @AndroidEntryPoint
-internal class WeaponDetailsActivity : AppCompatActivity() {
+internal class WeaponDetailsBottomSheet : BottomSheetDialogFragment() {
 
-    private var _binding: ActivityWeaponDetailsBinding? = null
+    private var _binding: BottomSheetWeaponDetailsBinding? = null
 
-    private val binding: ActivityWeaponDetailsBinding
+    private val binding: BottomSheetWeaponDetailsBinding
         get() = _binding!!
 
     private val args by args<Args>()
     private val viewModel by viewModels<WeaponDetailsViewModel>()
 
-    @Inject
-    lateinit var adLoader: AdLoader
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        _binding = ActivityWeaponDetailsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setUpUi()
-        observeViewModelFlows()
-        viewModel.start(args.weapon)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = BottomSheetWeaponDetailsBinding.inflate(
+            layoutInflater,
+            container,
+            false
+        )
+        return binding.root
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        viewModel.onBackClicked()
-        return true
-    }
-
-    override fun onBackPressed() {
-        viewModel.onNativeBackClicked()
-    }
-
-    private fun setUpUi() = with(binding) {
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        adLoader.loadBannerAds(banner)
-    }
-
-    private fun observeViewModelFlows() {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         observeFlow(viewModel.state, ::onStateChanged)
-        observeFlow(viewModel.action, ::onAction)
+        viewModel.start(args.weapon)
     }
 
     private fun onStateChanged(state: WeaponDetailsViewState) = with(binding) {
@@ -84,16 +68,14 @@ internal class WeaponDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun onAction(action: WeaponDetailsViewAction) = when (action) {
-        is WeaponDetailsViewAction.Finish -> finish()
-    }
-
     @Parcelize
     data class Args(val weapon: UiWeapon) : Parcelable
 
     companion object {
-        fun getIntent(context: Context, args: Args): Intent {
-            return context.createIntent<WeaponDetailsActivity>().putArguments(args)
+
+        fun newInstance(weapon: UiWeapon): WeaponDetailsBottomSheet {
+            val args = Args(weapon)
+            return WeaponDetailsBottomSheet().putArguments(args)
         }
     }
 }
