@@ -54,19 +54,19 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `when query type is ALL onQueryItemClicked should track button click event`() {
+    fun `onAllWeaponsClicked should track button click event`() {
         // WHEN
-        viewModel.onQueryItemClicked(WeaponQueryType.ALL)
+        viewModel.onAllWeaponsClicked()
 
         // THEN
         verify { mockAnalytics.trackAllWeaponsClicked() }
     }
 
     @Test
-    fun `when query type is ALL onQueryItemClicked should send NavigateToWeaponList action`() {
+    fun `onAllWeaponsClicked should send NavigateToWeaponList action`() {
         runTest {
             // WHEN
-            viewModel.onQueryItemClicked(WeaponQueryType.ALL)
+            viewModel.onAllWeaponsClicked()
 
             // THEN
             val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.All)

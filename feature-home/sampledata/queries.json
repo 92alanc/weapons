@@ -1,10 +1,6 @@
 {
   "data": [
     {
-      "icon": "@drawable/ic_all_weapons",
-      "text": "@string/query_all_weapons"
-    },
-    {
       "icon": "@drawable/ic_name",
       "text": "@string/query_by_name"
     },

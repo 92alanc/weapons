@@ -6,7 +6,6 @@ import com.alancamargo.weapons.home.R
 
 internal enum class WeaponQueryType(@StringRes val labelId: Int, @DrawableRes val iconId: Int) {
 
-    ALL(R.string.query_all_weapons, R.drawable.ic_all_weapons),
     BY_NAME(R.string.query_by_name, R.drawable.ic_name),
     BY_COUNTRY(R.string.query_by_country, R.drawable.ic_country),
     BY_YEAR(R.string.query_by_year, R.drawable.ic_year),

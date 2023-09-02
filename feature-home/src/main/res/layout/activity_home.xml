@@ -26,20 +26,39 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btAllWeapons"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginHorizontal="@dimen/margin_default"
+        android:paddingVertical="@dimen/padding_default"
+        android:text="@string/query_all_weapons"
+        app:icon="@drawable/ic_all_weapons"
+        app:iconGravity="textTop"
+        app:iconSize="@dimen/all_weapons_icon_size"
+        app:iconTint="@color/accent"
+        app:cornerRadius="@dimen/all_weapons_button_radius"
+        app:strokeColor="@color/light_grey_button_outline"
+        app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/margin_large"
-        android:paddingTop="@dimen/padding_default"
+        android:paddingTop="@dimen/padding_small"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="3"
-        app:layout_constraintTop_toBottomOf="@id/toolbarLayout"
+        app:layout_constraintTop_toBottomOf="@id/btAllWeapons"
         app:layout_constraintBottom_toTopOf="@+id/banner"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_query"
-        tools:itemCount="7"/>
+        tools:itemCount="6"/>
 
     <com.google.android.gms.ads.AdView
         xmlns:ads="http://schemas.android.com/apk/res-auto"
