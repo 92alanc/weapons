@@ -208,7 +208,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         ads:adUnitId="@string/banner_weapon_details"
-        ads:adSize="SMART_BANNER"
+        ads:adSize="BANNER"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
