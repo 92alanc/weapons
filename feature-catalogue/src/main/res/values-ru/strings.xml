@@ -33,4 +33,10 @@
     <string name="unknown">\?</string>
     <string name="error_loading_photo">\?</string>
     <string name="no_results">\?</string>
+
+    <plurals name="capacity_plural">
+        <item quantity="one">Capacity: %d round</item>
+        <item quantity="few">Capacity: %d rounds</item>
+        <item quantity="many">Capacity: %d rounds</item>
+    </plurals>
 </resources>
