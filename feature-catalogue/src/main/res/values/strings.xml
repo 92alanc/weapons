@@ -31,7 +31,6 @@
     <string name="mass_format">Mass: %1$.2fkg</string>
     <string name="rate_of_fire_format">Rate of fire: %1$d rounds per minute</string>
     <string name="effective_range_format">Effective range: %1$dm</string>
-    <string name="photo_indicator_format">Photo %1$d / %2$d</string>
     <string name="unknown">Unknown</string>
     <string name="error_loading_photo">Error loading photo</string>
     <string name="no_results">No results found. Try searching a different name</string>

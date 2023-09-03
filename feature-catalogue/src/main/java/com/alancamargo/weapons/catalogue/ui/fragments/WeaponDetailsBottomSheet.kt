@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.alancamargo.weapons.catalogue.databinding.BottomSheetWeaponDetailsBinding
-import com.alancamargo.weapons.catalogue.ui.adapter.ViewPagerAdapter
+import com.alancamargo.weapons.catalogue.ui.adapter.PhotoAdapter
 import com.alancamargo.weapons.catalogue.ui.viewmodel.weapondetails.WeaponDetailsViewModel
 import com.alancamargo.weapons.catalogue.ui.viewmodel.weapondetails.WeaponDetailsViewState
 import com.alancamargo.weapons.common.ui.UiWeapon
@@ -64,7 +64,7 @@ internal class WeaponDetailsBottomSheet : BottomSheetDialogFragment() {
             txtEffectiveRange.setTextOrHide(weapon.effectiveRange)
             txtMass.setTextOrHide(weapon.mass)
             txtRateOfFire.setTextOrHide(weapon.rateOfFire)
-            viewPager.adapter = ViewPagerAdapter(weapon.photos)
+            viewPager.adapter = PhotoAdapter(weapon.photos)
         }
     }
 
