@@ -2,9 +2,11 @@ package com.alancamargo.weapons.home.ui.viewmodel.home
 
 import app.cash.turbine.test
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
+import com.alancamargo.weapons.core.preferences.PreferencesManager
 import com.alancamargo.weapons.home.ui.analytics.HomeAnalytics
 import com.alancamargo.weapons.home.ui.model.WeaponQueryType
 import com.google.common.truth.Truth.assertThat
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
@@ -15,14 +17,18 @@ import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Test
 
+private const val KEY_SHOW_DISCLAIMER = "show-disclaimer"
+
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
 
     private val mockAnalytics = mockk<HomeAnalytics>(relaxed = true)
+    private val mockPreferencesManager = mockk<PreferencesManager>(relaxed = true)
     private val testDispatcher = StandardTestDispatcher()
 
     private val viewModel = HomeViewModel(
         mockAnalytics,
+        mockPreferencesManager,
         testDispatcher
     )
 
@@ -32,18 +38,36 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `getQueryTypes should track screen view event`() {
+    fun `start should track screen view event`() {
         // WHEN
-        viewModel.getQueryTypes()
+        viewModel.start()
 
         // THEN
         verify { mockAnalytics.trackScreenViewed() }
     }
 
     @Test
-    fun `getQueryTypes should set correct state`() = runTest {
+    fun `start should send ShowDisclaimer action`() = runTest {
+        // GIVEN
+        every {
+            mockPreferencesManager.getBoolean(KEY_SHOW_DISCLAIMER, defaultValue = true)
+        } returns true
+
         // WHEN
-        viewModel.getQueryTypes()
+        viewModel.start()
+
+        // THEN
+        val expected = HomeViewAction.ShowDisclaimer
+        viewModel.action.test {
+            val actual = awaitItem()
+            assertThat(actual).isEqualTo(expected)
+        }
+    }
+
+    @Test
+    fun `start should set correct state`() = runTest {
+        // WHEN
+        viewModel.start()
 
         // THEN
         val expected = HomeViewState(queryTypes = WeaponQueryType.values().toList())
@@ -51,6 +75,24 @@ class HomeViewModelTest {
             val actual = awaitItem()
             assertThat(actual).isEqualTo(expected)
         }
+    }
+
+    @Test
+    fun `onDisclaimerDismissed should track button click event`() {
+        // WHEN
+        viewModel.onDisclaimerDismissed()
+
+        // THEN
+        verify { mockAnalytics.trackDisclaimerDismissed() }
+    }
+
+    @Test
+    fun `onDisclaimerDismissed should set value on preferences manager`() {
+        // WHEN
+        viewModel.onDisclaimerDismissed()
+
+        // THEN
+        verify { mockPreferencesManager.setBoolean(KEY_SHOW_DISCLAIMER, value = false) }
     }
 
     @Test
