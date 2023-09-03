@@ -17,6 +17,7 @@ import com.alancamargo.weapons.core.extensions.putArguments
 import com.alancamargo.weapons.core.extensions.setDrawableOrHide
 import com.alancamargo.weapons.core.extensions.setTextOrHide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
 
@@ -65,6 +66,8 @@ internal class WeaponDetailsBottomSheet : BottomSheetDialogFragment() {
             txtMass.setTextOrHide(weapon.mass)
             txtRateOfFire.setTextOrHide(weapon.rateOfFire)
             viewPager.adapter = PhotoAdapter(weapon.photos)
+            TabLayoutMediator(tabLayout, viewPager) { _, _ ->
+            }.attach()
         }
     }
 
