@@ -38,7 +38,7 @@ internal fun stubUiWeapon() = UiWeapon(
     id = 123,
     name = "Weapon",
     year = null,
-    manufacturer = null,
+    make = null,
     country = null,
     type = UiWeaponType(id = 123, name = "Rifle"),
     lengthInMm = null,
@@ -55,7 +55,7 @@ private fun stubDbWeapon() = DbWeapon(
         id = 123,
         name = "Weapon",
         yearId = null,
-        manufacturerId = null,
+        makeId = null,
         countryId = null,
         typeId = 1,
         lengthInMm = null,
@@ -66,7 +66,7 @@ private fun stubDbWeapon() = DbWeapon(
         effectiveRangeInM = null
     ),
     year = null,
-    manufacturer = null,
+    make = null,
     country = null,
     type = DbWeaponType(id = 1, nameId = "type_melee", categoryId = null),
     calibre = null

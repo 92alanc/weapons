@@ -62,6 +62,9 @@ internal class HomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         recyclerView.adapter = adapter
         adLoader.loadBannerAds(banner)
+        btAllWeapons.setOnClickListener {
+            viewModel.onAllWeaponsClicked()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

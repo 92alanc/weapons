@@ -177,7 +177,7 @@ class WeaponListViewModelTest {
 
         // THEN
         viewModel.action.test {
-            val expected = WeaponListViewAction.NavigateToWeaponDetails(weapon)
+            val expected = WeaponListViewAction.ShowWeaponDetails(weapon)
             assertThat(awaitItem()).isEqualTo(expected)
         }
     }

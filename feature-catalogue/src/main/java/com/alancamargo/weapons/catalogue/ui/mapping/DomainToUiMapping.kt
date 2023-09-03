@@ -3,14 +3,14 @@ package com.alancamargo.weapons.catalogue.ui.mapping
 import com.alancamargo.weapons.catalogue.R
 import com.alancamargo.weapons.catalogue.domain.model.Calibre
 import com.alancamargo.weapons.catalogue.domain.model.Country
-import com.alancamargo.weapons.catalogue.domain.model.Manufacturer
+import com.alancamargo.weapons.catalogue.domain.model.Make
 import com.alancamargo.weapons.catalogue.domain.model.Weapon
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
 import com.alancamargo.weapons.catalogue.domain.model.WeaponType
 import com.alancamargo.weapons.catalogue.domain.model.Year
 import com.alancamargo.weapons.common.ui.UiCalibre
 import com.alancamargo.weapons.common.ui.UiCountry
-import com.alancamargo.weapons.common.ui.UiManufacturer
+import com.alancamargo.weapons.common.ui.UiMake
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.common.ui.UiWeaponType
 import com.alancamargo.weapons.common.ui.UiYear
@@ -20,7 +20,7 @@ internal fun Weapon.toUi(resourcesHelper: ResourcesHelper) = UiWeapon(
     id = id,
     name = name,
     year = year?.toUi(),
-    manufacturer = manufacturer?.toUi(),
+    make = make?.toUi(),
     country = country?.toUi(),
     type = type.toUi(resourcesHelper),
     lengthInMm = lengthInMm,
@@ -34,7 +34,7 @@ internal fun Weapon.toUi(resourcesHelper: ResourcesHelper) = UiWeapon(
 
 internal fun WeaponListHeader.toUi(resourcesHelper: ResourcesHelper) = when (this) {
     is Calibre -> toUi()
-    is Manufacturer -> toUi()
+    is Make -> toUi()
     is Year -> toUi()
     is Country -> toUi()
     is WeaponType -> toUi(resourcesHelper)
@@ -46,7 +46,7 @@ private fun Year.toUi() = UiYear(
     year = year
 )
 
-private fun Manufacturer.toUi() = UiManufacturer(
+private fun Make.toUi() = UiMake(
     id = id,
     name = name
 )

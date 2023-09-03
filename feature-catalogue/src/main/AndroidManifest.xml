@@ -7,7 +7,7 @@
             android:name=".ui.WeaponListActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.WeaponDetailsActivity"
+            android:name=".ui.fragments.WeaponDetailsBottomSheet"
             android:screenOrientation="portrait"/>
 
     </application>

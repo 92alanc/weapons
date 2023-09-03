@@ -16,5 +16,5 @@ internal interface WeaponRepository {
 
     suspend fun groupWeaponsByCalibre(): WeaponListResult
 
-    suspend fun groupWeaponsByManufacturer(): WeaponListResult
+    suspend fun groupWeaponsByMake(): WeaponListResult
 }

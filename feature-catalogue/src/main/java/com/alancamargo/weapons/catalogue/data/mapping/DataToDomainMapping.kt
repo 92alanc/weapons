@@ -2,13 +2,13 @@ package com.alancamargo.weapons.catalogue.data.mapping
 
 import com.alancamargo.weapons.catalogue.data.model.DbCalibre
 import com.alancamargo.weapons.catalogue.data.model.DbCountry
-import com.alancamargo.weapons.catalogue.data.model.DbManufacturer
+import com.alancamargo.weapons.catalogue.data.model.DbMake
 import com.alancamargo.weapons.catalogue.data.model.DbWeapon
 import com.alancamargo.weapons.catalogue.data.model.DbWeaponType
 import com.alancamargo.weapons.catalogue.data.model.DbYear
 import com.alancamargo.weapons.catalogue.domain.model.Calibre
 import com.alancamargo.weapons.catalogue.domain.model.Country
-import com.alancamargo.weapons.catalogue.domain.model.Manufacturer
+import com.alancamargo.weapons.catalogue.domain.model.Make
 import com.alancamargo.weapons.catalogue.domain.model.Weapon
 import com.alancamargo.weapons.catalogue.domain.model.WeaponType
 import com.alancamargo.weapons.catalogue.domain.model.Year
@@ -17,7 +17,7 @@ internal fun DbWeapon.toDomain(photos: List<String>) = Weapon(
     id = weapon.id,
     name = weapon.name,
     year = year?.toDomain(),
-    manufacturer = manufacturer?.toDomain(),
+    make = make?.toDomain(),
     country = country?.toDomain(),
     type = type.toDomain(),
     lengthInMm = weapon.lengthInMm,
@@ -34,7 +34,7 @@ private fun DbYear.toDomain() = Year(
     year = year
 )
 
-private fun DbManufacturer.toDomain() = Manufacturer(
+private fun DbMake.toDomain() = Make(
     id = id,
     name = name
 )

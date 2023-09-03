@@ -39,7 +39,6 @@
             android:layout_height="wrap_content"
             android:text="@string/error_loading_photo"
             android:visibility="gone"
-            android:textColor="@color/white"
             app:layout_constraintTop_toTopOf="@id/imgPhoto"
             app:layout_constraintBottom_toBottomOf="@id/imgPhoto"
             app:layout_constraintStart_toStartOf="@id/imgPhoto"

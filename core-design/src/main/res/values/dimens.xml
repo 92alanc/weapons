@@ -7,5 +7,5 @@
     <dimen name="margin_default">8dp</dimen>
     <dimen name="size_flag">50dp</dimen>
     <dimen name="radius_card_view">8dp</dimen>
-    <dimen name="size_splash_icon">100dp</dimen>
+    <dimen name="size_splash_icon">48dp</dimen>
 </resources>

@@ -20,7 +20,7 @@ internal class GetWeaponsUseCaseImpl @Inject constructor(
         is WeaponQuery.All -> repository.getAllWeapons()
         is WeaponQuery.ByCalibre -> repository.groupWeaponsByCalibre()
         is WeaponQuery.ByCountry -> repository.groupWeaponsByCountry()
-        is WeaponQuery.ByManufacturer -> repository.groupWeaponsByManufacturer()
+        is WeaponQuery.ByMake -> repository.groupWeaponsByMake()
         is WeaponQuery.ByType -> repository.groupWeaponsByType()
         is WeaponQuery.ByYear -> repository.groupWeaponsByYear()
         is WeaponQuery.ByName -> repository.filterWeaponsByName(query.name)

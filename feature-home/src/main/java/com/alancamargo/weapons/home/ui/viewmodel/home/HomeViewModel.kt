@@ -36,13 +36,14 @@ internal class HomeViewModel @Inject constructor(
         _state.update { it.onQueryTypesReceived(queryTypes) }
     }
 
+    fun onAllWeaponsClicked() {
+        analytics.trackAllWeaponsClicked()
+        val action = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.All)
+        sendAction(action)
+    }
+
     fun onQueryItemClicked(query: WeaponQueryType) {
         val action = when (query) {
-            WeaponQueryType.ALL -> {
-                analytics.trackAllWeaponsClicked()
-                HomeViewAction.NavigateToWeaponList(UiWeaponQuery.All)
-            }
-
             WeaponQueryType.BY_CALIBRE -> {
                 analytics.trackGroupByCalibreClicked()
                 HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByCalibre)
@@ -53,9 +54,9 @@ internal class HomeViewModel @Inject constructor(
                 HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByCountry)
             }
 
-            WeaponQueryType.BY_MANUFACTURER -> {
-                analytics.trackGroupByManufacturerClicked()
-                HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByManufacturer)
+            WeaponQueryType.BY_MAKE -> {
+                analytics.trackGroupByMakeClicked()
+                HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByMake)
             }
 
             WeaponQueryType.BY_NAME -> {

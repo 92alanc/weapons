@@ -66,7 +66,6 @@
         android:padding="@dimen/padding_default"
         android:text="@string/error"
         android:gravity="center"
-        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/imgError"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -100,7 +99,6 @@
         android:padding="@dimen/padding_default"
         android:text="@string/no_results"
         android:gravity="center"
-        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@id/imgNoResults"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -118,7 +116,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         ads:adUnitId="@string/banner_weapon_list"
-        ads:adSize="SMART_BANNER"
+        ads:adSize="BANNER"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

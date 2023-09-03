@@ -1,8 +1,6 @@
 package com.alancamargo.weapons.catalogue.di
 
-import com.alancamargo.weapons.catalogue.ui.navigation.WeaponDetailsActivityNavigationImpl
 import com.alancamargo.weapons.catalogue.ui.navigation.WeaponListActivityNavigationImpl
-import com.alancamargo.weapons.navigation.WeaponDetailsActivityNavigation
 import com.alancamargo.weapons.navigation.WeaponListActivityNavigation
 import dagger.Binds
 import dagger.Module
@@ -19,10 +17,4 @@ internal abstract class CatalogueNavigationModule {
     abstract fun bindWeaponListActivityNavigation(
         impl: WeaponListActivityNavigationImpl
     ): WeaponListActivityNavigation
-
-    @Binds
-    @ActivityScoped
-    abstract fun bindWeaponDetailsActivityNavigation(
-        impl: WeaponDetailsActivityNavigationImpl
-    ): WeaponDetailsActivityNavigation
 }

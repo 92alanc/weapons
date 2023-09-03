@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="all_weapons_icon_size">80dp</dimen>
+    <dimen name="all_weapons_button_radius">8dp</dimen>
+</resources>

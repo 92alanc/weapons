@@ -65,7 +65,7 @@ internal class HomeAnalyticsImpl @Inject constructor(
         )
     }
 
-    override fun trackGroupByManufacturerClicked() {
+    override fun trackGroupByMakeClicked() {
         analyticsManager.trackButtonClicked(
             screenName = SCREEN_NAME,
             buttonName = BUTTON_BY_MAKE

@@ -17,5 +17,5 @@ internal interface WeaponLocalDataSource {
 
     suspend fun groupWeaponsByCalibre(): Map<WeaponListHeader?, List<Weapon>>
 
-    suspend fun groupWeaponsByManufacturer(): Map<WeaponListHeader?, List<Weapon>>
+    suspend fun groupWeaponsByMake(): Map<WeaponListHeader?, List<Weapon>>
 }
