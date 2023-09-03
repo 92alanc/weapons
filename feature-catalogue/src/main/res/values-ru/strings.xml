@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="type_melee">\?</string>
+    <string name="type_pistol">\?</string>
+    <string name="type_rifle_bolt_action">\?</string>
+    <string name="type_rifle_semi_automatic">\?</string>
+    <string name="type_rifle_automatic">\?</string>
+    <string name="type_shotgun">\?</string>
+    <string name="type_carbine">\?</string>
+    <string name="type_machine_gun_light">\?</string>
+    <string name="type_machine_gun_medium">\?</string>
+    <string name="type_machine_gun_heavy">\?</string>
+    <string name="type_sub_machine_gun">\?</string>
+    <string name="type_grenade_anti_personnel">\?</string>
+    <string name="type_grenade_anti_tank">\?</string>
+    <string name="type_mine_anti_personnel">\?</string>
+    <string name="type_mine_anti_tank">\?</string>
+    <string name="type_grenade_launcher">\?</string>
+    <string name="type_rocket_launcher">\?</string>
+    <string name="type_booby_trap">\?</string>
+    <string name="type_flamethrower">\?</string>
+    <string name="type_rifle_anti_tank">\?</string>
+    <string name="type_rifle_single_shot">\?</string>
+    <string name="type_rifle_lever_action">\?</string>
+    <string name="year_format">Год: %1$d</string>
+    <string name="make_format">\?: %1$s</string>
+    <string name="type_format">\?: %1$s</string>
+    <string name="calibre_format">\?: %1$s</string>
+    <string name="length_format">\?: %1$dмм</string>
+    <string name="mass_format">\?: %1$.2fкг</string>
+    <string name="rate_of_fire_format">\?: %1$s ?</string>
+    <string name="effective_range_format">\?: %1$dм</string>
+    <string name="unknown">\?</string>
+    <string name="error_loading_photo">\?</string>
+    <string name="no_results">\?</string>
+</resources>

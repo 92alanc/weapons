@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_message">\? Алан Камарго</string>
+    <string name="privacy_policy">\?</string>
+    <string name="query_all_weapons">\?</string>
+    <string name="query_by_name">\?</string>
+    <string name="query_by_year">\?</string>
+    <string name="query_by_country">\?</string>
+    <string name="query_by_type">\?</string>
+    <string name="query_by_calibre">\?</string>
+    <string name="query_by_make">\?</string>
+    <string name="find_weapons_by_name">\?</string>
+    <string name="search">\?</string>
+    <string name="about">Оба</string>
+</resources>
