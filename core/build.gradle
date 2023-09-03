@@ -60,4 +60,5 @@ dependencies {
 
     testImplementation "$junit"
     testImplementation "$mockk_android"
+    testImplementation "$truth"
 }
