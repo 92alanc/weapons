@@ -1,22 +1,21 @@
 package com.alancamargo.weapons.core.analytics
 
 import androidx.core.os.bundleOf
+import com.alancamargo.weapons.core.log.Logger
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.logEvent
 import javax.inject.Inject
 
 private const val EVENT_BUTTON_CLICKED = "button_clicked"
-
 private const val PARAM_BUTTON_NAME = "button_name"
+private const val LOG_PREFIX = "Analytics"
 
 internal class AnalyticsManagerImpl @Inject constructor(
-    private val firebaseAnalytics: FirebaseAnalytics
+    private val firebaseAnalytics: FirebaseAnalytics,
+    private val logger: Logger
 ) : AnalyticsManager {
 
     override fun trackScreenViewed(screenName: String) {
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
-            param(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
-        }
+        trackEvent(screenName = screenName, eventName = FirebaseAnalytics.Event.SCREEN_VIEW)
     }
 
     override fun trackButtonClicked(
@@ -24,17 +23,12 @@ internal class AnalyticsManagerImpl @Inject constructor(
         buttonName: String,
         properties: (BundleBuilder.() -> Unit)?
     ) {
-        val params = properties?.let {
-            BundleBuilder().apply(it)
-        }?.build()?.apply {
-            putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
-            putString(PARAM_BUTTON_NAME, buttonName)
-        } ?: bundleOf(
-            FirebaseAnalytics.Param.SCREEN_NAME to screenName,
-            PARAM_BUTTON_NAME to buttonName
-        )
-
-        firebaseAnalytics.logEvent(EVENT_BUTTON_CLICKED, params)
+        trackEvent(
+            screenName = screenName,
+            eventName = EVENT_BUTTON_CLICKED
+        ) {
+            PARAM_BUTTON_NAME withValue buttonName
+        }
     }
 
     override fun trackEvent(
@@ -42,6 +36,8 @@ internal class AnalyticsManagerImpl @Inject constructor(
         eventName: String,
         properties: (BundleBuilder.() -> Unit)?
     ) {
+        logEvent(screenName = screenName, eventName = eventName, properties = properties)
+
         val params = properties?.let {
             BundleBuilder().apply(it)
         }?.build()?.apply {
@@ -49,5 +45,17 @@ internal class AnalyticsManagerImpl @Inject constructor(
         } ?: bundleOf(FirebaseAnalytics.Param.SCREEN_NAME to screenName)
 
         firebaseAnalytics.logEvent(eventName, params)
+    }
+
+    private fun logEvent(
+        screenName: String,
+        eventName: String,
+        properties: (BundleBuilder.() -> Unit)? = null
+    ) {
+        val propertiesString = properties?.let {
+            BundleBuilder().apply(it)
+        }?.asString()
+        val message = "$LOG_PREFIX Event: $eventName, Screen: $screenName, Properties: $propertiesString"
+        logger.debug(message)
     }
 }

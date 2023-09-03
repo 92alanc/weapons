@@ -31,8 +31,9 @@ internal object CoreModule {
     @Provides
     @Singleton
     fun provideAnalyticsManager(
-        firebaseAnalytics: FirebaseAnalytics
-    ): AnalyticsManager = AnalyticsManagerImpl(firebaseAnalytics)
+        firebaseAnalytics: FirebaseAnalytics,
+        logger: Logger
+    ): AnalyticsManager = AnalyticsManagerImpl(firebaseAnalytics, logger)
 
     @Provides
     @Singleton

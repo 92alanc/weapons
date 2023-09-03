@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.core.analytics
 
+import com.alancamargo.weapons.core.log.Logger
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.mockk.mockk
 import io.mockk.verify
@@ -8,7 +9,18 @@ import org.junit.Test
 class AnalyticsManagerImplTest {
 
     private val mockFirebaseAnalytics = mockk<FirebaseAnalytics>(relaxed = true)
-    private val analyticsManager = AnalyticsManagerImpl(mockFirebaseAnalytics)
+    private val mockLogger = mockk<Logger>(relaxed = true)
+    private val analyticsManager = AnalyticsManagerImpl(mockFirebaseAnalytics, mockLogger)
+
+    @Test
+    fun `trackScreenViewed should log event`() {
+        // WHEN
+        val screenName = "screen"
+        analyticsManager.trackScreenViewed(screenName)
+
+        // THEN
+        verify { mockLogger.debug(message = any()) }
+    }
 
     @Test
     fun `trackScreenViewed should track screen view event on firebase`() {
@@ -21,6 +33,17 @@ class AnalyticsManagerImplTest {
     }
 
     @Test
+    fun `trackButtonClicked should log event`() {
+        // WHEN
+        val buttonName = "button"
+        val screenName = "screen"
+        analyticsManager.trackButtonClicked(buttonName, screenName)
+
+        // THEN
+        verify { mockLogger.debug(message = any()) }
+    }
+
+    @Test
     fun `trackButtonClicked should track button click event on firebase`() {
         // WHEN
         val buttonName = "button"
@@ -30,6 +53,17 @@ class AnalyticsManagerImplTest {
         // THEN
         val eventName = "button_clicked"
         verify { mockFirebaseAnalytics.logEvent(eventName, any()) }
+    }
+
+    @Test
+    fun `trackEvent should log event`() {
+        // WHEN
+        val eventName = "event"
+        val screenName = "screen"
+        analyticsManager.trackEvent(screenName, eventName)
+
+        // THEN
+        verify { mockLogger.debug(message = any()) }
     }
 
     @Test

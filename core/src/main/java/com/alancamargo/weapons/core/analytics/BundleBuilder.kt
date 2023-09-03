@@ -25,4 +25,12 @@ class BundleBuilder {
 
         return bundle
     }
+
+    fun asString(): String {
+        val entries = keysAndValues.entries.joinToString { (key, value) ->
+            "$key: $value"
+        }
+
+        return "{ $entries }"
+    }
 }
