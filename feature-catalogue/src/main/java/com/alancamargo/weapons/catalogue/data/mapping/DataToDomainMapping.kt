@@ -29,23 +29,23 @@ internal fun DbWeapon.toDomain(photos: List<String>) = Weapon(
     photos = photos
 )
 
-private fun DbYear.toDomain() = Year(
+internal fun DbYear.toDomain() = Year(
     id = id,
     year = year
 )
 
-private fun DbMake.toDomain() = Make(
+internal fun DbMake.toDomain() = Make(
     id = id,
     name = name
 )
 
-private fun DbCountry.toDomain() = Country(
+internal fun DbCountry.toDomain() = Country(
     id = id,
     name = name,
     flagId = flagId
 )
 
-private fun DbWeaponType.toDomain() = when (nameId) {
+internal fun DbWeaponType.toDomain() = when (nameId) {
     DbWeaponType.NAME_BOOBY_TRAP -> WeaponType.BoobyTrap(id)
     DbWeaponType.NAME_CARBINE -> WeaponType.Carbine(id)
     DbWeaponType.NAME_FLAMETHROWER -> WeaponType.Flamethrower(id)
@@ -62,7 +62,7 @@ private fun DbWeaponType.toDomain() = when (nameId) {
     else -> throw IllegalArgumentException("Name must be a proper WeaponType name")
 }
 
-private fun DbCalibre.toDomain() = Calibre(
+internal fun DbCalibre.toDomain() = Calibre(
     id = id,
     name = name
 )
