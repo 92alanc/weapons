@@ -4,7 +4,7 @@ internal interface HomeAnalytics {
 
     fun trackScreenViewed()
 
-    fun trackDisclaimerDismissed()
+    fun trackFirstAccessInformationDismissed()
 
     fun trackAllWeaponsClicked()
 

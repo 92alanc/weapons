@@ -16,7 +16,7 @@ private const val BUTTON_BY_CALIBRE = "group-by-calibre"
 private const val BUTTON_BY_MAKE = "group-by-make"
 private const val BUTTON_APP_INFO = "app-info"
 private const val BUTTON_PRIVACY_POLICY = "privacy-policy"
-private const val BUTTON_DISCLAIMER_DISMISSED = "disclaimer-dismissed"
+private const val BUTTON_FIRST_ACCESS_INFORMATION_DISMISSED = "first-access-information-dismissed"
 
 class HomeAnalyticsImplTest {
 
@@ -33,15 +33,15 @@ class HomeAnalyticsImplTest {
     }
 
     @Test
-    fun `trackDisclaimerDismissed should track event correctly`() {
+    fun `trackFirstAccessInformationDismissed should track event correctly`() {
         // WHEN
-        analytics.trackDisclaimerDismissed()
+        analytics.trackFirstAccessInformationDismissed()
 
         // THEN
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
-                buttonName = BUTTON_DISCLAIMER_DISMISSED
+                buttonName = BUTTON_FIRST_ACCESS_INFORMATION_DISMISSED
             )
         }
     }

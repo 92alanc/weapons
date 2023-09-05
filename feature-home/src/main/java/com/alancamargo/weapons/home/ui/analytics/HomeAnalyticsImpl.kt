@@ -14,7 +14,7 @@ private const val BUTTON_BY_CALIBRE = "group-by-calibre"
 private const val BUTTON_BY_MAKE = "group-by-make"
 private const val BUTTON_APP_INFO = "app-info"
 private const val BUTTON_PRIVACY_POLICY = "privacy-policy"
-private const val BUTTON_DISCLAIMER_DISMISSED = "disclaimer-dismissed"
+private const val BUTTON_FIRST_ACCESS_INFORMATION_DISMISSED = "first-access-information-dismissed"
 
 internal class HomeAnalyticsImpl @Inject constructor(
     private val analyticsManager: AnalyticsManager
@@ -24,10 +24,10 @@ internal class HomeAnalyticsImpl @Inject constructor(
         analyticsManager.trackScreenViewed(SCREEN_NAME)
     }
 
-    override fun trackDisclaimerDismissed() {
+    override fun trackFirstAccessInformationDismissed() {
         analyticsManager.trackButtonClicked(
             screenName = SCREEN_NAME,
-            buttonName = BUTTON_DISCLAIMER_DISMISSED
+            buttonName = BUTTON_FIRST_ACCESS_INFORMATION_DISMISSED
         )
     }
 

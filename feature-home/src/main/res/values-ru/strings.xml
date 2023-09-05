@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="about_message">\? Алан Камарго</string>
-    <string name="privacy_policy">\?</string>
-    <string name="query_all_weapons">\?</string>
-    <string name="query_by_name">\?</string>
-    <string name="query_by_year">\?</string>
-    <string name="query_by_country">\?</string>
-    <string name="query_by_type">\?</string>
-    <string name="query_by_calibre">\?</string>
-    <string name="query_by_make">\?</string>
-    <string name="find_weapons_by_name">\?</string>
-    <string name="search">\?</string>
-    <string name="about">\?</string>
+    <string name="about_message">Приложение разработано Аланом Камарго</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="query_all_weapons">"Всё вооружение "</string>
+    <string name="query_by_name">По имени</string>
+    <string name="query_by_year">По году</string>
+    <string name="query_by_country">По стране</string>
+    <string name="query_by_type">По типу</string>
+    <string name="query_by_calibre">По калибру</string>
+    <string name="query_by_make">По марке</string>
+    <string name="find_weapons_by_name">"Найти оружие по названию "</string>
+    <string name="search">Поиск</string>
+    <string name="about">О приложении</string>
+    <string name="information">Информация</string>
+    <string name="first_access_information_message">Это приложение не игра</string>
 </resources>

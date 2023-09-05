@@ -17,7 +17,7 @@ import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Test
 
-private const val KEY_SHOW_DISCLAIMER = "show-disclaimer"
+private const val KEY_SHOW_FIRST_ACCESS_INFORMATION = "show-first-access-information"
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class HomeViewModelTest {
@@ -47,17 +47,20 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `start should send ShowDisclaimer action`() = runTest {
+    fun `start should send ShowFirstAccessInformation action`() = runTest {
         // GIVEN
         every {
-            mockPreferencesManager.getBoolean(KEY_SHOW_DISCLAIMER, defaultValue = true)
+            mockPreferencesManager.getBoolean(
+                KEY_SHOW_FIRST_ACCESS_INFORMATION,
+                defaultValue = true
+            )
         } returns true
 
         // WHEN
         viewModel.start()
 
         // THEN
-        val expected = HomeViewAction.ShowDisclaimer
+        val expected = HomeViewAction.ShowFirstAccessInformation
         viewModel.action.test {
             val actual = awaitItem()
             assertThat(actual).isEqualTo(expected)
@@ -83,7 +86,7 @@ class HomeViewModelTest {
         viewModel.onDisclaimerDismissed()
 
         // THEN
-        verify { mockAnalytics.trackDisclaimerDismissed() }
+        verify { mockAnalytics.trackFirstAccessInformationDismissed() }
     }
 
     @Test
@@ -92,7 +95,7 @@ class HomeViewModelTest {
         viewModel.onDisclaimerDismissed()
 
         // THEN
-        verify { mockPreferencesManager.setBoolean(KEY_SHOW_DISCLAIMER, value = false) }
+        verify { mockPreferencesManager.setBoolean(KEY_SHOW_FIRST_ACCESS_INFORMATION, value = false) }
     }
 
     @Test

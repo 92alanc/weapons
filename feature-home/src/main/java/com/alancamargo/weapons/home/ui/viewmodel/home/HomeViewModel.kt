@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val KEY_SHOW_DISCLAIMER = "show-disclaimer"
+private const val KEY_SHOW_FIRST_ACCESS_INFORMATION = "show-first-access-information"
 private const val PRIVACY_POLICY_URL = "https://pastebin.com/raw/Krd7c6aJ"
 
 @HiltViewModel
@@ -37,15 +37,15 @@ internal class HomeViewModel @Inject constructor(
     fun start() {
         analytics.trackScreenViewed()
 
-        val shouldShowDisclaimer = preferencesManager.getBoolean(
-            key = KEY_SHOW_DISCLAIMER,
+        val shouldShowFirstAccessInformation = preferencesManager.getBoolean(
+            key = KEY_SHOW_FIRST_ACCESS_INFORMATION,
             defaultValue = true
         )
 
-        if (shouldShowDisclaimer) {
+        if (shouldShowFirstAccessInformation) {
             viewModelScope.launch(dispatcher) {
-                delay(50)
-                _action.emit(HomeViewAction.ShowDisclaimer)
+                delay(timeMillis = 50)
+                _action.emit(HomeViewAction.ShowFirstAccessInformation)
             }
         }
 
@@ -54,8 +54,8 @@ internal class HomeViewModel @Inject constructor(
     }
 
     fun onDisclaimerDismissed() {
-        analytics.trackDisclaimerDismissed()
-        preferencesManager.setBoolean(KEY_SHOW_DISCLAIMER, value = false)
+        analytics.trackFirstAccessInformationDismissed()
+        preferencesManager.setBoolean(KEY_SHOW_FIRST_ACCESS_INFORMATION, value = false)
     }
 
     fun onAllWeaponsClicked() {

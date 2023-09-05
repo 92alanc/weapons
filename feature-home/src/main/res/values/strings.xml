@@ -16,6 +16,6 @@
     <string name="find_weapons_by_name">Find weapons by name</string>
     <string name="search">Search</string>
     <string name="about">About</string>
-    <string name="disclaimer">Disclaimer</string>
-    <string name="disclaimer_message">This app is not a game</string>
+    <string name="information">Information</string>
+    <string name="first_access_information_message">This app is not a game</string>
 </resources>
