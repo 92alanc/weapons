@@ -31,7 +31,7 @@ internal class WeaponListWithHeaderViewHolder(
         val header = entry.first
         processHeader(header)
         val list = entry.second.sortedBy { it.name }
-        binding.recyclerView.adapter = adapter
+        binding.weaponListWithHeaderRecyclerView.adapter = adapter
         adapter.submitList(list)
     }
 

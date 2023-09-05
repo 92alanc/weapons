@@ -8,6 +8,7 @@ interface DialogueHelper {
     fun showDialogue(
         context: Context,
         title: String,
-        @StringRes messageRes: Int
+        @StringRes messageRes: Int,
+        onDismiss: (() -> Unit)? = null
     )
 }

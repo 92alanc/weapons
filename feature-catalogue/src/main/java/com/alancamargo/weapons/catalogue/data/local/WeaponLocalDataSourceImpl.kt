@@ -22,23 +22,43 @@ internal class WeaponLocalDataSourceImpl @Inject constructor(
     }
 
     override suspend fun groupWeaponsByYear(): Map<WeaponListHeader?, List<Weapon>> {
-        return weaponDao.getAllWeapons().toDomain().groupBy { it.year }
+        return weaponDao.getAllWeapons().groupBy {
+            it.year
+        }.map { (year, weapons) ->
+            year?.toDomain() to weapons.toDomain()
+        }.toMap()
     }
 
     override suspend fun groupWeaponsByCountry(): Map<WeaponListHeader?, List<Weapon>> {
-        return weaponDao.getAllWeapons().toDomain().groupBy { it.country }
+        return weaponDao.getAllWeapons().groupBy {
+            it.country
+        }.map { (country, weapons) ->
+            country?.toDomain() to weapons.toDomain()
+        }.toMap()
     }
 
     override suspend fun groupWeaponsByType(): Map<WeaponListHeader?, List<Weapon>> {
-        return weaponDao.getAllWeapons().toDomain().groupBy { it.type }
+        return weaponDao.getAllWeapons().groupBy {
+            it.type
+        }.map { (type, weapons) ->
+            type.toDomain() to weapons.toDomain()
+        }.toMap()
     }
 
     override suspend fun groupWeaponsByCalibre(): Map<WeaponListHeader?, List<Weapon>> {
-        return weaponDao.getAllWeapons().toDomain().groupBy { it.calibre }
+        return weaponDao.getAllWeapons().groupBy {
+            it.calibre
+        }.map { (calibre, weapons) ->
+            calibre?.toDomain() to weapons.toDomain()
+        }.toMap()
     }
 
     override suspend fun groupWeaponsByMake(): Map<WeaponListHeader?, List<Weapon>> {
-        return weaponDao.getAllWeapons().toDomain().groupBy { it.make }
+        return weaponDao.getAllWeapons().groupBy {
+            it.make
+        }.map { (make, weapons) ->
+            make?.toDomain() to weapons.toDomain()
+        }.toMap()
     }
 
     private suspend fun List<DbWeapon>.toDomain() = map {

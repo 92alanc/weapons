@@ -20,7 +20,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object CoreModule {
+object CoreModule {
 
     @Provides
     @Singleton

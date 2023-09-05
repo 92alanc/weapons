@@ -11,7 +11,9 @@ internal class WeaponListWithHeaderItemDiffCallback
         oldItem: Pair<UiWeaponListHeader?, List<UiWeapon>>,
         newItem: Pair<UiWeaponListHeader?, List<UiWeapon>>
     ): Boolean {
-        return oldItem.first == newItem.first && oldItem.second.size == newItem.second.size
+        val (oldHeader, oldWeapons) = oldItem
+        val (newHeader, newWeapons) = newItem
+        return oldHeader == newHeader && oldWeapons.size == newWeapons.size
     }
 
     override fun areContentsTheSame(

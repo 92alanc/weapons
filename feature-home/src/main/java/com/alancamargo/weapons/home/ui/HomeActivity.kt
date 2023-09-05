@@ -55,7 +55,7 @@ internal class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         setUpUi()
         observeViewModelFlows()
-        viewModel.getQueryTypes()
+        viewModel.start()
     }
 
     private fun setUpUi() = with(binding) {
@@ -95,6 +95,7 @@ internal class HomeActivity : AppCompatActivity() {
         is HomeViewAction.ShowWeaponSearchDialogue -> showWeaponSearchDialogue()
         is HomeViewAction.ShowAppInfo -> showAppInfo()
         is HomeViewAction.ShowPrivacyPolicy -> showPrivacyPolicy(action.url)
+        is HomeViewAction.ShowDisclaimer -> showDisclaimer()
     }
 
     private fun navigateToWeaponsList(query: UiWeaponQuery) {
@@ -133,6 +134,15 @@ internal class HomeActivity : AppCompatActivity() {
             context = this,
             titleRes = R.string.privacy_policy,
             url = url
+        )
+    }
+
+    private fun showDisclaimer() {
+        dialogueHelper.showDialogue(
+            context = this,
+            title = getString(R.string.disclaimer),
+            messageRes = R.string.disclaimer_message,
+            onDismiss = viewModel::onDisclaimerDismissed
         )
     }
 }

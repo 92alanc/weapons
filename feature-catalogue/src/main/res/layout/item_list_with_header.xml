@@ -14,7 +14,7 @@
         android:importantForAccessibility="no"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/weaponListWithHeaderRecyclerView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/txtHeader"
         tools:src="@sample/weapons.json/data/flag"
@@ -33,7 +33,7 @@
         tools:text="@sample/weapons.json/data/country_name" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/weaponListWithHeaderRecyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
