@@ -7,8 +7,6 @@ import com.alancamargo.weapons.core.database.DatabaseProvider
 import com.alancamargo.weapons.core.database.DatabaseProviderImpl
 import com.alancamargo.weapons.core.log.Logger
 import com.alancamargo.weapons.core.log.LoggerImpl
-import com.alancamargo.weapons.core.preferences.PreferencesManager
-import com.alancamargo.weapons.core.preferences.PreferencesManagerImpl
 import com.alancamargo.weapons.core.resources.ResourcesHelper
 import com.alancamargo.weapons.core.resources.ResourcesHelperImpl
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -22,7 +20,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object CoreModule {
+object CoreModule {
 
     @Provides
     @Singleton
@@ -49,18 +47,4 @@ internal object CoreModule {
         @ApplicationContext context: Context,
         logger: Logger
     ): ResourcesHelper = ResourcesHelperImpl(context, logger)
-
-    @Provides
-    @Singleton
-    fun providePreferencesManager(
-        @ApplicationContext context: Context
-    ): PreferencesManager {
-        val fileName = "weapons-preferences"
-        val sharedPreferences = context.getSharedPreferences(
-            fileName,
-            Context.MODE_PRIVATE
-        )
-
-        return PreferencesManagerImpl(sharedPreferences)
-    }
 }

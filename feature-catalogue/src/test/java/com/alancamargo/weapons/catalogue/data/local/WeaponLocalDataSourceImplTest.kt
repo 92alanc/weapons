@@ -93,9 +93,9 @@ class WeaponLocalDataSourceImplTest {
         val actual = localDataSource.groupWeaponsByType()
 
         // THEN
-        val expectedEntryCount = 3
+        val expectedEntryCount = 1
         assertThat(actual.entries).hasSize(expectedEntryCount)
-        val expectedWeaponCount = 1
+        val expectedWeaponCount = 3
         assertThat(actual.values.all { it.size == expectedWeaponCount }).isTrue()
     }
 

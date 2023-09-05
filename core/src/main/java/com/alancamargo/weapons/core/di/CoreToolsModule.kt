@@ -10,7 +10,7 @@ import dagger.hilt.android.scopes.ActivityScoped
 
 @Module
 @InstallIn(ActivityComponent::class)
-internal abstract class CoreToolsModule {
+abstract class CoreToolsModule {
 
     @Binds
     @ActivityScoped
