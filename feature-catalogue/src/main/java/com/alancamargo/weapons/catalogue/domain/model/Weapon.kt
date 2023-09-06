@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.catalogue.domain.model
 
-data class Weapon(
+internal data class Weapon(
     val id: Long,
     val name: String,
     val year: Year?,

@@ -6,7 +6,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.alancamargo.weapons.catalogue.R
 import com.alancamargo.weapons.catalogue.databinding.ItemListWithHeaderBinding
 import com.alancamargo.weapons.catalogue.databinding.ItemWeaponSquareBinding
 import com.alancamargo.weapons.catalogue.ui.adapter.WeaponDiffCallback
@@ -18,6 +17,7 @@ import com.alancamargo.weapons.common.ui.UiWeaponListHeader
 import com.alancamargo.weapons.common.ui.UiWeaponType
 import com.alancamargo.weapons.common.ui.UiYear
 import com.alancamargo.weapons.core.resources.ResourcesHelper
+import com.alancamargo.weapons.common.R as R2
 
 internal class WeaponListWithHeaderViewHolder(
     private val binding: ItemListWithHeaderBinding,
@@ -45,14 +45,14 @@ internal class WeaponListWithHeaderViewHolder(
                     setImageDrawable(flag)
                 }
 
-                header.name
+                resourcesHelper.getString(header.name.nameRes)
             }
 
             is UiCalibre -> header.name
             is UiMake -> header.name
             is UiWeaponType -> header.name
             is UiYear -> header.year.toString()
-            null -> itemView.context.getString(R.string.unknown)
+            null -> itemView.context.getString(R2.string.unknown)
             else -> throw IllegalStateException("Must be an implementation of UiWeaponListFilter")
         }
     }

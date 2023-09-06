@@ -30,7 +30,6 @@
     <string name="mass_format">Масса: %1$.2fкг</string>
     <string name="rate_of_fire_format">Скорострельность: %1$s выстрелов в минуту</string>
     <string name="effective_range_format">Прицельная дальность: %1$dм</string>
-    <string name="unknown">Неизвестный</string>
     <string name="error_loading_photo">Ошибка загрузки фото</string>
     <string name="no_results">Результатов не найдено. Попробуйте поискать другое имя</string>
 

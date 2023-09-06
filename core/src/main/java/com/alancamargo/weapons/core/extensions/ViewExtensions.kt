@@ -12,6 +12,12 @@ fun MaterialTextView.setTextOrHide(text: String?) {
     } ?: hide()
 }
 
+fun MaterialTextView.setTextOrHide(textRes: Int?) {
+    textRes?.let {
+        setText(it)
+    } ?: hide()
+}
+
 fun ImageView.setDrawableOrHide(drawable: Drawable?) {
     drawable?.let {
         setImageDrawable(it)

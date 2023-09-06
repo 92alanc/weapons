@@ -57,7 +57,7 @@ internal class WeaponDetailsBottomSheet : BottomSheetDialogFragment() {
             txtType.text = weapon.type
             txtYear.setTextOrHide(weapon.year)
             txtCalibre.setTextOrHide(weapon.calibre)
-            txtCountry.setTextOrHide(weapon.country?.name)
+            txtCountry.setTextOrHide(weapon.country?.nameRes)
             imgFlag.setDrawableOrHide(weapon.country?.flagDrawable)
             txtCapacity.setTextOrHide(weapon.capacity)
             txtLength.setTextOrHide(weapon.length)

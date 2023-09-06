@@ -7,6 +7,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "COUNTRY")
 internal data class DbCountry(
     @PrimaryKey val id: Long,
-    val name: String,
+    val token: String,
     @ColumnInfo(name = "flag_id") val flagId: String
 )

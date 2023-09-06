@@ -32,7 +32,7 @@ internal class WeaponDetailsViewModel @Inject constructor(
     private fun buildLabelledWeapon(weapon: UiWeapon): UiLabelledWeapon {
         val country = weapon.country?.let {
             resourcesHelper.getDrawable(it.flagId)?.let { flagDrawable ->
-                UiLabelledCountry(it.name, flagDrawable)
+                UiLabelledCountry(it.name.nameRes, flagDrawable)
             }
         }
 
