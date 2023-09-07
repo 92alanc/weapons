@@ -24,14 +24,9 @@ internal class FileHelperImpl @Inject constructor(
     private suspend fun getRelativePath(weaponName: String): String {
         val country = weaponDao.getCountryByWeaponName(weaponName)
         val countryToken = country?.token ?: "unknown"
-        val formattedCountryToken = if (countryToken.contains("-")) {
-            countryToken
-        } else {
-            countryToken.replaceFirstChar { it.uppercase() }
-        }
         val formattedWeaponName = weaponName.replace("/", "-")
             .replace("\"", "")
 
-        return "$formattedCountryToken/$formattedWeaponName"
+        return "$countryToken/$formattedWeaponName"
     }
 }
