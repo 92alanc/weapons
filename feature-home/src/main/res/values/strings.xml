@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name_format">%1$s %2$s</string>
+    <string name="app_name_format" translatable="false">%1$s %2$s</string>
     <string name="about_message">App developed by Alan Camargo</string>
     <string name="privacy_policy">Privacy policy</string>
-    <string name="privacy_policy_url">https://pastebin.com/raw/Krd7c6aJ</string>
+    <string name="privacy_policy_url" translatable="false">https://pastebin.com/raw/Krd7c6aJ</string>
 
     <string name="query_all_weapons">All weapons</string>
     <string name="query_by_name">By name</string>
@@ -16,6 +16,6 @@
     <string name="find_weapons_by_name">Find weapons by name</string>
     <string name="search">Search</string>
     <string name="about">About</string>
-    <string name="disclaimer">Disclaimer</string>
-    <string name="disclaimer_message">This app is not a game</string>
+    <string name="information">Information</string>
+    <string name="first_access_information_message">This app is not a game</string>
 </resources>

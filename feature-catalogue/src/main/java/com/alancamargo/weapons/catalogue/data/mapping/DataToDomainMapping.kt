@@ -41,7 +41,7 @@ internal fun DbMake.toDomain() = Make(
 
 internal fun DbCountry.toDomain() = Country(
     id = id,
-    name = name,
+    name = token.toCountryName(),
     flagId = flagId
 )
 

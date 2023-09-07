@@ -18,7 +18,7 @@ import com.alancamargo.weapons.catalogue.data.model.RawDbWeapon
         DbMake::class,
         DbYear::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 internal abstract class WeaponDatabase : RoomDatabase() {

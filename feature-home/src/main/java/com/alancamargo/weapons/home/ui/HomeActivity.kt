@@ -95,7 +95,7 @@ internal class HomeActivity : AppCompatActivity() {
         is HomeViewAction.ShowWeaponSearchDialogue -> showWeaponSearchDialogue()
         is HomeViewAction.ShowAppInfo -> showAppInfo()
         is HomeViewAction.ShowPrivacyPolicy -> showPrivacyPolicy(action.url)
-        is HomeViewAction.ShowDisclaimer -> showDisclaimer()
+        is HomeViewAction.ShowFirstAccessInformation -> showFirstAccessInformation()
     }
 
     private fun navigateToWeaponsList(query: UiWeaponQuery) {
@@ -137,11 +137,11 @@ internal class HomeActivity : AppCompatActivity() {
         )
     }
 
-    private fun showDisclaimer() {
+    private fun showFirstAccessInformation() {
         dialogueHelper.showDialogue(
             context = this,
-            title = getString(R.string.disclaimer),
-            messageRes = R.string.disclaimer_message,
+            title = getString(R.string.information),
+            messageRes = R.string.first_access_information_message,
             onDismiss = viewModel::onDisclaimerDismissed
         )
     }

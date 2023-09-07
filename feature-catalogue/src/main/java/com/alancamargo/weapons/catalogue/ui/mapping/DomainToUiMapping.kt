@@ -53,7 +53,7 @@ private fun Make.toUi() = UiMake(
 
 private fun Country.toUi() = UiCountry(
     id = id,
-    name = name,
+    name = name.toUi(),
     flagId = flagId
 )
 

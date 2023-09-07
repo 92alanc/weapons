@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error">К сожалению, произошла ошибка, но не переживайте, разработчик был уведомлен и скоро исправит её</string>
+    <string name="ok">ОК</string>
+</resources>

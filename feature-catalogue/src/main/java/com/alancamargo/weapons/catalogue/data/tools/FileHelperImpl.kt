@@ -23,10 +23,10 @@ internal class FileHelperImpl @Inject constructor(
 
     private suspend fun getRelativePath(weaponName: String): String {
         val country = weaponDao.getCountryByWeaponName(weaponName)
-        val countryName = country?.name ?: "Unknown"
+        val countryToken = country?.token ?: "unknown"
         val formattedWeaponName = weaponName.replace("/", "-")
             .replace("\"", "")
 
-        return "$countryName/$formattedWeaponName"
+        return "$countryToken/$formattedWeaponName"
     }
 }

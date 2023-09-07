@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="british_empire">British Empire</string>
+    <string name="german_empire">German Empire</string>
+    <string name="belgium">Belgium</string>
+    <string name="austro_hungarian_empire">Austro-Hungarian Empire</string>
+    <string name="denmark">Denmark</string>
+    <string name="france">France</string>
+    <string name="italy">Italy</string>
+    <string name="japanese_empire">Japanese Empire</string>
+    <string name="romania">Romania</string>
+    <string name="russian_empire">Russian Empire</string>
+    <string name="spain">Spain</string>
+    <string name="united_states">United States</string>
+    <string name="unknown">Unknown</string>
+</resources>
