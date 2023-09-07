@@ -10,7 +10,9 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        val config = RequestConfiguration.Builder().build()
+        val config = RequestConfiguration.Builder()
+            .setTestDeviceIds(listOf("2EB7091342EC4A27FC1D20FC70AF504D"))
+            .build()
         MobileAds.setRequestConfiguration(config)
         MobileAds.initialize(this)
     }
