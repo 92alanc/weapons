@@ -29,8 +29,8 @@ ext {
     min_sdk_version = 23
     target_sdk_version = 33
 
-    ww1_version_code = 6
-    ww1_version_name = '2023.3.2'
+    ww1_version_code = 7
+    ww1_version_name = '2023.3.3'
 
     ww2_version_code = 1
     ww2_version_name = '2021.2.0'
