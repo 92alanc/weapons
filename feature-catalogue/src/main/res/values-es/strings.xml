@@ -35,7 +35,6 @@
 
     <plurals name="capacity_plural">
         <item quantity="one">Capacidad: %d cartucho</item>
-        <item quantity="many">Capacidad: %d cartuchos</item>
         <item quantity="other">Capacidad: %d cartuchos</item>
     </plurals>
 </resources>
