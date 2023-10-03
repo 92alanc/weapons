@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="type_melee">Cuerpo a cuerpo</string>
+    <string name="type_pistol">Pistola</string>
+    <string name="type_rifle_bolt_action">Rifle de acción de serrojo</string>
+    <string name="type_rifle_semi_automatic">Rifle semiautomático</string>
+    <string name="type_rifle_automatic">Rifle automático</string>
+    <string name="type_shotgun">Escopeta</string>
+    <string name="type_carbine">Carabina</string>
+    <string name="type_machine_gun_light">Ametralladora ligera</string>
+    <string name="type_machine_gun_medium">Ametralladora mediana</string>
+    <string name="type_machine_gun_heavy">Ametralladora pesada</string>
+    <string name="type_sub_machine_gun">Subametralladora</string>
+    <string name="type_grenade_anti_personnel">Granada antipersonal</string>
+    <string name="type_grenade_anti_tank">Granada antitanque</string>
+    <string name="type_mine_anti_personnel">Mina antipersonal</string>
+    <string name="type_mine_anti_tank">Mina antitanque</string>
+    <string name="type_grenade_launcher">Lanzagranadas</string>
+    <string name="type_rocket_launcher">Lanzacohetes</string>
+    <string name="type_booby_trap">Trampa explosiva</string>
+    <string name="type_flamethrower">Echador de llama</string>
+    <string name="type_rifle_anti_tank">Rifle antitanque</string>
+    <string name="type_rifle_single_shot">Rifle de un solo tiro</string>
+    <string name="type_rifle_lever_action">Rifle de palanca</string>
+    <string name="year_format">Año: %1$d</string>
+    <string name="make_format">Fabricante: %1$s</string>
+    <string name="type_format">Tipo: %1$s</string>
+    <string name="calibre_format">Calibre: %1$s</string>
+    <string name="length_format">Longitud: %1$dmm</string>
+    <string name="mass_format">Masa: %1$.2fkg</string>
+    <string name="rate_of_fire_format">Velocidad de disparo: %1$d disparos por minuto</string>
+    <string name="effective_range_format">Alcance efectivo: %1$dm</string>
+    <string name="error_loading_photo">Error al cargar la foto</string>
+    <string name="no_results">No se han encontrado resultados. Intenta buscar un nombre diferente</string>
+
+    <plurals name="capacity_plural">
+        <item quantity="one">Capacidad: %d cartucho</item>
+        <item quantity="many">Capacidad: %d cartuchos</item>
+        <item quantity="other">Capacidad: %d cartuchos</item>
+    </plurals>
+</resources>

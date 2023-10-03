@@ -1,4 +1,4 @@
 <resources>
     <string name="error">Unfortunately an error occurred but don\'t worry, the developer has been notified and will fix it soon</string>
-    <string name="ok">OK</string>
+    <string name="ok" translatable="false">OK</string>
 </resources>
