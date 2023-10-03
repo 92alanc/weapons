@@ -13,3 +13,4 @@ app/.DS_Store
 *.aab
 *.apk
 local.properties
+keystore.properties
