@@ -107,7 +107,6 @@ internal class HomeActivity : AppCompatActivity() {
         dialogue.show(supportFragmentManager, WeaponSearchDialogue.TAG)
     }
 
-    @Suppress("DEPRECATION")
     private fun showAppInfo() {
         val appName = getString(R2.string.app_name)
         val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

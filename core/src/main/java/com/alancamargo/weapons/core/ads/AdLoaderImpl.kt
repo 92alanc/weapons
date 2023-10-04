@@ -20,7 +20,7 @@ class AdLoaderImpl @Inject constructor(
             adListener = object : AdListener() {
                 override fun onAdFailedToLoad(error: LoadAdError) {
                     super.onAdFailedToLoad(error)
-                    logger.debug("Error loading ads. Reason: ${error.message}")
+                    logger.debug("Error loading ads. Reason: ${error.message} code: ${error.code}")
                 }
             }
             loadAd(adRequest)

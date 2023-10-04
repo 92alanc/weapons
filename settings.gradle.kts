@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -22,12 +24,14 @@ dependencyResolutionManagement {
 
 rootProject.name = "Weapons"
 
-include ':app'
-include ':core'
-include ':core-design'
-include ':navigation'
-include ':feature-home'
-include ':common'
-include ':feature-catalogue'
-include ':feature-web-view'
-include ':core-test'
+include(
+    ":app",
+    ":core",
+    ":core-design",
+    ":navigation",
+    ":feature-home",
+    ":common",
+    ":feature-catalogue",
+    ":feature-web-view",
+    ":core-test"
+)
