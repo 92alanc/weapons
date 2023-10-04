@@ -66,8 +66,8 @@ android {
         create("ww1") {
             dimension = "version"
             applicationIdSuffix = ".ww1"
-            versionCode = 7
-            versionName = "2023.3.3"
+            versionCode = 8
+            versionName = "2023.4.0"
         }
 
         create("ww2") {
