@@ -7,10 +7,10 @@ plugins {
 
 android {
     namespace = "com.alancamargo.weapons.core.design"
-    compileSdk = 34
+    compileSdk = Config.Build.TARGET_SDK
 
     defaultConfig {
-        minSdk = 23
+        minSdk = Config.Build.MIN_SDK
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -18,7 +18,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = Config.Build.ENABLE_MINIFY
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -26,37 +26,37 @@ android {
         }
     }
 
-    flavorDimensions += "version"
+    flavorDimensions += Config.Build.FLAVOUR_DIMENSION
 
     productFlavors {
-        create("ww1") {
-            dimension = "version"
+        create(Config.WW1.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
         }
 
-        create("ww2") {
-            dimension = "version"
+        create(Config.WW2.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
         }
 
-        create("korea") {
-            dimension = "version"
+        create(Config.Korea.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
         }
 
-        create("vietnam") {
-            dimension = "version"
+        create(Config.Vietnam.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = Config.Build.javaVersion
+        targetCompatibility = Config.Build.javaVersion
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.majorVersion
+        jvmTarget = Config.Build.javaVersionString
     }
 
     kotlin {
-        jvmToolchain(JavaVersion.VERSION_17.majorVersion.toInt())
+        jvmToolchain(Config.Build.javaVersionInt)
     }
 }
 

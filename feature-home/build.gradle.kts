@@ -7,19 +7,19 @@ plugins {
 
 android {
     namespace = "com.alancamargo.weapons.home"
-    compileSdk = 34
+    compileSdk = Config.Build.TARGET_SDK
 
     defaultConfig {
-        minSdk = 23
+        minSdk = Config.Build.MIN_SDK
 
-        testInstrumentationRunner = "com.alancamargo.weapons.core.test.runner.InstrumentedTestRunner"
+        testInstrumentationRunner = Config.Testing.CUSTOM_TEST_RUNNER
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
         consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = Config.Build.ENABLE_MINIFY
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -27,59 +27,59 @@ android {
         }
     }
 
-    flavorDimensions += "version"
+    flavorDimensions += Config.Build.FLAVOUR_DIMENSION
 
     productFlavors {
-        create("ww1") {
-            dimension = "version"
+        create(Config.WW1.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
         }
 
-        create("ww2") {
-            dimension = "version"
+        create(Config.WW2.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
         }
 
-        create("korea") {
-            dimension = "version"
+        create(Config.Korea.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
         }
 
-        create("vietnam") {
-            dimension = "version"
+        create(Config.Vietnam.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
         }
     }
 
     packaging {
-        resources.excludes.add("META-INF/*")
+        resources.excludes.add(Config.Build.META_INF_DIR)
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = Config.Build.javaVersion
+        targetCompatibility = Config.Build.javaVersion
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.majorVersion
+        jvmTarget = Config.Build.javaVersionString
     }
 
     kotlin {
-        jvmToolchain(JavaVersion.VERSION_17.majorVersion.toInt())
+        jvmToolchain(Config.Build.javaVersionInt)
     }
 
     buildFeatures {
-        viewBinding = true
+        viewBinding = Config.Build.ENABLE_VIEW_BINDING
     }
 
     @Suppress("UnstableApiUsage")
     testOptions {
-        animationsDisabled = true
-        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        animationsDisabled = Config.Testing.DISABLE_ANIMATIONS
+        execution = Config.Testing.ANDROID_TEST_ORCHESTRATOR
     }
 }
 
 dependencies {
-    implementation(project(":common"))
-    implementation(project(":core"))
-    implementation(project(":core-design"))
-    implementation(project(":navigation"))
+    implementation(project(Config.Modules.COMMON))
+    implementation(project(Config.Modules.CORE))
+    implementation(project(Config.Modules.CORE_DESIGN))
+    implementation(project(Config.Modules.NAVIGATION))
 
     implementation(libs.android.activity)
     implementation(libs.android.fragment)
@@ -95,7 +95,7 @@ dependencies {
     testImplementation(libs.truth)
     testImplementation(libs.turbine)
 
-    androidTestImplementation(project(":core-test"))
+    androidTestImplementation(project(Config.Modules.CORE_TEST))
 
     androidTestImplementation(libs.android.espresso.core)
     androidTestImplementation(libs.mockk.android)
