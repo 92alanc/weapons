@@ -17,12 +17,12 @@ internal class WeaponSearchAnalyticsImpl @Inject constructor(
     }
 
     override fun trackWeaponSearched(searchTerm: String) {
+        val properties = mapOf(PARAM_SEARCH_TERM to searchTerm)
         analyticsManager.trackButtonClicked(
             screenName = SCREEN_NAME,
-            buttonName = BUTTON_SEARCH
-        ) {
-            PARAM_SEARCH_TERM withValue searchTerm
-        }
+            buttonName = BUTTON_SEARCH,
+            properties = properties
+        )
     }
 
     override fun trackDialogueCancelled() {
