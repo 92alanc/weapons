@@ -7,12 +7,12 @@ interface AnalyticsManager {
     fun trackButtonClicked(
         screenName: String,
         buttonName: String,
-        properties: (BundleBuilder.() -> Unit)? = null
+        properties: Map<String, Any>? = null
     )
 
     fun trackEvent(
         screenName: String,
         eventName: String,
-        properties: (BundleBuilder.() -> Unit)? = null
+        properties: Map<String, Any>? = null
     )
 }

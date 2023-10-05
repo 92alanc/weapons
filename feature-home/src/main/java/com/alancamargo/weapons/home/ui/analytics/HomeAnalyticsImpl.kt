@@ -6,7 +6,7 @@ import javax.inject.Inject
 private const val SCREEN_NAME = "home"
 
 private const val BUTTON_ALL_WEAPONS = "all-weapons"
-private const val BUTTON_BY_NAME = "group-by-name"
+private const val BUTTON_BY_NAME = "search-by-name"
 private const val BUTTON_BY_COUNTRY = "group-by-country"
 private const val BUTTON_BY_YEAR = "group-by-year"
 private const val BUTTON_BY_TYPE = "group-by-type"

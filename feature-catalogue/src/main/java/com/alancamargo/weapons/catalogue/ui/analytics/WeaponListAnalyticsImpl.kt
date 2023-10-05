@@ -20,12 +20,12 @@ internal class WeaponListAnalyticsImpl @Inject constructor(
     }
 
     override fun trackWeaponClicked(weaponName: String) {
+        val properties = mapOf(PARAM_WEAPON_NAME to weaponName)
         analyticsManager.trackButtonClicked(
             screenName = SCREEN_NAME,
-            buttonName = BUTTON_WEAPON
-        ) {
-            PARAM_WEAPON_NAME withValue weaponName
-        }
+            buttonName = BUTTON_WEAPON,
+            properties = properties
+        )
     }
 
     override fun trackBackClicked() {
