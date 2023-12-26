@@ -64,7 +64,7 @@ dependencies {
     implementation(libs.android.material)
     implementation(libs.hilt.android)
 
-    api(libs.core.splashscreen)
+    api(libs.android.splashscreen)
 
     kapt(libs.hilt.compiler)
 }
