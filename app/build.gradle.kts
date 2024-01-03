@@ -106,7 +106,6 @@ dependencies {
     implementation(project(Config.Modules.FEATURE_WEB_VIEW))
 
     implementation(libs.android.core)
-    implementation(libs.google.ads)
     implementation(libs.hilt.android)
 
     kapt(libs.hilt.compiler)

@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.android.activity)
     implementation(libs.android.appcompat)
     implementation(libs.android.material)
+    implementation(libs.android.ump)
     implementation(libs.coil)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
