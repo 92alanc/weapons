@@ -2,6 +2,7 @@ package com.alancamargo.weapons.home.di
 
 import com.alancamargo.weapons.core.ads.AdLoader
 import com.alancamargo.weapons.core.analytics.AnalyticsManager
+import com.alancamargo.weapons.core.consent.UserConsentManager
 import com.alancamargo.weapons.core.design.di.CoreDesignModule
 import com.alancamargo.weapons.core.design.dialogue.DialogueHelper
 import com.alancamargo.weapons.core.di.CoreModule
@@ -59,4 +60,8 @@ internal object HomeTestModule {
     @Provides
     @Singleton
     fun provideMockAnalyticsManager(): AnalyticsManager = mockk(relaxed = true)
+
+    @Provides
+    @Singleton
+    fun provideMockUserConsentManager(): UserConsentManager = mockk(relaxed = true)
 }

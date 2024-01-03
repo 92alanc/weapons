@@ -7,7 +7,7 @@ import io.mockk.every
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 
-private const val KEY_SHOW_DISCLAIMER = "show-disclaimer"
+private const val KEY_SHOW_FIRST_ACCESS_INFORMATION = "show-first-access-information"
 
 internal fun HomeActivityTest.given(
     block: HomeTestRobot.() -> Unit
@@ -40,7 +40,7 @@ internal class HomeTestRobot(private val testSuite: HomeActivityTest) {
 
     private fun setIsFirstAccess(isFirstAccess: Boolean) {
         every {
-            testSuite.mockPreferencesManager.getBoolean(KEY_SHOW_DISCLAIMER, defaultValue = true)
+            testSuite.mockPreferencesManager.getBoolean(KEY_SHOW_FIRST_ACCESS_INFORMATION, defaultValue = true)
         } returns isFirstAccess
     }
 }

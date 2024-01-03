@@ -1,6 +1,6 @@
 package com.alancamargo.weapons.home.ui
 
-import com.alancamargo.weapons.core.ads.AdLoader
+import com.alancamargo.weapons.core.consent.UserConsentManager
 import com.alancamargo.weapons.core.design.dialogue.DialogueHelper
 import com.alancamargo.weapons.core.preferences.PreferencesManager
 import com.alancamargo.weapons.home.ui.robots.given
@@ -20,7 +20,7 @@ internal class HomeActivityTest {
     val hiltAndroidRule = HiltAndroidRule(this)
 
     @Inject
-    lateinit var mockAdLoader: AdLoader
+    lateinit var mockUserConsentManager: UserConsentManager
 
     @Inject
     lateinit var mockWeaponListActivityNavigation: WeaponListActivityNavigation
@@ -40,29 +40,29 @@ internal class HomeActivityTest {
     }
 
     @Test
-    fun shouldLoadBannerAds() {
+    fun shouldGetUserConsent() {
         given {
             launchAfterFirstAccess()
         } then {
-            loadBannerAds()
+            getUserConsent()
         }
     }
 
     @Test
-    fun onFirstAccess_shouldShowDisclaimerDialogue() {
+    fun onFirstAccess_shouldShowFirstAccessInformation() {
         given {
             launchOnFirstAccess()
         } then {
-            showDisclaimerDialogue()
+            showFirstAccessInformation()
         }
     }
 
     @Test
-    fun afterFirstAccess_shouldNotShowDisclaimerDialogue() {
+    fun afterFirstAccess_shouldNotShowFirstAccessInformation() {
         given {
             launchAfterFirstAccess()
         } then {
-            doNotShowDisclaimerDialogue()
+            doNotShowFirstAccessInformation()
         }
     }
 
