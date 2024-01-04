@@ -65,16 +65,11 @@ internal class HomeActivity : AppCompatActivity() {
         viewModel.start()
     }
 
-    private fun setUpUi() = with(binding) {
-        setSupportActionBar(toolbar)
-        recyclerView.adapter = adapter
-        btAllWeapons.setOnClickListener {
-            viewModel.onAllWeaponsClicked()
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        menu.findItem(R.id.itemPrivacySettings)?.run {
+            isVisible = userConsentManager.isPrivacyOptionsRequired()
+        }
         return true
     }
 
@@ -82,9 +77,18 @@ internal class HomeActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.itemAbout -> viewModel.onAppInfoClicked()
             R.id.itemPrivacyPolicy -> viewModel.onPrivacyPolicyClicked()
+            R.id.itemPrivacySettings -> userConsentManager.showPrivacyOptions(activity = this)
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setUpUi() = with(binding) {
+        setSupportActionBar(toolbar)
+        recyclerView.adapter = adapter
+        btAllWeapons.setOnClickListener {
+            viewModel.onAllWeaponsClicked()
+        }
     }
 
     private fun observeViewModelFlows() {

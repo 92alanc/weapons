@@ -2,6 +2,7 @@
 <resources>
     <string name="about_message">App desarrollada por Alan Camargo</string>
     <string name="privacy_policy">Política de privacidad</string>
+    <string name="privacy_settings">Ajustes de privacidad</string>
     <string name="query_all_weapons">Todas las armas</string>
     <string name="query_by_name">Por nombre</string>
     <string name="query_by_year">Por año</string>
