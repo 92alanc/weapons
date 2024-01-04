@@ -1,8 +1,3 @@
-@file:Suppress(
-    "USELESS_CAST",
-    "UNRESOLVED_REFERENCE"
-)
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.firebase.crashlytics)
@@ -12,31 +7,24 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
 }
 
-import java.util.Properties
-import java.io.FileInputStream
-
-val keystorePropertiesFile: File = rootProject.file("keystore.properties")
-val keystoreProperties = Properties()
-keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-
 android {
     namespace = "com.alancamargo.weapons"
-    compileSdk = 34
+    compileSdk = Config.Build.TARGET_SDK
 
     defaultConfig {
         applicationId = "com.alancamargo.weapons"
-        minSdk = 23
-        targetSdk = 34
+        minSdk = Config.Build.MIN_SDK
+        targetSdk = Config.Build.TARGET_SDK
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = file(keystoreProperties["storeFile"] as String)
-            storePassword = keystoreProperties["storePassword"] as String
+            keyAlias = properties["weapons_key_alias"] as String
+            keyPassword = properties["weapons_key_password"] as String
+            storeFile = file(path = properties["weapons_store_file"] as String)
+            storePassword = properties["weapons_store_password"] as String
         }
     }
 
@@ -46,7 +34,8 @@ android {
         }
 
         release {
-            isMinifyEnabled = true
+            isDebuggable = false
+            isMinifyEnabled = Config.Build.ENABLE_MINIFY
             isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -57,67 +46,66 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
+        viewBinding = Config.Build.ENABLE_VIEW_BINDING
     }
 
-    flavorDimensions += "version"
+    flavorDimensions += Config.Build.FLAVOUR_DIMENSION
 
     productFlavors {
-        create("ww1") {
-            dimension = "version"
-            applicationIdSuffix = ".ww1"
-            versionCode = 9
-            versionName = "2023.4.1"
+        create(Config.WW1.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
+            applicationIdSuffix = Config.WW1.SUFFIX
+            versionCode = Config.WW1.VERSION_CODE
+            versionName = Config.WW2.VERSION_NAME
         }
 
-        create("ww2") {
-            dimension = "version"
-            applicationIdSuffix = ".ww2"
-            versionCode = 1
-            versionName = "2023.4.0"
+        create(Config.WW2.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
+            applicationIdSuffix = Config.WW2.SUFFIX
+            versionCode = Config.WW2.VERSION_CODE
+            versionName = Config.WW2.VERSION_NAME
         }
 
-        create("korea") {
-            dimension = "version"
-            applicationIdSuffix = ".korea"
-            versionCode = 1
-            versionName = "2023.4.0"
+        create(Config.Korea.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
+            applicationIdSuffix = Config.Korea.SUFFIX
+            versionCode = Config.Korea.VERSION_CODE
+            versionName = Config.Korea.VERSION_NAME
         }
 
-        create("vietnam") {
-            dimension = "version"
-            applicationIdSuffix = ".vietnam"
-            versionCode = 1
-            versionName = "2023.4.0"
+        create(Config.Vietnam.FLAVOUR_NAME) {
+            dimension = Config.Build.FLAVOUR_DIMENSION
+            applicationIdSuffix = Config.Vietnam.SUFFIX
+            versionCode = Config.Vietnam.VERSION_CODE
+            versionName = Config.Vietnam.VERSION_NAME
         }
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = Config.Build.javaVersion
+        targetCompatibility = Config.Build.javaVersion
     }
 
     packaging {
-        resources.excludes.add("META-INF/*")
+        resources.excludes.add(Config.Build.META_INF_DIR)
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.majorVersion
+        jvmTarget = Config.Build.javaVersionString
     }
 
     kotlin {
-        jvmToolchain(JavaVersion.VERSION_17.majorVersion.toInt())
+        jvmToolchain(Config.Build.javaVersionInt)
     }
 }
 
 dependencies {
-    implementation(project(":core-design"))
-    implementation(project(":feature-home"))
-    implementation(project(":feature-catalogue"))
-    implementation(project(":feature-web-view"))
+    implementation(project(Config.Modules.CORE_DESIGN))
+    implementation(project(Config.Modules.FEATURE_HOME))
+    implementation(project(Config.Modules.FEATURE_CATALOGUE))
+    implementation(project(Config.Modules.FEATURE_WEB_VIEW))
 
     implementation(libs.android.core)
-    implementation(libs.google.ads)
     implementation(libs.hilt.android)
 
     kapt(libs.hilt.compiler)

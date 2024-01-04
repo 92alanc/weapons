@@ -7,8 +7,13 @@ import io.mockk.verify
 
 internal class HomeAssertionRobot(private val testSuite: HomeActivityTest) {
 
-    fun loadBannerAds() {
-        verify { testSuite.mockAdLoader.loadBannerAds(target = any()) }
+    fun getUserConsent() {
+        verify {
+            testSuite.mockUserConsentManager.getConsentIfRequired(
+                activity = any(),
+                onDismiss = any()
+            )
+        }
     }
 
     fun navigateToWeaponList() {
@@ -54,7 +59,7 @@ internal class HomeAssertionRobot(private val testSuite: HomeActivityTest) {
         }
     }
 
-    fun showDisclaimerDialogue() {
+    fun showFirstAccessInformation() {
         verify {
             testSuite.mockDialogueHelper.showDialogue(
                 context = any(),
@@ -65,7 +70,7 @@ internal class HomeAssertionRobot(private val testSuite: HomeActivityTest) {
         }
     }
 
-    fun doNotShowDisclaimerDialogue() {
+    fun doNotShowFirstAccessInformation() {
         verify(exactly = 0) {
             testSuite.mockDialogueHelper.showDialogue(
                 context = any(),

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.ads.AdLoader
+import com.alancamargo.weapons.core.consent.UserConsentManager
 import com.alancamargo.weapons.core.design.dialogue.DialogueHelper
 import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.home.R
@@ -27,6 +28,9 @@ import com.alancamargo.weapons.core.design.R as R2
 
 @AndroidEntryPoint
 internal class HomeActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var userConsentManager: UserConsentManager
 
     @Inject
     lateinit var adLoader: AdLoader
@@ -53,22 +57,19 @@ internal class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        userConsentManager.getConsentIfRequired(activity = this) {
+            adLoader.loadBannerAds(binding.banner)
+        }
         setUpUi()
         observeViewModelFlows()
         viewModel.start()
     }
 
-    private fun setUpUi() = with(binding) {
-        setSupportActionBar(toolbar)
-        recyclerView.adapter = adapter
-        adLoader.loadBannerAds(banner)
-        btAllWeapons.setOnClickListener {
-            viewModel.onAllWeaponsClicked()
-        }
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        menu.findItem(R.id.itemPrivacySettings)?.run {
+            isVisible = userConsentManager.isPrivacyOptionsRequired()
+        }
         return true
     }
 
@@ -76,9 +77,18 @@ internal class HomeActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.itemAbout -> viewModel.onAppInfoClicked()
             R.id.itemPrivacyPolicy -> viewModel.onPrivacyPolicyClicked()
+            R.id.itemPrivacySettings -> userConsentManager.showPrivacyOptions(activity = this)
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setUpUi() = with(binding) {
+        setSupportActionBar(toolbar)
+        recyclerView.adapter = adapter
+        btAllWeapons.setOnClickListener {
+            viewModel.onAllWeaponsClicked()
+        }
     }
 
     private fun observeViewModelFlows() {

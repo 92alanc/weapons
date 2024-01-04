@@ -8,10 +8,10 @@ plugins {
 
 android {
     namespace = "com.alancamargo.weapons.core"
-    compileSdk = 34
+    compileSdk = Config.Build.TARGET_SDK
 
     defaultConfig {
-        minSdk = 23
+        minSdk = Config.Build.MIN_SDK
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -19,7 +19,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = Config.Build.ENABLE_MINIFY
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -28,16 +28,16 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = Config.Build.javaVersion
+        targetCompatibility = Config.Build.javaVersion
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.majorVersion
+        jvmTarget = Config.Build.javaVersionString
     }
 
     kotlin {
-        jvmToolchain(JavaVersion.VERSION_17.majorVersion.toInt())
+        jvmToolchain(Config.Build.javaVersionInt)
     }
 
     @Suppress("UnstableApiUsage")
@@ -52,6 +52,7 @@ dependencies {
     implementation(libs.android.activity)
     implementation(libs.android.appcompat)
     implementation(libs.android.material)
+    implementation(libs.android.ump)
     implementation(libs.coil)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)

@@ -2,6 +2,7 @@
 <resources>
     <string name="about_message">Приложение разработано Аланом Камарго</string>
     <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="privacy_settings">Настройки конфиденциальности</string>
     <string name="query_all_weapons">"Всё вооружение "</string>
     <string name="query_by_name">По имени</string>
     <string name="query_by_year">По году</string>
