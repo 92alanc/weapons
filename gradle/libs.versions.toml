@@ -39,9 +39,9 @@ android-test-runner = { group = "androidx.test", name = "runner", version.ref = 
 android-ump = { group = "com.google.android.ump", name = "user-messaging-platform", version.ref = "androidUmp" }
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
-firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
-firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
 google-ads = { group = "com.google.android.gms", name = "play-services-ads", version.ref = "googleAds" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
