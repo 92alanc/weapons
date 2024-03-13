@@ -66,7 +66,6 @@ private fun WeaponType.toUi(resourcesHelper: ResourcesHelper) = when (this) {
     is WeaponType.Rifle -> convertRifle(resourcesHelper)
     is WeaponType.MachineGun -> convertMachineGun(resourcesHelper)
     is WeaponType.Grenade -> convertGrenade(resourcesHelper)
-    is WeaponType.Mine -> convertMine(resourcesHelper)
     is WeaponType.BoobyTrap -> UiWeaponType(id, resourcesHelper.getString(R.string.type_booby_trap))
 
     is WeaponType.RocketLauncher -> UiWeaponType(
@@ -154,16 +153,4 @@ private fun WeaponType.Grenade.convertGrenade(resourcesHelper: ResourcesHelper):
             resourcesHelper.getString(R.string.type_grenade_anti_tank)
         )
     }
-}
-
-private fun WeaponType.Mine.convertMine(resourcesHelper: ResourcesHelper) = when (this.category) {
-    WeaponType.Mine.Category.ANTI_PERSONNEL -> UiWeaponType(
-        id,
-        resourcesHelper.getString(R.string.type_mine_anti_personnel)
-    )
-
-    WeaponType.Mine.Category.ANTI_TANK -> UiWeaponType(
-        id,
-        resourcesHelper.getString(R.string.type_mine_anti_tank)
-    )
 }

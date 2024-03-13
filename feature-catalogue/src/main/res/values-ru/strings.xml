@@ -13,8 +13,6 @@
     <string name="type_sub_machine_gun">Пистолет-пулемёт</string>
     <string name="type_grenade_anti_personnel">Противопехотная граната</string>
     <string name="type_grenade_anti_tank">Противотанковая граната</string>
-    <string name="type_mine_anti_personnel">Противопехотная мина</string>
-    <string name="type_mine_anti_tank">Противотанковая мина</string>
     <string name="type_grenade_launcher">Гранатомёт</string>
     <string name="type_rocket_launcher">Ракетная пусковая установка</string>
     <string name="type_booby_trap">Ловушка</string>

@@ -55,7 +55,6 @@ internal fun DbWeaponType.toDomain() = when (nameId) {
     DbWeaponType.NAME_SHOTGUN -> WeaponType.Shotgun(id)
     DbWeaponType.NAME_SUB_MACHINE_GUN -> WeaponType.SubMachineGun(id)
     DbWeaponType.NAME_PISTOL -> WeaponType.Pistol(id)
-    DbWeaponType.NAME_MINE -> convertMine()
     DbWeaponType.NAME_RIFLE -> convertRifle()
     DbWeaponType.NAME_GRENADE -> convertGrenade()
     DbWeaponType.NAME_MACHINE_GUN -> convertMachineGun()
@@ -66,18 +65,6 @@ internal fun DbCalibre.toDomain() = Calibre(
     id = id,
     name = name
 )
-
-private fun DbWeaponType.convertMine() = when (this.categoryId) {
-    DbWeaponType.CATEGORY_ANTI_PERSONNEL -> {
-        WeaponType.Mine(id, WeaponType.Mine.Category.ANTI_PERSONNEL)
-    }
-
-    DbWeaponType.CATEGORY_ANTI_TANK -> {
-        WeaponType.Mine(id, WeaponType.Mine.Category.ANTI_TANK)
-    }
-
-    else -> throw IllegalArgumentException("Category must be a WeaponType.Mine.Category")
-}
 
 private fun DbWeaponType.convertRifle() = when (this.categoryId) {
     DbWeaponType.CATEGORY_AUTOMATIC -> {

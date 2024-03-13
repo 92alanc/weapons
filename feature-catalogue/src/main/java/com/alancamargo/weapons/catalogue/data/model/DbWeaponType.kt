@@ -20,7 +20,6 @@ internal data class DbWeaponType(
         const val NAME_MACHINE_GUN = "type_machine_gun"
         const val NAME_SUB_MACHINE_GUN = "type_sub_machine_gun"
         const val NAME_GRENADE = "type_grenade"
-        const val NAME_MINE = "type_mine"
         const val NAME_GRENADE_LAUNCHER = "type_grenade_launcher"
         const val NAME_ROCKET_LAUNCHER = "type_rocket_launcher"
         const val NAME_BOOBY_TRAP = "type_booby_trap"
