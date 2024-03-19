@@ -22,7 +22,7 @@ class WeaponLocalDataSourceImplTest {
     @Before
     fun setUp() {
         coEvery {
-            mockFileHelper.getImageFilePaths(weaponName = any())
+            mockFileHelper.getImageFilePaths(weaponId = any())
         } returns listOf(
             "photo1.jpg",
             "photo2.jpg",

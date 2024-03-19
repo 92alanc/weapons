@@ -62,7 +62,7 @@ internal class WeaponLocalDataSourceImpl @Inject constructor(
     }
 
     private suspend fun List<DbWeapon>.toDomain() = map {
-        val photos = fileHelper.getImageFilePaths(it.weapon.name)
+        val photos = fileHelper.getImageFilePaths(it.weapon.id)
         it.toDomain(photos)
     }
 }

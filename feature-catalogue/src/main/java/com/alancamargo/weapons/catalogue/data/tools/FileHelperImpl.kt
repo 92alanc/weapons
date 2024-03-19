@@ -10,8 +10,8 @@ internal class FileHelperImpl @Inject constructor(
     private val weaponDao: WeaponDao
 ) : FileHelper {
 
-    override suspend fun getImageFilePaths(weaponName: String): List<String> {
-        val relativePath = getRelativePath(weaponName)
+    override suspend fun getImageFilePaths(weaponId: Long): List<String> {
+        val relativePath = getRelativePath(weaponId)
         val filesInRelativePath = context.assets.list(relativePath)
 
         return if (filesInRelativePath.isNullOrEmpty()) {
@@ -21,12 +21,9 @@ internal class FileHelperImpl @Inject constructor(
         }
     }
 
-    private suspend fun getRelativePath(weaponName: String): String {
-        val country = weaponDao.getCountryByWeaponName(weaponName)
+    private suspend fun getRelativePath(weaponId: Long): String {
+        val country = weaponDao.getCountryByWeaponId(weaponId)
         val countryToken = country?.token ?: "unknown"
-        val formattedWeaponName = weaponName.replace("/", "-")
-            .replace("\"", "")
-
-        return "$countryToken/$formattedWeaponName"
+        return "$countryToken/$weaponId"
     }
 }

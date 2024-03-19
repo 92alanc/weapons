@@ -17,6 +17,6 @@ internal interface WeaponDao {
     @Query("SELECT * FROM WEAPON WHERE NAME LIKE '%' || :name || '%' ORDER BY NAME")
     suspend fun getWeaponsByName(name: String): List<DbWeapon>
 
-    @Query("SELECT * FROM COUNTRY WHERE ID = (SELECT COUNTRY_ID FROM WEAPON WHERE NAME = :weaponName)")
-    suspend fun getCountryByWeaponName(weaponName: String): DbCountry?
+    @Query("SELECT * FROM COUNTRY WHERE ID = (SELECT COUNTRY_ID FROM WEAPON WHERE ID = :weaponId)")
+    suspend fun getCountryByWeaponId(weaponId: Long): DbCountry?
 }
