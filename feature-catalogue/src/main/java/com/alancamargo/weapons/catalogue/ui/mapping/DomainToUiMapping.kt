@@ -21,7 +21,7 @@ internal fun Weapon.toUi(resourcesHelper: ResourcesHelper) = UiWeapon(
     name = name,
     year = year?.toUi(),
     make = make?.toUi(),
-    country = country?.toUi(),
+    country = country?.toUi(resourcesHelper),
     type = type.toUi(resourcesHelper),
     lengthInMm = lengthInMm,
     massInKg = massInKg,
@@ -36,7 +36,7 @@ internal fun WeaponListHeader.toUi(resourcesHelper: ResourcesHelper) = when (thi
     is Calibre -> toUi()
     is Make -> toUi()
     is Year -> toUi()
-    is Country -> toUi()
+    is Country -> toUi(resourcesHelper)
     is WeaponType -> toUi(resourcesHelper)
     else -> throw IllegalStateException("Must be an implementation of WeaponListHeader")
 }
@@ -51,10 +51,11 @@ private fun Make.toUi() = UiMake(
     name = name
 )
 
-private fun Country.toUi() = UiCountry(
+private fun Country.toUi(resourcesHelper: ResourcesHelper) = UiCountry(
     id = id,
     name = name.toUi(),
-    flagId = flagId
+    flagId = flagId,
+    text = resourcesHelper.getString(name.toUi().nameRes)
 )
 
 private fun Calibre.toUi() = UiCalibre(

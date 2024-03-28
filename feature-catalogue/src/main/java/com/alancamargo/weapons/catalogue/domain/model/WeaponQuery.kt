@@ -2,17 +2,17 @@ package com.alancamargo.weapons.catalogue.domain.model
 
 internal sealed class WeaponQuery {
 
-    object All : WeaponQuery()
+    data object All : WeaponQuery()
 
     data class ByName(val name: String) : WeaponQuery()
 
-    object ByYear : WeaponQuery()
+    data object ByYear : WeaponQuery()
 
-    object ByCountry : WeaponQuery()
+    data object ByCountry : WeaponQuery()
 
-    object ByType : WeaponQuery()
+    data object ByType : WeaponQuery()
 
-    object ByCalibre : WeaponQuery()
+    data object ByCalibre : WeaponQuery()
 
-    object ByMake : WeaponQuery()
+    data object ByMake : WeaponQuery()
 }
