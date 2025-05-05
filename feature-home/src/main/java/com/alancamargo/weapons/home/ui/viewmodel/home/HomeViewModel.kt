@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.di.IoDispatcher
+import com.alancamargo.weapons.core.di.ViewActionDelay
 import com.alancamargo.weapons.core.preferences.PreferencesManager
+import com.alancamargo.weapons.core.remoteconfig.RemoteConfigManager
 import com.alancamargo.weapons.home.ui.analytics.HomeAnalytics
 import com.alancamargo.weapons.home.ui.model.WeaponQueryType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +20,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val KEY_FIRST_ACCESS_INFO = "first_access_info"
 private const val KEY_SHOW_FIRST_ACCESS_INFORMATION = "show-first-access-information"
 private const val PRIVACY_POLICY_URL = "https://pastebin.com/raw/Krd7c6aJ"
 
@@ -25,7 +28,9 @@ private const val PRIVACY_POLICY_URL = "https://pastebin.com/raw/Krd7c6aJ"
 internal class HomeViewModel @Inject constructor(
     private val analytics: HomeAnalytics,
     private val preferencesManager: PreferencesManager,
-    @IoDispatcher private val dispatcher: CoroutineDispatcher
+    private val remoteConfigManager: RemoteConfigManager,
+    @IoDispatcher private val dispatcher: CoroutineDispatcher,
+    @ViewActionDelay private val viewActionDelay: Long
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(HomeViewState())
@@ -44,12 +49,14 @@ internal class HomeViewModel @Inject constructor(
 
         if (shouldShowFirstAccessInformation) {
             viewModelScope.launch(dispatcher) {
-                delay(timeMillis = 50)
-                _action.emit(HomeViewAction.ShowFirstAccessInformation)
+                val text = remoteConfigManager.getString(KEY_FIRST_ACCESS_INFO)
+                val action = HomeViewAction.ShowFirstAccessInformation(text)
+                delay(viewActionDelay)
+                _action.emit(action)
             }
         }
 
-        val queryTypes = WeaponQueryType.values().toList()
+        val queryTypes = WeaponQueryType.entries.toList()
         _state.update { it.onQueryTypesReceived(queryTypes) }
     }
 

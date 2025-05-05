@@ -19,7 +19,7 @@ internal class DatabaseProviderImpl @Inject constructor(
             context,
             clazz.java,
             name
-        ).fallbackToDestructiveMigration()
+        ).fallbackToDestructiveMigration(dropAllTables = true)
             .createFromAsset(assetPath)
             .build()
     }

@@ -7,6 +7,4 @@ internal interface WeaponListAnalytics {
     fun trackWeaponClicked(weaponName: String)
 
     fun trackBackClicked()
-
-    fun trackNativeBackClicked()
 }

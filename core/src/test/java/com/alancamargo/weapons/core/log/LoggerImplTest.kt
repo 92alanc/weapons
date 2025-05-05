@@ -29,49 +29,49 @@ class LoggerImplTest {
 
     @Test
     fun `debug should log message locally`() {
-        // GIVEN
+        // Given
         val message = "Message"
 
-        // WHEN
+        // When
         logger.debug(message)
 
-        // THEN
+        // Then
         verify { Log.d(LOG_TAG, message) }
     }
 
     @Test
     fun `debug should log message on crashlytics`() {
-        // GIVEN
+        // Given
         val message = "Message"
 
-        // WHEN
+        // When
         logger.debug(message)
 
-        // THEN
+        // Then
         verify { mockFirebaseCrashlytics.log(message) }
     }
 
     @Test
     fun `error should log error locally`() {
-        // GIVEN
+        // Given
         val throwable = Throwable("Message")
 
-        // WHEN
+        // When
         logger.error(throwable)
 
-        // THEN
+        // Then
         verify { Log.e(LOG_TAG, throwable.message, throwable) }
     }
 
     @Test
     fun `error should log error on crashlytics`() {
-        // GIVEN
+        // Given
         val throwable = Throwable("Message")
 
-        // WHEN
+        // When
         logger.error(throwable)
 
-        // THEN
+        // Then
         verify { mockFirebaseCrashlytics.recordException(throwable) }
     }
 }

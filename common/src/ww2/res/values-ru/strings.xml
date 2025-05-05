@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="british_empire">Британская Империя</string>
+    <string name="nazi_germany">Нацистская Германия</string>
+    <string name="france">Франция</string>
+    <string name="soviet_union">Советский Союз</string>
+    <string name="japanese_empire">Японская Империя</string>
+    <string name="united_states">Соединённые Штаты</string>
+    <string name="unknown">Неизвестный</string>
+    <string name="fascist_italy">Фашистская Италия</string>
+</resources>

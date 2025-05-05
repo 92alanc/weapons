@@ -1,9 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.android.compose.compiler)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.parcelise)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -39,10 +40,6 @@ android {
             dimension = Config.Build.FLAVOUR_DIMENSION
         }
 
-        create(Config.Korea.FLAVOUR_NAME) {
-            dimension = Config.Build.FLAVOUR_DIMENSION
-        }
-
         create(Config.Vietnam.FLAVOUR_NAME) {
             dimension = Config.Build.FLAVOUR_DIMENSION
         }
@@ -66,10 +63,9 @@ android {
     }
 
     buildFeatures {
-        viewBinding = Config.Build.ENABLE_VIEW_BINDING
+        compose = Config.Build.ENABLE_COMPOSE
     }
 
-    @Suppress("UnstableApiUsage")
     testOptions {
         animationsDisabled = Config.Testing.DISABLE_ANIMATIONS
         execution = Config.Testing.ANDROID_TEST_ORCHESTRATOR
@@ -78,15 +74,20 @@ android {
 
 dependencies {
     implementation(project(Config.Modules.CORE))
+    implementation(project(Config.Modules.CORE_DESIGN))
     implementation(project(Config.Modules.NAVIGATION))
 
     implementation(libs.android.appcompat)
     implementation(libs.android.activity)
+    implementation(libs.android.compose.activity)
+    implementation(platform(libs.android.compose.bom))
+    implementation(libs.android.compose.material3)
+    implementation(libs.android.compose.preview)
     implementation(libs.android.material)
     implementation(libs.google.ads)
     implementation(libs.hilt.android)
 
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     testImplementation(libs.coroutines.test)
     testImplementation(libs.junit)
@@ -101,5 +102,5 @@ dependencies {
 
     androidTestUtil(libs.android.test.orchestrator)
 
-    kaptAndroidTest(libs.hilt.compiler)
+    kspAndroidTest(libs.hilt.compiler)
 }

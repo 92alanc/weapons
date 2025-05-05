@@ -14,10 +14,10 @@ class WeaponDetailsAnalyticsImplTest {
 
     @Test
     fun `trackScreenViewed should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackScreenViewed()
 
-        // THEN
+        // Then
         verify { mockAnalyticsManager.trackScreenViewed(SCREEN_NAME) }
     }
 }

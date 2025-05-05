@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.google.services)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -35,7 +35,7 @@ android {
 
         release {
             isDebuggable = false
-            isMinifyEnabled = Config.Build.ENABLE_MINIFY
+            isMinifyEnabled = true
             isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -45,10 +45,6 @@ android {
         }
     }
 
-    buildFeatures {
-        viewBinding = Config.Build.ENABLE_VIEW_BINDING
-    }
-
     flavorDimensions += Config.Build.FLAVOUR_DIMENSION
 
     productFlavors {
@@ -56,7 +52,7 @@ android {
             dimension = Config.Build.FLAVOUR_DIMENSION
             applicationIdSuffix = Config.WW1.SUFFIX
             versionCode = Config.WW1.VERSION_CODE
-            versionName = Config.WW2.VERSION_NAME
+            versionName = Config.WW1.VERSION_NAME
         }
 
         create(Config.WW2.FLAVOUR_NAME) {
@@ -64,13 +60,6 @@ android {
             applicationIdSuffix = Config.WW2.SUFFIX
             versionCode = Config.WW2.VERSION_CODE
             versionName = Config.WW2.VERSION_NAME
-        }
-
-        create(Config.Korea.FLAVOUR_NAME) {
-            dimension = Config.Build.FLAVOUR_DIMENSION
-            applicationIdSuffix = Config.Korea.SUFFIX
-            versionCode = Config.Korea.VERSION_CODE
-            versionName = Config.Korea.VERSION_NAME
         }
 
         create(Config.Vietnam.FLAVOUR_NAME) {
@@ -100,13 +89,15 @@ android {
 }
 
 dependencies {
+    implementation(project(Config.Modules.CORE))
     implementation(project(Config.Modules.CORE_DESIGN))
     implementation(project(Config.Modules.FEATURE_HOME))
     implementation(project(Config.Modules.FEATURE_CATALOGUE))
     implementation(project(Config.Modules.FEATURE_WEB_VIEW))
+    implementation(project(Config.Modules.NAVIGATION))
 
     implementation(libs.android.core)
     implementation(libs.hilt.android)
 
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 }

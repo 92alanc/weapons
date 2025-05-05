@@ -2,37 +2,29 @@ package com.alancamargo.weapons.webview.ui
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Parcelable
-import android.view.Menu
-import android.view.MenuItem
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.res.stringResource
 import com.alancamargo.weapons.core.ads.AdLoader
 import com.alancamargo.weapons.core.extensions.args
 import com.alancamargo.weapons.core.extensions.createIntent
 import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.core.extensions.putArguments
-import com.alancamargo.weapons.webview.R
-import com.alancamargo.weapons.webview.databinding.ActivityWebViewBinding
+import com.alancamargo.weapons.webview.ui.view.WebViewScreen
 import com.alancamargo.weapons.webview.ui.viewmodel.WebViewViewAction
 import com.alancamargo.weapons.webview.ui.viewmodel.WebViewViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
+import com.alancamargo.weapons.core.design.R as CoreR
 
 @AndroidEntryPoint
 internal class WebViewActivity : AppCompatActivity() {
-
-    private var _binding: ActivityWebViewBinding? = null
-
-    private val binding
-        get() = _binding!!
 
     private val args by args<Args>()
     private val viewModel by viewModels<WebViewViewModel>()
@@ -40,16 +32,22 @@ internal class WebViewActivity : AppCompatActivity() {
     @Inject
     lateinit var adLoader: AdLoader
 
+    private val loadContentState = mutableStateOf(true)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityWebViewBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setUpUi()
+        setContent {
+            WebViewScreen(
+                title = stringResource(args.titleRes),
+                url = args.url,
+                loadContentState = loadContentState,
+                adUnitId = getString(CoreR.string.banner_web_view),
+                adLoader = adLoader,
+                onRefreshClicked = viewModel::onRefresh,
+                onBackClicked = viewModel::onBackClicked
+            )
+        }
         observeFlow(viewModel.action, ::onActionChanged)
-    }
-
-    override fun onBackPressed() {
-        viewModel.onNativeBackClicked()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -57,54 +55,10 @@ internal class WebViewActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_web_view, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.itemRefresh -> {
-                viewModel.onRefresh()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun setUpUi() {
-        setUpToolbar()
-        setUpWebView()
-        adLoader.loadBannerAds(binding.banner)
-    }
-
     private fun onActionChanged(action: WebViewViewAction) {
         when (action) {
-            WebViewViewAction.Refresh -> binding.webView.loadUrl(args.url)
+            WebViewViewAction.Refresh -> loadContentState.value = true
             WebViewViewAction.Finish -> finish()
-        }
-    }
-
-    private fun setUpToolbar() = with(binding) {
-        setSupportActionBar(toolbar)
-        toolbar.setTitle(args.titleRes)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    private fun setUpWebView() {
-        with(binding.webView) {
-            webViewClient = object : WebViewClient() {
-                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                    super.onPageStarted(view, url, favicon)
-                    binding.progressBar.isVisible = true
-                }
-
-                override fun onPageFinished(view: WebView?, url: String?) {
-                    super.onPageFinished(view, url)
-                    binding.progressBar.isVisible = false
-                }
-            }
-            loadUrl(args.url)
         }
     }
 

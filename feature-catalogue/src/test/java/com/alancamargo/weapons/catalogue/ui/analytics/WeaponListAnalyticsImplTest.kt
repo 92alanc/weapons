@@ -9,7 +9,6 @@ private const val SCREEN_NAME = "weapon-list"
 
 private const val BUTTON_WEAPON = "weapon"
 private const val BUTTON_BACK = "back"
-private const val BUTTON_NATIVE_BACK = "native-back"
 
 private const val PARAM_WEAPON_NAME = "weapon-name"
 
@@ -20,22 +19,22 @@ class WeaponListAnalyticsImplTest {
 
     @Test
     fun `trackScreenViewed should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackScreenViewed()
 
-        // THEN
+        // Then
         verify { mockAnalyticsManager.trackScreenViewed(SCREEN_NAME) }
     }
 
     @Test
     fun `trackWeaponClicked should track event correctly`() {
-        // GIVEN
+        // Given
         val weaponName = "weapon"
 
-        // WHEN
+        // When
         analytics.trackWeaponClicked(weaponName)
 
-        // THEN
+        // Then
         val properties = mapOf(PARAM_WEAPON_NAME to weaponName)
         verify {
             mockAnalyticsManager.trackButtonClicked(
@@ -48,28 +47,14 @@ class WeaponListAnalyticsImplTest {
 
     @Test
     fun `trackBackClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackBackClicked()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
                 buttonName = BUTTON_BACK
-            )
-        }
-    }
-
-    @Test
-    fun `trackNativeBackClicked should track event correctly`() {
-        // WHEN
-        analytics.trackNativeBackClicked()
-
-        // THEN
-        verify {
-            mockAnalyticsManager.trackButtonClicked(
-                screenName = SCREEN_NAME,
-                buttonName = BUTTON_NATIVE_BACK
             )
         }
     }

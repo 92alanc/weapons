@@ -8,5 +8,5 @@ data class UiCountry(
     val id: Long,
     val name: UiCountryName,
     val flagId: String,
-    override val text: String? = flagId
+    override val text: String?
 ) : UiWeaponListHeader

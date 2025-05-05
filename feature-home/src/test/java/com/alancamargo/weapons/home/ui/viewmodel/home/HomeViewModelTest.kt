@@ -3,9 +3,11 @@ package com.alancamargo.weapons.home.ui.viewmodel.home
 import app.cash.turbine.test
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.preferences.PreferencesManager
+import com.alancamargo.weapons.core.remoteconfig.RemoteConfigManager
 import com.alancamargo.weapons.home.ui.analytics.HomeAnalytics
 import com.alancamargo.weapons.home.ui.model.WeaponQueryType
 import com.google.common.truth.Truth.assertThat
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -17,6 +19,7 @@ import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Test
 
+private const val KEY_FIRST_ACCESS_INFO = "first_access_info"
 private const val KEY_SHOW_FIRST_ACCESS_INFORMATION = "show-first-access-information"
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -24,12 +27,15 @@ class HomeViewModelTest {
 
     private val mockAnalytics = mockk<HomeAnalytics>(relaxed = true)
     private val mockPreferencesManager = mockk<PreferencesManager>(relaxed = true)
+    private val mockRemoteConfigManager = mockk<RemoteConfigManager>()
     private val testDispatcher = StandardTestDispatcher()
 
     private val viewModel = HomeViewModel(
         mockAnalytics,
         mockPreferencesManager,
-        testDispatcher
+        mockRemoteConfigManager,
+        testDispatcher,
+        viewActionDelay = 0
     )
 
     @Before
@@ -39,16 +45,16 @@ class HomeViewModelTest {
 
     @Test
     fun `start should track screen view event`() {
-        // WHEN
+        // When
         viewModel.start()
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackScreenViewed() }
     }
 
     @Test
     fun `start should send ShowFirstAccessInformation action`() = runTest {
-        // GIVEN
+        // Given
         every {
             mockPreferencesManager.getBoolean(
                 KEY_SHOW_FIRST_ACCESS_INFORMATION,
@@ -56,11 +62,16 @@ class HomeViewModelTest {
             )
         } returns true
 
-        // WHEN
+        val text = "This app is not a game."
+        coEvery {
+            mockRemoteConfigManager.getString(KEY_FIRST_ACCESS_INFO)
+        } returns text
+
+        // When
         viewModel.start()
 
-        // THEN
-        val expected = HomeViewAction.ShowFirstAccessInformation
+        // Then
+        val expected = HomeViewAction.ShowFirstAccessInformation(text)
         viewModel.action.test {
             val actual = awaitItem()
             assertThat(actual).isEqualTo(expected)
@@ -69,11 +80,11 @@ class HomeViewModelTest {
 
     @Test
     fun `start should set correct state`() = runTest {
-        // WHEN
+        // When
         viewModel.start()
 
-        // THEN
-        val expected = HomeViewState(queryTypes = WeaponQueryType.values().toList())
+        // Then
+        val expected = HomeViewState(queryTypes = WeaponQueryType.entries.toList())
         viewModel.state.test {
             val actual = awaitItem()
             assertThat(actual).isEqualTo(expected)
@@ -82,38 +93,38 @@ class HomeViewModelTest {
 
     @Test
     fun `onDisclaimerDismissed should track button click event`() {
-        // WHEN
+        // When
         viewModel.onDisclaimerDismissed()
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackFirstAccessInformationDismissed() }
     }
 
     @Test
     fun `onDisclaimerDismissed should set value on preferences manager`() {
-        // WHEN
+        // When
         viewModel.onDisclaimerDismissed()
 
-        // THEN
+        // Then
         verify { mockPreferencesManager.setBoolean(KEY_SHOW_FIRST_ACCESS_INFORMATION, value = false) }
     }
 
     @Test
     fun `onAllWeaponsClicked should track button click event`() {
-        // WHEN
+        // When
         viewModel.onAllWeaponsClicked()
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackAllWeaponsClicked() }
     }
 
     @Test
     fun `onAllWeaponsClicked should send NavigateToWeaponList action`() {
         runTest {
-            // WHEN
+            // When
             viewModel.onAllWeaponsClicked()
 
-            // THEN
+            // Then
             val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.All)
             viewModel.action.test {
                 val actual = awaitItem()
@@ -124,20 +135,20 @@ class HomeViewModelTest {
 
     @Test
     fun `when query type is BY_CALIBRE onQueryItemClicked should track button click event`() {
-        // WHEN
+        // When
         viewModel.onQueryItemClicked(WeaponQueryType.BY_CALIBRE)
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackGroupByCalibreClicked() }
     }
 
     @Test
     fun `when query type is BY_CALIBRE onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
-            // WHEN
+            // When
             viewModel.onQueryItemClicked(WeaponQueryType.BY_CALIBRE)
 
-            // THEN
+            // Then
             val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByCalibre)
             viewModel.action.test {
                 val actual = awaitItem()
@@ -148,20 +159,20 @@ class HomeViewModelTest {
 
     @Test
     fun `when query type is BY_COUNTRY onQueryItemClicked should track button click event`() {
-        // WHEN
+        // When
         viewModel.onQueryItemClicked(WeaponQueryType.BY_COUNTRY)
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackGroupByCountryClicked() }
     }
 
     @Test
     fun `when query type is BY_COUNTRY onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
-            // WHEN
+            // When
             viewModel.onQueryItemClicked(WeaponQueryType.BY_COUNTRY)
 
-            // THEN
+            // Then
             val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByCountry)
             viewModel.action.test {
                 val actual = awaitItem()
@@ -172,20 +183,20 @@ class HomeViewModelTest {
 
     @Test
     fun `when query type is BY_MAKE onQueryItemClicked should track button click event`() {
-        // WHEN
+        // When
         viewModel.onQueryItemClicked(WeaponQueryType.BY_MAKE)
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackGroupByMakeClicked() }
     }
 
     @Test
     fun `when query type is BY_MAKE onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
-            // WHEN
+            // When
             viewModel.onQueryItemClicked(WeaponQueryType.BY_MAKE)
 
-            // THEN
+            // Then
             val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByMake)
             viewModel.action.test {
                 val actual = awaitItem()
@@ -196,20 +207,20 @@ class HomeViewModelTest {
 
     @Test
     fun `when query type is BY_NAME onQueryItemClicked should track button click event`() {
-        // WHEN
+        // When
         viewModel.onQueryItemClicked(WeaponQueryType.BY_NAME)
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackGroupByNameClicked() }
     }
 
     @Test
     fun `when query type is BY_NAME onQueryItemClicked should send ShowWeaponSearchDialogue action`() {
         runTest {
-            // WHEN
+            // When
             viewModel.onQueryItemClicked(WeaponQueryType.BY_NAME)
 
-            // THEN
+            // Then
             val expected = HomeViewAction.ShowWeaponSearchDialogue
             viewModel.action.test {
                 val actual = awaitItem()
@@ -220,20 +231,20 @@ class HomeViewModelTest {
 
     @Test
     fun `when query type is BY_TYPE onQueryItemClicked should track button click event`() {
-        // WHEN
+        // When
         viewModel.onQueryItemClicked(WeaponQueryType.BY_TYPE)
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackGroupByTypeClicked() }
     }
 
     @Test
     fun `when query type is BY_TYPE onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
-            // WHEN
+            // When
             viewModel.onQueryItemClicked(WeaponQueryType.BY_TYPE)
 
-            // THEN
+            // Then
             val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByType)
             viewModel.action.test {
                 val actual = awaitItem()
@@ -244,20 +255,20 @@ class HomeViewModelTest {
 
     @Test
     fun `when query type is BY_YEAR onQueryItemClicked should track button click event`() {
-        // WHEN
+        // When
         viewModel.onQueryItemClicked(WeaponQueryType.BY_YEAR)
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackGroupByYearClicked() }
     }
 
     @Test
     fun `when query type is BY_YEAR onQueryItemClicked should send NavigateToWeaponList action`() {
         runTest {
-            // WHEN
+            // When
             viewModel.onQueryItemClicked(WeaponQueryType.BY_YEAR)
 
-            // THEN
+            // Then
             val expected = HomeViewAction.NavigateToWeaponList(UiWeaponQuery.ByYear)
             viewModel.action.test {
                 val actual = awaitItem()
@@ -268,19 +279,19 @@ class HomeViewModelTest {
 
     @Test
     fun `onAppInfoClicked should track button click event`() {
-        // WHEN
+        // When
         viewModel.onAppInfoClicked()
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackAppInfoClicked() }
     }
 
     @Test
     fun `onAppInfoClicked should send ShowAppInfo action`() = runTest {
-        // WHEN
+        // When
         viewModel.onAppInfoClicked()
 
-        // THEN
+        // Then
         val expected = HomeViewAction.ShowAppInfo
         viewModel.action.test {
             val actual = awaitItem()
@@ -290,19 +301,19 @@ class HomeViewModelTest {
 
     @Test
     fun `onPrivacyPolicyClicked should track button click event`() {
-        // WHEN
+        // When
         viewModel.onPrivacyPolicyClicked()
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackPrivacyPolicyClicked() }
     }
 
     @Test
     fun `onPrivacyPolicyClicked should send ShowPrivacyPolicy action`() = runTest {
-        // WHEN
+        // When
         viewModel.onPrivacyPolicyClicked()
 
-        // THEN
+        // Then
         val expected = HomeViewAction.ShowPrivacyPolicy(url = "https://pastebin.com/raw/Krd7c6aJ")
         viewModel.action.test {
             val actual = awaitItem()

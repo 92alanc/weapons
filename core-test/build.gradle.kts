@@ -35,10 +35,6 @@ android {
             dimension = Config.Build.FLAVOUR_DIMENSION
         }
 
-        create(Config.Korea.FLAVOUR_NAME) {
-            dimension = Config.Build.FLAVOUR_DIMENSION
-        }
-
         create(Config.Vietnam.FLAVOUR_NAME) {
             dimension = Config.Build.FLAVOUR_DIMENSION
         }

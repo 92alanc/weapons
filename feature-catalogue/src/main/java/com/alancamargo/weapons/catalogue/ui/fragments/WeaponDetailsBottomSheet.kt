@@ -5,70 +5,43 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.viewModels
-import com.alancamargo.weapons.catalogue.databinding.BottomSheetWeaponDetailsBinding
-import com.alancamargo.weapons.catalogue.ui.adapter.PhotoAdapter
+import com.alancamargo.weapons.catalogue.ui.view.WeaponDetailsScreen
 import com.alancamargo.weapons.catalogue.ui.viewmodel.weapondetails.WeaponDetailsViewModel
-import com.alancamargo.weapons.catalogue.ui.viewmodel.weapondetails.WeaponDetailsViewState
 import com.alancamargo.weapons.common.ui.UiWeapon
 import com.alancamargo.weapons.core.extensions.args
-import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.core.extensions.putArguments
-import com.alancamargo.weapons.core.extensions.setDrawableOrHide
-import com.alancamargo.weapons.core.extensions.setTextOrHide
+import com.alancamargo.weapons.core.resources.ResourcesHelper
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
+import javax.inject.Inject
 
 @AndroidEntryPoint
 internal class WeaponDetailsBottomSheet : BottomSheetDialogFragment() {
 
-    private var _binding: BottomSheetWeaponDetailsBinding? = null
-
-    private val binding: BottomSheetWeaponDetailsBinding
-        get() = _binding!!
-
     private val args by args<Args>()
     private val viewModel by viewModels<WeaponDetailsViewModel>()
+
+    @Inject
+    lateinit var resourcesHelper: ResourcesHelper
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = BottomSheetWeaponDetailsBinding.inflate(
-            layoutInflater,
-            container,
-            false
-        )
-        return binding.root
+        return ComposeView(requireContext()).apply {
+            setContent {
+                WeaponDetailsScreen(args.weapon, resourcesHelper)
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeFlow(viewModel.state, ::onStateChanged)
-        viewModel.start(args.weapon)
-    }
-
-    private fun onStateChanged(state: WeaponDetailsViewState) = with(binding) {
-        state.weapon?.let { weapon ->
-            txtName.text = weapon.name
-            txtType.text = weapon.type
-            txtYear.setTextOrHide(weapon.year)
-            txtCalibre.setTextOrHide(weapon.calibre)
-            txtCountry.setTextOrHide(weapon.country?.nameRes)
-            imgFlag.setDrawableOrHide(weapon.country?.flagDrawable)
-            txtCapacity.setTextOrHide(weapon.capacity)
-            txtLength.setTextOrHide(weapon.length)
-            txtMake.setTextOrHide(weapon.make)
-            txtEffectiveRange.setTextOrHide(weapon.effectiveRange)
-            txtMass.setTextOrHide(weapon.mass)
-            txtRateOfFire.setTextOrHide(weapon.rateOfFire)
-            viewPager.adapter = PhotoAdapter(weapon.photos)
-            TabLayoutMediator(tabLayout, viewPager) { _, _ ->
-            }.attach()
-        }
+        viewModel.onScreenViewed()
     }
 
     @Parcelize

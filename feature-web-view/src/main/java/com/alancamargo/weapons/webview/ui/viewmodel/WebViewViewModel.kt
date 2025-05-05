@@ -35,11 +35,6 @@ internal class WebViewViewModel @Inject constructor(
         sendAction(WebViewViewAction.Finish)
     }
 
-    fun onNativeBackClicked() {
-        analytics.trackNativeBackClicked()
-        sendAction(WebViewViewAction.Finish)
-    }
-
     private fun sendAction(action: WebViewViewAction) {
         viewModelScope.launch(dispatcher) {
             _action.emit(action)

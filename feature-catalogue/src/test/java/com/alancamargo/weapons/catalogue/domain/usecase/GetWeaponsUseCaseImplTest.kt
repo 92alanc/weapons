@@ -18,14 +18,14 @@ class GetWeaponsUseCaseImplTest {
 
     @Test
     fun `when query is All invoke should return correct result`() = runTest {
-        // GIVEN
+        // Given
         val expected = WeaponListResult.Success(stubWeaponListMap())
         coEvery { mockRepository.getAllWeapons() } returns expected
 
-        // WHEN
+        // When
         val result = useCase(WeaponQuery.All)
 
-        // THEN
+        // Then
         result.test {
             assertThat(awaitItem()).isEqualTo(expected)
             awaitComplete()
@@ -34,14 +34,14 @@ class GetWeaponsUseCaseImplTest {
 
     @Test
     fun `when query is ByCalibre invoke should return correct result`() = runTest {
-        // GIVEN
+        // Given
         val expected = WeaponListResult.Success(stubWeaponListMap())
         coEvery { mockRepository.groupWeaponsByCalibre() } returns expected
 
-        // WHEN
+        // When
         val result = useCase(WeaponQuery.ByCalibre)
 
-        // THEN
+        // Then
         result.test {
             assertThat(awaitItem()).isEqualTo(expected)
             awaitComplete()
@@ -50,14 +50,14 @@ class GetWeaponsUseCaseImplTest {
 
     @Test
     fun `when query is ByCountry invoke should return correct result`() = runTest {
-        // GIVEN
+        // Given
         val expected = WeaponListResult.Success(stubWeaponListMap())
         coEvery { mockRepository.groupWeaponsByCountry() } returns expected
 
-        // WHEN
+        // When
         val result = useCase(WeaponQuery.ByCountry)
 
-        // THEN
+        // Then
         result.test {
             assertThat(awaitItem()).isEqualTo(expected)
             awaitComplete()
@@ -66,14 +66,14 @@ class GetWeaponsUseCaseImplTest {
 
     @Test
     fun `when query is ByMake invoke should return correct result`() = runTest {
-        // GIVEN
+        // Given
         val expected = WeaponListResult.Success(stubWeaponListMap())
         coEvery { mockRepository.groupWeaponsByMake() } returns expected
 
-        // WHEN
+        // When
         val result = useCase(WeaponQuery.ByMake)
 
-        // THEN
+        // Then
         result.test {
             assertThat(awaitItem()).isEqualTo(expected)
             awaitComplete()
@@ -82,14 +82,14 @@ class GetWeaponsUseCaseImplTest {
 
     @Test
     fun `when query is ByType invoke should return correct result`() = runTest {
-        // GIVEN
+        // Given
         val expected = WeaponListResult.Success(stubWeaponListMap())
         coEvery { mockRepository.groupWeaponsByType() } returns expected
 
-        // WHEN
+        // When
         val result = useCase(WeaponQuery.ByType)
 
-        // THEN
+        // Then
         result.test {
             assertThat(awaitItem()).isEqualTo(expected)
             awaitComplete()
@@ -98,14 +98,14 @@ class GetWeaponsUseCaseImplTest {
 
     @Test
     fun `when query is ByYear invoke should return correct result`() = runTest {
-        // GIVEN
+        // Given
         val expected = WeaponListResult.Success(stubWeaponListMap())
         coEvery { mockRepository.groupWeaponsByYear() } returns expected
 
-        // WHEN
+        // When
         val result = useCase(WeaponQuery.ByYear)
 
-        // THEN
+        // Then
         result.test {
             assertThat(awaitItem()).isEqualTo(expected)
             awaitComplete()
@@ -114,15 +114,15 @@ class GetWeaponsUseCaseImplTest {
 
     @Test
     fun `when query is ByName invoke should return correct result`() = runTest {
-        // GIVEN
+        // Given
         val name = "weapon"
         val expected = WeaponListResult.Success(stubWeaponListMap())
         coEvery { mockRepository.filterWeaponsByName(name) } returns expected
 
-        // WHEN
+        // When
         val result = useCase(WeaponQuery.ByName(name))
 
-        // THEN
+        // Then
         result.test {
             assertThat(awaitItem()).isEqualTo(expected)
             awaitComplete()

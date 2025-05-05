@@ -1,11 +1,9 @@
 package com.alancamargo.weapons.core.design.dialogue
 
 import android.content.Context
-import androidx.annotation.VisibleForTesting
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import javax.inject.Inject
 
-@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
 class DialogueHelperImpl @Inject constructor() : DialogueHelper {
 
     override fun showDialogue(
@@ -14,9 +12,19 @@ class DialogueHelperImpl @Inject constructor() : DialogueHelper {
         messageRes: Int,
         onDismiss: (() -> Unit)?
     ) {
+        val message = context.getString(messageRes)
+        showDialogue(context, title, message, onDismiss)
+    }
+
+    override fun showDialogue(
+        context: Context,
+        title: String,
+        message: String,
+        onDismiss: (() -> Unit)?
+    ) {
         MaterialAlertDialogBuilder(context)
             .setTitle(title)
-            .setMessage(messageRes)
+            .setMessage(message)
             .setOnDismissListener { onDismiss?.invoke() }
             .show()
     }

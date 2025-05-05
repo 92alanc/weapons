@@ -31,28 +31,28 @@ class WebViewViewModelTest {
 
     @Test
     fun `start should track screen view event`() {
-        // WHEN
+        // When
         viewModel.start()
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackScreenViewed() }
     }
 
     @Test
     fun `onRefresh should track button click event`() {
-        // WHEN
+        // When
         viewModel.onRefresh()
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackRefreshClicked() }
     }
 
     @Test
     fun `onRefresh should send Refresh action`() = runTest {
-        // WHEN
+        // When
         viewModel.onRefresh()
 
-        // THEN
+        // Then
         viewModel.action.test {
             assertThat(awaitItem()).isEqualTo(WebViewViewAction.Refresh)
         }
@@ -60,39 +60,19 @@ class WebViewViewModelTest {
 
     @Test
     fun `onBackClicked should track button click event`() {
-        // WHEN
+        // When
         viewModel.onBackClicked()
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackBackClicked() }
     }
 
     @Test
     fun `onBackClicked should send Finish action`() = runTest {
-        // WHEN
+        // When
         viewModel.onBackClicked()
 
-        // THEN
-        viewModel.action.test {
-            assertThat(awaitItem()).isEqualTo(WebViewViewAction.Finish)
-        }
-    }
-
-    @Test
-    fun `onNativeBackClicked should track button click event`() {
-        // WHEN
-        viewModel.onNativeBackClicked()
-
-        // THEN
-        verify { mockAnalytics.trackNativeBackClicked() }
-    }
-
-    @Test
-    fun `onNativeBackClicked should send Finish action`() = runTest {
-        // WHEN
-        viewModel.onNativeBackClicked()
-
-        // THEN
+        // Then
         viewModel.action.test {
             assertThat(awaitItem()).isEqualTo(WebViewViewAction.Finish)
         }

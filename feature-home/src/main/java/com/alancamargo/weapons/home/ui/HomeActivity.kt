@@ -3,10 +3,10 @@ package com.alancamargo.weapons.home.ui
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.mutableStateOf
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.ads.AdLoader
@@ -14,9 +14,9 @@ import com.alancamargo.weapons.core.consent.UserConsentManager
 import com.alancamargo.weapons.core.design.dialogue.DialogueHelper
 import com.alancamargo.weapons.core.extensions.observeFlow
 import com.alancamargo.weapons.home.R
-import com.alancamargo.weapons.home.databinding.ActivityHomeBinding
-import com.alancamargo.weapons.home.ui.adapter.QueryAdapter
 import com.alancamargo.weapons.home.ui.fragments.WeaponSearchDialogue
+import com.alancamargo.weapons.home.ui.model.WeaponQueryType
+import com.alancamargo.weapons.home.ui.view.HomeScreen
 import com.alancamargo.weapons.home.ui.viewmodel.home.HomeViewAction
 import com.alancamargo.weapons.home.ui.viewmodel.home.HomeViewModel
 import com.alancamargo.weapons.home.ui.viewmodel.home.HomeViewState
@@ -44,50 +44,37 @@ internal class HomeActivity : AppCompatActivity() {
     @Inject
     lateinit var dialogueHelper: DialogueHelper
 
-    private var _binding: ActivityHomeBinding? = null
-
-    private val binding: ActivityHomeBinding
-        get() = _binding!!
-
     private val viewModel by viewModels<HomeViewModel>()
-    private val adapter by lazy { QueryAdapter(viewModel::onQueryItemClicked) }
+
+    private val queryTypesState = mutableStateOf(emptyList<WeaponQueryType>())
+    private val isConsentGrantedState = mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        _binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        userConsentManager.getConsentIfRequired(activity = this) {
-            adLoader.loadBannerAds(binding.banner)
+        setContent {
+            HomeScreen(
+                queryTypes = queryTypesState.value,
+                isConsentGranted = isConsentGrantedState.value,
+                adLoader = adLoader,
+                adUnitId = getString(R2.string.banner_main),
+                onAllWeaponsClicked = viewModel::onAllWeaponsClicked,
+                onQueryItemClicked = viewModel::onQueryItemClicked,
+                onAboutClicked = viewModel::onAppInfoClicked,
+                onPrivacyPolicyClicked = viewModel::onPrivacyPolicyClicked,
+                onPrivacySettingsClicked = {
+                    userConsentManager.showPrivacyOptions(activity = this)
+                }
+            )
         }
-        setUpUi()
+        getConsentIfRequired()
         observeViewModelFlows()
         viewModel.start()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        menu.findItem(R.id.itemPrivacySettings)?.run {
-            isVisible = userConsentManager.isPrivacyOptionsRequired()
-        }
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.itemAbout -> viewModel.onAppInfoClicked()
-            R.id.itemPrivacyPolicy -> viewModel.onPrivacyPolicyClicked()
-            R.id.itemPrivacySettings -> userConsentManager.showPrivacyOptions(activity = this)
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun setUpUi() = with(binding) {
-        setSupportActionBar(toolbar)
-        recyclerView.adapter = adapter
-        btAllWeapons.setOnClickListener {
-            viewModel.onAllWeaponsClicked()
+    private fun getConsentIfRequired() {
+        userConsentManager.getConsentIfRequired(activity = this) {
+            isConsentGrantedState.value = true
         }
     }
 
@@ -97,7 +84,9 @@ internal class HomeActivity : AppCompatActivity() {
     }
 
     private fun onStateChanged(state: HomeViewState) {
-        state.queryTypes?.let(adapter::submitList)
+        state.queryTypes?.let {
+            queryTypesState.value = it
+        }
     }
 
     private fun onAction(action: HomeViewAction) = when (action) {
@@ -105,7 +94,7 @@ internal class HomeActivity : AppCompatActivity() {
         is HomeViewAction.ShowWeaponSearchDialogue -> showWeaponSearchDialogue()
         is HomeViewAction.ShowAppInfo -> showAppInfo()
         is HomeViewAction.ShowPrivacyPolicy -> showPrivacyPolicy(action.url)
-        is HomeViewAction.ShowFirstAccessInformation -> showFirstAccessInformation()
+        is HomeViewAction.ShowFirstAccessInformation -> showFirstAccessInformation(action.text)
     }
 
     private fun navigateToWeaponsList(query: UiWeaponQuery) {
@@ -146,11 +135,11 @@ internal class HomeActivity : AppCompatActivity() {
         )
     }
 
-    private fun showFirstAccessInformation() {
+    private fun showFirstAccessInformation(text: String) {
         dialogueHelper.showDialogue(
             context = this,
             title = getString(R.string.information),
-            messageRes = R.string.first_access_information_message,
+            message = text,
             onDismiss = viewModel::onDisclaimerDismissed
         )
     }

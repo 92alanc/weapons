@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="british_empire">Império Británico</string>
+    <string name="nazi_germany">Alemania Nazi</string>
+    <string name="france">Francia</string>
+    <string name="soviet_union">Unión Soviética</string>
+    <string name="japanese_empire">Império Japonés</string>
+    <string name="united_states">Estados Unidos</string>
+    <string name="unknown">Desconocido</string>
+    <string name="fascist_italy">Italia Fascista</string>
+</resources>

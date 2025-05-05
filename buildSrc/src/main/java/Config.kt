@@ -4,12 +4,12 @@ object Config {
 
     object Build {
 
-        const val ENABLE_MINIFY = true
-        const val ENABLE_VIEW_BINDING = true
+        const val ENABLE_MINIFY = false
+        const val ENABLE_COMPOSE = true
         const val FLAVOUR_DIMENSION = "version"
         const val META_INF_DIR = "META-INF/*"
         const val MIN_SDK = 23
-        const val TARGET_SDK = 34
+        const val TARGET_SDK = 35
 
         val javaVersion = JavaVersion.VERSION_17
         val javaVersionString = javaVersion.majorVersion
@@ -39,8 +39,8 @@ object Config {
 
         const val FLAVOUR_NAME = "ww1"
         const val SUFFIX = ".$FLAVOUR_NAME"
-        const val VERSION_CODE = 10
-        const val VERSION_NAME = "2024.1.0"
+        const val VERSION_CODE = 11
+        const val VERSION_NAME = "2025.2.0"
     }
 
     object WW2 {
@@ -48,15 +48,7 @@ object Config {
         const val FLAVOUR_NAME = "ww2"
         const val SUFFIX = ".$FLAVOUR_NAME"
         const val VERSION_CODE = 1
-        const val VERSION_NAME = "2023.4.0"
-    }
-
-    object Korea {
-
-        const val FLAVOUR_NAME = "korea"
-        const val SUFFIX = ".$FLAVOUR_NAME"
-        const val VERSION_CODE = 1
-        const val VERSION_NAME = "2023.4.0"
+        const val VERSION_NAME = "2025.2.0"
     }
 
     object Vietnam {

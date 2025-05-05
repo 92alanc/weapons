@@ -1,7 +1,6 @@
 package com.alancamargo.weapons.core.consent
 
 import android.content.Context
-import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import com.alancamargo.weapons.core.log.Logger
 import com.google.android.gms.ads.MobileAds
@@ -13,7 +12,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 
-@VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
 class UserConsentManagerImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val logger: Logger
