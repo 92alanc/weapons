@@ -1,6 +1,8 @@
 package com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist
 
 import app.cash.turbine.test
+import com.alancamargo.weapons.catalogue.domain.model.Weapon
+import com.alancamargo.weapons.catalogue.domain.model.WeaponListHeader
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListResult
 import com.alancamargo.weapons.catalogue.domain.model.WeaponQuery
 import com.alancamargo.weapons.catalogue.domain.usecase.GetWeaponsUseCase
@@ -51,26 +53,50 @@ class WeaponListViewModelTest {
 
     @Test
     fun `handleQuery should track screen view event`() {
-        // GIVEN
+        // Given
         every { mockGetWeaponsUseCase(WeaponQuery.All) } returns flowOf(WeaponListResult.Error)
 
-        // WHEN
+        // When
         viewModel.handleQuery(UiWeaponQuery.All)
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackScreenViewed() }
     }
 
     @Test
     fun `with no results handleQuery should set correct view state`() = runTest {
-        // GIVEN
+        // Given
         val result = WeaponListResult.Success(emptyMap())
         every { mockGetWeaponsUseCase(WeaponQuery.All) } returns flowOf(result)
 
-        // WHEN
+        // When
         viewModel.handleQuery(UiWeaponQuery.All)
 
-        // THEN
+        // Then
+        viewModel.state.test {
+            val initialState = WeaponListViewState()
+            assertThat(awaitItem()).isEqualTo(initialState)
+            val loading = initialState.onLoading()
+            assertThat(awaitItem()).isEqualTo(loading)
+            val empty = loading.onEmptyState()
+            assertThat(awaitItem()).isEqualTo(empty)
+            val finalState = empty.onFinishedLoading()
+            assertThat(awaitItem()).isEqualTo(finalState)
+        }
+    }
+
+    @Test
+    fun `with empty results handleQuery should set correct view state`() = runTest {
+        // Given
+        val result = WeaponListResult.Success(
+            mapOf<WeaponListHeader?, List<Weapon>>(null to emptyList())
+        )
+        every { mockGetWeaponsUseCase(WeaponQuery.All) } returns flowOf(result)
+
+        // When
+        viewModel.handleQuery(UiWeaponQuery.All)
+
+        // Then
         viewModel.state.test {
             val initialState = WeaponListViewState()
             assertThat(awaitItem()).isEqualTo(initialState)
@@ -85,14 +111,14 @@ class WeaponListViewModelTest {
 
     @Test
     fun `with weapon list handleQuery should set correct view state`() = runTest {
-        // GIVEN
+        // Given
         val result = WeaponListResult.Success(stubWeaponListMap())
         every { mockGetWeaponsUseCase(WeaponQuery.All) } returns flowOf(result)
 
-        // WHEN
+        // When
         viewModel.handleQuery(UiWeaponQuery.All)
 
-        // THEN
+        // Then
         viewModel.state.test {
             val initialState = WeaponListViewState()
             assertThat(awaitItem()).isEqualTo(initialState)
@@ -105,14 +131,14 @@ class WeaponListViewModelTest {
 
     @Test
     fun `with weapon list with header handleQuery should set correct view state`() = runTest {
-        // GIVEN
+        // Given
         val result = WeaponListResult.Success(stubWeaponListWithHeaderMap())
         every { mockGetWeaponsUseCase(WeaponQuery.All) } returns flowOf(result)
 
-        // WHEN
+        // When
         viewModel.handleQuery(UiWeaponQuery.All)
 
-        // THEN
+        // Then
         viewModel.state.test {
             val initialState = WeaponListViewState()
             assertThat(awaitItem()).isEqualTo(initialState)
@@ -125,28 +151,28 @@ class WeaponListViewModelTest {
 
     @Test
     fun `with error handleQuery should log exception`() = runTest {
-        // GIVEN
+        // Given
         val exception = IllegalStateException()
         every { mockGetWeaponsUseCase(WeaponQuery.All) } returns flow { throw exception }
 
-        // WHEN
+        // When
         viewModel.handleQuery(UiWeaponQuery.All)
 
-        // THEN
+        // Then
         advanceUntilIdle()
         verify { mockLogger.error(exception) }
     }
 
     @Test
     fun `with error handleQuery should set correct view state`() = runTest {
-        // GIVEN
+        // Given
         val result = WeaponListResult.Error
         every { mockGetWeaponsUseCase(WeaponQuery.All) } returns flowOf(result)
 
-        // WHEN
+        // When
         viewModel.handleQuery(UiWeaponQuery.All)
 
-        // THEN
+        // Then
         viewModel.state.test {
             val initialState = WeaponListViewState()
             assertThat(awaitItem()).isEqualTo(initialState)
@@ -161,21 +187,21 @@ class WeaponListViewModelTest {
 
     @Test
     fun `onWeaponClicked should track button click event`() {
-        // WHEN
+        // When
         val weapon = stubUiWeapon()
         viewModel.onWeaponClicked(weapon)
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackWeaponClicked(weapon.name) }
     }
 
     @Test
     fun `onWeaponClicked should send NavigateToWeaponDetails action`() = runTest {
-        // WHEN
+        // When
         val weapon = stubUiWeapon()
         viewModel.onWeaponClicked(weapon)
 
-        // THEN
+        // Then
         viewModel.action.test {
             val expected = WeaponListViewAction.ShowWeaponDetails(weapon)
             assertThat(awaitItem()).isEqualTo(expected)
@@ -184,39 +210,19 @@ class WeaponListViewModelTest {
 
     @Test
     fun `onBackClicked should track button click event`() {
-        // WHEN
+        // When
         viewModel.onBackClicked()
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackBackClicked() }
     }
 
     @Test
     fun `onBackClicked should send Finish action`() = runTest {
-        // WHEN
+        // When
         viewModel.onBackClicked()
 
-        // THEN
-        viewModel.action.test {
-            assertThat(awaitItem()).isEqualTo(WeaponListViewAction.Finish)
-        }
-    }
-
-    @Test
-    fun `onNativeBackClicked should track button click event`() {
-        // WHEN
-        viewModel.onNativeBackClicked()
-
-        // THEN
-        verify { mockAnalytics.trackNativeBackClicked() }
-    }
-
-    @Test
-    fun `onNativeBackClicked should send Finish action`() = runTest {
-        // WHEN
-        viewModel.onNativeBackClicked()
-
-        // THEN
+        // Then
         viewModel.action.test {
             assertThat(awaitItem()).isEqualTo(WeaponListViewAction.Finish)
         }

@@ -68,16 +68,11 @@ internal class WeaponListViewModel @Inject constructor(
         sendAction(WeaponListViewAction.Finish)
     }
 
-    fun onNativeBackClicked() {
-        analytics.trackNativeBackClicked()
-        sendAction(WeaponListViewAction.Finish)
-    }
-
     private fun handleResult(result: WeaponListResult) = when (result) {
         is WeaponListResult.Success -> {
             val body = result.weapons
 
-            if (body.isEmpty()) {
+            if (body.isEmpty() || body.values.all { it.isEmpty() }) {
                 _state.update { it.onEmptyState() }
             } else {
                 if (body.isWeaponList()) {

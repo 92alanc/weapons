@@ -22,7 +22,7 @@ class WeaponLocalDataSourceImplTest {
     @Before
     fun setUp() {
         coEvery {
-            mockFileHelper.getImageFilePaths(weaponName = any())
+            mockFileHelper.getImageFilePaths(weaponId = any())
         } returns listOf(
             "photo1.jpg",
             "photo2.jpg",
@@ -32,67 +32,67 @@ class WeaponLocalDataSourceImplTest {
 
     @Test
     fun `getAllWeapons should return all weapons`() = runTest {
-        // GIVEN
+        // Given
         val weapons = stubDbWeaponList()
         coEvery { mockDao.getAllWeapons() } returns weapons
 
-        // WHEN
+        // When
         val actual = localDataSource.getAllWeapons()
 
-        // THEN
+        // Then
         actual.assertMapHasNullKeyAndValuesAreCorrect()
     }
 
     @Test
     fun `filterWeaponsByName should return weapons filtered by name`() = runTest {
-        // GIVEN
+        // Given
         val weapons = stubDbWeaponList()
         val name = "weapon"
         coEvery { mockDao.getWeaponsByName(name) } returns weapons
 
-        // WHEN
+        // When
         val actual = localDataSource.filterWeaponsByName(name)
 
-        // THEN
+        // Then
         actual.assertMapHasNullKeyAndValuesAreCorrect()
     }
 
     @Test
     fun `groupWeaponsByYear should return weapons grouped by year`() = runTest {
-        // GIVEN
+        // Given
         val weapons = stubDbWeaponList()
         coEvery { mockDao.getAllWeapons() } returns weapons
 
-        // WHEN
+        // When
         val actual = localDataSource.groupWeaponsByYear()
 
-        // THEN
+        // Then
         actual.assertMapHasNullKeyAndValuesAreCorrect()
     }
 
     @Test
     fun `groupWeaponsByCountry should return weapons grouped by country`() = runTest {
-        // GIVEN
+        // Given
         val weapons = stubDbWeaponList()
         coEvery { mockDao.getAllWeapons() } returns weapons
 
-        // WHEN
+        // When
         val actual = localDataSource.groupWeaponsByCountry()
 
-        // THEN
+        // Then
         actual.assertMapHasNullKeyAndValuesAreCorrect()
     }
 
     @Test
     fun `groupWeaponsByType should return weapons grouped by type`() = runTest {
-        // GIVEN
+        // Given
         val weapons = stubDbWeaponList()
         coEvery { mockDao.getAllWeapons() } returns weapons
 
-        // WHEN
+        // When
         val actual = localDataSource.groupWeaponsByType()
 
-        // THEN
+        // Then
         val expectedEntryCount = 1
         assertThat(actual.entries).hasSize(expectedEntryCount)
         val expectedWeaponCount = 3
@@ -101,27 +101,27 @@ class WeaponLocalDataSourceImplTest {
 
     @Test
     fun `groupWeaponsByCalibre should return weapons grouped by calibre`() = runTest {
-        // GIVEN
+        // Given
         val weapons = stubDbWeaponList()
         coEvery { mockDao.getAllWeapons() } returns weapons
 
-        // WHEN
+        // When
         val actual = localDataSource.groupWeaponsByCalibre()
 
-        // THEN
+        // Then
         actual.assertMapHasNullKeyAndValuesAreCorrect()
     }
 
     @Test
     fun `groupWeaponsByMake should return weapons grouped by make`() = runTest {
-        // GIVEN
+        // Given
         val weapons = stubDbWeaponList()
         coEvery { mockDao.getAllWeapons() } returns weapons
 
-        // WHEN
+        // When
         val actual = localDataSource.groupWeaponsByMake()
 
-        // THEN
+        // Then
         actual.assertMapHasNullKeyAndValuesAreCorrect()
     }
 

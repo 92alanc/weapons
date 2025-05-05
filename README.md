@@ -7,7 +7,6 @@ either for educational purposes or for weapon enthusiasts.
 
 - World War 1 (available [here](https://play.google.com/store/apps/details?id=com.alancamargo.weapons.ww1))
 - World War 2 (in progress)
-- Korean War (to be developed)
 - Vietnam War (to be developed)
 
 ## Author

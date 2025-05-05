@@ -7,6 +7,4 @@ internal interface WebViewAnalytics {
     fun trackRefreshClicked()
 
     fun trackBackClicked()
-
-    fun trackNativeBackClicked()
 }

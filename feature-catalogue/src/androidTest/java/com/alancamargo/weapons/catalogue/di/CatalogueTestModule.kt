@@ -57,7 +57,7 @@ internal object CatalogueTestModule {
     @Singleton
     fun provideMockFileHelper(): FileHelper = mockk {
         coEvery {
-            getImageFilePaths(weaponName = any())
+            getImageFilePaths(weaponId = any())
         } returns listOf("1.jpg", "2.jpg", "3.jpg")
     }
 

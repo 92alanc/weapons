@@ -9,7 +9,6 @@ private const val SCREEN_NAME = "web-view"
 
 private const val BUTTON_REFRESH = "refresh"
 private const val BUTTON_BACK = "back"
-private const val BUTTON_NATIVE_BACK = "native-back"
 
 class WebViewAnalyticsImplTest {
 
@@ -18,19 +17,19 @@ class WebViewAnalyticsImplTest {
 
     @Test
     fun `trackScreenViewed should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackScreenViewed()
 
-        // THEN
+        // Then
         verify { mockAnalyticsManager.trackScreenViewed(SCREEN_NAME) }
     }
 
     @Test
     fun `trackRefreshClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackRefreshClicked()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
@@ -41,28 +40,14 @@ class WebViewAnalyticsImplTest {
 
     @Test
     fun `trackBackClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackBackClicked()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
                 buttonName = BUTTON_BACK
-            )
-        }
-    }
-
-    @Test
-    fun `trackNativeBackClicked should track event correctly`() {
-        // WHEN
-        analytics.trackNativeBackClicked()
-
-        // THEN
-        verify {
-            mockAnalyticsManager.trackButtonClicked(
-                screenName = SCREEN_NAME,
-                buttonName = BUTTON_NATIVE_BACK
             )
         }
     }

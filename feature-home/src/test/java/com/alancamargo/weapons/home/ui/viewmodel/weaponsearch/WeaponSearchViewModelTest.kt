@@ -32,34 +32,34 @@ class WeaponSearchViewModelTest {
 
     @Test
     fun `start should track dialogue view event`() {
-        // WHEN
+        // When
         viewModel.start()
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackDialogueViewed() }
     }
 
     @Test
     fun `onOkClicked should track button click event`() {
-        // GIVEN
+        // Given
         val weaponName = "Gewehr"
 
-        // WHEN
+        // When
         viewModel.onOkClicked(weaponName)
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackWeaponSearched(weaponName) }
     }
 
     @Test
     fun `onOkClicked should send NavigateToWeaponList action`() = runTest {
-        // GIVEN
+        // Given
         val weaponName = "Lee-Enfield"
 
-        // WHEN
+        // When
         viewModel.onOkClicked(weaponName)
 
-        // THEN
+        // Then
         val query = UiWeaponQuery.ByName(weaponName)
         val expected = WeaponSearchViewAction.NavigateToWeaponList(query)
         viewModel.action.test {
@@ -70,10 +70,10 @@ class WeaponSearchViewModelTest {
 
     @Test
     fun `onCancel should track dialogue cancel event`() {
-        // WHEN
+        // When
         viewModel.onCancel()
 
-        // THEN
+        // Then
         verify { mockAnalytics.trackDialogueCancelled() }
     }
 }

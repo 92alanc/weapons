@@ -7,10 +7,13 @@ import com.alancamargo.weapons.core.database.DatabaseProvider
 import com.alancamargo.weapons.core.database.DatabaseProviderImpl
 import com.alancamargo.weapons.core.log.Logger
 import com.alancamargo.weapons.core.log.LoggerImpl
+import com.alancamargo.weapons.core.remoteconfig.RemoteConfigManager
+import com.alancamargo.weapons.core.remoteconfig.RemoteConfigManagerImpl
 import com.alancamargo.weapons.core.resources.ResourcesHelper
 import com.alancamargo.weapons.core.resources.ResourcesHelperImpl
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,4 +50,14 @@ object CoreModule {
         @ApplicationContext context: Context,
         logger: Logger
     ): ResourcesHelper = ResourcesHelperImpl(context, logger)
+
+    @Provides
+    @Singleton
+    fun provideRemoteConfigManager(
+        firebaseRemoteConfig: FirebaseRemoteConfig,
+        logger: Logger
+    ): RemoteConfigManager = RemoteConfigManagerImpl(
+        firebaseRemoteConfig,
+        logger
+    )
 }

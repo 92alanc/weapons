@@ -23,85 +23,85 @@ class WeaponRepositoryImplTest {
 
     @Test
     fun `when local data source returns weapons getAllWeapons should return Success`() = runTest {
-        // GIVEN
+        // Given
         val expected = stubWeaponListMap()
         coEvery { mockLocalDataSource.getAllWeapons() } returns expected
 
-        // WHEN
+        // When
         val actual = repository.getAllWeapons()
 
-        // THEN
+        // Then
         assertThat(actual).isEqualTo(WeaponListResult.Success(expected))
     }
 
     @Test
     fun `when local data source throws exception getAllWeapons should log error`() = runTest {
-        // GIVEN
+        // Given
         val exception = Throwable()
         coEvery { mockLocalDataSource.getAllWeapons() } throws exception
 
-        // WHEN
+        // When
         repository.getAllWeapons()
 
-        // THEN
+        // Then
         verify { mockLogger.error(exception) }
     }
 
     @Test
     fun `when local data source throws exception getAllWeapons should return Error`() = runTest {
-        // GIVEN
+        // Given
         val exception = Throwable()
         coEvery { mockLocalDataSource.getAllWeapons() } throws exception
 
-        // WHEN
+        // When
         val actual = repository.getAllWeapons()
 
-        // THEN
+        // Then
         assertThat(actual).isEqualTo(WeaponListResult.Error)
     }
 
     @Test
     fun `when local data source returns weapons filterWeaponsByName should return Success`() {
         runTest {
-            // GIVEN
+            // Given
             val name = "weapon"
             val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.filterWeaponsByName(name) } returns expected
 
-            // WHEN
+            // When
             val actual = repository.filterWeaponsByName(name)
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Success(expected))
         }
     }
 
     @Test
     fun `when local data source throws exception filterWeaponsByName should log error`() = runTest {
-        // GIVEN
+        // Given
         val name = "weapon"
         val exception = Throwable()
         coEvery { mockLocalDataSource.filterWeaponsByName(name) } throws exception
 
-        // WHEN
+        // When
         repository.filterWeaponsByName(name)
 
-        // THEN
+        // Then
         verify { mockLogger.error(exception) }
     }
 
     @Test
     fun `when local data source throws exception filterWeaponsByName should return Error`() {
         runTest {
-            // GIVEN
+            // Given
             val name = "weapon"
             val exception = Throwable()
             coEvery { mockLocalDataSource.filterWeaponsByName(name) } throws exception
 
-            // WHEN
+            // When
             val actual = repository.filterWeaponsByName(name)
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Error)
         }
     }
@@ -109,42 +109,42 @@ class WeaponRepositoryImplTest {
     @Test
     fun `when local data source returns weapons groupWeaponsByYear should return Success`() {
         runTest {
-            // GIVEN
+            // Given
             val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.groupWeaponsByYear() } returns expected
 
-            // WHEN
+            // When
             val actual = repository.groupWeaponsByYear()
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Success(expected))
         }
     }
 
     @Test
     fun `when local data source throws exception groupWeaponsByYear should log error`() = runTest {
-        // GIVEN
+        // Given
         val exception = Throwable()
         coEvery { mockLocalDataSource.groupWeaponsByYear() } throws exception
 
-        // WHEN
+        // When
         repository.groupWeaponsByYear()
 
-        // THEN
+        // Then
         verify { mockLogger.error(exception) }
     }
 
     @Test
     fun `when local data source throws exception groupWeaponsByYear should return Error`() {
         runTest {
-            // GIVEN
+            // Given
             val exception = Throwable()
             coEvery { mockLocalDataSource.groupWeaponsByYear() } throws exception
 
-            // WHEN
+            // When
             val actual = repository.groupWeaponsByYear()
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Error)
         }
     }
@@ -152,42 +152,42 @@ class WeaponRepositoryImplTest {
     @Test
     fun `when local data source returns weapons groupWeaponsByCountry should return Success`() {
         runTest {
-            // GIVEN
+            // Given
             val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.groupWeaponsByCountry() } returns expected
 
-            // WHEN
+            // When
             val actual = repository.groupWeaponsByCountry()
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Success(expected))
         }
     }
 
     @Test
     fun `when local data source throws exception groupWeaponsByCountry should log error`() = runTest {
-        // GIVEN
+        // Given
         val exception = Throwable()
         coEvery { mockLocalDataSource.groupWeaponsByCountry() } throws exception
 
-        // WHEN
+        // When
         repository.groupWeaponsByCountry()
 
-        // THEN
+        // Then
         verify { mockLogger.error(exception) }
     }
 
     @Test
     fun `when local data source throws exception groupWeaponsByCountry should return Error`() {
         runTest {
-            // GIVEN
+            // Given
             val exception = Throwable()
             coEvery { mockLocalDataSource.groupWeaponsByCountry() } throws exception
 
-            // WHEN
+            // When
             val actual = repository.groupWeaponsByCountry()
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Error)
         }
     }
@@ -195,42 +195,42 @@ class WeaponRepositoryImplTest {
     @Test
     fun `when local data source returns weapons groupWeaponsByType should return Success`() {
         runTest {
-            // GIVEN
+            // Given
             val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.groupWeaponsByType() } returns expected
 
-            // WHEN
+            // When
             val actual = repository.groupWeaponsByType()
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Success(expected))
         }
     }
 
     @Test
     fun `when local data source throws exception groupWeaponsByType should log error`() = runTest {
-        // GIVEN
+        // Given
         val exception = Throwable()
         coEvery { mockLocalDataSource.groupWeaponsByType() } throws exception
 
-        // WHEN
+        // When
         repository.groupWeaponsByType()
 
-        // THEN
+        // Then
         verify { mockLogger.error(exception) }
     }
 
     @Test
     fun `when local data source throws exception groupWeaponsByType should return Error`() {
         runTest {
-            // GIVEN
+            // Given
             val exception = Throwable()
             coEvery { mockLocalDataSource.groupWeaponsByType() } throws exception
 
-            // WHEN
+            // When
             val actual = repository.groupWeaponsByType()
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Error)
         }
     }
@@ -238,14 +238,14 @@ class WeaponRepositoryImplTest {
     @Test
     fun `when local data source returns weapons groupWeaponsByCalibre should return Success`() {
         runTest {
-            // GIVEN
+            // Given
             val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.groupWeaponsByCalibre() } returns expected
 
-            // WHEN
+            // When
             val actual = repository.groupWeaponsByCalibre()
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Success(expected))
         }
     }
@@ -253,14 +253,14 @@ class WeaponRepositoryImplTest {
     @Test
     fun `when local data source throws exception groupWeaponsByCalibre should log error`() {
         runTest {
-            // GIVEN
+            // Given
             val exception = Throwable()
             coEvery { mockLocalDataSource.groupWeaponsByCalibre() } throws exception
 
-            // WHEN
+            // When
             repository.groupWeaponsByCalibre()
 
-            // THEN
+            // Then
             verify { mockLogger.error(exception) }
         }
     }
@@ -268,14 +268,14 @@ class WeaponRepositoryImplTest {
     @Test
     fun `when local data source throws exception groupWeaponsByCalibre should return Error`() {
         runTest {
-            // GIVEN
+            // Given
             val exception = Throwable()
             coEvery { mockLocalDataSource.groupWeaponsByCalibre() } throws exception
 
-            // WHEN
+            // When
             val actual = repository.groupWeaponsByCalibre()
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Error)
         }
     }
@@ -283,14 +283,14 @@ class WeaponRepositoryImplTest {
     @Test
     fun `when local data source returns weapons groupWeaponsByMake should return Success`() {
         runTest {
-            // GIVEN
+            // Given
             val expected = stubWeaponListMap()
             coEvery { mockLocalDataSource.groupWeaponsByMake() } returns expected
 
-            // WHEN
+            // When
             val actual = repository.groupWeaponsByMake()
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Success(expected))
         }
     }
@@ -298,14 +298,14 @@ class WeaponRepositoryImplTest {
     @Test
     fun `when local data source throws exception groupWeaponsByMake should log error`() {
         runTest {
-            // GIVEN
+            // Given
             val exception = Throwable()
             coEvery { mockLocalDataSource.groupWeaponsByMake() } throws exception
 
-            // WHEN
+            // When
             repository.groupWeaponsByMake()
 
-            // THEN
+            // Then
             verify { mockLogger.error(exception) }
         }
     }
@@ -313,14 +313,14 @@ class WeaponRepositoryImplTest {
     @Test
     fun `when local data source throws exception groupWeaponsByMake should return Error`() {
         runTest {
-            // GIVEN
+            // Given
             val exception = Throwable()
             coEvery { mockLocalDataSource.groupWeaponsByMake() } throws exception
 
-            // WHEN
+            // When
             val actual = repository.groupWeaponsByMake()
 
-            // THEN
+            // Then
             assertThat(actual).isEqualTo(WeaponListResult.Error)
         }
     }

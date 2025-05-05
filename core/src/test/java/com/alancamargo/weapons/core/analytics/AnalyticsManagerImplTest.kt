@@ -14,66 +14,66 @@ class AnalyticsManagerImplTest {
 
     @Test
     fun `trackScreenViewed should log event`() {
-        // WHEN
+        // When
         val screenName = "screen"
         analyticsManager.trackScreenViewed(screenName)
 
-        // THEN
+        // Then
         verify { mockLogger.debug(message = any()) }
     }
 
     @Test
     fun `trackScreenViewed should track screen view event on firebase`() {
-        // WHEN
+        // When
         val screenName = "screen"
         analyticsManager.trackScreenViewed(screenName)
 
-        // THEN
+        // Then
         verify { mockFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, any()) }
     }
 
     @Test
     fun `trackButtonClicked should log event`() {
-        // WHEN
+        // When
         val buttonName = "button"
         val screenName = "screen"
         analyticsManager.trackButtonClicked(buttonName, screenName)
 
-        // THEN
+        // Then
         verify { mockLogger.debug(message = any()) }
     }
 
     @Test
     fun `trackButtonClicked should track button click event on firebase`() {
-        // WHEN
+        // When
         val buttonName = "button"
         val screenName = "screen"
         analyticsManager.trackButtonClicked(buttonName, screenName)
 
-        // THEN
+        // Then
         val eventName = "button_clicked"
         verify { mockFirebaseAnalytics.logEvent(eventName, any()) }
     }
 
     @Test
     fun `trackEvent should log event`() {
-        // WHEN
+        // When
         val eventName = "event"
         val screenName = "screen"
         analyticsManager.trackEvent(screenName, eventName)
 
-        // THEN
+        // Then
         verify { mockLogger.debug(message = any()) }
     }
 
     @Test
     fun `trackEvent should track event on firebase`() {
-        // WHEN
+        // When
         val eventName = "event"
         val screenName = "screen"
         analyticsManager.trackEvent(screenName, eventName)
 
-        // THEN
+        // Then
         verify { mockFirebaseAnalytics.logEvent(eventName, any()) }
     }
 }

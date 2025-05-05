@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaults>
+    <entry>
+        <key>first_access_info</key>
+        <value>This app is not a game.</value>
+    </entry>
+</defaults>

@@ -13,8 +13,6 @@
     <string name="type_sub_machine_gun">Sub machine-gun</string>
     <string name="type_grenade_anti_personnel">Anti-personnel grenade</string>
     <string name="type_grenade_anti_tank">Anti-tank grenade</string>
-    <string name="type_mine_anti_personnel">Anti-personnel mine</string>
-    <string name="type_mine_anti_tank">Anti-tank mine</string>
     <string name="type_grenade_launcher">Grenade launcher</string>
     <string name="type_rocket_launcher">Rocket launcher</string>
     <string name="type_booby_trap">Booby trap</string>

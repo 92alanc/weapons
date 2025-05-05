@@ -13,8 +13,6 @@
     <string name="type_sub_machine_gun">Metralhadora pesada</string>
     <string name="type_grenade_anti_personnel">Submetralhadora</string>
     <string name="type_grenade_anti_tank">Granada antitanque</string>
-    <string name="type_mine_anti_personnel">Mina antipessoal</string>
-    <string name="type_mine_anti_tank">Mina antitanque</string>
     <string name="type_grenade_launcher">Lança-granada</string>
     <string name="type_rocket_launcher">Lança-foguete</string>
     <string name="type_booby_trap">Armadilha</string>

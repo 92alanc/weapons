@@ -4,17 +4,18 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
+import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import com.alancamargo.weapons.catalogue.databinding.ActivityWeaponListBinding
-import com.alancamargo.weapons.catalogue.ui.adapter.WeaponAdapter
-import com.alancamargo.weapons.catalogue.ui.adapter.WeaponListWithHeaderAdapter
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.res.stringResource
 import com.alancamargo.weapons.catalogue.ui.fragments.WeaponDetailsBottomSheet
+import com.alancamargo.weapons.catalogue.ui.view.WeaponListScreen
 import com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist.WeaponListViewAction
 import com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist.WeaponListViewModel
 import com.alancamargo.weapons.catalogue.ui.viewmodel.weaponlist.WeaponListViewState
 import com.alancamargo.weapons.common.ui.UiWeapon
+import com.alancamargo.weapons.common.ui.UiWeaponListHeader
 import com.alancamargo.weapons.common.ui.UiWeaponQuery
 import com.alancamargo.weapons.core.ads.AdLoader
 import com.alancamargo.weapons.core.extensions.args
@@ -25,16 +26,12 @@ import com.alancamargo.weapons.core.resources.ResourcesHelper
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.parcelize.Parcelize
 import javax.inject.Inject
+import com.alancamargo.weapons.core.design.R as CoreR
 
 private const val TAG_WEAPON_DETAILS = "weapon-details"
 
 @AndroidEntryPoint
 internal class WeaponListActivity : AppCompatActivity() {
-
-    private var _binding: ActivityWeaponListBinding? = null
-
-    private val binding: ActivityWeaponListBinding
-        get() = _binding!!
 
     private val args by args<Args>()
     private val viewModel by viewModels<WeaponListViewModel>()
@@ -45,42 +42,34 @@ internal class WeaponListActivity : AppCompatActivity() {
     @Inject
     lateinit var resourcesHelper: ResourcesHelper
 
-    private val weaponAdapter by lazy {
-        WeaponAdapter(
-            resourcesHelper,
-            viewModel::onWeaponClicked
-        )
-    }
-
-    private val weaponListWithHeaderAdapter by lazy {
-        WeaponListWithHeaderAdapter(
-            resourcesHelper,
-            viewModel::onWeaponClicked
-        )
-    }
+    private val weaponsState = mutableStateOf(emptyList<UiWeapon>())
+    private val weaponListWithHeaderState = mutableStateOf(
+        emptyList<Pair<UiWeaponListHeader?, List<UiWeapon>>>()
+    )
+    private val isProgressBarVisibleState = mutableStateOf(false)
+    private val isWeaponListVisibleState = mutableStateOf(false)
+    private val isWeaponListWithHeaderVisibleState = mutableStateOf(false)
+    private val isEmptyStateVisibleState = mutableStateOf(false)
+    private val isErrorVisibleState = mutableStateOf(false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityWeaponListBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setUpUi()
+        setContent {
+            WeaponListScreen(
+                weapons = weaponsState.value,
+                weaponListWithHeader = weaponListWithHeaderState.value,
+                isProgressBarVisible = isProgressBarVisibleState.value,
+                isEmptyStateVisible = isEmptyStateVisibleState.value,
+                isErrorVisible = isErrorVisibleState.value,
+                resourcesHelper = resourcesHelper,
+                adUnitId = stringResource(CoreR.string.banner_weapon_list),
+                adLoader = adLoader,
+                onItemClicked = viewModel::onWeaponClicked,
+                onBackClicked = viewModel::onBackClicked
+            )
+        }
         observeViewModelFlows()
         viewModel.handleQuery(args.query)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        viewModel.onBackClicked()
-        return true
-    }
-
-    override fun onBackPressed() {
-        viewModel.onNativeBackClicked()
-    }
-
-    private fun setUpUi() = with(binding) {
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        adLoader.loadBannerAds(banner)
     }
 
     private fun observeViewModelFlows() {
@@ -89,19 +78,14 @@ internal class WeaponListActivity : AppCompatActivity() {
     }
 
     private fun onStateChanged(state: WeaponListViewState) = with(state) {
-        binding.progressBar.isVisible = isLoading
-        binding.groupError.isVisible = showError
-        binding.groupNoResults.isVisible = showEmptyState
+        isProgressBarVisibleState.value = isLoading
+        isWeaponListVisibleState.value = weapons != null
+        isWeaponListWithHeaderVisibleState.value = weaponListWithHeader != null
+        isEmptyStateVisibleState.value = showEmptyState
+        isErrorVisibleState.value = showError
 
-        weapons?.let {
-            binding.recyclerView.adapter = weaponAdapter
-            weaponAdapter.submitList(it)
-        }
-
-        weaponListWithHeader?.let {
-            binding.recyclerView.adapter = weaponListWithHeaderAdapter
-            weaponListWithHeaderAdapter.submitList(it)
-        }
+        weapons?.let { weaponsState.value = it }
+        weaponListWithHeader?.let { weaponListWithHeaderState.value = it }
     }
 
     private fun onAction(action: WeaponListViewAction) = when (action) {

@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-dontwarn com.alancamargo.weapons.core.ads.AdLoader
+-dontwarn com.alancamargo.weapons.core.design.view.ComposableAdViewKt
+-dontwarn com.alancamargo.weapons.core.design.view.CustomFontTextKt
+-dontwarn com.alancamargo.weapons.core.extensions.LifecycleOwnerExtensionsKt

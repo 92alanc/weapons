@@ -1,8 +1,9 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.android.compose.compiler)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -37,10 +38,6 @@ android {
             dimension = Config.Build.FLAVOUR_DIMENSION
         }
 
-        create(Config.Korea.FLAVOUR_NAME) {
-            dimension = Config.Build.FLAVOUR_DIMENSION
-        }
-
         create(Config.Vietnam.FLAVOUR_NAME) {
             dimension = Config.Build.FLAVOUR_DIMENSION
         }
@@ -58,13 +55,24 @@ android {
     kotlin {
         jvmToolchain(Config.Build.javaVersionInt)
     }
+
+    buildFeatures {
+        compose = Config.Build.ENABLE_COMPOSE
+    }
 }
 
 dependencies {
+    implementation(project(Config.Modules.CORE))
+
     implementation(libs.android.material)
+    implementation(libs.android.compose.activity)
+    implementation(platform(libs.android.compose.bom))
+    implementation(libs.android.compose.material3)
+    implementation(libs.android.compose.preview)
+    implementation(libs.google.ads)
     implementation(libs.hilt.android)
 
     api(libs.android.splashscreen)
 
-    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 }

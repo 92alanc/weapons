@@ -1,8 +1,8 @@
 package com.alancamargo.weapons.catalogue.domain.usecase
 
-import com.alancamargo.weapons.catalogue.domain.repository.WeaponRepository
 import com.alancamargo.weapons.catalogue.domain.model.WeaponListResult
 import com.alancamargo.weapons.catalogue.domain.model.WeaponQuery
+import com.alancamargo.weapons.catalogue.domain.repository.WeaponRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

@@ -25,19 +25,19 @@ class HomeAnalyticsImplTest {
 
     @Test
     fun `trackScreenViewed should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackScreenViewed()
 
-        // THEN
+        // Then
         verify { mockAnalyticsManager.trackScreenViewed(SCREEN_NAME) }
     }
 
     @Test
     fun `trackFirstAccessInformationDismissed should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackFirstAccessInformationDismissed()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
@@ -48,10 +48,10 @@ class HomeAnalyticsImplTest {
 
     @Test
     fun `trackAllWeaponsClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackAllWeaponsClicked()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
@@ -62,10 +62,10 @@ class HomeAnalyticsImplTest {
 
     @Test
     fun `trackGroupByNameClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackGroupByNameClicked()
 
-        // THEN
+        // Then
         mockAnalyticsManager.trackButtonClicked(
             screenName = SCREEN_NAME,
             buttonName = BUTTON_BY_NAME
@@ -74,10 +74,10 @@ class HomeAnalyticsImplTest {
 
     @Test
     fun `trackGroupByCountryClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackGroupByCountryClicked()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
@@ -88,10 +88,10 @@ class HomeAnalyticsImplTest {
 
     @Test
     fun `trackGroupByYearClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackGroupByYearClicked()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
@@ -102,10 +102,10 @@ class HomeAnalyticsImplTest {
 
     @Test
     fun `trackGroupByTypeClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackGroupByTypeClicked()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
@@ -116,10 +116,10 @@ class HomeAnalyticsImplTest {
 
     @Test
     fun `trackGroupByCalibreClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackGroupByCalibreClicked()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
@@ -130,10 +130,10 @@ class HomeAnalyticsImplTest {
 
     @Test
     fun `trackGroupByMakeClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackGroupByMakeClicked()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
@@ -144,10 +144,10 @@ class HomeAnalyticsImplTest {
 
     @Test
     fun `trackAppInfoClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackAppInfoClicked()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,
@@ -158,10 +158,10 @@ class HomeAnalyticsImplTest {
 
     @Test
     fun `trackPrivacyPolicyClicked should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackPrivacyPolicyClicked()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackButtonClicked(
                 screenName = SCREEN_NAME,

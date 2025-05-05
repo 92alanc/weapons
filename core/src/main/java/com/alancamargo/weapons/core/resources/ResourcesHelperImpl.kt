@@ -1,5 +1,6 @@
 package com.alancamargo.weapons.core.resources
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
@@ -16,16 +17,26 @@ internal class ResourcesHelperImpl @Inject constructor(
     }
 
     override fun getDrawable(resourceName: String): Drawable? = try {
-        val resId = context.resources.getIdentifier(
-            resourceName,
-            "drawable",
-            context.packageName
-        )
-
-        ContextCompat.getDrawable(context, resId)
+        getDrawableResourceId(resourceName)?.let { resId ->
+            ContextCompat.getDrawable(context, resId)
+        }
     } catch (t: Throwable) {
         logger.error(t)
         null
+    }
+
+    @SuppressLint("DiscouragedApi")
+    override fun getDrawableResourceId(resourceName: String): Int? {
+        return try {
+            context.resources.getIdentifier(
+                resourceName,
+                "drawable",
+                context.packageName
+            )
+        } catch (t: Throwable) {
+            logger.error(t)
+            null
+        }
     }
 
     override fun getFormattedString(stringId: Int, arg: Any): String {

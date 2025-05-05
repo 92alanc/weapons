@@ -13,8 +13,6 @@
     <string name="type_sub_machine_gun">Пистолет-пулемёт</string>
     <string name="type_grenade_anti_personnel">Противопехотная граната</string>
     <string name="type_grenade_anti_tank">Противотанковая граната</string>
-    <string name="type_mine_anti_personnel">Противопехотная мина</string>
-    <string name="type_mine_anti_tank">Противотанковая мина</string>
     <string name="type_grenade_launcher">Гранатомёт</string>
     <string name="type_rocket_launcher">Ракетная пусковая установка</string>
     <string name="type_booby_trap">Ловушка</string>
@@ -28,7 +26,7 @@
     <string name="calibre_format">Калибр: %1$s</string>
     <string name="length_format">Длина: %1$dмм</string>
     <string name="mass_format">Масса: %1$.2fкг</string>
-    <string name="rate_of_fire_format">Скорострельность: %1$s выстрелов в минуту</string>
+    <string name="rate_of_fire_format">Скорострельность: %1$d выстрелов в минуту</string>
     <string name="effective_range_format">Прицельная дальность: %1$dм</string>
     <string name="error_loading_photo">Ошибка загрузки фото</string>
     <string name="no_results">Результатов не найдено. Попробуйте поискать другое имя</string>

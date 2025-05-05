@@ -10,6 +10,8 @@ interface ResourcesHelper {
 
     fun getDrawable(resourceName: String): Drawable?
 
+    fun getDrawableResourceId(resourceName: String): Int?
+
     fun getFormattedString(@StringRes stringId: Int, arg: Any): String
 
     fun getPluralString(@PluralsRes stringId: Int, quantity: Int): String

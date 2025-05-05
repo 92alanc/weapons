@@ -7,7 +7,6 @@ private const val SCREEN_NAME = "weapon-list"
 
 private const val BUTTON_WEAPON = "weapon"
 private const val BUTTON_BACK = "back"
-private const val BUTTON_NATIVE_BACK = "native-back"
 
 private const val PARAM_WEAPON_NAME = "weapon-name"
 
@@ -32,13 +31,6 @@ internal class WeaponListAnalyticsImpl @Inject constructor(
         analyticsManager.trackButtonClicked(
             screenName = SCREEN_NAME,
             buttonName = BUTTON_BACK
-        )
-    }
-
-    override fun trackNativeBackClicked() {
-        analyticsManager.trackButtonClicked(
-            screenName = SCREEN_NAME,
-            buttonName = BUTTON_NATIVE_BACK
         )
     }
 }

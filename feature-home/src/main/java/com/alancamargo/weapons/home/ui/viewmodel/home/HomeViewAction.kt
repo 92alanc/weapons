@@ -6,11 +6,11 @@ internal sealed class HomeViewAction {
 
     data class NavigateToWeaponList(val query: UiWeaponQuery) : HomeViewAction()
 
-    object ShowWeaponSearchDialogue : HomeViewAction()
+    data object ShowWeaponSearchDialogue : HomeViewAction()
 
-    object ShowAppInfo : HomeViewAction()
+    data object ShowAppInfo : HomeViewAction()
 
     data class ShowPrivacyPolicy(val url: String) : HomeViewAction()
 
-    object ShowFirstAccessInformation : HomeViewAction()
+    data class ShowFirstAccessInformation(val text: String) : HomeViewAction()
 }

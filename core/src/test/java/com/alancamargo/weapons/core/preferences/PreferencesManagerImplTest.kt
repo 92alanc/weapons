@@ -15,28 +15,28 @@ class PreferencesManagerImplTest {
 
     @Test
     fun `getBoolean should return boolean value`() {
-        // GIVEN
+        // Given
         val key = "boolean"
         val defaultValue = true
         every { mockSharedPreferences.getBoolean(key, defaultValue) } returns false
 
-        // WHEN
+        // When
         val actual = preferencesManager.getBoolean(key, defaultValue)
 
-        // THEN
+        // Then
         assertThat(actual).isFalse()
     }
 
     @Test
     fun `setBoolean should set boolean value`() {
-        // GIVEN
+        // Given
         val key = "boolean"
         val expected = true
 
-        // WHEN
+        // When
         preferencesManager.setBoolean(key, expected)
 
-        // THEN
+        // Then
         verify {
             mockSharedPreferences.edit {
                 putBoolean(key, expected)

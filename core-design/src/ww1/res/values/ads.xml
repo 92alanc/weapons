@@ -3,6 +3,5 @@
     <string name="ads_app_id" translatable="false">ca-app-pub-8160707058079016~4293133458</string>
     <string name="banner_weapon_list" translatable="false">ca-app-pub-8160707058079016/9134396590</string>
     <string name="banner_main" translatable="false">ca-app-pub-8160707058079016/2092112571</string>
-    <string name="banner_weapon_details" translatable="false">ca-app-pub-8160707058079016/2568988240</string>
     <string name="banner_web_view" translatable="false">ca-app-pub-8160707058079016/7629743236</string>
 </resources>

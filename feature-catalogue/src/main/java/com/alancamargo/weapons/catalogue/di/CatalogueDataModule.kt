@@ -38,7 +38,6 @@ internal object CatalogueDataModule {
     @Provides
     @Singleton
     fun provideFileHelper(
-        @ApplicationContext context: Context,
-        weaponDao: WeaponDao
-    ): FileHelper = FileHelperImpl(context, weaponDao)
+        @ApplicationContext context: Context
+    ): FileHelper = FileHelperImpl(context)
 }

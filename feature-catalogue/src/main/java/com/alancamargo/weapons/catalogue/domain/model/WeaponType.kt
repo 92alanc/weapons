@@ -16,7 +16,6 @@ sealed class WeaponType(val id: Long) : WeaponListHeader {
             SINGLE_SHOT,
             LEVER_ACTION
         }
-
     }
 
     class Shotgun(id: Long) : WeaponType(id)
@@ -30,7 +29,6 @@ sealed class WeaponType(val id: Long) : WeaponListHeader {
             MEDIUM,
             HEAVY
         }
-
     }
 
     class SubMachineGun(id: Long) : WeaponType(id)
@@ -41,16 +39,6 @@ sealed class WeaponType(val id: Long) : WeaponListHeader {
             ANTI_PERSONNEL,
             ANTI_TANK
         }
-
-    }
-
-    class Mine(id: Long, val category: Category) : WeaponType(id) {
-
-        enum class Category {
-            ANTI_PERSONNEL,
-            ANTI_TANK
-        }
-
     }
 
     class GrenadeLauncher(id: Long) : WeaponType(id)
@@ -60,5 +48,4 @@ sealed class WeaponType(val id: Long) : WeaponListHeader {
     class BoobyTrap(id: Long) : WeaponType(id)
 
     class Flamethrower(id: Long) : WeaponType(id)
-
 }

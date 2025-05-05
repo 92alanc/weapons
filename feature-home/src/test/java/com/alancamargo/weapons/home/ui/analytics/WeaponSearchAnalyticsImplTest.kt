@@ -17,22 +17,22 @@ class WeaponSearchAnalyticsImplTest {
 
     @Test
     fun `trackDialogueViewed should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackDialogueViewed()
 
-        // THEN
+        // Then
         verify { mockAnalyticsManager.trackScreenViewed(SCREEN_NAME) }
     }
 
     @Test
     fun `trackWeaponSearched should track event correctly`() {
-        // GIVEN
+        // Given
         val searchTerm = "lee-enfield"
 
-        // WHEN
+        // When
         analytics.trackWeaponSearched(searchTerm)
 
-        // THEN
+        // Then
         val properties = mapOf(PARAM_SEARCH_TERM to searchTerm)
         verify {
             mockAnalyticsManager.trackButtonClicked(
@@ -45,10 +45,10 @@ class WeaponSearchAnalyticsImplTest {
 
     @Test
     fun `trackDialogueCancelled should track event correctly`() {
-        // WHEN
+        // When
         analytics.trackDialogueCancelled()
 
-        // THEN
+        // Then
         verify {
             mockAnalyticsManager.trackEvent(
                 screenName = SCREEN_NAME,

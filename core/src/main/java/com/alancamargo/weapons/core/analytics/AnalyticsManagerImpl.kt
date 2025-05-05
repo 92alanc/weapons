@@ -2,7 +2,7 @@ package com.alancamargo.weapons.core.analytics
 
 import com.alancamargo.weapons.core.log.Logger
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.analytics.logEvent
 import javax.inject.Inject
 
 private const val EVENT_BUTTON_CLICKED = "button_clicked"
