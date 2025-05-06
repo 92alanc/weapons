@@ -10,8 +10,6 @@ enum class CountryName {
     JAPANESE_EMPIRE,
     ITALY,
     BELGIUM,
-    SPAIN,
-    DENMARK,
     ROMANIA,
     UNITED_STATES,
     UNKNOWN
