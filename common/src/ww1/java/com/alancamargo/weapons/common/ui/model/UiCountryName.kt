@@ -15,5 +15,6 @@ enum class UiCountryName(@StringRes val nameRes: Int) {
     BELGIUM(nameRes = R.string.belgium),
     ROMANIA(nameRes = R.string.romania),
     UNITED_STATES(nameRes = R.string.united_states),
+    OTTOMAN_EMPIRE(nameRes = R.string.ottoman_empire),
     UNKNOWN(nameRes = R.string.unknown)
 }

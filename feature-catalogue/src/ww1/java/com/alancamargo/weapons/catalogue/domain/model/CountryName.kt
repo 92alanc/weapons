@@ -12,5 +12,6 @@ enum class CountryName {
     BELGIUM,
     ROMANIA,
     UNITED_STATES,
+    OTTOMAN_EMPIRE,
     UNKNOWN
 }

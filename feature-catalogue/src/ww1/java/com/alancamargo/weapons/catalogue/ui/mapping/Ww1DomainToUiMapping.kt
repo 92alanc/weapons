@@ -14,5 +14,6 @@ internal fun CountryName.toUi() = when (this) {
     CountryName.ITALY -> UiCountryName.ITALY
     CountryName.ROMANIA -> UiCountryName.ROMANIA
     CountryName.UNITED_STATES -> UiCountryName.UNITED_STATES
+    CountryName.OTTOMAN_EMPIRE -> UiCountryName.OTTOMAN_EMPIRE
     CountryName.UNKNOWN -> UiCountryName.UNKNOWN
 }

@@ -13,5 +13,6 @@ internal fun String.toCountryName() = when (this) {
     "romania" -> CountryName.ROMANIA
     "belgium" -> CountryName.BELGIUM
     "united-states" -> CountryName.UNITED_STATES
+    "ottoman-empire" -> CountryName.OTTOMAN_EMPIRE
     else -> CountryName.UNKNOWN
 }
