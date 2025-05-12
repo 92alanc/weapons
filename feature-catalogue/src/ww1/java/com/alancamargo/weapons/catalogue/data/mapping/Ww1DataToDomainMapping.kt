@@ -11,9 +11,8 @@ internal fun String.toCountryName() = when (this) {
     "japanese-empire" -> CountryName.JAPANESE_EMPIRE
     "italy" -> CountryName.ITALY
     "romania" -> CountryName.ROMANIA
-    "spain" -> CountryName.SPAIN
-    "denmark" -> CountryName.DENMARK
     "belgium" -> CountryName.BELGIUM
     "united-states" -> CountryName.UNITED_STATES
+    "ottoman-empire" -> CountryName.OTTOMAN_EMPIRE
     else -> CountryName.UNKNOWN
 }

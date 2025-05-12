@@ -39,16 +39,16 @@ object Config {
 
         const val FLAVOUR_NAME = "ww1"
         const val SUFFIX = ".$FLAVOUR_NAME"
-        const val VERSION_CODE = 11
-        const val VERSION_NAME = "2025.2.0"
+        const val VERSION_CODE = 12
+        const val VERSION_NAME = "2025.2.1"
     }
 
     object WW2 {
 
         const val FLAVOUR_NAME = "ww2"
         const val SUFFIX = ".$FLAVOUR_NAME"
-        const val VERSION_CODE = 1
-        const val VERSION_NAME = "2025.2.0"
+        const val VERSION_CODE = 2
+        const val VERSION_NAME = "2025.2.1"
     }
 
     object Vietnam {
@@ -56,6 +56,6 @@ object Config {
         const val FLAVOUR_NAME = "vietnam"
         const val SUFFIX = ".$FLAVOUR_NAME"
         const val VERSION_CODE = 1
-        const val VERSION_NAME = "2023.4.0"
+        const val VERSION_NAME = "2025.2.1"
     }
 }

@@ -4,13 +4,12 @@
     <string name="german_empire">Imperio Alemán</string>
     <string name="belgium">Bélgica</string>
     <string name="austro_hungarian_empire">Imperio Austrohúngaro</string>
-    <string name="denmark">Dinamarca</string>
     <string name="france">Francia</string>
     <string name="italy">Italia</string>
     <string name="japanese_empire">Imperio Japonés</string>
     <string name="romania">Rumania</string>
     <string name="russian_empire">Imperio Ruso</string>
-    <string name="spain">España</string>
     <string name="united_states">Estados Unidos</string>
+    <string name="ottoman_empire">Imperio Otomano</string>
     <string name="unknown">Desconocido</string>
 </resources>
