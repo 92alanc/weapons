@@ -57,7 +57,7 @@ internal class HomeActivity : AppCompatActivity() {
                 queryTypes = queryTypesState.value,
                 isConsentGranted = isConsentGrantedState.value,
                 adLoader = adLoader,
-                adUnitId = getString(R2.string.banner_main),
+                adUnitId = getString(R2.string.banner_home),
                 onAllWeaponsClicked = viewModel::onAllWeaponsClicked,
                 onQueryItemClicked = viewModel::onQueryItemClicked,
                 onAboutClicked = viewModel::onAppInfoClicked,

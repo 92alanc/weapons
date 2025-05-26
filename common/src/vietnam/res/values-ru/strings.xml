@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="south_vietnam">Южный Вьетнам</string>
+    <string name="united_states">Соединённые Штаты</string>
+    <string name="australia">Австралия</string>
+    <string name="north_vietnam">Северный Вьетнам</string>
+    <string name="viet_cong">Вьетконг</string>
+    <string name="unknown">Неизвестный</string>
+</resources>
