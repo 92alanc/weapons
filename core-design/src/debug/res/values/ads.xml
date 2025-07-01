@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="banner_weapon_list" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="banner_main" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_home" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_weapon_details" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="banner_web_view" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

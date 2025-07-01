@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="banner_weapon_list">130626424</string>
-    <string name="banner_main">130626424</string>
-    <string name="banner_weapon_details">130626424</string>
+    <string name="ads_app_id" translatable="false">ca-app-pub-8160707058079016~1530947744</string>
+    <string name="banner_weapon_list" translatable="false">ca-app-pub-8160707058079016/1339376051</string>
+    <string name="banner_home" translatable="false">ca-app-pub-8160707058079016/3494766102</string>
+    <string name="banner_web_view" translatable="false">ca-app-pub-8160707058079016/9026294381</string>
 </resources>

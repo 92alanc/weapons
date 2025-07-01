@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="south_vietnam">Vietnã do Sul</string>
+    <string name="united_states">Estados Unidos</string>
+    <string name="australia">Austrália</string>
+    <string name="north_vietnam">Vietnã do Norte</string>
+    <string name="viet_cong">Vietcong</string>
+    <string name="unknown">Desconhecido</string>
+</resources>
