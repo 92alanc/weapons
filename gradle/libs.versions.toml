@@ -1,31 +1,31 @@
 [versions]
-androidActivity = "1.10.1"
+androidActivity = "1.13.0"
 androidAppcompat = "1.7.1"
-androidCompose = "2025.07.00"
-androidCore = "1.16.0"
-androidEspresso = "3.6.1"
-androidFragment = "1.8.8"
-androidGradlePlugin = "8.11.1"
-androidMaterial = "1.12.0"
-androidSplashScreen = "1.0.1"
-androidTestOrchestrator = "1.5.1"
-androidTestRunner = "1.6.2"
-androidUmp = "3.2.0"
+androidCompose = "2026.06.01"
+androidCore = "1.19.0"
+androidEspresso = "3.7.0"
+androidFragment = "1.8.9"
+androidGradlePlugin = "9.3.1"
+androidMaterial = "1.14.0"
+androidSplashScreen = "1.2.0"
+androidTestOrchestrator = "1.6.1"
+androidTestRunner = "1.7.0"
+androidUmp = "4.0.0"
 coil = "2.7.0"
-coilCompose = "3.2.0"
-coroutinesTest = "1.10.2"
-firebaseBom = "34.0.0"
-firebaseCrashlytics = "3.0.5"
-googleAds = "24.4.0"
-googleServices = "4.4.3"
-hilt = "2.57"
+coilCompose = "3.5.0"
+coroutinesTest = "1.11.0"
+firebaseBom = "34.16.0"
+firebaseCrashlytics = "3.0.7"
+googleAds = "25.4.0"
+googleServices = "4.5.0"
+hilt = "2.60.1"
 junit = "4.13.2"
-kotlinPlugin = "2.2.0"
-kspPlugin = "2.2.0-2.0.2"
-mockk = "1.14.5"
-r8 = "8.11.18"
-room = "2.7.2"
-truth = "1.4.4"
+kotlinPlugin = "2.4.10"
+kspPlugin = "2.3.10"
+mockk = "1.14.11"
+r8 = "9.3.16"
+room = "2.8.4"
+truth = "1.4.5"
 turbine = "1.2.1"
 
 [libraries]
@@ -34,6 +34,7 @@ android-appcompat = { group = "androidx.appcompat", name = "appcompat", version.
 android-compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "androidActivity" }
 android-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidCompose" }
 android-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+android-compose-material-icons = { group = "androidx.compose.material", name = "material-icons-core" }
 android-compose-preview = { group = "androidx.compose.ui", name = "ui-tooling" }
 android-core = { group = "androidx.core", name = "core-ktx", version.ref = "androidCore" }
 android-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidEspresso" }
@@ -69,7 +70,6 @@ android-library = { id = "com.android.library", version.ref = "androidGradlePlug
 firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebaseCrashlytics" }
 google-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinPlugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinPlugin" }
 kotlin-parcelise = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlinPlugin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }

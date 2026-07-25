@@ -3,7 +3,6 @@ plugins {
     alias(libs.plugins.firebase.crashlytics)
     alias(libs.plugins.google.services)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
 }
 
@@ -21,10 +20,10 @@ android {
 
     signingConfigs {
         create("release") {
-            keyAlias = properties["weapons_key_alias"] as String
-            keyPassword = properties["weapons_key_password"] as String
-            storeFile = file(path = properties["weapons_store_file"] as String)
-            storePassword = properties["weapons_store_password"] as String
+            keyAlias = property("weapons_key_alias") as String
+            keyPassword = property("weapons_key_password") as String
+            storeFile = file(path = property("weapons_store_file") as String)
+            storePassword = property("weapons_store_password") as String
         }
     }
 
@@ -77,14 +76,6 @@ android {
 
     packaging {
         resources.excludes.add(Config.Build.META_INF_DIR)
-    }
-
-    kotlinOptions {
-        jvmTarget = Config.Build.javaVersionString
-    }
-
-    kotlin {
-        jvmToolchain(Config.Build.javaVersionInt)
     }
 }
 

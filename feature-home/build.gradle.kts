@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.compose.compiler)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
 }
 
@@ -51,10 +50,6 @@ android {
     compileOptions {
         sourceCompatibility = Config.Build.javaVersion
         targetCompatibility = Config.Build.javaVersion
-    }
-
-    kotlinOptions {
-        jvmTarget = Config.Build.javaVersionString
     }
 
     kotlin {
