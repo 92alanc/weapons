@@ -9,11 +9,10 @@ object Config {
         const val FLAVOUR_DIMENSION = "version"
         const val META_INF_DIR = "META-INF/*"
         const val MIN_SDK = 23
-        const val TARGET_SDK = 35
+        const val TARGET_SDK = 37
 
         val javaVersion = JavaVersion.VERSION_17
-        val javaVersionString = javaVersion.majorVersion
-        val javaVersionInt = javaVersionString.toInt()
+        val javaVersionInt = javaVersion.majorVersion.toInt()
     }
 
     object Testing {
@@ -39,16 +38,16 @@ object Config {
 
         const val FLAVOUR_NAME = "ww1"
         const val SUFFIX = ".$FLAVOUR_NAME"
-        const val VERSION_CODE = 13
-        const val VERSION_NAME = "2025.3.0"
+        const val VERSION_CODE = 14
+        const val VERSION_NAME = "2026.3.0"
     }
 
     object WW2 {
 
         const val FLAVOUR_NAME = "ww2"
         const val SUFFIX = ".$FLAVOUR_NAME"
-        const val VERSION_CODE = 2
-        const val VERSION_NAME = "2025.2.1"
+        const val VERSION_CODE = 3
+        const val VERSION_NAME = "2026.3.0"
     }
 
     object Vietnam {
@@ -56,6 +55,6 @@ object Config {
         const val FLAVOUR_NAME = "vietnam"
         const val SUFFIX = ".$FLAVOUR_NAME"
         const val VERSION_CODE = 1
-        const val VERSION_NAME = "2025.2.0"
+        const val VERSION_NAME = "2026.3.0"
     }
 }

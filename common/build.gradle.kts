@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.parcelise)
 }
 
@@ -44,10 +43,6 @@ android {
     compileOptions {
         sourceCompatibility = Config.Build.javaVersion
         targetCompatibility = Config.Build.javaVersion
-    }
-
-    kotlinOptions {
-        jvmTarget = Config.Build.javaVersionString
     }
 
     kotlin {

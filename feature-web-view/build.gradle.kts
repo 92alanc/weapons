@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.compose.compiler)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.parcelise)
     alias(libs.plugins.ksp)
 }
@@ -54,10 +53,6 @@ android {
         targetCompatibility = Config.Build.javaVersion
     }
 
-    kotlinOptions {
-        jvmTarget = Config.Build.javaVersionString
-    }
-
     kotlin {
         jvmToolchain(Config.Build.javaVersionInt)
     }
@@ -82,6 +77,7 @@ dependencies {
     implementation(libs.android.compose.activity)
     implementation(platform(libs.android.compose.bom))
     implementation(libs.android.compose.material3)
+    implementation(libs.android.compose.material.icons)
     implementation(libs.android.compose.preview)
     implementation(libs.android.material)
     implementation(libs.google.ads)

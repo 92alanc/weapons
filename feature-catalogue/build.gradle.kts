@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.android.compose.compiler)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.parcelise)
     alias(libs.plugins.ksp)
 }
@@ -54,17 +53,13 @@ android {
         resources.excludes.add(Config.Build.META_INF_DIR)
     }
 
-    kotlinOptions {
-        jvmTarget = Config.Build.javaVersionString
-    }
-
     buildFeatures {
         compose = Config.Build.ENABLE_COMPOSE
     }
 
     sourceSets {
         getByName("main") {
-            assets.setSrcDirs(listOf("src/main/assets", "src/test/assets"))
+            assets.directories.addAll(listOf("src/main/assets", "src/test/assets"))
         }
     }
 
@@ -85,6 +80,7 @@ dependencies {
     implementation(libs.android.compose.activity)
     implementation(platform(libs.android.compose.bom))
     implementation(libs.android.compose.material3)
+    implementation(libs.android.compose.material.icons)
     implementation(libs.android.compose.preview)
     implementation(libs.android.core)
     implementation(libs.android.fragment)
